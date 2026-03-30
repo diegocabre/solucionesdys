@@ -1,65 +1,146 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import { Hammer, Truck, Briefcase, Globe } from 'lucide-react';
+import Button from '@/components/Button';
+import ServiceCard from '@/components/ServiceCard';
 
 export default function Home() {
+  const services = [
+    {
+      title: "Productos y Ferretería",
+      description: "Catálogo completo de herramientas y materiales de construcción con los mejores estándares del mercado.",
+      icon: Hammer,
+      id: "ferreteria"
+    },
+    {
+      title: "Transporte Personalizado",
+      description: "Logística y despachos a medida, asegurando que tus materiales lleguen a tiempo y en perfectas condiciones.",
+      icon: Truck,
+      id: "transporte"
+    },
+    {
+      title: "Consultorías Técnicas",
+      description: "Asesoramiento profesional para tus proyectos de construcción, optimizando recursos y tiempos de ejecución.",
+      icon: Briefcase,
+      id: "consultoria"
+    },
+    {
+      title: "Creación de Sitios Web",
+      description: "Desarrollo de presencia digital y tiendas online para llevar tu negocio, taller o constructora al siguiente nivel.",
+      icon: Globe,
+      id: "webs"
+    }
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <section className="relative min-h-[85vh] flex items-center bg-gray-50 overflow-hidden">
+        {/* Background gradient pattern */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-0 -left-1/4 w-1/2 h-full bg-brand-accent/5 blur-3xl rounded-full"></div>
+          <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gray-200/50 blur-3xl rounded-full"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-8"
+          >
+            <div className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
+              <span className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+                Productos Online y Soluciones
+              </span>
+            </div>
+            
+            <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary leading-tight">
+              Construimos <br/>
+              <span className="font-serif italic font-light text-brand-accent">lo que imaginas</span>
+            </h1>
+            
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed">
+              Soluciones integrales de ferretería, logística, consultoría y tecnología para hacer realidad tus proyectos.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button size="lg" onClick={() => window.location.href='/productos'}>
+                Ver Catálogo
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => window.location.href='#servicios'}>
+                Nuestros Servicios
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Hero Image / Visual Element */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
+          >
+            <div className="absolute inset-0 bg-linear-to-tr from-brand-primary to-brand-accent opacity-20 z-10"></div>
+            {/* Usando una imagen placeholder limpia de herramientas usando unmount de un div con gradiente oscuro y minimalista */}
+            <div className="w-full h-full bg-gray-200 dark:bg-gray-800 object-cover flex items-center justify-center">
+              <span className="text-gray-400 text-lg">Imagen Destacada (Tools/Logistics)</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="servicios" className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <h2 className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+              Todo en un solo lugar
+            </h2>
+            <h3 className="text-4xl font-bold text-brand-primary">
+              Nuestros Servicios
+            </h3>
+            <p className="text-gray-500">
+              No solo vendemos herramientas, te acompañamos en todo el ciclo de vida de tu negocio.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, idx) => (
+              <ServiceCard
+                key={service.id}
+                title={service.title}
+                description={service.description}
+                Icon={service.icon}
+                index={idx}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-slate-900 text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 flex justify-center items-center">
+           <Hammer className="w-[800px] h-[800px] text-white -rotate-12 transform translate-x-1/4" />
+        </div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative z-10 max-w-3xl mx-auto px-4 space-y-8"
+        >
+          <h2 className="text-4xl lg:text-5xl font-serif">¿Listo para empezar?</h2>
+          <p className="text-xl text-gray-300 font-light">
+            Consulta por presupuestos en herramientas, transporte de materiales o solicita una asesoría.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <Button size="lg" variant="primary" className="mt-8 bg-white! text-slate-900! hover:bg-gray-100! ring-white!">
+            Contáctanos Hoy
+          </Button>
+        </motion.div>
+      </section>
     </div>
   );
 }

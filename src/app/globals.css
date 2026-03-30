@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 :root {
+  /* Fondo blanco principal */
   --background: #ffffff;
-  --foreground: #171717;
+  /* Texto principal azul muy oscuro / gris pizarra */
+  --foreground: #1e293b;
+  
+  /* Color principal de la marca (Textos y logos) */
+  --brand-primary: #1e293b;
+  /* Color verde de la marca (Acentos, botones, logo de hoja) */
+  --brand-accent: #4d7c3d;
+  --brand-accent-light: #659247;
+  --brand-accent-dark: #3b5f2f;
 }
 
 @theme inline {
@@ -10,12 +19,22 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Añadiendo paleta personalizada a la configuración del tema Tailwind */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-light: var(--brand-accent-light);
+  --color-brand-accent-dark: var(--brand-accent-dark);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Fondo oscuro suave para modo noche */
+    --background: #0f172a; 
+    /* Texto claro para modo noche */
+    --foreground: #f8fafc;
+    /* Colores corporativos (el primario se aclara en modo oscuro para leerse) */
+    --brand-primary: #cbd5e1;
   }
 }
 
@@ -23,4 +42,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
