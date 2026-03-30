@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/store/cartStore';
@@ -19,7 +20,7 @@ export default function Navbar() {
   const NAV_LINKS = [
     { label: 'Inicio', href: '/' },
     { label: 'Productos', href: '/productos' },
-    { label: 'Transporte', href: '#transporte' },
+    { label: 'Servicios', href: '#servicios' },
     { label: 'Consultoría', href: '#consultoria' },
     { label: 'Webs', href: '#webs' },
     { label: 'Contacto', href: '/contacto' },
@@ -28,12 +29,18 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full bg-background border-b z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-serif text-brand-primary tracking-wide">
-              Soluciones <span className="font-bold text-brand-accent">DyS</span>
-            </span>
+            <div className="relative h-12 sm:h-14 w-40 sm:w-56">
+              <Image 
+                src="/assets/img/logo.png" 
+                alt="Soluciones DyS" 
+                fill
+                style={{ objectFit: 'contain', objectPosition: 'left center' }}
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Menu */}

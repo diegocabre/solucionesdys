@@ -2,9 +2,18 @@
 
 import Button from "@/components/Button";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { useActionState } from "react";
+import { sendContactEmail, FormState } from "./actions";
+
+const initialState: FormState = {
+  success: false,
+  message: "",
+  error: ""
+};
 
 export default function ContactoPage() {
+  const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   return (
     <div className="bg-gray-50 min-h-[calc(100vh-64px)] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +53,11 @@ export default function ContactoPage() {
                   <p className="font-medium text-slate-900">
                     Teléfono / WhatsApp
                   </p>
-                  <p>+56 9 8788 7209</p>
+                  <p>
+                    <a href="https://wa.me/56987887209" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors">
+                      +56 9 8788 7209
+                    </a>
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-slate-700">
@@ -56,6 +69,13 @@ export default function ContactoPage() {
                   <p>Puerto Varas, Chile</p>
                 </div>
               </div>
+              
+              <div className="pt-6 border-t border-gray-100 flex justify-start">
+                <a href="https://wa.me/56987887209" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md">
+                  <MessageCircle size={22} />
+                  Chatea por WhatsApp
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -65,13 +85,25 @@ export default function ContactoPage() {
             animate={{ opacity: 1, x: 0 }}
             className="bg-gray-50 p-6 rounded-xl border border-gray-100"
           >
-            <form className="space-y-6">
+            <form action={formAction} className="space-y-6">
+              {state.message && (
+                <div className="p-4 bg-green-50 text-green-800 rounded-md text-sm border border-green-200">
+                  {state.message}
+                </div>
+              )}
+              {state.error && (
+                <div className="p-4 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+                  {state.error}
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-slate-900 mb-1">
                   Nombre Completo
                 </label>
                 <input
+                  name="name"
                   type="text"
+                  required
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
                   placeholder="Juan Pérez"
                 />
@@ -81,20 +113,22 @@ export default function ContactoPage() {
                   Correo Electrónico
                 </label>
                 <input
+                  name="email"
                   type="email"
+                  required
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
                   placeholder="juan@ejemplo.com"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-900 mb-1">
-                  Motivo (Ferretería, Transporte, Web...)
+                  Motivo (Ferretería, Servicios, Web...)
                 </label>
-                <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900">
-                  <option>Ferretería / Productos</option>
-                  <option>Transporte</option>
-                  <option>Consultoría</option>
-                  <option>Desarrollo Web</option>
+                <select name="subject" required className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900">
+                  <option value="Ferretería / Productos">Ferretería / Productos</option>
+                  <option value="Servicios/Transporte">Servicios Generales</option>
+                  <option value="Consultoría">Consultoría y Partners</option>
+                  <option value="Desarrollo Web">Desarrollo Web</option>
                 </select>
               </div>
               <div>
@@ -102,13 +136,15 @@ export default function ContactoPage() {
                   Mensaje
                 </label>
                 <textarea
+                  name="message"
+                  required
                   rows={4}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
                   placeholder="¿Cómo podemos ayudarte?"
                 ></textarea>
               </div>
-              <Button type="button" className="w-full">
-                Enviar Mensaje
+              <Button type="submit" className="w-full" disabled={pending}>
+                {pending ? "Enviando..." : "Enviar Mensaje"}
               </Button>
             </form>
           </motion.div>

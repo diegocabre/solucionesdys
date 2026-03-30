@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Hammer, Truck, Briefcase, Globe } from 'lucide-react';
 import Button from '@/components/Button';
 import ServiceCard from '@/components/ServiceCard';
+import InstagramCarousel from '@/components/InstagramCarousel';
 
 export default function Home() {
   const services = [
@@ -14,14 +15,14 @@ export default function Home() {
       id: "ferreteria"
     },
     {
-      title: "Transporte Personalizado",
-      description: "Logística y despachos a medida, asegurando que tus materiales lleguen a tiempo y en perfectas condiciones.",
+      title: "Servicios Generales",
+      description: "Servicio de limpieza de tapicería y alfombras de casa y auto, y traslados VIP a ejecutivos y empresas (máx. 4 personas).",
       icon: Truck,
-      id: "transporte"
+      id: "servicios"
     },
     {
-      title: "Consultorías Técnicas",
-      description: "Asesoramiento profesional para tus proyectos de construcción, optimizando recursos y tiempos de ejecución.",
+      title: "Consultoría y Partners",
+      description: "Asesoramiento profesional y alianzas con empresas partners especializadas para impulsar tus proyectos.",
       icon: Briefcase,
       id: "consultoria"
     },
@@ -75,18 +76,14 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Hero Image / Visual Element */}
+          {/* Hero Image / Instagram Carousel */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            <div className="absolute inset-0 bg-linear-to-tr from-brand-primary to-brand-accent opacity-20 z-10"></div>
-            {/* Usando una imagen placeholder limpia de herramientas usando unmount de un div con gradiente oscuro y minimalista */}
-            <div className="w-full h-full bg-gray-200 dark:bg-gray-800 object-cover flex items-center justify-center">
-              <span className="text-gray-400 text-lg">Imagen Destacada (Tools/Logistics)</span>
-            </div>
+            <InstagramCarousel />
           </motion.div>
         </div>
       </section>
@@ -136,7 +133,7 @@ export default function Home() {
           <p className="text-xl text-gray-300 font-light">
             Consulta por presupuestos en herramientas, transporte de materiales o solicita una asesoría.
           </p>
-          <Button size="lg" variant="primary" className="mt-8 bg-white! text-slate-900! hover:bg-gray-100! ring-white!">
+          <Button size="lg" variant="primary" className="mt-8 bg-white! text-slate-900! hover:bg-gray-100! ring-white!" onClick={() => window.location.href='/contacto'}>
             Contáctanos Hoy
           </Button>
         </motion.div>

@@ -29,9 +29,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Contacto</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>soporte@solucionesdys.com</li>
-              <li>+56 9 1234 5678</li>
-              <li>Santiago, Chile</li>
+              <li>sandracydiegoc@gmail.com</li>
+              <li>+56 9 8788 7209</li>
+              <li>Puerto Varas, Chile</li>
             </ul>
           </div>
           
