@@ -57,17 +57,17 @@ export async function POST(request: Request) {
       currency_id: "CLP", 
     }));
 
-    // Forzamos una URL estrictamente válida para evitar el error 'back_url.success must be defined'
-    const fallbackUrl = "http://localhost:3000";
+    // Mercado Pago requiere URLs absolutas *con path explícito* para evitar fallas en su validador (url.parse)
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
     const response = await preference.create({
       body: {
         items: mpItems,
         external_reference: orderId || "sin-orden",
         back_urls: {
-          success: fallbackUrl,
-          failure: fallbackUrl,
-          pending: fallbackUrl,
+          success: `${baseUrl}/checkout-success`,
+          failure: `${baseUrl}/`,
+          pending: `${baseUrl}/`,
         },
         auto_return: "approved",
       },
