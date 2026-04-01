@@ -5,11 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { setDrawerOpen, getTotalItems } = useCartStore();
+  const pathname = usePathname();
 
   // Hidratación segura para Next.js y Zustand
   const [mounted, setMounted] = useState(false);
@@ -51,16 +53,29 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-foreground hover:text-brand-accent transition-colors font-medium text-sm"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-2">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+              
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive ? "text-brand-accent" : "text-foreground hover:text-brand-accent"
+                  }`}
+                >
+                  <span className="relative z-10">{link.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-active-desktop"
+                      className="absolute inset-0 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-md"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
 
             <button
               onClick={() => setDrawerOpen(true)}
@@ -109,16 +124,24 @@ export default function Navbar() {
             className="md:hidden border-t overflow-hidden bg-background"
           >
             <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-3 py-3 text-base font-medium text-foreground hover:text-brand-accent hover:bg-gray-50 rounded-md"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-3 py-3 text-base font-medium rounded-md transition-colors ${
+                      isActive 
+                        ? "text-brand-accent bg-brand-accent/10 dark:bg-brand-accent/20" 
+                        : "text-foreground hover:text-brand-accent hover:bg-gray-50 dark:hover:bg-slate-800"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}
