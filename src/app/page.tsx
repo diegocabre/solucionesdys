@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Hammer, Truck, Briefcase, Globe } from 'lucide-react';
 import Button from '@/components/Button';
 import ServiceCard from '@/components/ServiceCard';
-import InstagramCarousel from '@/components/InstagramCarousel';
+import ServicesCarousel from '@/components/ServicesCarousel';
 
 export default function Home() {
   const services = [
@@ -12,25 +12,29 @@ export default function Home() {
       title: "Productos y Ferretería",
       description: "Catálogo completo de herramientas y materiales de construcción con los mejores estándares del mercado.",
       icon: Hammer,
-      id: "ferreteria"
+      id: "ferreteria",
+      href: "/productos"
     },
     {
       title: "Servicios Generales",
       description: "Servicio de limpieza de tapicería y alfombras de casa y auto, y traslados VIP a ejecutivos y empresas (máx. 4 personas).",
       icon: Truck,
-      id: "servicios"
+      id: "servicios",
+      href: "/servicios"
     },
     {
       title: "Consultoría y Partners",
       description: "Asesoramiento profesional y alianzas con empresas partners especializadas para impulsar tus proyectos.",
       icon: Briefcase,
-      id: "consultoria"
+      id: "consultoria",
+      href: "/consultoria"
     },
     {
       title: "Creación de Sitios Web",
       description: "Desarrollo de presencia digital y tiendas online para llevar tu negocio, taller o constructora al siguiente nivel.",
       icon: Globe,
-      id: "webs"
+      id: "webs",
+      href: "/webs"
     }
   ];
 
@@ -76,14 +80,14 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Hero Image / Instagram Carousel */}
+          {/* Hero Image / Services Carousel */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            <InstagramCarousel />
+            <ServicesCarousel />
           </motion.div>
         </div>
       </section>
@@ -110,6 +114,7 @@ export default function Home() {
                 title={service.title}
                 description={service.description}
                 Icon={service.icon}
+                href={service.href}
                 index={idx}
               />
             ))}

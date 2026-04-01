@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
+import Link from 'next/link';
 
 interface ServiceCardProps {
   title: string;
@@ -12,15 +13,15 @@ interface ServiceCardProps {
   index?: number;
 }
 
-export default function ServiceCard({ title, description, Icon, index = 0 }: ServiceCardProps) {
-  return (
+export default function ServiceCard({ title, description, Icon, href, index = 0 }: ServiceCardProps) {
+  const CardContent = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-start gap-4 hover:shadow-2xl hover:shadow-brand-accent/20 transition-all cursor-pointer group"
+      className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-start gap-4 hover:shadow-2xl hover:shadow-brand-accent/20 transition-all cursor-pointer group h-full"
     >
       <div className="p-4 bg-brand-accent/10 rounded-xl group-hover:bg-brand-accent/20 transition-colors">
         <Icon className="w-8 h-8 text-brand-accent" />
@@ -35,4 +36,14 @@ export default function ServiceCard({ title, description, Icon, index = 0 }: Ser
       </p>
     </motion.div>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block h-full">
+        {CardContent}
+      </Link>
+    );
+  }
+
+  return CardContent;
 }
