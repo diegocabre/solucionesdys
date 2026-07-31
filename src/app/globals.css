@@ -35,15 +35,9 @@
   --color-brand-green-dark: var(--brand-green-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Fondo oscuro azul noche */
-    --background: #0d151e; 
-    /* Texto claro crema */
-    --foreground: #f4f3f0;
-    /* Color principal se aclara un poco para contraste */
-    --brand-primary: #e6ebf0;
-  }
+/* Configurar variante dark de Tailwind v4 para que sea por clase (.dark) y no automática por media query */
+@utility dark {
+  &:where(.dark, .dark *);
 }
 
 body {
