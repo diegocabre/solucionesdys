@@ -25,8 +25,8 @@ export default function Navbar() {
     { label: "Inicio", href: "/" },
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "Consultoría", href: "/consultoria" },
-    { label: "Webs", href: "/webs" },
+    { label: "Diseño Web", href: "/webs" },
+    { label: "Partners", href: "/partners" },
     { label: "Contacto", href: "/contacto" },
   ];
 
@@ -34,21 +34,27 @@ export default function Navbar() {
     <nav className="fixed w-full bg-background border-b z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo con nuevas proporciones */}
-          <Link href="/" className="flex items-center gap-2">
-            {/* Aumentamos h-12 a h-16 (64px) y h-14 a h-20 (80px) para que tenga más espacio vertical */}
-            <div className="relative h-16 sm:h-20 w-48 sm:w-72">
+          {/* Logo como Emblema con Texto Elegante Al Lado */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative h-12 w-12 sm:h-15 sm:w-15 rounded-xl overflow-hidden border border-brand-accent/30 shadow-md shadow-brand-accent/15 transition-transform duration-300 group-hover:scale-105 shrink-0">
               <Image
                 src="/assets/img/logo.png"
                 alt="Soluciones DyS"
                 fill
-                sizes="(max-width: 640px) 192px, 288px"
+                sizes="(max-width: 640px) 48px, 60px"
                 style={{
-                  objectFit: "contain",
-                  objectPosition: "left center",
+                  objectFit: "cover",
                 }}
                 priority
               />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="text-lg sm:text-2xl font-bold font-serif text-brand-primary tracking-wide leading-none transition-colors group-hover:text-brand-accent">
+                Soluciones <span className="text-brand-accent">DyS</span>
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-green-light mt-1.5 leading-none">
+                Productos & Web
+              </span>
             </div>
           </Link>
 

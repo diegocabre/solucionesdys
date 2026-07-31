@@ -10,9 +10,8 @@ export default function Footer() {
               Soluciones <span className="text-brand-accent-light">DyS</span>
             </h3>
             <p className="text-gray-400 text-sm max-w-sm">
-              Brindamos herramientas de construcción, transporte personalizado,
-              asesoría técnica y diseño web profesional para impulsar tus
-              proyectos.
+              Especialistas en productos online, limpieza profunda de hogar y vehículos,
+              diseño de sitios web a medida y soluciones para partners digitales.
             </p>
           </div>
 
@@ -24,31 +23,31 @@ export default function Footer() {
                   href="/productos"
                   className="hover:text-brand-accent-light transition"
                 >
-                  Ferretería & Productos Online
+                  Productos Online
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#transporte"
+                  href="/servicios"
                   className="hover:text-brand-accent-light transition"
                 >
-                  Transporte Personalizado
+                  Limpieza de Hogar
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#consultoria"
+                  href="/webs"
                   className="hover:text-brand-accent-light transition"
                 >
-                  Consultorías
+                  Diseño de Sitios Web
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#webs"
+                  href="/partners"
                   className="hover:text-brand-accent-light transition"
                 >
-                  Creación de Sitios Web
+                  Nuestros Partners
                 </Link>
               </li>
             </ul>
@@ -114,6 +113,9 @@ export default function Footer() {
             reservados.
           </p>
           <div className="mt-4 md:mt-0 space-x-4">
+            <Link href="/admin" className="hover:text-white transition font-medium text-brand-accent-light">
+              Acceso Admin
+            </Link>
             <Link href="#" className="hover:text-white transition">
               Términos de Servicio
             </Link>

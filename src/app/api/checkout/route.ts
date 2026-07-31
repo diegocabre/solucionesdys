@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { items, customer } = body;
+    const { items, customer, paymentMethod } = body;
 
     // Validación básica de los ítems
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         customer_city: customer.city,
         items: items,
         total_amount: totalAmount,
-        status: "pending"
+        status: paymentMethod === "transfer" ? "pending_transfer" : "pending"
       }]).select("id").single();
 
       if (error) {
@@ -37,6 +37,10 @@ export async function POST(request: Request) {
       } else {
         orderId = data.id;
       }
+    }
+
+    if (paymentMethod === "transfer") {
+      return NextResponse.json({ orderId, method: "transfer" });
     }
 
     // Inicializamos el SDK de MercadoPago limpiando el token de espacios invisibles

@@ -1,17 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { verifyAdminPassword } from "./actions";
-import { Lock, LogOut, PackagePlus, Trash2, UploadCloud, RefreshCw, AlertCircle, ImageIcon, Loader2, Edit, ShoppingBag, X } from "lucide-react";
+import { loginStep1, loginStep2, recoveryStep1, recoveryStep2, checkSession, logout, deleteOrderAndNotify, cleanupExpiredOrders } from "./actions";
+import { Lock, LogOut, PackagePlus, Trash2, UploadCloud, RefreshCw, AlertCircle, ImageIcon, Loader2, Edit, ShoppingBag, X, Mail, Check, KeyRound } from "lucide-react";
 import Button from "@/components/Button";
 import { supabase } from "@/lib/supabaseClient";
 import { Product } from "@/store/cartStore";
 
 export default function AdminPage() {
-  // --------- ESTADOS DE SESIÓN ---------
+  // --------- ESTADOS DE SESIÓN Y 2FA ---------
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [emailInput, setEmailInput] = useState("sandracydiegoc@gmail.com");
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState("");
+  const [loginStep, setLoginStep] = useState<"credentials" | "otp" | "recovery_email" | "recovery_otp">("credentials");
+  const [otpInput, setOtpInput] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   // --------- ESTADOS DE NAVEGACIÓN ---------
   const [activeTab, setActiveTab] = useState<"products" | "orders">("products");
@@ -43,17 +48,138 @@ export default function AdminPage() {
   });
   const [editFile, setEditFile] = useState<File | null>(null);
 
+  // --------- EFECTO INICIAL (JWT SESSION) ---------
+  useEffect(() => {
+    const verifySession = async () => {
+      try {
+        const sessionEmail = await checkSession();
+        if (sessionEmail) {
+          setIsAuthenticated(true);
+          setEmailInput(sessionEmail);
+          
+          // EJECUTAR LIMPIEZA AUTOMÁTICA DE ÓRDENES EXPIRADAS (48 HORAS)
+          try {
+            await cleanupExpiredOrders();
+          } catch (cleanErr) {
+            console.error("Error al limpiar órdenes expiradas:", cleanErr);
+          }
+          
+          // Cargar productos
+          const { data: prodData } = await supabase.from("products").select("*").order("created_at", { ascending: false });
+          if (prodData) setProducts(prodData as Product[]);
+          
+          // Cargar órdenes
+          const { data: ordData } = await supabase.from("orders").select("*").order("created_at", { ascending: false });
+          if (ordData) setOrders(ordData);
+        }
+      } catch (err) {
+        console.error("Error al validar sesión persistente:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    verifySession();
+  }, []);
+
   // --------- LÓGICA DE AUTENTICACIÓN ---------
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLoginStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
-    const isValid = await verifyAdminPassword(passwordInput);
-    if (isValid) {
-      setIsAuthenticated(true);
-      fetchProducts();
-      fetchOrders();
-    } else {
-      setAuthError("Contraseña incorrecta.");
+    setAuthError("");
+    setSuccessMessage("");
+    setIsSubmitting(true);
+    try {
+      const res = await loginStep1(emailInput, passwordInput);
+      if (res.success) {
+        setLoginStep("otp");
+      } else {
+        setAuthError(res.error || "Error al iniciar sesión.");
+      }
+    } catch (err) {
+      setAuthError("Error de conexión con el servidor.");
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const handleLoginStep2 = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError("");
+    setIsSubmitting(true);
+    try {
+      const res = await loginStep2(otpInput);
+      if (res.success) {
+        setIsAuthenticated(true);
+        // EJECUTAR LIMPIEZA AUTOMÁTICA AL INICIAR SESIÓN
+        try {
+          await cleanupExpiredOrders();
+        } catch (cleanErr) {
+          console.error("Error al limpiar órdenes expiradas:", cleanErr);
+        }
+        // Cargar datos
+        const { data: prodData } = await supabase.from("products").select("*").order("created_at", { ascending: false });
+        if (prodData) setProducts(prodData as Product[]);
+        const { data: ordData } = await supabase.from("orders").select("*").order("created_at", { ascending: false });
+        if (ordData) setOrders(ordData);
+      } else {
+        setAuthError(res.error || "Código de verificación incorrecto.");
+      }
+    } catch (err) {
+      setAuthError("Error de conexión con el servidor.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleRecoveryStep1 = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError("");
+    setIsSubmitting(true);
+    try {
+      const res = await recoveryStep1(emailInput);
+      if (res.success) {
+        setLoginStep("recovery_otp");
+      } else {
+        setAuthError(res.error || "Error al solicitar recuperación.");
+      }
+    } catch (err) {
+      setAuthError("Error de conexión con el servidor.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleRecoveryStep2 = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError("");
+    if (!newPassword || newPassword.length < 6) {
+      setAuthError("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const res = await recoveryStep2(otpInput, newPassword);
+      if (res.success) {
+        setSuccessMessage("Tu contraseña ha sido restablecida exitosamente. Ya puedes iniciar sesión.");
+        setLoginStep("credentials");
+        setPasswordInput("");
+        setOtpInput("");
+        setNewPassword("");
+      } else {
+        setAuthError(res.error || "Código de verificación incorrecto.");
+      }
+    } catch (err) {
+      setAuthError("Error de conexión con el servidor.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setIsAuthenticated(false);
+    setLoginStep("credentials");
+    setPasswordInput("");
+    setOtpInput("");
   };
 
   // --------- RECUPERAR DATOS ---------
@@ -90,6 +216,69 @@ export default function AdminPage() {
   const refreshData = () => {
     if (activeTab === "products") fetchProducts();
     else fetchOrders();
+  };
+
+  const parseAddress = (fullAddress: string) => {
+    if (!fullAddress) return { address: "", email: "", docType: "Boleta", details: "" };
+    
+    const parts = fullAddress.split(" | ");
+    const address = parts[0] || "";
+    let email = "";
+    let docType = "Boleta";
+    let details = "";
+
+    parts.forEach(part => {
+      if (part.startsWith("Correo: ")) {
+        email = part.replace("Correo: ", "");
+      } else if (part.startsWith("Tipo Doc: ")) {
+        const docStr = part.replace("Tipo Doc: ", "");
+        if (docStr.includes("Factura")) {
+          docType = "Factura";
+          const match = docStr.match(/\(([^)]+)\)/);
+          if (match && match[1]) {
+            details = match[1];
+          }
+        }
+      }
+    });
+
+    return { address, email, docType, details };
+  };
+
+  const handleUpdateOrderStatus = async (orderId: string, newStatus: string) => {
+    try {
+      const { error } = await supabase
+        .from("orders")
+        .update({ status: newStatus })
+        .eq("id", orderId);
+
+      if (error) throw error;
+      fetchOrders();
+    } catch (err: any) {
+      console.error(err);
+      alert("Error al actualizar la orden: " + err.message);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId: string) => {
+    if (!confirm("¿Estás seguro de que deseas eliminar esta orden? Se le enviará un correo de notificación de cancelación al cliente de forma automática.")) {
+      return;
+    }
+    
+    setIsLoading(true);
+    try {
+      const res = await deleteOrderAndNotify(orderId);
+      if (res.success) {
+        alert("Orden eliminada y cliente notificado.");
+        fetchOrders();
+      } else {
+        alert("Error al eliminar la orden: " + res.error);
+      }
+    } catch (err: any) {
+      alert("Error de conexión: " + err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // --------- CREAR PRODUCTO ---------
@@ -214,44 +403,250 @@ export default function AdminPage() {
     }
   };
 
+  if (isLoading && !isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+        <Loader2 className="w-10 h-10 animate-spin text-brand-accent mb-4" />
+        <p className="text-gray-500 text-sm font-medium">Validando sesión administrativa...</p>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 border border-gray-100 relative overflow-hidden">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-8 border border-gray-100 dark:border-slate-800 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-brand-accent"></div>
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-brand-primary/5 rounded-2xl flex items-center justify-center">
-              <Lock className="w-8 h-8 text-slate-900" />
+            <div className="w-16 h-16 bg-brand-primary/10 rounded-2xl flex items-center justify-center">
+              <Lock className="w-8 h-8 text-brand-accent" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-center text-slate-900 mb-2">Panel Administrativo</h1>
-          <p className="text-gray-500 text-center text-sm mb-8">Ingresa la clave maestra para gestionar el inventario.</p>
           
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <input
-                type="password"
-                placeholder="Contraseña..."
-                value={passwordInput}
-                onChange={(e) => {
-                  setPasswordInput(e.target.value);
-                  setAuthError("");
-                }}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900"
-              />
-              {authError && <p className="text-red-500 text-sm mt-2">{authError}</p>}
-            </div>
-            <Button type="submit" className="w-full justify-center py-3">
-              Ingresar al Tablero
-            </Button>
-          </form>
+          {/* VISTA CREDENCIALES DE LOGIN */}
+          {loginStep === "credentials" && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-brand-primary mb-2">Panel Administrativo</h1>
+              <p className="text-gray-500 text-center text-sm mb-6">Gestiona productos, stock y órdenes de clientes.</p>
+              
+              {successMessage && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 text-xs rounded-xl font-medium leading-relaxed">
+                  {successMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleLoginStep1} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Usuario / Correo</label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      required
+                      placeholder="ejemplo@correo.com"
+                      value={emailInput}
+                      onChange={(e) => {
+                        setEmailInput(e.target.value);
+                        setAuthError("");
+                      }}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                    />
+                    <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Contraseña</label>
+                  <div className="relative">
+                    <input
+                      type="password"
+                      required
+                      placeholder="••••••••"
+                      value={passwordInput}
+                      onChange={(e) => {
+                        setPasswordInput(e.target.value);
+                        setAuthError("");
+                      }}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                    />
+                    <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  </div>
+                  {authError && <p className="text-red-500 text-sm mt-2 font-medium">{authError}</p>}
+                </div>
+                <Button type="submit" disabled={isSubmitting} className="w-full justify-center py-3 mt-2 bg-brand-accent hover:bg-brand-accent-dark border-brand-accent">
+                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Ingresar al Tablero"}
+                </Button>
+                <div className="text-center pt-2">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setLoginStep("recovery_email");
+                      setAuthError("");
+                      setSuccessMessage("");
+                    }}
+                    className="text-xs font-semibold text-brand-accent hover:underline"
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+
+          {/* VISTA CÓDIGO OTP (2FA) */}
+          {loginStep === "otp" && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-brand-primary mb-2">Código de Verificación</h1>
+              <p className="text-gray-500 text-center text-sm mb-6">Hemos enviado un código de acceso a tu correo.</p>
+              
+              <form onSubmit={handleLoginStep2} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Código de 6 Dígitos</label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      required
+                      maxLength={6}
+                      placeholder="123456"
+                      value={otpInput}
+                      onChange={(e) => {
+                        setOtpInput(e.target.value);
+                        setAuthError("");
+                      }}
+                      className="w-full text-center tracking-[0.5em] text-lg font-mono py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                    />
+                  </div>
+                  {authError && <p className="text-red-500 text-sm mt-2 font-medium">{authError}</p>}
+                </div>
+                <Button type="submit" disabled={isSubmitting} className="w-full justify-center py-3 mt-2 bg-brand-accent hover:bg-brand-accent-dark border-brand-accent">
+                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verificar e Ingresar"}
+                </Button>
+                <div className="text-center pt-2">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setLoginStep("credentials");
+                      setAuthError("");
+                      setOtpInput("");
+                    }}
+                    className="text-xs font-semibold text-gray-400 hover:text-brand-primary"
+                  >
+                    Volver al ingreso
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+
+          {/* VISTA SOLICITUD DE RECUPERACIÓN */}
+          {loginStep === "recovery_email" && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-brand-primary mb-2">Recuperar Clave</h1>
+              <p className="text-gray-500 text-center text-sm mb-6">Ingresa tu correo para recibir un código de recuperación.</p>
+              
+              <form onSubmit={handleRecoveryStep1} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Correo Administrador</label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      required
+                      placeholder="ejemplo@correo.com"
+                      value={emailInput}
+                      onChange={(e) => {
+                        setEmailInput(e.target.value);
+                        setAuthError("");
+                      }}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                    />
+                    <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  </div>
+                  {authError && <p className="text-red-500 text-sm mt-2 font-medium">{authError}</p>}
+                </div>
+                <Button type="submit" disabled={isSubmitting} className="w-full justify-center py-3 mt-2 bg-brand-accent hover:bg-brand-accent-dark border-brand-accent">
+                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Enviar Código"}
+                </Button>
+                <div className="text-center pt-2">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setLoginStep("credentials");
+                      setAuthError("");
+                    }}
+                    className="text-xs font-semibold text-gray-400 hover:text-brand-primary"
+                  >
+                    Volver al ingreso
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+
+          {/* VISTA RESET DE CLAVE CON OTP */}
+          {loginStep === "recovery_otp" && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-brand-primary mb-2">Restablecer Clave</h1>
+              <p className="text-gray-500 text-center text-sm mb-6">Ingresa el código enviado y tu nueva contraseña.</p>
+              
+              <form onSubmit={handleRecoveryStep2} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Código de 6 Dígitos</label>
+                  <input
+                    type="text"
+                    required
+                    maxLength={6}
+                    placeholder="123456"
+                    value={otpInput}
+                    onChange={(e) => {
+                      setOtpInput(e.target.value);
+                      setAuthError("");
+                    }}
+                    className="w-full text-center tracking-[0.5em] text-sm font-mono py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Nueva Contraseña</label>
+                  <div className="relative">
+                    <input
+                      type="password"
+                      required
+                      placeholder="Min. 6 caracteres"
+                      value={newPassword}
+                      onChange={(e) => {
+                        setNewPassword(e.target.value);
+                        setAuthError("");
+                      }}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-850 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100"
+                    />
+                    <KeyRound className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  </div>
+                  {authError && <p className="text-red-500 text-sm mt-2 font-medium">{authError}</p>}
+                </div>
+                <Button type="submit" disabled={isSubmitting} className="w-full justify-center py-3 mt-2 bg-brand-accent hover:bg-brand-accent-dark border-brand-accent">
+                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Guardar Nueva Contraseña"}
+                </Button>
+                <div className="text-center pt-2">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setLoginStep("credentials");
+                      setAuthError("");
+                      setOtpInput("");
+                      setNewPassword("");
+                    }}
+                    className="text-xs font-semibold text-gray-400 hover:text-brand-primary"
+                  >
+                    Volver al ingreso
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 relative">
+    <div className="min-h-screen bg-background pb-20 relative">
       {/* Header Admin */}
       <header className="bg-white border-b border-gray-100 py-6 pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -263,7 +658,7 @@ export default function AdminPage() {
             <p className="text-gray-500 mt-1">Sincronizado con la base de datos central local.</p>
           </div>
           <button 
-            onClick={() => setIsAuthenticated(false)}
+            onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
           >
             <LogOut className="w-4 h-4" />
@@ -435,7 +830,7 @@ export default function AdminPage() {
                 <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-brand-accent' : ''}`} />
               </button>
             </div>
-            <div className="overflow-x-auto">
+            <div className="w-full overflow-x-auto">
               {isLoading ? (
                 <div className="flex justify-center py-20"><Loader2 className="w-10 h-10 text-brand-accent animate-spin" /></div>
               ) : orders.length === 0 ? (
@@ -452,6 +847,7 @@ export default function AdminPage() {
                       <th className="px-6 py-4 font-medium">Ubicación / Entrega</th>
                       <th className="px-6 py-4 font-medium">Monto</th>
                       <th className="px-6 py-4 font-medium">Estado</th>
+                      <th className="px-6 py-4 font-medium text-right">Acciones</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-50">
@@ -465,21 +861,107 @@ export default function AdminPage() {
                           <div className="text-xs text-gray-400 font-medium">📞 {o.customer_phone}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-800">{o.customer_city}</div>
-                          <div className="text-xs text-gray-500 max-w-[200px] truncate">{o.customer_address}</div>
-                          {o.customer_city?.toLowerCase() === "puerto varas" ? (
-                            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded uppercase mt-1 inline-block">Envío Gratis</span>
-                          ) : (
-                            <span className="text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded uppercase mt-1 inline-block">Por Pagar</span>
-                          )}
+                          {(() => {
+                            const parsed = parseAddress(o.customer_address);
+                            return (
+                              <div className="space-y-1">
+                                <div className="font-medium text-gray-800">{o.customer_city}</div>
+                                <div className="text-xs text-gray-500 max-w-[250px] truncate" title={parsed.address}>
+                                  {parsed.address}
+                                </div>
+                                {parsed.email && (
+                                  <div className="text-[11px] text-brand-primary/80 flex items-center gap-1 font-medium">
+                                    <Mail className="w-3 h-3 text-brand-accent shrink-0" /> {parsed.email}
+                                  </div>
+                                )}
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                  {o.customer_city?.toLowerCase() === "puerto varas" ? (
+                                    <span className="text-[9px] font-bold bg-green-50 text-green-700 border border-green-200 px-1.5 py-0.5 rounded uppercase">Envío Gratis</span>
+                                  ) : (
+                                    <span className="text-[9px] font-bold bg-orange-50 text-orange-700 border border-orange-200 px-1.5 py-0.5 rounded uppercase">Por Pagar</span>
+                                  )}
+                                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border uppercase ${
+                                    parsed.docType === "Factura" 
+                                      ? "bg-purple-50 text-purple-700 border-purple-200" 
+                                      : "bg-teal-50 text-teal-700 border-teal-200"
+                                  }`}>
+                                    SII: {parsed.docType}
+                                  </span>
+                                </div>
+                                {parsed.docType === "Factura" && parsed.details && (
+                                  <div className="text-[10px] bg-purple-50/50 text-purple-900/90 p-1.5 rounded-lg border border-purple-100 max-w-[250px] whitespace-normal leading-tight font-sans">
+                                    <strong>Detalles Factura:</strong> {parsed.details}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })()}
                         </td>
                         <td className="px-6 py-4 font-bold text-gray-800">
                           ${Number(o.total_amount).toLocaleString("es-CL")}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-2 py-1 rounded-md text-xs font-bold border ${o.status === "paid" ? "bg-green-100 text-green-700 border-green-200" : "bg-yellow-100 text-yellow-700 border-yellow-200"}`}>
-                            {o.status.toUpperCase()}
+                          <span className={`px-2 py-1 rounded-md text-xs font-bold border ${
+                            o.status === "paid" 
+                              ? "bg-green-100 text-green-700 border-green-200" 
+                              : o.status === "pending_transfer" 
+                                ? "bg-blue-100 text-blue-700 border-blue-200" 
+                                : "bg-yellow-100 text-yellow-700 border-yellow-200"
+                          }`}>
+                            {o.status === "pending_transfer" ? "TRANSFERENCIA PENDIENTE" : o.status.toUpperCase()}
                           </span>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          {(() => {
+                            const parsed = parseAddress(o.customer_address);
+                            return (
+                              <div className="flex justify-end items-center gap-1.5 sm:gap-2">
+                                {o.status !== "paid" && (
+                                  <button
+                                    onClick={() => handleUpdateOrderStatus(o.id, "paid")}
+                                    className="px-2 py-1.5 sm:px-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shadow-sm"
+                                    title="Marcar orden como pagada / completada"
+                                  >
+                                    <Check className="w-3.5 h-3.5 shrink-0" />
+                                    <span className="hidden lg:inline">Confirmar Pago</span>
+                                  </button>
+                                )}
+                                <a
+                                  href={parsed.email 
+                                    ? `mailto:${parsed.email}?subject=${encodeURIComponent(
+                                        `Documento Tributario de tu compra en Soluciones DyS`
+                                      )}&body=${encodeURIComponent(
+                                        `Hola ${o.customer_name},\n\n¡Muchas gracias por comprar en Soluciones DyS!\n\nAdjunto en este correo encontrarás tu ${
+                                          parsed.docType
+                                        } correspondiente a tu compra.\n\nDetalle de la orden:\n- Orden ID: ${
+                                          o.id
+                                        }\n- Total: $${Number(o.total_amount).toLocaleString("es-CL")}\n\nQuedamos a tu entera disposición.\n\nAtentamente,\nEquipo Soluciones DyS\nsandracydiegoc@gmail.com`
+                                      )}`
+                                    : `mailto:?subject=${encodeURIComponent(
+                                        `Documento Tributario de tu compra en Soluciones DyS`
+                                      )}&body=${encodeURIComponent(
+                                        `Hola ${o.customer_name},\n\n¡Muchas gracias por comprar en Soluciones DyS!\n\nAdjunto en este correo encontrarás tu Boleta correspondiente a tu compra.\n\nDetalle de la orden:\n- Orden ID: ${
+                                          o.id
+                                        }\n- Total: $${Number(o.total_amount).toLocaleString("es-CL")}\n\nQuedamos a tu entera disposición.\n\nAtentamente,\nEquipo Soluciones DyS\nsandracydiegoc@gmail.com`
+                                      )}`
+                                  }
+                                  className="px-2 py-1.5 sm:px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors"
+                                  title={`Enviar ${parsed.docType} al correo del cliente`}
+                                >
+                                  <Mail className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                                  <span className="hidden lg:inline">Enviar {parsed.docType}</span>
+                                </a>
+                                <button
+                                  onClick={() => handleDeleteOrder(o.id)}
+                                  className="px-2 py-1.5 sm:px-2.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors"
+                                  title="Eliminar orden y notificar por correo"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5 shrink-0" />
+                                  <span className="hidden lg:inline">Borrar</span>
+                                </button>
+                              </div>
+                            );
+                          })()}
                         </td>
                       </tr>
                     ))}

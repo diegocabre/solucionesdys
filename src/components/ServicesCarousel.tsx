@@ -7,23 +7,38 @@ const slides = [
   {
     id: 1,
     title: 'Productos Online',
+    description: 'Catálogo de herramientas y suministros al alcance de un clic.',
     image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2940&auto=format&fit=crop',
   },
   {
     id: 2,
-    title: 'Transporte VIP Empresas',
-    image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2940&auto=format&fit=crop',
-  },
-  {
-    id: 3,
     title: 'Limpieza de Tapicería',
-    description: 'Auto y Casa',
+    description: 'Sillones, alfombras y colchones impecables en tu hogar.',
     image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=2874&auto=format&fit=crop',
   },
   {
+    id: 3,
+    title: 'Limpieza de Canaletas',
+    description: 'Mantención preventiva de techos y canaletas para el invierno.',
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2940&auto=format&fit=crop',
+  },
+  {
     id: 4,
-    title: 'Partner en Consultorías',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop',
+    title: 'Tapicería de Autos',
+    description: 'Limpieza profunda e higienización de asientos y alfombras.',
+    image: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=2940&auto=format&fit=crop',
+  },
+  {
+    id: 5,
+    title: 'Diseño de Sitios Web',
+    description: 'Creamos tu plataforma a medida optimizada para vender.',
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2940&auto=format&fit=crop',
+  },
+  {
+    id: 6,
+    title: 'Nuestros Partners',
+    description: 'Sitios web desarrollados por nosotros activos en internet.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
   }
 ];
 

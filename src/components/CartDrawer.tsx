@@ -3,7 +3,7 @@
 import { useCartStore } from "@/store/cartStore";
 import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, Minus, Plus, ShoppingBag, Trash2, X, User, Phone, MapPin, Truck } from "lucide-react";
+import { Loader2, Minus, Plus, ShoppingBag, Trash2, X, User, Phone, MapPin, Truck, Landmark, CreditCard, Mail, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "./Button";
 
@@ -15,6 +15,7 @@ export default function CartDrawer() {
     updateQuantity,
     removeItem,
     getTotal,
+    clearCart,
   } = useCartStore();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -22,10 +23,17 @@ export default function CartDrawer() {
 
   // States para Formulario de Cliente
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"transfer" | "mercadopago">("transfer");
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [customerCity, setCustomerCity] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [docType, setDocType] = useState<"boleta" | "factura">("boleta");
+  const [billingRut, setBillingRut] = useState("");
+  const [billingRazon, setBillingRazon] = useState("");
+  const [billingGiro, setBillingGiro] = useState("");
+  const [billingEmail, setBillingEmail] = useState("");
 
   // Inicializar MP SDK
   useEffect(() => {
@@ -41,8 +49,13 @@ export default function CartDrawer() {
       return;
     }
 
-    if (!customerName || !customerPhone || !customerAddress || !customerCity) {
-      alert("Por favor completa todos los datos de envío.");
+    if (!customerName || !customerPhone || !customerAddress || !customerCity || !customerEmail) {
+      alert("Por favor completa todos los datos de envío (incluyendo correo).");
+      return;
+    }
+
+    if (docType === "factura" && (!billingRut || !billingRazon || !billingGiro || !billingEmail)) {
+      alert("Por favor completa los datos de facturación de la empresa.");
       return;
     }
 
@@ -55,15 +68,18 @@ export default function CartDrawer() {
         quantity: i.quantity,
       }));
 
+      let formattedAddress = `${customerAddress} | Correo: ${customerEmail} | Tipo Doc: ${docType === 'factura' ? `Factura (RUT: ${billingRut}, Razón: ${billingRazon}, Giro: ${billingGiro}, Correo Facturación: ${billingEmail})` : 'Boleta'}`;
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           items: itemsToBuy,
+          paymentMethod,
           customer: {
             name: customerName,
             phone: customerPhone,
-            address: customerAddress,
+            address: formattedAddress,
             city: customerCity
           }
         }),
@@ -71,10 +87,20 @@ export default function CartDrawer() {
 
       const data = await res.json();
 
-      if (data.id) {
-        setPreferenceId(data.id);
+      if (paymentMethod === "transfer") {
+        if (data.orderId) {
+          clearCart();
+          setDrawerOpen(false);
+          window.location.href = `/checkout-success?order_id=${data.orderId}&method=transfer`;
+        } else {
+          alert("Ocurrió un error al registrar tu orden de transferencia.");
+        }
       } else {
-        alert("Ocurrió un error al generar la orden de pago.");
+        if (data.id) {
+          setPreferenceId(data.id);
+        } else {
+          alert("Ocurrió un error al generar la orden de pago.");
+        }
       }
     } catch (error) {
       console.error(error);
@@ -89,6 +115,12 @@ export default function CartDrawer() {
       setTimeout(() => {
         setShowCheckoutForm(false);
         setPreferenceId(null);
+        setCustomerEmail("");
+        setDocType("boleta");
+        setBillingRut("");
+        setBillingRazon("");
+        setBillingGiro("");
+        setBillingEmail("");
       }, 300);
     }
   }, [isDrawerOpen]);
@@ -192,6 +224,10 @@ export default function CartDrawer() {
                     <input type="text" value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="Ej: Juan Pérez" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-accent/50 outline-none text-sm text-gray-900" />
                   </div>
                   <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1.5 mb-1"><Mail className="w-3 h-3"/> Correo Electrónico</label>
+                    <input type="email" value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="cliente@correo.com" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-accent/50 outline-none text-sm text-gray-900" />
+                  </div>
+                  <div>
                     <label className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1.5 mb-1"><Phone className="w-3 h-3"/> Teléfono</label>
                     <input type="tel" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="+56 9 1234 5678" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-accent/50 outline-none text-sm text-gray-900" />
                   </div>
@@ -207,6 +243,71 @@ export default function CartDrawer() {
                     ) : customerCity ? (
                       <p className="text-xs text-orange-500 font-medium mt-1">El costo de mensajería será coordinado para pago en destino.</p>
                     ) : null}
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1.5 mb-2"><FileText className="w-3 h-3"/> Tipo de Documento (SII)</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button 
+                        type="button"
+                        onClick={() => setDocType("boleta")}
+                        className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-center transition-all ${docType === "boleta" ? "border-brand-accent bg-brand-accent/5 font-semibold text-brand-primary" : "border-gray-200 text-gray-500"}`}
+                      >
+                        <span className="text-xs">Boleta</span>
+                      </button>
+                      <button 
+                        type="button"
+                        onClick={() => setDocType("factura")}
+                        className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-center transition-all ${docType === "factura" ? "border-brand-accent bg-brand-accent/5 font-semibold text-brand-primary" : "border-gray-200 text-gray-500"}`}
+                      >
+                        <span className="text-xs">Factura</span>
+                      </button>
+                    </div>
+                  </div>
+                  {docType === "factura" && (
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="p-4 bg-gray-50 border border-gray-200 rounded-2xl space-y-3 text-left">
+                      <h4 className="text-xs font-bold text-brand-primary uppercase tracking-wider mb-2">Datos de Facturación</h4>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[10px] font-semibold text-gray-500 uppercase block mb-1">RUT Empresa</label>
+                          <input type="text" value={billingRut} onChange={e => setBillingRut(e.target.value)} placeholder="12.345.678-9" className="w-full p-2.5 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-accent/50 outline-none text-xs text-gray-900" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-semibold text-gray-500 uppercase block mb-1">Razón Social</label>
+                          <input type="text" value={billingRazon} onChange={e => setBillingRazon(e.target.value)} placeholder="Ej: Mi Pyme SpA" className="w-full p-2.5 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-accent/50 outline-none text-xs text-gray-900" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[10px] font-semibold text-gray-500 uppercase block mb-1">Giro Comercial</label>
+                          <input type="text" value={billingGiro} onChange={e => setBillingGiro(e.target.value)} placeholder="Ej: Venta de herramientas" className="w-full p-2.5 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-accent/50 outline-none text-xs text-gray-900" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-semibold text-gray-500 uppercase block mb-1">Email Facturas</label>
+                          <input type="email" value={billingEmail} onChange={e => setBillingEmail(e.target.value)} placeholder="facturacion@empresa.cl" className="w-full p-2.5 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-accent/50 outline-none text-xs text-gray-900" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1.5 mb-2"><CreditCard className="w-3 h-3"/> Método de Pago</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button 
+                        type="button"
+                        onClick={() => setPaymentMethod("transfer")}
+                        className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${paymentMethod === "transfer" ? "border-brand-accent bg-brand-accent/5 font-semibold text-brand-primary" : "border-gray-200 text-gray-500"}`}
+                      >
+                        <Landmark className="w-5 h-5 mb-1 text-brand-accent" />
+                        <span className="text-xs">Transferencia</span>
+                      </button>
+                      <button 
+                        type="button"
+                        onClick={() => setPaymentMethod("mercadopago")}
+                        className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${paymentMethod === "mercadopago" ? "border-brand-accent bg-brand-accent/5 font-semibold text-brand-primary" : "border-gray-200 text-gray-500"}`}
+                      >
+                        <CreditCard className="w-5 h-5 mb-1 text-brand-accent" />
+                        <span className="text-xs">Mercado Pago</span>
+                      </button>
+                    </div>
                   </div>
                   <button onClick={() => setShowCheckoutForm(false)} className="text-sm text-brand-accent underline hover:opacity-80 pt-2 block">
                     Volver al carrito
@@ -233,7 +334,9 @@ export default function CartDrawer() {
                     {isLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      showCheckoutForm ? "Continuar con el Pago" : `Proceder al Envío / Pago`
+                      showCheckoutForm 
+                        ? (paymentMethod === "transfer" ? "Confirmar Orden por Transferencia" : "Continuar con el Pago") 
+                        : `Proceder al Envío / Pago`
                     )}
                   </Button>
                 ) : (

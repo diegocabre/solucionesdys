@@ -1,17 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Fondo blanco principal */
-  --background: #ffffff;
-  /* Texto principal azul muy oscuro / gris pizarra */
-  --foreground: #1e293b;
+  /* Fondo crema cálido premium */
+  --background: #fafaf9;
+  /* Texto principal azul slate muy oscuro */
+  --foreground: #1c2733;
   
-  /* Color principal de la marca (Textos y logos) */
-  --brand-primary: #1e293b;
-  /* Color verde de la marca (Acentos, botones, logo de hoja) */
-  --brand-accent: #4d7c3d;
-  --brand-accent-light: #659247;
-  --brand-accent-dark: #3b5f2f;
+  /* Color principal de la marca (Azul Slate del Logo) */
+  --brand-primary: #182838;
+  /* Color cobre/oro rosa (Acentos, botones, logo) */
+  --brand-accent: #bfa38a;
+  --brand-accent-light: #d1baaa;
+  --brand-accent-dark: #9e7f69;
+
+  /* Color verde oliva de la marca (Foliado del logo) */
+  --brand-green: #43663b;
+  --brand-green-light: #5d8254;
+  --brand-green-dark: #2f4d28;
 }
 
 @theme inline {
@@ -25,22 +30,25 @@
   --color-brand-accent: var(--brand-accent);
   --color-brand-accent-light: var(--brand-accent-light);
   --color-brand-accent-dark: var(--brand-accent-dark);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-light: var(--brand-green-light);
+  --color-brand-green-dark: var(--brand-green-dark);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Fondo oscuro suave para modo noche */
-    --background: #0f172a; 
-    /* Texto claro para modo noche */
-    --foreground: #f8fafc;
-    /* Colores corporativos (el primario se aclara en modo oscuro para leerse) */
-    --brand-primary: #cbd5e1;
+    /* Fondo oscuro azul noche */
+    --background: #0d151e; 
+    /* Texto claro crema */
+    --foreground: #f4f3f0;
+    /* Color principal se aclara un poco para contraste */
+    --brand-primary: #e6ebf0;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
 }

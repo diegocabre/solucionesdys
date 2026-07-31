@@ -15,42 +15,42 @@ const initialState: FormState = {
 export default function ContactoPage() {
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   return (
-    <div className="bg-gray-50 min-h-[calc(100vh-64px)] py-16">
+    <div className="bg-background min-h-[calc(100vh-64px)] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <h1 className="text-4xl font-bold text-slate-900">Contacto</h1>
-          <p className="text-slate-700">
+          <h1 className="text-4xl font-bold text-brand-primary">Contacto</h1>
+          <p className="text-gray-500 dark:text-gray-400 font-light">
             Estamos listos para ayudarte con tus proyectos. Escríbenos y te
             responderemos a la brevedad.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-2xl shadow-sm border p-8 lg:p-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-800 p-8 lg:p-12">
           {/* Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
-            <h2 className="text-2xl font-bold text-slate-900">
+            <h2 className="text-2xl font-bold text-brand-primary">
               Información de Contacto
             </h2>
             <div className="space-y-6">
-              <div className="flex items-center gap-4 text-slate-700">
+              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
                 <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
                   <Mail size={24} />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Email</p>
+                  <p className="font-semibold text-brand-primary">Email</p>
                   <p>sandracydiegoc@gmail.com</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 text-slate-700">
+              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
                 <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
                   <Phone size={24} />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">
+                  <p className="font-semibold text-brand-primary">
                     Teléfono / WhatsApp
                   </p>
                   <p>
@@ -60,17 +60,17 @@ export default function ContactoPage() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 text-slate-700">
+              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
                 <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Ubicación</p>
+                  <p className="font-semibold text-brand-primary">Ubicación</p>
                   <p>Puerto Varas, Chile</p>
                 </div>
               </div>
               
-              <div className="pt-6 border-t border-gray-100 flex justify-start">
+              <div className="pt-6 border-t border-gray-100 dark:border-slate-800 flex justify-start">
                 <a href="https://wa.me/56987887209" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md">
                   <MessageCircle size={22} />
                   Chatea por WhatsApp
@@ -83,7 +83,7 @@ export default function ContactoPage() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-gray-50 p-6 rounded-xl border border-gray-100"
+            className="bg-gray-50/50 dark:bg-slate-850 p-6 rounded-2xl border border-gray-100 dark:border-slate-800"
           >
             <form action={formAction} className="space-y-6">
               {state.message && (
@@ -97,53 +97,56 @@ export default function ContactoPage() {
                 </div>
               )}
               <div>
-                <label className="block text-sm font-medium text-slate-900 mb-1">
+                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
                   Nombre Completo
                 </label>
                 <input
                   name="name"
                   type="text"
                   required
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
+                  className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm"
                   placeholder="Juan Pérez"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-900 mb-1">
+                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
                   Correo Electrónico
                 </label>
                 <input
                   name="email"
                   type="email"
                   required
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
+                  className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm"
                   placeholder="juan@ejemplo.com"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-900 mb-1">
-                  Motivo (Ferretería, Servicios, Web...)
+                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                  Motivo de Contacto
                 </label>
-                <select name="subject" required className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900">
-                  <option value="Ferretería / Productos">Ferretería / Productos</option>
-                  <option value="Servicios/Transporte">Servicios Generales</option>
-                  <option value="Consultoría">Consultoría y Partners</option>
-                  <option value="Desarrollo Web">Desarrollo Web</option>
+                <select name="subject" required className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm">
+                  <option value="Productos Online">Productos Online</option>
+                  <option value="Limpieza de Tapicería">Limpieza de Tapicería (Casa)</option>
+                  <option value="Limpieza de Canaletas">Limpieza de Canaletas</option>
+                  <option value="Tapicería de Autos">Tapicería de Autos (Vehículo)</option>
+                  <option value="Diseño de Sitios Web">Diseño de Sitios Web</option>
+                  <option value="Alianzas / Partners">Alianzas / Partners</option>
+                  <option value="Otro Motivo">Otro Motivo</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-900 mb-1">
+                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
                   Mensaje
                 </label>
                 <textarea
                   name="message"
                   required
                   rows={4}
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent p-3 border outline-none bg-white text-slate-900"
+                  className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm"
                   placeholder="¿Cómo podemos ayudarte?"
                 ></textarea>
               </div>
-              <Button type="submit" className="w-full" disabled={pending}>
+              <Button type="submit" className="w-full justify-center bg-brand-accent hover:bg-brand-accent-dark border-brand-accent" disabled={pending}>
                 {pending ? "Enviando..." : "Enviar Mensaje"}
               </Button>
             </form>
