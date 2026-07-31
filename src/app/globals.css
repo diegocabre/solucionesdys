@@ -35,10 +35,8 @@
   --color-brand-green-dark: var(--brand-green-dark);
 }
 
-/* Configurar variante dark de Tailwind v4 para que sea por clase (.dark) y no automática por media query */
-@utility dark {
-  &:where(.dark, .dark *);
-}
+/* Desactivar el modo oscuro automático de prefers-color-scheme en Tailwind v4 redirigiendo la variante dark a una clase inactiva */
+@custom-variant dark (.theme-dark-disabled &);
 
 body {
   background: var(--background);

@@ -27,7 +27,7 @@ export default function ServiceCard({ title, description, Icon, href, index = 0 
         <Icon className="w-8 h-8 text-brand-accent" />
       </div>
       
-      <h3 className="text-xl font-bold text-foreground">
+      <h3 className="text-xl font-bold text-foreground dark:text-slate-100">
         {title}
       </h3>
       

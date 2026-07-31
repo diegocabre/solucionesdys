@@ -99,7 +99,7 @@ export default function Home() {
             <span className="text-xs font-semibold tracking-widest text-brand-green uppercase bg-brand-green/10 px-3 py-1 rounded-full">
               Servicios & Productos
             </span>
-            <h3 className="text-4xl font-bold text-brand-primary">
+            <h3 className="text-4xl font-bold text-brand-primary dark:text-white">
               ¿Qué Ofrecemos?
             </h3>
             <p className="text-gray-500 font-light">

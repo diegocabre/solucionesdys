@@ -1,6 +1,17 @@
 import { Globe, Code, Layers, MousePointerClick, Zap, Search, Sparkles, Smartphone } from 'lucide-react';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Diseño y Desarrollo de Páginas Web en Puerto Varas | Soluciones DyS",
+  description: "Creamos sitios web profesionales, landing pages y tiendas e-commerce a medida. Páginas rápidas, optimizadas para Google (SEO) y responsivas.",
+  openGraph: {
+    title: "Diseño y Desarrollo de Páginas Web en Puerto Varas | Soluciones DyS",
+    description: "Creamos sitios web profesionales, landing pages y tiendas e-commerce a medida. Optimizados para SEO.",
+    type: "website",
+  }
+};
 
 export default function WebsPage() {
   const webServices = [
@@ -60,7 +71,7 @@ export default function WebsPage() {
                   Diseño & Desarrollo Profesional
                 </span>
               </div>
-              <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
                 Lleva tu marca al <br />
                 <span className="text-brand-accent italic font-serif font-light">Mundo Digital</span>
               </h1>
@@ -117,7 +128,7 @@ export default function WebsPage() {
           {/* Grid de Tipos de Sitio */}
           <div className="mb-24 space-y-12">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-brand-primary font-serif">¿Qué tipo de sitio web necesitas?</h2>
+              <h2 className="text-3xl font-bold text-brand-primary dark:text-white font-serif">¿Qué tipo de sitio web necesitas?</h2>
               <p className="text-gray-500 font-light max-w-xl mx-auto">Selecciona la estructura ideal para cumplir tus metas de negocio.</p>
             </div>
             
@@ -133,7 +144,7 @@ export default function WebsPage() {
                       <div className={`w-12 h-12 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center`}>
                         <Icon className="w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-bold text-brand-primary">{service.title}</h3>
+                      <h3 className="text-xl font-bold text-brand-primary dark:text-slate-100">{service.title}</h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed">
                         {service.description}
                       </p>
@@ -155,16 +166,16 @@ export default function WebsPage() {
           <div className="bg-gray-50 dark:bg-slate-900/50 border border-gray-100 dark:border-slate-800/80 rounded-3xl p-8 sm:p-16 space-y-16">
             <div className="text-center space-y-2">
               <span className="text-xs font-semibold text-brand-accent uppercase bg-brand-accent/10 px-3 py-1 rounded-full">Metodología</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary font-serif">Proceso de Desarrollo</h2>
-              <p className="text-gray-500 font-light max-w-xl mx-auto">De la idea a la pantalla de forma ordenada y transparente.</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-serif">Proceso de Desarrollo</h2>
+              <p className="text-gray-500 dark:text-slate-300 font-light max-w-xl mx-auto">De la idea a la pantalla de forma ordenada y transparente.</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, idx) => (
                 <div key={idx} className="space-y-4 relative">
-                  <div className="text-4xl font-bold font-serif text-brand-accent/30">{step.step}</div>
-                  <h3 className="text-lg font-bold text-brand-primary">{step.title}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed">
+                  <div className="text-4xl font-bold font-serif text-brand-accent/50 dark:text-brand-accent/70">{step.step}</div>
+                  <h3 className="text-lg font-bold text-brand-primary dark:text-slate-100">{step.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-slate-300 font-light leading-relaxed">
                     {step.desc}
                   </p>
                 </div>

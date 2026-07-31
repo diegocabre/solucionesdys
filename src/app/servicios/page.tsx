@@ -1,6 +1,17 @@
 import { Sparkles, Home, Car, ShieldCheck } from 'lucide-react';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Limpieza Profesional de Tapicería, Alfombras y Autos en Puerto Varas | Soluciones DyS",
+  description: "Servicios de limpieza profunda a domicilio en Puerto Varas, Llanquihue y Puerto Montt. Lavado de sillones, alfombras, interiores de autos y mantención de canaletas.",
+  openGraph: {
+    title: "Limpieza Profesional de Tapicería y Alfombras | Soluciones DyS",
+    description: "Servicios de limpieza profunda a domicilio en Puerto Varas. Lavado de sillones, alfombras, autos y mantención de canaletas.",
+    type: "website",
+  }
+};
 
 export default function ServiciosPage() {
   const cleaningServices = [
@@ -55,7 +66,7 @@ export default function ServiciosPage() {
             <span className="text-xs font-semibold tracking-widest text-brand-accent uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
               Hogar & Vehículos
             </span>
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-primary flex justify-center items-center gap-3">
+            <h1 className="text-4xl lg:text-6xl font-bold text-brand-primary dark:text-white flex justify-center items-center gap-3">
               Limpieza Profesional
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed">
@@ -77,7 +88,7 @@ export default function ServiciosPage() {
                       <Icon className="w-7 h-7 text-brand-accent" />
                     </div>
                     
-                    <h2 className="text-2xl font-bold text-brand-primary font-serif">{service.title}</h2>
+                    <h2 className="text-2xl font-bold text-brand-primary dark:text-slate-100 font-serif">{service.title}</h2>
                     
                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-light">
                       {service.description}

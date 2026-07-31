@@ -32,7 +32,7 @@ export default function ContactoPage() {
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
-            <h2 className="text-2xl font-bold text-brand-primary">
+            <h2 className="text-2xl font-bold text-brand-primary dark:text-white">
               Información de Contacto
             </h2>
             <div className="space-y-6">
@@ -41,7 +41,7 @@ export default function ContactoPage() {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-primary">Email</p>
+                  <p className="font-semibold text-brand-primary dark:text-slate-100">Email</p>
                   <p>sandracydiegoc@gmail.com</p>
                 </div>
               </div>
@@ -50,7 +50,7 @@ export default function ContactoPage() {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-primary">
+                  <p className="font-semibold text-brand-primary dark:text-slate-100">
                     Teléfono / WhatsApp
                   </p>
                   <p>
@@ -65,7 +65,7 @@ export default function ContactoPage() {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-primary">Ubicación</p>
+                  <p className="font-semibold text-brand-primary dark:text-slate-100">Ubicación</p>
                   <p>Puerto Varas, Chile</p>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function ContactoPage() {
                 </div>
               )}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                <label className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
                   Nombre Completo
                 </label>
                 <input
@@ -109,7 +109,7 @@ export default function ContactoPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                <label className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
                   Correo Electrónico
                 </label>
                 <input
@@ -121,7 +121,7 @@ export default function ContactoPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                <label className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
                   Motivo de Contacto
                 </label>
                 <select name="subject" required className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm">
@@ -135,7 +135,7 @@ export default function ContactoPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                <label className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
                   Mensaje
                 </label>
                 <textarea
