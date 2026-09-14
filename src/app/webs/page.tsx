@@ -4,11 +4,11 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Diseño y Desarrollo de Páginas Web en Puerto Varas | Soluciones DyS",
-  description: "Creamos sitios web profesionales, landing pages y tiendas e-commerce a medida. Páginas rápidas, optimizadas para Google (SEO) y responsivas.",
+  title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS en Puerto Varas | Soluciones DyS",
+  description: "Soluciones digitales a medida: sitios web, landing pages y tiendas e-commerce construidos con las últimas tecnologías (React, Next.js y Tailwind CSS). Rápidos, optimizados para Google (SEO) y responsivos.",
   openGraph: {
-    title: "Diseño y Desarrollo de Páginas Web en Puerto Varas | Soluciones DyS",
-    description: "Creamos sitios web profesionales, landing pages y tiendas e-commerce a medida. Optimizados para SEO.",
+    title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS | Soluciones DyS",
+    description: "Soluciones digitales a medida con las últimas tecnologías: React, Next.js y Tailwind CSS. Optimizadas para SEO.",
     type: "website",
   }
 };
@@ -49,7 +49,7 @@ export default function WebsPage() {
     {
       step: "03",
       title: "Desarrollo",
-      desc: "Codificamos con tecnologías modernas (React/Next.js) garantizando velocidad óptima y SEO integrado."
+      desc: "Codificamos con las últimas tecnologías (React, Next.js y Tailwind CSS) garantizando velocidad óptima y SEO integrado."
     },
     {
       step: "04",
@@ -72,12 +72,22 @@ export default function WebsPage() {
                 </span>
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
-                Lleva tu marca al <br />
-                <span className="text-brand-accent italic font-serif font-light">Mundo Digital</span>
+                Soluciones digitales con las <br />
+                <span className="text-brand-accent italic font-serif font-light">últimas tecnologías</span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl">
-                Diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
+                Diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda, construidos con React, Next.js y Tailwind CSS. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
               </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                {["React", "Next.js", "Tailwind CSS", "TypeScript"].map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-primary/5 dark:bg-white/5 border border-brand-primary/10 dark:border-white/10 text-brand-primary dark:text-slate-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
               <div className="pt-2">
                 <Link href="/contacto?subject=Diseño Web">
                   <Button variant="primary" size="lg" className="shadow-lg hover:shadow-brand-accent/40 transition-all">
@@ -118,6 +128,13 @@ export default function WebsPage() {
                     <div>
                       <h4 className="font-semibold text-sm">Optimización SEO Base</h4>
                       <p className="text-xs text-gray-300">Estructurado para aparecer en las búsquedas de Google.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-start">
+                    <div className="p-2 bg-white/10 rounded-lg"><Code className="w-5 h-5 text-brand-accent" /></div>
+                    <div>
+                      <h4 className="font-semibold text-sm">Stack de Última Generación</h4>
+                      <p className="text-xs text-gray-300">Construido con React, Next.js y Tailwind CSS.</p>
                     </div>
                   </div>
                 </div>

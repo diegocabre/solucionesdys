@@ -10,30 +10,14 @@ export default function Footer() {
               Soluciones <span className="text-brand-accent-light">DyS</span>
             </h3>
             <p className="text-gray-400 text-sm max-w-sm">
-              Especialistas en productos online, limpieza profunda de hogar y vehículos,
-              diseño de sitios web a medida y soluciones para partners digitales.
+              Soluciones digitales con las últimas tecnologías: diseño y desarrollo
+              de sitios web a medida con React, Next.js y Tailwind CSS.
             </p>
           </div>
 
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Servicios</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <Link
-                  href="/productos"
-                  className="hover:text-brand-accent-light transition"
-                >
-                  Productos Online
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/servicios"
-                  className="hover:text-brand-accent-light transition"
-                >
-                  Limpieza de Hogar
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/webs"
@@ -113,9 +97,6 @@ export default function Footer() {
             reservados.
           </p>
           <div className="mt-4 md:mt-0 space-x-4">
-            <Link href="/admin" className="hover:text-white transition font-medium text-brand-accent-light">
-              Acceso Admin
-            </Link>
             <Link href="#" className="hover:text-white transition">
               Términos de Servicio
             </Link>

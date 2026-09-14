@@ -125,11 +125,9 @@ export default function ContactoPage() {
                   Motivo de Contacto
                 </label>
                 <select name="subject" required className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm">
-                  <option value="Productos Online">Productos Online</option>
-                  <option value="Limpieza de Tapicería">Limpieza de Tapicería (Casa)</option>
-                  <option value="Limpieza de Canaletas">Limpieza de Canaletas</option>
-                  <option value="Tapicería de Autos">Tapicería de Autos (Vehículo)</option>
                   <option value="Diseño de Sitios Web">Diseño de Sitios Web</option>
+                  <option value="Landing Page">Landing Page</option>
+                  <option value="Tienda Online / E-commerce">Tienda Online / E-commerce</option>
                   <option value="Alianzas / Partners">Alianzas / Partners</option>
                   <option value="Otro Motivo">Otro Motivo</option>
                 </select>

@@ -1,30 +1,20 @@
 "use client";
 
-import { useCartStore } from "@/store/cartStore";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { setDrawerOpen, getTotalItems } = useCartStore();
   const pathname = usePathname();
-
-  // Hidratación segura para Next.js y Zustand
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const NAV_LINKS = [
     { label: "Inicio", href: "/" },
-    { label: "Productos", href: "/productos" },
-    { label: "Servicios", href: "/servicios" },
     { label: "Diseño Web", href: "/webs" },
     { label: "Partners", href: "/partners" },
     { label: "Contacto", href: "/contacto" },
@@ -53,7 +43,7 @@ export default function Navbar() {
                 Soluciones <span className="text-brand-accent">DyS</span>
               </span>
               <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-green-light mt-1.5 leading-none">
-                Productos & Web
+                Soluciones Digitales
               </span>
             </div>
           </Link>
@@ -62,7 +52,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-2">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
-              
+
               return (
                 <Link
                   key={link.label}
@@ -82,34 +72,10 @@ export default function Navbar() {
                 </Link>
               );
             })}
-
-            <button
-              onClick={() => setDrawerOpen(true)}
-              className="relative p-2 text-foreground hover:text-brand-accent"
-            >
-              <ShoppingCart size={20} />
-              {mounted && getTotalItems() > 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-accent rounded-full">
-                  {getTotalItems()}
-                </span>
-              )}
-            </button>
           </div>
 
           {/* Mobile Actions */}
           <div className="flex md:hidden items-center gap-4">
-            <button
-              onClick={() => setDrawerOpen(true)}
-              className="relative p-2 text-foreground hover:text-brand-accent"
-            >
-              <ShoppingCart size={20} />
-              {mounted && getTotalItems() > 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-accent rounded-full">
-                  {getTotalItems()}
-                </span>
-              )}
-            </button>
-
             <button
               onClick={toggleMenu}
               className="p-2 text-foreground hover:bg-gray-100 rounded-md focus:outline-none"
@@ -132,15 +98,15 @@ export default function Navbar() {
             <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
               {NAV_LINKS.map((link) => {
                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
-                
+
                 return (
                   <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={`block px-3 py-3 text-base font-medium rounded-md transition-colors ${
-                      isActive 
-                        ? "text-brand-accent bg-brand-accent/10 dark:bg-brand-accent/20" 
+                      isActive
+                        ? "text-brand-accent bg-brand-accent/10 dark:bg-brand-accent/20"
                         : "text-foreground hover:text-brand-accent hover:bg-gray-50 dark:hover:bg-slate-800"
                     }`}
                   >

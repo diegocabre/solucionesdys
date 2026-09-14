@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contacto | Cotiza Limpieza de Tapicería y Diseño Web en Puerto Varas",
-  description: "Comunícate con Soluciones DyS. Cotiza limpieza profunda de sillones, alfombras y autos, mantención de canaletas o el diseño de tu próximo sitio web profesional.",
+  title: "Contacto | Cotiza tu Sitio Web en Puerto Varas | Soluciones DyS",
+  description: "Comunícate con Soluciones DyS. Cotiza el diseño y desarrollo de tu próximo sitio web, landing page o tienda online con React, Next.js y Tailwind CSS.",
   openGraph: {
     title: "Contacto | Soluciones DyS Puerto Varas",
-    description: "Cotiza limpieza profunda de sillones, alfombras y autos, mantención de canaletas o el diseño de tu próximo sitio web profesional.",
+    description: "Cotiza el diseño y desarrollo de tu próximo sitio web, landing page o tienda online con React, Next.js y Tailwind CSS.",
     type: "website",
   }
 };
