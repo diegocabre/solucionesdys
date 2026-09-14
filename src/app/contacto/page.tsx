@@ -54,8 +54,8 @@ export default function ContactoPage() {
                     Teléfono / WhatsApp
                   </p>
                   <p>
-                    <a href="https://wa.me/56987887209" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors">
-                      +56 9 8788 7209
+                    <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors">
+                      +56 9 4763 7541
                     </a>
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export default function ContactoPage() {
               </div>
               
               <div className="pt-6 border-t border-gray-100 dark:border-slate-800 flex justify-start">
-                <a href="https://wa.me/56987887209" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md">
+                <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md">
                   <MessageCircle size={22} />
                   Chatea por WhatsApp
                 </a>
@@ -85,7 +85,18 @@ export default function ContactoPage() {
             animate={{ opacity: 1, x: 0 }}
             className="bg-gray-50/50 dark:bg-slate-850 p-6 rounded-2xl border border-gray-100 dark:border-slate-800"
           >
-            <form action={formAction} className="space-y-6">
+            <form action={formAction} className="relative space-y-6">
+              {/* Honeypot anti-spam: invisible para personas, los bots suelen rellenarlo */}
+              <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="company_website">No completar este campo</label>
+                <input
+                  id="company_website"
+                  name="company_website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               {state.message && (
                 <div className="p-4 bg-green-50 text-green-800 rounded-md text-sm border border-green-200">
                   {state.message}

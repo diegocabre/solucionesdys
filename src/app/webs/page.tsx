@@ -6,10 +6,13 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS en Puerto Varas | Soluciones DyS",
   description: "Soluciones digitales a medida: sitios web, landing pages y tiendas e-commerce construidos con las últimas tecnologías (React, Next.js y Tailwind CSS). Rápidos, optimizados para Google (SEO) y responsivos.",
+  alternates: { canonical: "/webs" },
   openGraph: {
     title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS | Soluciones DyS",
     description: "Soluciones digitales a medida con las últimas tecnologías: React, Next.js y Tailwind CSS. Optimizadas para SEO.",
+    url: "/webs",
     type: "website",
+    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
   }
 };
 
@@ -67,13 +70,13 @@ export default function WebsPage() {
           <div className="mb-20 flex flex-col lg:flex-row gap-12 items-center">
             <div className="flex-1 space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
-                <span className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+                <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
                   Diseño & Desarrollo Profesional
                 </span>
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
                 Soluciones digitales con las <br />
-                <span className="text-brand-accent italic font-serif font-light">últimas tecnologías</span>
+                <span className="text-brand-accent-dark italic font-serif font-light">últimas tecnologías</span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl">
                 Diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda, construidos con React, Next.js y Tailwind CSS. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
@@ -168,7 +171,7 @@ export default function WebsPage() {
                     </div>
                     <div className="pt-6 border-t border-gray-50 dark:border-slate-800 mt-6">
                       <Link href={`/contacto?subject=Consulta - ${service.title}`}>
-                        <span className="text-xs font-semibold text-brand-accent hover:text-brand-accent-dark transition-colors cursor-pointer inline-flex items-center gap-1">
+                        <span className="text-xs font-semibold text-brand-accent-dark hover:text-brand-primary transition-colors cursor-pointer inline-flex items-center gap-1">
                           Saber más &rarr;
                         </span>
                       </Link>
@@ -182,7 +185,7 @@ export default function WebsPage() {
           {/* Proceso de Trabajo */}
           <div className="bg-gray-50 dark:bg-slate-900/50 border border-gray-100 dark:border-slate-800/80 rounded-3xl p-8 sm:p-16 space-y-16">
             <div className="text-center space-y-2">
-              <span className="text-xs font-semibold text-brand-accent uppercase bg-brand-accent/10 px-3 py-1 rounded-full">Metodología</span>
+              <span className="text-xs font-semibold text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">Metodología</span>
               <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-serif">Proceso de Desarrollo</h2>
               <p className="text-gray-500 dark:text-slate-300 font-light max-w-xl mx-auto">De la idea a la pantalla de forma ordenada y transparente.</p>
             </div>

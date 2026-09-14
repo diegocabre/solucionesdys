@@ -20,7 +20,7 @@ export default function Button({
   
   const variants = {
     primary: 'bg-brand-accent text-white hover:bg-brand-accent-light',
-    outline: 'border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white',
+    outline: 'border-2 border-brand-accent text-brand-accent-dark hover:bg-brand-accent hover:text-white',
     ghost: 'hover:bg-gray-100 text-brand-primary dark:hover:bg-gray-800'
   };
 

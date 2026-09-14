@@ -56,14 +56,14 @@ export default function Home() {
             className="space-y-8"
           >
             <div className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
-              <span className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+              <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
                 Soluciones DyS • 100% Digital
               </span>
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary leading-tight">
               Soluciones digitales con <br/>
-              <span className="font-serif italic font-light text-brand-accent">las últimas tecnologías</span>
+              <span className="font-serif italic font-light text-brand-accent-dark">las últimas tecnologías</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed font-light">

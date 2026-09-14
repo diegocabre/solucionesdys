@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { COOKIE_CONSENT_EVENT } from "@/components/CookieConsent";
 
 export default function Footer() {
   return (
@@ -41,12 +44,12 @@ export default function Footer() {
             <h4 className="text-lg font-medium">Contacto</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>sandracydiegoc@gmail.com</li>
-              <li>+56 9 8788 7209</li>
+              <li>+56 9 4763 7541</li>
               <li>Puerto Varas, Chile</li>
             </ul>
             <div className="flex gap-4 pt-2">
               <a
-                href="https://wa.me/56987887209"
+                href="https://wa.me/56947637541"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-brand-accent-light transition"
@@ -100,9 +103,16 @@ export default function Footer() {
             <Link href="#" className="hover:text-white transition">
               Términos de Servicio
             </Link>
-            <Link href="#" className="hover:text-white transition">
+            <Link href="/privacidad" className="hover:text-white transition">
               Privacidad
             </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))}
+              className="hover:text-white transition"
+            >
+              Preferencias de Cookies
+            </button>
           </div>
         </div>
       </div>

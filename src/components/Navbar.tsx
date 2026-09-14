@@ -39,8 +39,8 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <span className="text-lg sm:text-2xl font-bold font-serif text-brand-primary tracking-wide leading-none transition-colors group-hover:text-brand-accent">
-                Soluciones <span className="text-brand-accent">DyS</span>
+              <span className="text-lg sm:text-2xl font-bold font-serif text-brand-primary tracking-wide leading-none transition-colors group-hover:text-brand-accent-dark">
+                Soluciones <span className="text-brand-accent-dark">DyS</span>
               </span>
               <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-green-light mt-1.5 leading-none">
                 Soluciones Digitales
@@ -58,7 +58,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive ? "text-brand-accent" : "text-foreground hover:text-brand-accent"
+                    isActive ? "text-brand-accent-dark" : "text-foreground hover:text-brand-accent-dark"
                   }`}
                 >
                   <span className="relative z-10">{link.label}</span>
@@ -106,8 +106,8 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={`block px-3 py-3 text-base font-medium rounded-md transition-colors ${
                       isActive
-                        ? "text-brand-accent bg-brand-accent/10 dark:bg-brand-accent/20"
-                        : "text-foreground hover:text-brand-accent hover:bg-gray-50 dark:hover:bg-slate-800"
+                        ? "text-brand-accent-dark bg-brand-accent/10 dark:bg-brand-accent/20"
+                        : "text-foreground hover:text-brand-accent-dark hover:bg-gray-50 dark:hover:bg-slate-800"
                     }`}
                   >
                     {link.label}
