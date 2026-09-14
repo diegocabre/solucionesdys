@@ -68,9 +68,9 @@ export default function CookieConsent() {
           <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl shadow-2xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center">
             <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
               Usamos cookies esenciales para el funcionamiento del sitio. Con tu
-              autorización, también usamos Google Analytics y Microsoft Clarity
-              para entender cómo se usa el sitio y mejorarlo. Puedes revisar los
-              detalles en nuestra{' '}
+              autorización, también usamos Microsoft Clarity para entender cómo
+              se usa el sitio y mejorarlo. Puedes revisar los detalles en
+              nuestra{' '}
               <Link href="/privacidad" className="underline text-brand-accent-dark hover:text-brand-primary">
                 Política de Privacidad y Cookies
               </Link>

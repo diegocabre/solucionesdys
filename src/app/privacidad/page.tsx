@@ -52,8 +52,7 @@ export default function PrivacidadPage() {
                 <strong>Datos de navegación (solo con tu autorización):</strong> si
                 aceptas las cookies analíticas, recopilamos de forma agregada
                 información sobre cómo usas el sitio (páginas visitadas, tiempo de
-                permanencia, tipo de dispositivo) a través de Google Analytics y
-                Microsoft Clarity.
+                permanencia, tipo de dispositivo) a través de Microsoft Clarity.
               </li>
             </ul>
             <p>No solicitamos ni almacenamos datos bancarios, de pago ni contraseñas en este sitio.</p>
@@ -107,8 +106,8 @@ export default function PrivacidadPage() {
                   <tr>
                     <td className="py-2 pr-4 align-top">Analíticas</td>
                     <td className="py-2 pr-4 align-top">
-                      Google Analytics y Microsoft Clarity: nos ayudan a entender cómo
-                      se navega el sitio para mejorarlo.
+                      Microsoft Clarity: nos ayuda a entender cómo se navega el
+                      sitio para mejorarlo.
                     </td>
                     <td className="py-2 align-top">Sí</td>
                   </tr>
@@ -118,8 +117,8 @@ export default function PrivacidadPage() {
             <p>
               Puedes aceptar o rechazar las cookies analíticas en cualquier momento
               desde el enlace <strong>&ldquo;Preferencias de Cookies&rdquo;</strong> en el
-              pie de página. Si las rechazas, Google Analytics y Microsoft Clarity no
-              se cargarán en tu navegador.
+              pie de página. Si las rechazas, Microsoft Clarity no se cargará en
+              tu navegador.
             </p>
           </section>
 
@@ -128,9 +127,8 @@ export default function PrivacidadPage() {
             <p>Para operar el sitio, algunos datos pasan por proveedores externos:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li>
-                <strong>Google (Gmail / Google Analytics):</strong> usamos Gmail para
-                recibir los mensajes del formulario de contacto, y Google Analytics
-                (si aceptas cookies) para estadísticas de uso del sitio.
+                <strong>Google (Gmail):</strong> usamos Gmail para recibir los
+                mensajes del formulario de contacto.
               </li>
               <li>
                 <strong>Microsoft Clarity:</strong> herramienta de análisis de
@@ -150,7 +148,7 @@ export default function PrivacidadPage() {
               Conservamos los mensajes del formulario de contacto solo por el tiempo
               necesario para responder tu consulta y, si corresponde, dar seguimiento
               comercial. Los datos analíticos se conservan según los plazos por
-              defecto de Google Analytics y Microsoft Clarity.
+              defecto de Microsoft Clarity.
             </p>
           </section>
 
