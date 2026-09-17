@@ -1,6 +1,6 @@
 'use server'
 
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import { headers } from 'next/headers'
 
 export type FormState = {
@@ -87,24 +87,22 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
     }
   }
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER || 'sandracydiegoc@gmail.com',
-      pass: process.env.EMAIL_PASS,
-    },
-  })
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   try {
-    await transporter.sendMail({
-      // Se envía desde la misma cuenta para evitar problemas de SPF/DKIM;
-      // el remitente real queda en el reply-to.
-      from: `"Formulario Web" <${process.env.EMAIL_USER || 'sandracydiegoc@gmail.com'}>`,
+    const { error: resendError } = await resend.emails.send({
+      from: 'Formulario Web <formulario@solucionesdys.cl>',
       replyTo: email,
       to: 'sandracydiegoc@gmail.com',
       subject: `Nuevo contacto web: ${subject}`,
       text: `Nombre: ${name}\nEmail: ${email}\nMotivo: ${subject}\n\nMensaje:\n${message}`,
     })
+
+    if (resendError) {
+      console.error('Error enviando email:', resendError)
+      return { success: false, message: '', error: 'Error enviando el mensaje. Revisa la configuración del servidor de correo.' }
+    }
+
     return { success: true, message: '¡Mensaje enviado con éxito!', error: '' }
   } catch (error) {
     console.error('Error enviando email:', error)
