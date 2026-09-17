@@ -103,6 +103,19 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
       return { success: false, message: '', error: 'Error enviando el mensaje. Revisa la configuración del servidor de correo.' }
     }
 
+    // Respuesta automática al visitante. Es "best effort": si falla no se
+    // reporta error, ya que el mensaje principal a la empresa ya se envió.
+    try {
+      await resend.emails.send({
+        from: 'Soluciones DyS <formulario@solucionesdys.cl>',
+        to: email,
+        subject: 'Hemos recibido tu mensaje - Soluciones DyS',
+        text: `Hola ${name},\n\nGracias por contactarnos. Recibimos tu mensaje sobre "${subject}" y pronto nos comunicaremos contigo.\n\nSaludos,\nEquipo Soluciones DyS`,
+      })
+    } catch (autoReplyError) {
+      console.error('Error enviando respuesta automática:', autoReplyError)
+    }
+
     return { success: true, message: '¡Mensaje enviado con éxito!', error: '' }
   } catch (error) {
     console.error('Error enviando email:', error)
