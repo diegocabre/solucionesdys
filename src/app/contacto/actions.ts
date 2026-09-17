@@ -56,9 +56,7 @@ function escapeHtml(value: string): string {
 }
 
 // HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail).
-// El logo se usa dos veces: como marca de agua de fondo (best-effort, algunos
-// clientes de correo antiguos como Outlook de escritorio la ignoran) y como
-// imagen normal en el encabezado, que sí se ve en todos los clientes.
+// El logo ya incluye el texto "Soluciones DyS" dentro de la imagen.
 function buildAutoReplyHtml(name: string, subject: string): string {
   const logoUrl = `${SITE_URL}/assets/img/logo.png`
   const safeName = escapeHtml(name)
@@ -75,11 +73,8 @@ function buildAutoReplyHtml(name: string, subject: string): string {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#ffffff; border-radius:16px; overflow:hidden; border:1px solid #e7e2dc;">
             <tr>
-              <td align="center" style="background-color:#182838; background-image:url('${logoUrl}'); background-repeat:no-repeat; background-position:center; background-size:140px; padding:48px 24px;">
-                <img src="${logoUrl}" width="64" height="64" alt="Soluciones DyS" style="display:block; border-radius:12px;" />
-                <div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#d1baaa; margin-top:12px; letter-spacing:0.5px;">
-                  Soluciones DyS
-                </div>
+              <td align="center" style="background-color:#182838; padding:40px 24px;">
+                <img src="${logoUrl}" width="160" alt="Soluciones DyS" style="display:block; max-width:160px; height:auto;" />
               </td>
             </tr>
             <tr>
