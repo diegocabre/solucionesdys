@@ -50,9 +50,8 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
   // Campo honeypot: invisible para personas, pero los bots que autocompletan
   // formularios suelen rellenarlo. Si viene con contenido, fingimos éxito
   // sin enviar nada ni revelar que fue detectado.
-  const honeypot = formData.get('company_website')?.toString() || ''
+  const honeypot = formData.get('hp_check_x9')?.toString() || ''
   if (honeypot.trim() !== '') {
-    console.warn('[DEBUG contacto] Honeypot activado, valor recibido:', JSON.stringify(honeypot))
     return { success: true, message: '¡Mensaje enviado con éxito!', error: '' }
   }
 
@@ -88,12 +87,10 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
     }
   }
 
-  console.warn('[DEBUG contacto] RESEND_API_KEY presente:', Boolean(process.env.RESEND_API_KEY))
-
   const resend = new Resend(process.env.RESEND_API_KEY)
 
   try {
-    const { data: resendData, error: resendError } = await resend.emails.send({
+    const { error: resendError } = await resend.emails.send({
       from: 'Formulario Web <formulario@solucionesdys.cl>',
       replyTo: email,
       to: 'sandracydiegoc@gmail.com',
@@ -102,14 +99,13 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
     })
 
     if (resendError) {
-      console.error('[DEBUG contacto] Error enviando email:', JSON.stringify(resendError))
+      console.error('Error enviando email:', resendError)
       return { success: false, message: '', error: 'Error enviando el mensaje. Revisa la configuración del servidor de correo.' }
     }
 
-    console.warn('[DEBUG contacto] Enviado OK, id:', resendData?.id)
     return { success: true, message: '¡Mensaje enviado con éxito!', error: '' }
   } catch (error) {
-    console.error('[DEBUG contacto] Excepción enviando email:', error)
+    console.error('Error enviando email:', error)
     return { success: false, message: '', error: 'Error enviando el mensaje. Revisa la configuración del servidor de correo.' }
   }
 }

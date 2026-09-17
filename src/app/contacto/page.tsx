@@ -88,10 +88,10 @@ export default function ContactoPage() {
             <form action={formAction} className="relative space-y-6">
               {/* Honeypot anti-spam: invisible para personas, los bots suelen rellenarlo */}
               <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
-                <label htmlFor="company_website">No completar este campo</label>
+                <label htmlFor="hp_check_x9">No completar este campo</label>
                 <input
-                  id="company_website"
-                  name="company_website"
+                  id="hp_check_x9"
+                  name="hp_check_x9"
                   type="text"
                   tabIndex={-1}
                   autoComplete="off"
