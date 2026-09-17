@@ -2,6 +2,7 @@
 
 import { Resend } from 'resend'
 import { headers } from 'next/headers'
+import { SITE_URL } from '@/lib/site'
 
 export type FormState = {
   success: boolean
@@ -44,6 +45,75 @@ function isRateLimited(key: string): boolean {
 // cabeceras SMTP (CRLF injection) cuando el valor se usa en headers de email.
 function sanitizeForHeader(value: string): string {
   return value.replace(/[\r\n\t\0]/g, ' ').trim()
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+// HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail).
+// El logo se usa dos veces: como marca de agua de fondo (best-effort, algunos
+// clientes de correo antiguos como Outlook de escritorio la ignoran) y como
+// imagen normal en el encabezado, que sí se ve en todos los clientes.
+function buildAutoReplyHtml(name: string, subject: string): string {
+  const logoUrl = `${SITE_URL}/assets/img/logo.png`
+  const safeName = escapeHtml(name)
+  const safeSubject = escapeHtml(subject)
+
+  return `<!DOCTYPE html>
+<html lang="es">
+  <body style="margin:0; padding:0; background-color:#fafaf9;">
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+      Recibimos tu mensaje, ${safeName}. Pronto nos comunicaremos contigo.
+    </div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafaf9; padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#ffffff; border-radius:16px; overflow:hidden; border:1px solid #e7e2dc;">
+            <tr>
+              <td align="center" style="background-color:#182838; background-image:url('${logoUrl}'); background-repeat:no-repeat; background-position:center; background-size:140px; padding:48px 24px;">
+                <img src="${logoUrl}" width="64" height="64" alt="Soluciones DyS" style="display:block; border-radius:12px;" />
+                <div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#d1baaa; margin-top:12px; letter-spacing:0.5px;">
+                  Soluciones DyS
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:32px 28px; font-family:Arial, Helvetica, sans-serif; color:#1c2733;">
+                <p style="font-size:16px; margin:0 0 16px;">Hola ${safeName},</p>
+                <p style="font-size:15px; line-height:1.6; margin:0 0 16px;">
+                  Gracias por contactarnos. Recibimos tu mensaje sobre
+                  <strong style="color:#9e7f69;">"${safeSubject}"</strong> y muy pronto nos comunicaremos contigo.
+                </p>
+                <p style="font-size:15px; line-height:1.6; margin:0 0 24px;">
+                  Mientras tanto, si tu consulta es urgente, puedes escribirnos directo por WhatsApp.
+                </p>
+                <table role="presentation" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="center" style="background-color:#43663b; border-radius:8px;">
+                      <a href="https://wa.me/56947637541" style="display:inline-block; padding:12px 24px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#ffffff; text-decoration:none; font-weight:bold;">
+                        Escribir por WhatsApp
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:20px 28px; background-color:#fafaf9; border-top:1px solid #e7e2dc; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#6b7280; text-align:center;">
+                Soluciones DyS · Puerto Varas, Chile
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`
 }
 
 export async function sendContactEmail(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -111,6 +181,7 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
         to: email,
         subject: 'Hemos recibido tu mensaje - Soluciones DyS',
         text: `Hola ${name},\n\nGracias por contactarnos. Recibimos tu mensaje sobre "${subject}" y pronto nos comunicaremos contigo.\n\nSaludos,\nEquipo Soluciones DyS`,
+        html: buildAutoReplyHtml(name, subject),
       })
     } catch (autoReplyError) {
       console.error('Error enviando respuesta automática:', autoReplyError)
