@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import Analytics from "@/components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import StructuredData from "@/components/StructuredData";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
@@ -68,6 +69,7 @@ export default function RootLayout({
         <Footer />
         <CookieConsent />
         <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );
