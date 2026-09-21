@@ -23,6 +23,57 @@ export const COMUNAS_ZONA = [
   "Maullín",
 ] as const;
 
+const DIA_MS = 86_400_000;
+
+const sumarDias = (fecha: string, dias: number) =>
+  new Date(Date.parse(`${fecha}T00:00:00Z`) + dias * DIA_MS).toISOString().slice(0, 10);
+
+// Un turno con fecha D dura desde las 09:00 de D hasta las 08:59 de D+1.
+const HORA_CAMBIO_TURNO = 9;
+
+export interface TurnoVigente {
+  /** Fecha (YYYY-MM-DD) del turno que está en curso ahora en Santiago. */
+  fechaVigente: string;
+  /** Fecha del turno anterior, ya terminado. */
+  fechaAnterior: string;
+  /** Hora actual en Santiago (0-23). */
+  hora: number;
+}
+
+/** Turno en curso según el reloj de Santiago: antes de las 09:00 sigue el turno del día anterior. */
+export function turnoVigente(ahora: Date = new Date()): TurnoVigente {
+  const partes: Record<string, string> = {};
+  for (const p of new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Santiago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(ahora)) {
+    partes[p.type] = p.value;
+  }
+  const hoy = `${partes.year}-${partes.month}-${partes.day}`;
+  const hora = Number(partes.hour);
+  const fechaVigente = hora < HORA_CAMBIO_TURNO ? sumarDias(hoy, -1) : hoy;
+  return { fechaVigente, fechaAnterior: sumarDias(fechaVigente, -1), hora };
+}
+
+// Centro de Puerto Varas: punto de referencia para ordenar las farmacias cercanas.
+const CENTRO_PUERTO_VARAS = { lat: -41.3186, lng: -72.9857 };
+
+/** Distancia en línea recta (km) entre una farmacia y el centro de Puerto Varas, o null sin coordenadas. */
+export function distanciaAPuertoVarasKm(f: Pick<FarmaciaTurno, "lat" | "lng">): number | null {
+  if (f.lat === null || f.lng === null) return null;
+  const rad = (g: number) => (g * Math.PI) / 180;
+  const dLat = rad(f.lat - CENTRO_PUERTO_VARAS.lat);
+  const dLng = rad(f.lng - CENTRO_PUERTO_VARAS.lng);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(CENTRO_PUERTO_VARAS.lat)) * Math.cos(rad(f.lat)) * Math.sin(dLng / 2) ** 2;
+  return 6371 * 2 * Math.asin(Math.sqrt(a));
+}
+
 export interface FarmaciaTurno {
   id: string;
   nombre: string;
@@ -43,13 +94,19 @@ export interface FarmaciaTurno {
 }
 
 export interface FarmaciasResponse {
-  /** Fecha (YYYY-MM-DD) a la que corresponde el turno informado. */
+  /** Fecha (YYYY-MM-DD) del turno vigente al generar la respuesta. */
   fecha: string;
   /** Momento en que se generó esta respuesta (ISO). */
   actualizado: string;
   fuente: string;
   total: number;
+  /** Farmacias del turno vigente. Vacío si el MINSAL aún no publica el turno en curso. */
   farmacias: FarmaciaTurno[];
+  /**
+   * Turnos recientes de otras fechas (el anterior, ya terminado, o uno futuro ya publicado).
+   * Sirven de respaldo si el MINSAL se atrasa; no son farmacias de turno ahora.
+   */
+  otrasFechas: FarmaciaTurno[];
 }
 
 interface MinsalLocal {
@@ -137,15 +194,19 @@ export function normalizarRespuesta(data: unknown, comunaSlug?: string): Farmaci
   if (!Array.isArray(data)) throw new Error("Respuesta inesperada del MINSAL");
   const locales = data as MinsalLocal[];
 
+  const { fechaVigente } = turnoVigente();
+
   // Junto con los turnos del día, el servicio arrastra registros antiguos (locales de
-  // urgencia con fecha vieja). Nos quedamos solo con la fecha más reciente.
-  const fecha = locales.reduce((max, l) => (l.fecha > max ? l.fecha : max), "");
+  // urgencia con fecha vieja). Descartamos todo lo que quede más de 2 días atrás de la
+  // fecha más nueva del servicio.
+  const fechaMax = locales.reduce((max, l) => (l.fecha > max ? l.fecha : max), "");
+  const limite = sumarDias(fechaMax, -2);
 
   const zona = new Set(COMUNAS_ZONA.map((c) => toSlug(c)));
   const orden = new Map<string, number>(COMUNAS_ZONA.map((c, i) => [toSlug(c), i]));
 
-  const farmacias = locales
-    .filter((l) => l.fecha === fecha && zona.has(toSlug(l.comuna_nombre)))
+  const recientes = locales
+    .filter((l) => l.fecha >= limite && zona.has(toSlug(l.comuna_nombre)))
     .map(normalizar)
     .filter((f) => !comunaSlug || f.comunaSlug === comunaSlug)
     .sort(
@@ -154,12 +215,15 @@ export function normalizarRespuesta(data: unknown, comunaSlug?: string): Farmaci
         a.nombre.localeCompare(b.nombre, "es"),
     );
 
+  const farmacias = recientes.filter((f) => f.fecha === fechaVigente);
+
   return {
-    fecha,
+    fecha: fechaVigente,
     actualizado: new Date().toISOString(),
     fuente: FUENTE,
     total: farmacias.length,
     farmacias,
+    otrasFechas: recientes.filter((f) => f.fecha !== fechaVigente),
   };
 }
 
