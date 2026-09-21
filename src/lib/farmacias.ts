@@ -1,7 +1,9 @@
 // Farmacias de turno: consulta el servicio abierto del MINSAL, lo normaliza y
-// lo filtra a la zona de Puerto Varas. Lo usa el endpoint /api/farmacias-turno.
+// lo filtra a la zona de Puerto Varas. Lo usa el endpoint /api/farmacias-turno y, como
+// respaldo, el navegador del visitante (el MINSAL bloquea a veces las IP de servidores
+// pero permite CORS, así que la consulta directa desde el navegador sigue funcionando).
 
-const MINSAL_URL = "https://midas.minsal.cl/farmacia_v2/WS/getLocalesTurnos.php";
+export const MINSAL_URL = "https://midas.minsal.cl/farmacia_v2/WS/getLocalesTurnos.php";
 
 // Cuánto tiempo (segundos) reutilizamos la respuesta del MINSAL antes de volver a pedirla.
 const REVALIDATE_SECONDS = 900;
@@ -64,7 +66,7 @@ interface MinsalLocal {
   local_lng: string;
 }
 
-const sinTildes = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+const sinTildes = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 export const toSlug = (s: string) =>
   sinTildes(s).trim().toLowerCase().replace(/\s+/g, "-");
@@ -129,15 +131,9 @@ function normalizar(l: MinsalLocal): FarmaciaTurno {
   };
 }
 
-export async function obtenerFarmaciasTurno(comunaSlug?: string): Promise<FarmaciasResponse> {
-  const res = await fetch(MINSAL_URL, {
-    headers: { Accept: "application/json", "User-Agent": "SolucionesDyS/1.0 (+https://www.solucionesdys.cl)" },
-    next: { revalidate: REVALIDATE_SECONDS },
-    signal: AbortSignal.timeout(10_000),
-  });
-  if (!res.ok) throw new Error(`MINSAL respondió ${res.status}`);
-
-  const data: unknown = await res.json();
+// Convierte la respuesta cruda del MINSAL en la respuesta limpia que usa la página.
+// Es una función pura: corre igual en el servidor y en el navegador.
+export function normalizarRespuesta(data: unknown, comunaSlug?: string): FarmaciasResponse {
   if (!Array.isArray(data)) throw new Error("Respuesta inesperada del MINSAL");
   const locales = data as MinsalLocal[];
 
@@ -165,4 +161,14 @@ export async function obtenerFarmaciasTurno(comunaSlug?: string): Promise<Farmac
     total: farmacias.length,
     farmacias,
   };
+}
+
+export async function obtenerFarmaciasTurno(comunaSlug?: string): Promise<FarmaciasResponse> {
+  const res = await fetch(MINSAL_URL, {
+    headers: { Accept: "application/json", "User-Agent": "SolucionesDyS/1.0 (+https://www.solucionesdys.cl)" },
+    next: { revalidate: REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(10_000),
+  });
+  if (!res.ok) throw new Error(`MINSAL respondió ${res.status}`);
+  return normalizarRespuesta(await res.json(), comunaSlug);
 }

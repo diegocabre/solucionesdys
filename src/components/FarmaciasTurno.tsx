@@ -12,6 +12,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { MINSAL_URL, normalizarRespuesta } from "@/lib/farmacias";
 import type { FarmaciasResponse, FarmaciaTurno } from "@/lib/farmacias";
 
 const COMUNA_PRINCIPAL = { slug: "puerto-varas", nombre: "Puerto Varas" };
@@ -47,12 +48,11 @@ const rutaUrl = (f: FarmaciaTurno) =>
     ? `https://www.google.com/maps/dir/?api=1&destination=${f.lat},${f.lng}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${f.direccion}, ${f.comuna}, Chile`)}`;
 
-// Consulta el API interno. Devuelve siempre un Estado: los errores no se lanzan.
+// Primero consulta nuestro API. Si el servidor no logra llegar al MINSAL (su Cloudflare bloquea
+// a veces las IP de servidores), reintenta directo desde el navegador del visitante, que el MINSAL
+// sí acepta (CORS abierto). Devuelve siempre un Estado: los errores no se lanzan.
 async function pedirFarmacias(signal?: AbortSignal): Promise<Estado | null> {
-  try {
-    const res = await fetch("/api/farmacias-turno", { signal });
-    if (!res.ok) throw new Error(String(res.status));
-    const data = (await res.json()) as FarmaciasResponse;
+  const listo = (data: FarmaciasResponse): Estado => {
     const horaSantiago = Number(
       new Intl.DateTimeFormat("es-CL", {
         hour: "numeric",
@@ -61,6 +61,20 @@ async function pedirFarmacias(signal?: AbortSignal): Promise<Estado | null> {
       }).format(new Date()),
     );
     return { tipo: "listo", data, horaSantiago };
+  };
+
+  try {
+    const res = await fetch("/api/farmacias-turno", { signal });
+    if (!res.ok) throw new Error(String(res.status));
+    return listo((await res.json()) as FarmaciasResponse);
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") return null;
+  }
+
+  try {
+    const res = await fetch(MINSAL_URL, { signal: signal ?? AbortSignal.timeout(15_000) });
+    if (!res.ok) throw new Error(String(res.status));
+    return listo(normalizarRespuesta(await res.json()));
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") return null;
     return { tipo: "error" };
