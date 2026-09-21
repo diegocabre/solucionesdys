@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Globe, ArrowUpRight, Code, ShieldCheck, Sparkles, Smartphone } from "lucide-react";
 import Button from "@/components/Button";
+import Image from "next/image";
 import Link from "next/link";
 
 interface PartnerProject {
@@ -11,6 +12,8 @@ interface PartnerProject {
   category: string;
   description: string;
   url: string;
+  /** Captura de la web (public/assets/img/partners), recortada a la parte superior. */
+  image: string;
   tags: string[];
   gradient: string;
   features: string[];
@@ -23,6 +26,7 @@ const PARTNER_PROJECTS: PartnerProject[] = [
     category: "Cowork, Cafetería & Talleres",
     description: "Un espacio inspirador y colaborativo en el sur de Chile. Sitio web corporativo completo con presentación de sus servicios de cafetería premium, arriendo de salas de reuniones, puestos de cowork y calendario de talleres dinámicos.",
     url: "https://www.rincondelaromo.com/home",
+    image: "/assets/img/partners/rincon-del-aromo-web.jpg",
     tags: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
     gradient: "from-[#aa7b49] via-[#bf915f] to-[#5c3e21]",
     features: ["Arriendo de Espacios", "Menú de Cafetería", "Calendario de Actividades"]
@@ -33,9 +37,21 @@ const PARTNER_PROJECTS: PartnerProject[] = [
     category: "Consultoría Estratégica & Asesorías",
     description: "Consultores de negocios de primer nivel. Plataforma corporativa diseñada con una estética limpia e institucional para la difusión de servicios de análisis financiero, gestión de riesgos y desarrollo de estrategias de crecimiento comercial.",
     url: "https://www.estriborconsultores.cl/",
+    image: "/assets/img/partners/estribor-consultores-web.jpg",
     tags: ["Next.js", "React", "TailwindCSS", "TypeScript"],
     gradient: "from-[#0d2a45] via-[#1a3d60] to-[#081b2e]",
     features: ["Portafolio de Asesorías", "Formulario de Diagnóstico", "Optimización de Velocidad"]
+  },
+  {
+    id: 3,
+    name: "Dogtoralia Vet",
+    category: "Veterinaria & Tienda Online",
+    description: "Clínicas veterinarias con sedes en Puente Alto y Santiago Centro. Sitio web con sus servicios de atención veterinaria, tienda online de productos para el bienestar de las mascotas y contacto directo por WhatsApp.",
+    url: "https://www.dogtoraliavet.cl/home",
+    image: "/assets/img/partners/dogtoralia-vet-web.jpg",
+    tags: ["React", "Next.js", "TailwindCSS"],
+    gradient: "from-[#2793bb] via-[#2e8aa0] to-[#6ea34a]",
+    features: ["Tienda Online de Productos", "Servicios Veterinarios", "Contacto por WhatsApp"]
   }
 ];
 
@@ -81,7 +97,7 @@ export default function PartnersPage() {
         </div>
 
         {/* Grilla de Proyectos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-24">
           {PARTNER_PROJECTS.map((project, idx) => (
             <motion.div
               key={project.id}
@@ -91,23 +107,36 @@ export default function PartnersPage() {
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 dark:border-slate-800 transition-all flex flex-col group h-full"
             >
-              {/* Vista previa simulada con gradiente elegante */}
-              <div className={`h-52 bg-linear-to-br ${project.gradient} p-8 flex flex-col justify-between relative overflow-hidden`}>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl transform translate-x-10 -translate-y-10" />
-                
-                {/* Header de la tarjeta simulada */}
-                <div className="flex justify-between items-center z-10">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              {/* Cintillo de color con la captura del sitio en un marco de navegador */}
+              <div className={`relative overflow-hidden bg-linear-to-br ${project.gradient} pt-6 px-6`}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10" />
+
+                <div className="relative z-10 rounded-t-xl overflow-hidden bg-white shadow-2xl shadow-black/30 ring-1 ring-black/10 transition-transform duration-500 group-hover:-translate-y-1">
+                  <div className="flex items-center gap-3 bg-gray-100 px-3 py-2">
+                    <div className="flex gap-1.5 shrink-0" aria-hidden="true">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    </div>
+                    <div className="flex items-center gap-1.5 min-w-0 grow rounded-md bg-white px-2 py-0.5 text-[10px] text-gray-500">
+                      <Globe className="w-3 h-3 shrink-0" aria-hidden="true" />
+                      <span className="truncate">{new URL(project.url).hostname.replace(/^www\./, "")}</span>
+                    </div>
                   </div>
-                  <Globe className="text-white/40 w-5 h-5 group-hover:text-brand-accent-light transition-colors" />
+                  <div className="relative aspect-1200/550 bg-gray-50">
+                    <Image
+                      src={project.image}
+                      alt={`Captura del sitio web de ${project.name}`}
+                      fill
+                      sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 30vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
                 </div>
 
-                {/* Mockup del Logo/Nombre */}
-                <div className="z-10 mt-auto">
-                  <span className="text-xs font-semibold text-brand-accent-light uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full backdrop-blur-xs">
+                {/* Nombre y categoría sobre el color de la marca del cliente */}
+                <div className="relative z-10 pt-5 pb-6">
+                  <span className="text-xs font-semibold text-white/90 uppercase tracking-widest bg-white/15 px-3 py-1 rounded-full backdrop-blur-xs inline-block">
                     {project.category}
                   </span>
                   <h3 className="text-2xl font-bold text-white mt-3 font-serif">

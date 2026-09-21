@@ -37,6 +37,22 @@ export default function Footer() {
                   Nuestros Partners
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/aprende-ia"
+                  className="hover:text-brand-accent-light transition"
+                >
+                  Aprende IA
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/comunidad/farmacias-de-turno"
+                  className="hover:text-brand-accent-light transition"
+                >
+                  Farmacias de turno Puerto Varas
+                </Link>
+              </li>
             </ul>
           </div>
 

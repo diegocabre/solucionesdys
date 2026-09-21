@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Bot, MapPin, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,8 @@ export default function Navbar() {
   const NAV_LINKS = [
     { label: "Inicio", href: "/" },
     { label: "Diseño Web", href: "/webs" },
+    { label: "Aprende IA", href: "/aprende-ia", icon: Bot },
+    { label: "Comunidad Puerto Varas", href: "/comunidad", icon: MapPin },
     { label: "Partners", href: "/partners" },
     { label: "Contacto", href: "/contacto" },
   ];
@@ -49,9 +51,10 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+              const Icon = link.icon;
 
               return (
                 <Link
@@ -61,7 +64,10 @@ export default function Navbar() {
                     isActive ? "text-brand-accent-dark" : "text-foreground hover:text-brand-accent-dark"
                   }`}
                 >
-                  <span className="relative z-10">{link.label}</span>
+                  <span className="relative z-10 inline-flex items-center gap-1.5">
+                    {Icon && <Icon size={15} aria-hidden="true" />}
+                    {link.label}
+                  </span>
                   {isActive && (
                     <motion.div
                       layoutId="navbar-active-desktop"
@@ -75,9 +81,11 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex md:hidden items-center gap-4">
+          <div className="flex lg:hidden items-center gap-4">
             <button
               onClick={toggleMenu}
+              aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isOpen}
               className="p-2 text-foreground hover:bg-gray-100 rounded-md focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -93,23 +101,25 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t overflow-hidden bg-background"
+            className="lg:hidden border-t overflow-hidden bg-background"
           >
             <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
               {NAV_LINKS.map((link) => {
                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                const Icon = link.icon;
 
                 return (
                   <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-3 text-base font-medium rounded-md transition-colors ${
+                    className={`flex items-center gap-2 px-3 py-3 text-base font-medium rounded-md transition-colors ${
                       isActive
                         ? "text-brand-accent-dark bg-brand-accent/10 dark:bg-brand-accent/20"
                         : "text-foreground hover:text-brand-accent-dark hover:bg-gray-50 dark:hover:bg-slate-800"
                     }`}
                   >
+                    {Icon && <Icon size={18} aria-hidden="true" />}
                     {link.label}
                   </Link>
                 );

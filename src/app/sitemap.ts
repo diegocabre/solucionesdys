@@ -5,6 +5,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes: { path: string; priority: number; changeFrequency: "weekly" | "monthly" }[] = [
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/webs", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/aprende-ia", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/comunidad", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/comunidad/farmacias-de-turno", priority: 0.8, changeFrequency: "weekly" },
     { path: "/partners", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contacto", priority: 0.8, changeFrequency: "monthly" },
     { path: "/privacidad", priority: 0.3, changeFrequency: "monthly" },
