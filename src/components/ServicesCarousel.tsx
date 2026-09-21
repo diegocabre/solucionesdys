@@ -3,23 +3,15 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { PARTNER_PROJECTS } from '@/lib/partners';
 
-const slides = [
-  {
-    id: 1,
-    title: 'Rincón del Aromo',
-    description: 'Sitio web real para un cowork, cafetería y espacio de talleres en Puerto Varas.',
-    image: '/assets/img/partners/rincon-del-aromo.jpg',
-    href: '/partners',
-  },
-  {
-    id: 2,
-    title: 'Estribor Consultores',
-    description: 'Plataforma corporativa real para una consultora de estrategia y gestión.',
-    image: '/assets/img/partners/estribor-consultores.jpg',
-    href: '/partners',
-  },
-];
+const slides = PARTNER_PROJECTS.map((project) => ({
+  id: project.id,
+  title: project.name,
+  description: project.summary,
+  image: project.cover ?? project.image,
+  href: '/partners',
+}));
 
 export default function ServicesCarousel() {
   const [current, setCurrent] = useState(0);
