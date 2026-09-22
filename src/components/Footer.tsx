@@ -59,7 +59,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Contacto</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>sandracydiegoc@gmail.com</li>
+              <li>contacto@solucionesdys.cl</li>
               <li>+56 9 4763 7541</li>
               <li>Puerto Varas, Chile</li>
             </ul>

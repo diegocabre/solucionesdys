@@ -34,7 +34,7 @@ export default function PrivacidadPage() {
               <li><strong>Razón social:</strong> Soluciones DyS SpA</li>
               <li><strong>RUT:</strong> 78.152.735-1</li>
               <li><strong>Domicilio:</strong> Puerto Varas, Chile</li>
-              <li><strong>Correo de contacto:</strong> sandracydiegoc@gmail.com</li>
+              <li><strong>Correo de contacto:</strong> contacto@solucionesdys.cl</li>
               <li><strong>Teléfono / WhatsApp:</strong> +56 9 4763 7541</li>
             </ul>
           </section>
@@ -167,8 +167,8 @@ export default function PrivacidadPage() {
             <p>
               Para ejercer cualquiera de estos derechos, o si tienes preguntas sobre
               esta política, escríbenos a{" "}
-              <a href="mailto:sandracydiegoc@gmail.com" className="text-brand-accent-dark underline hover:text-brand-primary">
-                sandracydiegoc@gmail.com
+              <a href="mailto:contacto@solucionesdys.cl" className="text-brand-accent-dark underline hover:text-brand-primary">
+                contacto@solucionesdys.cl
               </a>{" "}
               o contáctanos por WhatsApp al{" "}
               <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="text-brand-accent-dark underline hover:text-brand-primary">

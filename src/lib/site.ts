@@ -14,7 +14,7 @@ export const BUSINESS = {
   displayName: "Soluciones DyS",
   phone: "+56947637541",
   phoneDisplay: "+56 9 4763 7541",
-  email: "sandracydiegoc@gmail.com",
+  email: "contacto@solucionesdys.cl",
   addressLocality: "Puerto Varas",
   addressRegion: "Los Lagos",
   addressCountry: "CL",

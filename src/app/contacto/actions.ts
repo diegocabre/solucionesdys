@@ -158,7 +158,7 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
     const { error: resendError } = await resend.emails.send({
       from: 'Formulario Web <formulario@solucionesdys.cl>',
       replyTo: email,
-      to: 'sandracydiegoc@gmail.com',
+      to: 'contacto@solucionesdys.cl',
       subject: `Nuevo contacto web: ${subject}`,
       text: `Nombre: ${name}\nEmail: ${email}\nMotivo: ${subject}\n\nMensaje:\n${message}`,
     })

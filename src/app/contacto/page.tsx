@@ -42,7 +42,7 @@ export default function ContactoPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-brand-primary dark:text-slate-100">Email</p>
-                  <p>sandracydiegoc@gmail.com</p>
+                  <p>contacto@solucionesdys.cl</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
