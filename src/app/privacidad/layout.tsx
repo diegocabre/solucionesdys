@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad y Cookies | Soluciones DyS",
+  title: "Política de Privacidad y Cookies",
   description:
     "Política de privacidad y cookies de Soluciones DyS SpA: qué datos recopilamos, cómo los usamos y tus derechos conforme a la legislación chilena de protección de datos.",
   alternates: { canonical: "/privacidad" },

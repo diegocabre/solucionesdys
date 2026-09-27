@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Nuestros Partners y Portafolio de Sitios Web | Soluciones DyS",
-  description: "Conoce los proyectos web creados por Soluciones DyS: Rincón del Aromo, Estribor Consultores y Dogtoralia Vet. Casos de éxito y portafolio de clientes.",
+  title: "Partners y Portafolio de Sitios Web",
+  description: "Conoce los proyectos web creados por Soluciones DyS: Estribor Consultores, Rincón del Aromo, Dogtoralia Vet y Caroline Magic. Casos de éxito y portafolio de clientes.",
   alternates: { canonical: "/partners" },
   openGraph: {
     title: "Partners y Portafolio Web | Soluciones DyS",

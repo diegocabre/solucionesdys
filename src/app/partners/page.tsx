@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, ArrowUpRight, Code, ShieldCheck, Sparkles, Smartphone } from "lucide-react";
+import { Code, Sparkles, Smartphone } from "lucide-react";
 import Button from "@/components/Button";
-import Image from "next/image";
 import Link from "next/link";
-import { PARTNER_PROJECTS } from "@/lib/partners";
+import PartnersShowcase from "@/components/PartnersShowcase";
 
 export default function PartnersPage() {
   return (
@@ -48,100 +47,9 @@ export default function PartnersPage() {
           </motion.p>
         </div>
 
-        {/* Grilla de Proyectos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-24">
-          {PARTNER_PROJECTS.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 dark:border-slate-800 transition-all flex flex-col group h-full"
-            >
-              {/* Cintillo de color con la captura del sitio en un marco de navegador */}
-              <div className={`relative overflow-hidden bg-linear-to-br ${project.gradient} pt-6 px-6`}>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10" />
-
-                <div className="relative z-10 rounded-t-xl overflow-hidden bg-white shadow-2xl shadow-black/30 ring-1 ring-black/10 transition-transform duration-500 group-hover:-translate-y-1">
-                  <div className="flex items-center gap-3 bg-gray-100 px-3 py-2">
-                    <div className="flex gap-1.5 shrink-0" aria-hidden="true">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    </div>
-                    <div className="flex items-center gap-1.5 min-w-0 grow rounded-md bg-white px-2 py-0.5 text-[10px] text-gray-500">
-                      <Globe className="w-3 h-3 shrink-0" aria-hidden="true" />
-                      <span className="truncate">{new URL(project.url).hostname.replace(/^www\./, "")}</span>
-                    </div>
-                  </div>
-                  <div className="relative aspect-1200/550 bg-gray-50">
-                    <Image
-                      src={project.image}
-                      alt={`Captura del sitio web de ${project.name}`}
-                      fill
-                      sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 30vw"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                {/* Nombre y categoría sobre el color de la marca del cliente */}
-                <div className="relative z-10 pt-5 pb-6">
-                  <span className="text-xs font-semibold text-white/90 uppercase tracking-widest bg-white/15 px-3 py-1 rounded-full backdrop-blur-xs inline-block">
-                    {project.category}
-                  </span>
-                  <h3 className="text-2xl font-bold text-white mt-3 font-serif">
-                    {project.name}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Contenido descriptivo */}
-              <div className="p-8 flex flex-col justify-between grow space-y-6">
-                <div className="space-y-4">
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                    {project.description}
-                  </p>
-                  
-                  {/* Características */}
-                  <ul className="space-y-2">
-                    {project.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                        <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Tags de Tecnologías */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag) => (
-                    <span 
-                      key={tag} 
-                      className="text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-md font-medium border border-gray-200/50 dark:border-slate-700/50"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Enlace de visita */}
-                <div className="pt-4 border-t border-gray-100 dark:border-slate-800">
-                  <a 
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-accent hover:text-brand-accent-dark transition-colors group/link"
-                  >
-                    <span>Visitar sitio web en vivo</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Showcase interactivo de proyectos */}
+        <div className="mb-24">
+          <PartnersShowcase />
         </div>
 
         {/* CTA Banner de Alianza */}

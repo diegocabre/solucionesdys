@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS en Puerto Varas | Soluciones DyS",
+  title: "Diseño y Desarrollo Web en Puerto Varas con React y Next.js",
   description: "Soluciones digitales a medida: sitios web, landing pages y tiendas e-commerce construidos con las últimas tecnologías (React, Next.js y Tailwind CSS). Rápidos, optimizados para Google (SEO) y responsivos.",
   alternates: { canonical: "/webs" },
   openGraph: {
@@ -75,11 +75,11 @@ export default function WebsPage() {
                 </span>
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
-                Soluciones digitales con las <br />
+                Sitios web a medida con las <br />
                 <span className="text-brand-accent-dark italic font-serif font-light">últimas tecnologías</span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl">
-                Diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda, construidos con React, Next.js y Tailwind CSS. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
+                Desde Puerto Varas diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda, construidos con React, Next.js y Tailwind CSS. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
                 {["React", "Next.js", "Tailwind CSS", "TypeScript"].map((tech) => (

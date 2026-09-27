@@ -5,6 +5,8 @@ import { MousePointerClick, Layers, Code, Globe } from 'lucide-react';
 import Button from '@/components/Button';
 import ServiceCard from '@/components/ServiceCard';
 import ServicesCarousel from '@/components/ServicesCarousel';
+import FeaturedCase from '@/components/FeaturedCase';
+import FaqSection from '@/components/FaqSection';
 
 export default function Home() {
   const services = [
@@ -57,17 +59,17 @@ export default function Home() {
           >
             <div className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
               <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
-                Soluciones DyS • 100% Digital
+                Soluciones DyS • Puerto Varas, Chile
               </span>
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary leading-tight">
-              Soluciones digitales con <br/>
-              <span className="font-serif italic font-light text-brand-accent-dark">las últimas tecnologías</span>
+              Diseño y desarrollo web en <br/>
+              <span className="font-serif italic font-light text-brand-accent-dark">Puerto Varas</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed font-light">
-              Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida con React, Next.js y Tailwind CSS para impulsar tu marca.
+              Sitios web, landing pages y tiendas online a medida para pymes de Puerto Varas, Los Lagos y todo Chile, construidos con las últimas tecnologías: React, Next.js y Tailwind CSS.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -99,11 +101,11 @@ export default function Home() {
             <span className="text-xs font-semibold tracking-widest text-brand-green uppercase bg-brand-green/10 px-3 py-1 rounded-full">
               Servicios Digitales
             </span>
-            <h3 className="text-4xl font-bold text-brand-primary dark:text-white">
+            <h2 className="text-4xl font-bold text-brand-primary dark:text-white">
               ¿Qué Ofrecemos?
-            </h3>
+            </h2>
             <p className="text-gray-500 font-light">
-              Soluciones diseñadas para potenciar tu presencia en internet con las últimas tecnologías.
+              Soluciones digitales para pymes y emprendedores del sur de Chile, con las últimas tecnologías.
             </p>
           </div>
 
@@ -121,6 +123,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FeaturedCase />
+
+      <FaqSection />
 
       {/* CTA Section */}
       <section className="py-24 bg-[#182838] text-white text-center relative overflow-hidden">

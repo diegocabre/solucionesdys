@@ -11,9 +11,9 @@ import { SITE_URL, SITE_NAME } from "@/lib/site";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 
-const title = "Soluciones DyS | Sitios Web con React, Next.js y Tailwind CSS";
+const title = "Diseño y Desarrollo Web en Puerto Varas | Soluciones DyS";
 const description =
-  "Soluciones digitales con las últimas tecnologías. Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida con React, Next.js y Tailwind CSS.";
+  "Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de Los Lagos y todo Chile. Rápidos, optimizados para Google y con las últimas tecnologías.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

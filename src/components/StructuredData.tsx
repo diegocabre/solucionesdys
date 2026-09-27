@@ -1,5 +1,8 @@
 import { SITE_URL, SITE_NAME, BUSINESS } from "@/lib/site";
 
+// Comunas que atendemos presencialmente; el resto de Chile se atiende de forma remota.
+const AREA_SERVED = ["Puerto Varas", "Llanquihue", "Frutillar", "Puerto Montt"];
+
 export default function StructuredData() {
   const data = {
     "@context": "https://schema.org",
@@ -19,10 +22,28 @@ export default function StructuredData() {
       addressRegion: BUSINESS.addressRegion,
       addressCountry: BUSINESS.addressCountry,
     },
-    areaServed: "CL",
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
+    },
+    areaServed: [
+      ...AREA_SERVED.map((name) => ({ "@type": "City", name })),
+      { "@type": "AdministrativeArea", name: "Región de Los Lagos" },
+      { "@type": "Country", name: "Chile" },
+    ],
+    knowsAbout: [
+      "Diseño web",
+      "Desarrollo web",
+      "Landing pages",
+      "Tiendas online",
+      "SEO",
+      "React",
+      "Next.js",
+    ],
     sameAs: [BUSINESS.instagram],
     description:
-      "Diseño y desarrollo de sitios web, landing pages y tiendas online a medida con React, Next.js y Tailwind CSS.",
+      "Diseño y desarrollo de sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de la Región de Los Lagos y todo Chile.",
   };
 
   return (

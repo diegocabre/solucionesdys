@@ -18,6 +18,8 @@ export const BUSINESS = {
   addressLocality: "Puerto Varas",
   addressRegion: "Los Lagos",
   addressCountry: "CL",
+  // Centro de Puerto Varas (no publicamos dirección exacta).
+  geo: { latitude: -41.3195, longitude: -72.9854 },
   instagram: "https://www.instagram.com/solucionesdys.cl/",
   whatsapp: "https://wa.me/56947637541",
 };
