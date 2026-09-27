@@ -79,7 +79,7 @@ function TerminalDemo() {
             onClick={() => elegir(e.id)}
             className={`rounded-full px-3.5 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
               e.id === escenario.id
-                ? "bg-brand-accent text-white"
+                ? "bg-brand-accent-dark text-white"
                 : "bg-white/10 text-gray-300 hover:bg-white/20"
             }`}
           >
@@ -110,7 +110,7 @@ function TerminalDemo() {
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-white/10 px-5 py-3 text-xs text-gray-500">
+      <div className="flex items-center justify-between gap-3 border-t border-white/10 px-5 py-3 text-xs text-gray-400">
         <span>Simulación ilustrativa</span>
         <button
           type="button"
@@ -189,7 +189,7 @@ function FlujoInteractivo() {
             </span>
             <div className="space-y-3">
               <h3 className="text-lg font-bold font-serif text-brand-primary">
-                {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-gray-500">· {paso.corto}</span>
+                {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-gray-600">· {paso.corto}</span>
               </h3>
               <p className="text-gray-700 leading-relaxed">{paso.detalle}</p>
               <p className="text-sm text-brand-accent-dark italic">{paso.ejemplo}</p>

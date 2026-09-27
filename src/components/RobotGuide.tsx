@@ -199,7 +199,7 @@ export default function RobotGuide() {
             aria-pressed={tema.id === t.id}
             className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
               tema.id === t.id
-                ? "bg-brand-accent text-white border-brand-accent"
+                ? "bg-brand-accent-dark text-white border-brand-accent-dark"
                 : "bg-white text-foreground border-gray-200 hover:border-brand-accent hover:text-brand-accent-dark"
             }`}
           >

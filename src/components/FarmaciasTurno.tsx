@@ -412,6 +412,10 @@ export default function FarmaciasTurno() {
                 </p>
               </div>
             ) : (
+              <section aria-labelledby="farmacias-de-turno-hoy">
+              <h2 id="farmacias-de-turno-hoy" className="sr-only">
+                Farmacias de turno en {conteo.get(comuna)?.nombre}
+              </h2>
               <ul className="space-y-4">
                 <AnimatePresence mode="popLayout">
                   {lista.map((f) => (
@@ -425,6 +429,7 @@ export default function FarmaciasTurno() {
                   ))}
                 </AnimatePresence>
               </ul>
+              </section>
             )}
 
             {cercanas.length > 0 && (

@@ -124,7 +124,7 @@ export default function AprendeIaPage() {
               </p>
               <Link
                 href="/contacto"
-                className="inline-flex h-11 items-center justify-center rounded-md bg-brand-accent px-8 text-lg font-medium text-white hover:bg-brand-accent-dark transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+                className="inline-flex h-11 items-center justify-center rounded-md bg-brand-accent-dark px-8 text-lg font-medium text-white hover:bg-brand-primary transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
               >
                 Hablemos
               </Link>
