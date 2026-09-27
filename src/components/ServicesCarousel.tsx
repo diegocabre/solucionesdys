@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PARTNER_PROJECTS } from '@/lib/partners';
 
@@ -35,24 +36,26 @@ export default function ServicesCarousel() {
           className="absolute inset-0"
         >
           <div className="absolute inset-0 bg-black/40 z-10" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={slides[current].image}
             alt={`Proyecto real: ${slides[current].title}`}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            priority={current === 0}
+            className="object-cover"
           />
           <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-linear-to-t from-black/90 via-black/40 to-transparent">
             <span className="text-brand-accent-light text-xs font-semibold uppercase tracking-widest">
               Proyecto real
             </span>
-            <motion.h3
+            <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
               className="text-white text-2xl md:text-3xl font-bold mt-1"
             >
               {slides[current].title}
-            </motion.h3>
+            </motion.p>
             {slides[current].description && (
               <motion.p
                 initial={{ y: 20, opacity: 0 }}

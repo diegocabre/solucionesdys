@@ -51,12 +51,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
               <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
                 Soluciones DyS • Puerto Varas, Chile
@@ -80,7 +75,7 @@ export default function Home() {
                 Cotizar mi Proyecto
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Hero Image / Services Carousel */}
           <motion.div
