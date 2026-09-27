@@ -57,5 +57,17 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     tags: ["React", "Next.js", "TailwindCSS"],
     gradient: "from-[#2793bb] via-[#2e8aa0] to-[#6ea34a]",
     features: ["Tienda Online de Productos", "Servicios Veterinarios", "Contacto por WhatsApp"]
+  },
+  {
+    id: 4,
+    name: "Caroline Magic",
+    category: "Tarot Evolutivo & Arte Místico",
+    description: "Espacio sagrado y contemporáneo de tarot evolutivo guiado por Caroline. Sitio con oráculo interactivo del día, agenda de lecturas y talleres grupales, y una identidad visual mística que conecta arte, energía y transformación personal.",
+    summary: "Sitio web real de tarot evolutivo, talleres y arte místico con oráculo interactivo.",
+    url: "https://www.carolinemagic.cl/",
+    image: "/assets/img/partners/caroline-magic-web.jpg",
+    tags: ["Next.js", "React", "TailwindCSS", "Framer Motion"],
+    gradient: "from-[#7b3f61] via-[#a4487a] to-[#2e1a3d]",
+    features: ["Oráculo Interactivo del Día", "Agenda de Lecturas de Tarot", "Talleres y Rituales Grupales"]
   }
 ];
