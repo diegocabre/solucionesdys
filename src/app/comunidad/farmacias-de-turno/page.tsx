@@ -41,7 +41,7 @@ export default function FarmaciasDeTurnoPage() {
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-brand-primary">
             Farmacias de turno en{" "}
-            <span className="font-serif italic font-light text-brand-accent">Puerto Varas</span>
+            <span className="font-serif italic font-light text-brand-accent-dark">Puerto Varas</span>
           </h1>
           <p className="text-lg text-gray-600 font-light leading-relaxed">
             Encuentra la farmacia que está de turno hoy en Puerto Varas y las comunas cercanas, con su

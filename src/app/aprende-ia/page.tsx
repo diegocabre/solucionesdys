@@ -33,13 +33,13 @@ export default function AprendeIaPage() {
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
               <Bot className="w-4 h-4 text-brand-accent" aria-hidden="true" />
-              <span className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+              <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
                 Aprende IA
               </span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-bold text-brand-primary leading-tight">
               La inteligencia artificial,{" "}
-              <span className="font-serif italic font-light text-brand-accent">sin complicaciones</span>
+              <span className="font-serif italic font-light text-brand-accent-dark">sin complicaciones</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 font-light leading-relaxed">
               Qué es, cómo evoluciona y cómo usarla en serio. Conversa con DyBot, mira a Claude Code trabajar y
@@ -71,7 +71,7 @@ export default function AprendeIaPage() {
           <div className="space-y-10">
             <div className="max-w-3xl space-y-3">
               <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary">
-                La IA <span className="font-serif italic font-light text-brand-accent">hoy</span>
+                La IA <span className="font-serif italic font-light text-brand-accent-dark">hoy</span>
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 Lo último que publican las fuentes oficiales: Anthropic, OpenAI, Google y MIT Technology Review.
@@ -84,7 +84,7 @@ export default function AprendeIaPage() {
           <div className="space-y-10">
             <div className="max-w-3xl space-y-3">
               <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
-                Conceptos <span className="font-serif italic font-light text-brand-accent">clave</span>
+                Conceptos <span className="font-serif italic font-light text-brand-accent-dark">clave</span>
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 Lo que conviene entender detrás de los titulares. Revisado en {IA_REVISADO}; donde hay fuente
@@ -99,7 +99,7 @@ export default function AprendeIaPage() {
         <section id="claude-code" className="scroll-mt-28 py-16 space-y-12">
           <div className="max-w-3xl space-y-3">
             <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary">
-              Claude <span className="font-serif italic font-light text-brand-accent">Code</span>
+              Claude <span className="font-serif italic font-light text-brand-accent-dark">Code</span>
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Es el asistente de programación de Anthropic y la herramienta que más usamos en Soluciones DyS.

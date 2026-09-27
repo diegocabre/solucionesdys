@@ -23,7 +23,7 @@ export default function PartnersPage() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20"
           >
             <Sparkles className="w-4 h-4 text-brand-accent" />
-            <span className="text-sm font-semibold tracking-wider text-brand-accent uppercase">
+            <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
               Proyectos en el Mundo Digital
             </span>
           </motion.div>
@@ -34,7 +34,7 @@ export default function PartnersPage() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-6xl font-bold text-brand-primary"
           >
-            Nuestros <span className="font-serif italic font-light text-brand-accent">Partners</span>
+            Nuestros <span className="font-serif italic font-light text-brand-accent-dark">Partners</span>
           </motion.h1>
           
           <motion.p

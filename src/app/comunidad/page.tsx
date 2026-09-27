@@ -32,7 +32,7 @@ export default function ComunidadPage() {
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-brand-primary">
             Comunidad{" "}
-            <span className="font-serif italic font-light text-brand-accent">Puerto Varas</span>
+            <span className="font-serif italic font-light text-brand-accent-dark">Puerto Varas</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 font-light leading-relaxed">
             Herramientas útiles y gratuitas para los vecinos de Puerto Varas y alrededores. Somos de acá y

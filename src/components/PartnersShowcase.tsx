@@ -98,7 +98,7 @@ export default function PartnersShowcase() {
                 >
                   <span
                     className={`font-mono text-sm transition-colors ${
-                      isActive ? 'text-brand-accent' : 'text-gray-400'
+                      isActive ? 'text-brand-accent-dark' : 'text-gray-500'
                     }`}
                   >
                     {String(idx + 1).padStart(2, '0')}
@@ -107,14 +107,14 @@ export default function PartnersShowcase() {
                   <span className="min-w-0 flex-1">
                     <span
                       className={`block font-serif text-2xl transition-colors sm:text-4xl ${
-                        isActive ? 'text-brand-primary' : 'text-gray-400 group-hover:text-gray-600'
+                        isActive ? 'text-brand-primary' : 'text-gray-500 group-hover:text-gray-700'
                       }`}
                     >
                       {project.name}
                     </span>
                     <span
                       className={`mt-1 block text-xs uppercase tracking-widest transition-colors ${
-                        isActive ? 'text-brand-accent' : 'text-gray-400'
+                        isActive ? 'text-brand-accent-dark' : 'text-gray-500'
                       }`}
                     >
                       {project.category}
