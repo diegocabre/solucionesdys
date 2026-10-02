@@ -2,14 +2,18 @@ import { Globe, Code, Layers, MousePointerClick, Zap, Search, Sparkles, Smartpho
 import Button from '@/components/Button';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import CasosDeExito from '@/components/CasosDeExito';
+import JsonLd from '@/components/JsonLd';
+import { getTestimoniosPublicados } from '@/lib/casos';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: "Diseño y Desarrollo Web en Puerto Varas con React y Next.js",
-  description: "Soluciones digitales a medida: sitios web, landing pages y tiendas e-commerce construidos con las últimas tecnologías (React, Next.js y Tailwind CSS). Rápidos, optimizados para Google (SEO) y responsivos.",
+  title: "Diseño Web en Puerto Varas: sitios rápidos que traen clientes",
+  description: "Sitios web, landing pages y tiendas online a medida para pymes de Puerto Varas y Los Lagos: cargan rápido en el celular, aparecen en Google y convierten visitas en consultas por WhatsApp.",
   alternates: { canonical: "/webs" },
   openGraph: {
-    title: "Diseño y Desarrollo Web con React, Next.js y Tailwind CSS | Soluciones DyS",
-    description: "Soluciones digitales a medida con las últimas tecnologías: React, Next.js y Tailwind CSS. Optimizadas para SEO.",
+    title: "Diseño Web en Puerto Varas: sitios rápidos que traen clientes | Soluciones DyS",
+    description: "Sitios web a medida que cargan rápido, aparecen en Google y generan más consultas para tu negocio.",
     url: "/webs",
     type: "website",
     images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
@@ -52,7 +56,7 @@ export default function WebsPage() {
     {
       step: "03",
       title: "Desarrollo",
-      desc: "Codificamos con las últimas tecnologías (React, Next.js y Tailwind CSS) garantizando velocidad óptima y SEO integrado."
+      desc: "Construimos tu sitio para que cargue rápido en cualquier celular y Google lo entienda desde el primer día (con React, Next.js y Tailwind CSS)."
     },
     {
       step: "04",
@@ -61,9 +65,29 @@ export default function WebsPage() {
     }
   ];
 
+  // AggregateRating solo con reseñas reales publicadas que tengan calificación.
+  const calificaciones = getTestimoniosPublicados()
+    .map((c) => c.testimonio.calificacion)
+    .filter((n): n is number => typeof n === 'number');
+  const ratingJsonLd =
+    calificaciones.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ProfessionalService',
+          '@id': `${SITE_URL}/#business`,
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: (calificaciones.reduce((a, b) => a + b, 0) / calificaciones.length).toFixed(1),
+            reviewCount: calificaciones.length,
+            bestRating: 5,
+          },
+        }
+      : null;
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <main className="flex-1 pt-12 pb-24">
+      {ratingJsonLd && <JsonLd data={ratingJsonLd} />}
+      <div className="flex-1 pt-12 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Hero Section / Cabecera */}
@@ -75,13 +99,14 @@ export default function WebsPage() {
                 </span>
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
-                Sitios web a medida con las <br />
-                <span className="text-brand-accent-dark italic font-serif font-light">últimas tecnologías</span>
+                Sitios web que <br />
+                <span className="text-brand-accent-dark italic font-serif font-light">te traen clientes</span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl">
-                Desde Puerto Varas diseñamos ecosistemas web rápidos, atractivos y optimizados para motores de búsqueda, construidos con React, Next.js y Tailwind CSS. Potenciamos tu negocio para atraer nuevos clientes las 24 horas del día.
+                Desde Puerto Varas diseñamos sitios que cargan rápido en el celular, aparecen cuando te buscan en Google y hacen fácil que te escriban por WhatsApp. Tu negocio recibiendo consultas las 24 horas, también mientras duermes.
               </p>
-              <div className="flex flex-wrap gap-2 pt-1">
+              <p className="text-sm text-gray-500 pt-1">Construidos con tecnología usada por grandes empresas:</p>
+              <div className="flex flex-wrap gap-2">
                 {["React", "Next.js", "Tailwind CSS", "TypeScript"].map((tech) => (
                   <span
                     key={tech}
@@ -109,35 +134,35 @@ export default function WebsPage() {
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center gap-3">
                   <Sparkles className="text-brand-accent-light w-6 h-6 animate-pulse" />
-                  <h3 className="text-xl font-bold font-serif text-brand-accent-light">Estándares Premium</h3>
+                  <h2 className="text-xl font-bold font-serif text-brand-accent-light">Lo que gana tu negocio</h2>
                 </div>
                 <div className="space-y-4">
                   <div className="flex gap-4 items-start">
                     <div className="p-2 bg-white/10 rounded-lg"><Zap className="w-5 h-5 text-brand-accent" /></div>
                     <div>
-                      <h4 className="font-semibold text-sm">Velocidad Ultrarrápida</h4>
-                      <p className="text-xs text-gray-300">Carga en menos de 1.5 segundos para no perder visitas.</p>
+                      <h3 className="font-semibold text-sm">Carga rápida en el celular</h3>
+                      <p className="text-xs text-gray-300">Si tu sitio demora, la visita se va a la competencia. Optimizamos cada imagen y cada línea de código.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start">
                     <div className="p-2 bg-white/10 rounded-lg"><Smartphone className="w-5 h-5 text-brand-accent" /></div>
                     <div>
-                      <h4 className="font-semibold text-sm">Diseño 100% Responsivo</h4>
-                      <p className="text-xs text-gray-300">Adaptado a celulares, tablets y computadoras.</p>
+                      <h3 className="font-semibold text-sm">Se ve bien en cualquier pantalla</h3>
+                      <p className="text-xs text-gray-300">La mayoría de tus clientes te encontrará desde el celular.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start">
                     <div className="p-2 bg-white/10 rounded-lg"><Search className="w-5 h-5 text-brand-accent" /></div>
                     <div>
-                      <h4 className="font-semibold text-sm">Optimización SEO Base</h4>
-                      <p className="text-xs text-gray-300">Estructurado para aparecer en las búsquedas de Google.</p>
+                      <h3 className="font-semibold text-sm">Aparecer en Google</h3>
+                      <p className="text-xs text-gray-300">Preparado para que te encuentren quienes buscan lo que ofreces en tu zona.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start">
                     <div className="p-2 bg-white/10 rounded-lg"><Code className="w-5 h-5 text-brand-accent" /></div>
                     <div>
-                      <h4 className="font-semibold text-sm">Stack de Última Generación</h4>
-                      <p className="text-xs text-gray-300">Construido con React, Next.js y Tailwind CSS.</p>
+                      <h3 className="font-semibold text-sm">Más consultas</h3>
+                      <p className="text-xs text-gray-300">Botones de WhatsApp y formularios a la vista para que contactarte sea fácil.</p>
                     </div>
                   </div>
                 </div>
@@ -182,6 +207,8 @@ export default function WebsPage() {
             </div>
           </div>
 
+          <CasosDeExito />
+
           {/* Proceso de Trabajo */}
           <div className="bg-gray-50 dark:bg-slate-900/50 border border-gray-100 dark:border-slate-800/80 rounded-3xl p-8 sm:p-16 space-y-16">
             <div className="text-center space-y-2">
@@ -204,7 +231,7 @@ export default function WebsPage() {
           </div>
 
         </div>
-      </main>
+      </div>
     </div>
   );
 }
