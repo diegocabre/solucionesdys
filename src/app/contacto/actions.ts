@@ -3,6 +3,7 @@
 import { Resend } from 'resend'
 import { headers } from 'next/headers'
 import { SITE_URL } from '@/lib/site'
+import { getClientIp, limitByIp } from '@/lib/rate-limit'
 
 export type FormState = {
   success: boolean
@@ -20,26 +21,9 @@ const ALLOWED_SUBJECTS = [
 
 const EMAIL_REGEX = /^[^\s@"<>,]+@[^\s@"<>,]+\.[^\s@"<>,]+$/
 
-// Límite simple en memoria: máx. 5 envíos cada 10 minutos por IP.
-// Es "best effort" (se reinicia si el servidor se reinicia o hay varias instancias);
-// para tráfico alto conviene un store compartido (ej. Upstash Redis / Vercel KV).
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+// Máx. 5 envíos cada 10 minutos por IP (compartido entre instancias vía Upstash).
 const RATE_LIMIT_MAX = 5
-const submissions = new Map<string, number[]>()
-
-function isRateLimited(key: string): boolean {
-  const now = Date.now()
-  const timestamps = (submissions.get(key) || []).filter(
-    (t) => now - t < RATE_LIMIT_WINDOW_MS
-  )
-  if (timestamps.length >= RATE_LIMIT_MAX) {
-    submissions.set(key, timestamps)
-    return true
-  }
-  timestamps.push(now)
-  submissions.set(key, timestamps)
-  return false
-}
+const RATE_LIMIT_WINDOW_SEC = 10 * 60
 
 // Quita saltos de línea y caracteres de control para evitar inyección de
 // cabeceras SMTP (CRLF injection) cuando el valor se usa en headers de email.
@@ -139,12 +123,10 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
   }
 
   const headersList = await headers()
-  const ip =
-    headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    headersList.get('x-real-ip') ||
-    'unknown'
+  const ip = getClientIp(headersList)
 
-  if (isRateLimited(ip)) {
+  const { success: withinLimit } = await limitByIp(`contacto:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_SEC)
+  if (!withinLimit) {
     return {
       success: false,
       message: '',

@@ -1,9 +1,24 @@
 import type { NextRequest } from "next/server";
 import { obtenerFarmaciasTurno, toSlug } from "@/lib/farmacias";
+import { getClientIp, limitByIp } from "@/lib/rate-limit";
+
+// Máx. 60 consultas por minuto por IP (solo cuentan las que llegan al servidor, no las del CDN).
+const RATE_LIMIT_MAX = 60;
+const RATE_LIMIT_WINDOW_SEC = 60;
 
 // GET /api/farmacias-turno            → farmacias de turno de toda la zona de Puerto Varas
 // GET /api/farmacias-turno?comuna=puerto-varas → solo una comuna
 export async function GET(request: NextRequest) {
+  const ip = getClientIp(request.headers);
+  const limite = await limitByIp(`farmacias:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_SEC);
+  if (!limite.success) {
+    const segundos = Math.max(1, Math.ceil((limite.reset - Date.now()) / 1000));
+    return Response.json(
+      { error: "Demasiadas consultas seguidas. Intenta de nuevo en un momento." },
+      { status: 429, headers: { "Retry-After": String(segundos), "Cache-Control": "no-store" } },
+    );
+  }
+
   const comuna = request.nextUrl.searchParams.get("comuna");
 
   try {
