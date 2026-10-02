@@ -3,6 +3,8 @@ import Button from '@/components/Button';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import CasosDeExito from '@/components/CasosDeExito';
+import UltimosArticulos from '@/components/UltimosArticulos';
+import ZonaAtencion from '@/components/ZonaAtencion';
 import JsonLd from '@/components/JsonLd';
 import { getTestimoniosPublicados } from '@/lib/casos';
 import { SITE_URL } from '@/lib/site';
@@ -87,7 +89,7 @@ export default function WebsPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {ratingJsonLd && <JsonLd data={ratingJsonLd} />}
-      <div className="flex-1 pt-12 pb-24">
+      <div className="flex-1 pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Hero Section / Cabecera */}
@@ -232,6 +234,8 @@ export default function WebsPage() {
 
         </div>
       </div>
+      <UltimosArticulos />
+      <ZonaAtencion />
     </div>
   );
 }

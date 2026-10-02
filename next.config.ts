@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const securityHeaders = [
   // Evita que el sitio sea embebido en un iframe ajeno (protección contra clickjacking)
@@ -31,4 +32,13 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Artículos del blog en content/blog/*.mdx. Los plugins van como texto para que
+// funcionen con Turbopack: frontmatter YAML (se lee aparte en src/lib/blog.ts) y
+// tablas estilo GitHub.
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+  },
+});
+
+export default withMDX(nextConfig);

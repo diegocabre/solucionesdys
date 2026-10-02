@@ -31,6 +31,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/blog"
+                  className="hover:text-brand-accent-light transition"
+                >
+                  Blog: guías para pymes
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/partners"
                   className="hover:text-brand-accent-light transition"
                 >

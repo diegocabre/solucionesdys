@@ -1,7 +1,7 @@
-import { SITE_URL, SITE_NAME, BUSINESS } from "@/lib/site";
+import { SITE_URL, SITE_NAME, BUSINESS, AREA_SERVED } from "@/lib/site";
 
-// Comunas que atendemos presencialmente; el resto de Chile se atiende de forma remota.
-const AREA_SERVED = ["Puerto Varas", "Llanquihue", "Frutillar", "Puerto Montt"];
+// Único JSON-LD del negocio en todo el sitio (ProfessionalService es un subtipo de
+// LocalBusiness). Otros bloques lo referencian por su @id en vez de repetirlo.
 
 export default function StructuredData() {
   const data = {

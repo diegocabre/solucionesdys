@@ -9,6 +9,10 @@ export const SITE_URL =
 
 export const SITE_NAME = "Soluciones DyS";
 
+// Comunas que atendemos presencialmente; el resto de Chile se atiende de forma remota.
+// La usan el JSON-LD del negocio (StructuredData) y el bloque visible ZonaAtencion.
+export const AREA_SERVED = ["Puerto Varas", "Llanquihue", "Frutillar", "Puerto Montt"] as const;
+
 export const BUSINESS = {
   legalName: "Soluciones DyS SpA",
   displayName: "Soluciones DyS",
