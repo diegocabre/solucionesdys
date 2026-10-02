@@ -170,6 +170,13 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
   const captcha = await verifyTurnstile(formData.get('cf-turnstile-response')?.toString() || '', knownIp)
   if (!captcha.ok) {
     console.warn('[contacto] Turnstile rechazado:', captcha.reason)
+    if (captcha.reason === 'sin-configurar') {
+      return {
+        success: false,
+        message: '',
+        error: 'El formulario no está disponible en este momento. Escríbenos por WhatsApp al +56 9 4763 7541 o a contacto@solucionesdys.cl.',
+      }
+    }
     return {
       success: false,
       message: '',
