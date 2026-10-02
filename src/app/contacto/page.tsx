@@ -1,10 +1,13 @@
 "use client";
 
 import Button from "@/components/Button";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { useActionState } from "react";
 import { sendContactEmail, FormState } from "./actions";
+import TurnstileWidget from "@/components/TurnstileWidget";
+import { agregarAtribucion } from "@/lib/attribution";
 
 const initialState: FormState = {
   success: false,
@@ -14,6 +17,11 @@ const initialState: FormState = {
 
 export default function ContactoPage() {
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
+  // Adjunta la página de origen y los utm_* (si los hay) antes de enviar.
+  const enviar = (formData: FormData) => {
+    agregarAtribucion(formData);
+    formAction(formData);
+  };
   return (
     <div className="bg-background min-h-[calc(100vh-64px)] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +93,7 @@ export default function ContactoPage() {
             animate={{ opacity: 1, x: 0 }}
             className="bg-gray-50/50 dark:bg-slate-850 p-6 rounded-2xl border border-gray-100 dark:border-slate-800"
           >
-            <form action={formAction} className="relative space-y-6">
+            <form action={enviar} className="relative space-y-6">
               {/* Honeypot anti-spam: invisible para personas, los bots suelen rellenarlo */}
               <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
                 <label htmlFor="hp_check_x9">No completar este campo</label>
@@ -132,6 +140,20 @@ export default function ContactoPage() {
                 />
               </div>
               <div>
+                <label htmlFor="contacto-phone" className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
+                  Teléfono <span className="normal-case font-normal">(opcional)</span>
+                </label>
+                <input
+                  id="contacto-phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  maxLength={20}
+                  className="w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 dark:text-slate-100 text-sm"
+                  placeholder="+56 9 1234 5678"
+                />
+              </div>
+              <div>
                 <label className="block text-xs font-semibold text-gray-500 dark:text-slate-300 mb-1 uppercase tracking-wider">
                   Motivo de Contacto
                 </label>
@@ -155,6 +177,14 @@ export default function ContactoPage() {
                   placeholder="¿Cómo podemos ayudarte?"
                 ></textarea>
               </div>
+              <TurnstileWidget resetKey={state} />
+              <p className="text-xs text-gray-500">
+                Guardamos tu consulta para poder responderte. Más detalles en nuestra{" "}
+                <Link href="/privacidad" className="underline underline-offset-2 hover:text-brand-primary">
+                  política de privacidad
+                </Link>
+                .
+              </p>
               <Button type="submit" className="w-full justify-center bg-brand-accent hover:bg-brand-accent-dark border-brand-accent" disabled={pending}>
                 {pending ? "Enviando..." : "Enviar Mensaje"}
               </Button>

@@ -1,4 +1,4 @@
-const LAST_UPDATED = "14 de septiembre de 2026";
+const LAST_UPDATED = "2 de octubre de 2026";
 
 export default function PrivacidadPage() {
   return (
@@ -45,8 +45,13 @@ export default function PrivacidadPage() {
             <ul className="list-disc pl-6 space-y-1">
               <li>
                 <strong>Formulario de contacto:</strong> cuando nos escribes desde la
-                página de Contacto, recibimos tu nombre, correo electrónico, motivo
-                de contacto y el mensaje que nos envías.
+                página de Contacto, guardamos tu nombre, correo electrónico, teléfono
+                (si lo indicas), motivo de contacto y el mensaje que nos envías. Junto
+                con ellos registramos datos técnicos mínimos: la página del sitio desde
+                la que llegaste, la campaña de origen si viniste desde un anuncio o
+                enlace etiquetado (parámetros <em>utm</em>), el tipo de navegador
+                (<em>user agent</em>) y un código cifrado de tu dirección IP (un hash
+                irreversible con sal; nunca guardamos la IP en claro).
               </li>
               <li>
                 <strong>Datos de navegación (solo con tu autorización):</strong> si
@@ -62,6 +67,15 @@ export default function PrivacidadPage() {
             <h2 className="text-2xl font-bold text-brand-primary">3. Para qué usamos tus datos</h2>
             <ul className="list-disc pl-6 space-y-1">
               <li>Responder tus consultas y cotizaciones a través del formulario de contacto o WhatsApp.</li>
+              <li>
+                Llevar un registro ordenado de las consultas recibidas y su estado
+                (nueva, contactada, cerrada), para no perder ninguna.
+              </li>
+              <li>
+                Prevenir spam y abuso del formulario (verificación anti-robots y
+                límite de envíos por dirección IP).
+              </li>
+              <li>Saber qué páginas y campañas nos traen consultas, para mejorar el sitio.</li>
               <li>Comunicarnos contigo respecto de un proyecto o servicio solicitado.</li>
               <li>
                 Entender cómo se usa el sitio y mejorarlo (solo si aceptas cookies
@@ -115,6 +129,12 @@ export default function PrivacidadPage() {
               </table>
             </div>
             <p>
+              Además, mientras navegas guardamos en el almacenamiento de sesión de tu
+              navegador (que se borra al cerrar la pestaña) la última página que
+              visitaste y la campaña de origen, solo para adjuntarlas a tu consulta si
+              envías el formulario. No es una cookie y no se comparte con terceros.
+            </p>
+            <p>
               Puedes aceptar o rechazar las cookies analíticas en cualquier momento
               desde el enlace <strong>&ldquo;Preferencias de Cookies&rdquo;</strong> en el
               pie de página. Si las rechazas, Microsoft Clarity no se cargará en
@@ -134,6 +154,23 @@ export default function PrivacidadPage() {
                 <strong>Microsoft Clarity:</strong> herramienta de análisis de
                 comportamiento en el sitio (si aceptas cookies).
               </li>
+              <li>
+                <strong>Supabase:</strong> base de datos donde guardamos las consultas
+                del formulario de contacto.
+              </li>
+              <li>
+                <strong>Resend:</strong> servicio que envía los correos del formulario
+                (el aviso interno y la confirmación que recibes).
+              </li>
+              <li>
+                <strong>Cloudflare Turnstile:</strong> verificación anti-robots del
+                formulario. Analiza señales técnicas del navegador para distinguir
+                personas de bots, sin cookies publicitarias.
+              </li>
+              <li>
+                <strong>Upstash y Vercel:</strong> alojamiento del sitio y control del
+                límite de envíos por IP.
+              </li>
             </ul>
             <p>
               Estos proveedores procesan datos en servidores que pueden estar fuera
@@ -145,10 +182,16 @@ export default function PrivacidadPage() {
           <section className="space-y-3">
             <h2 className="text-2xl font-bold text-brand-primary">7. Plazo de conservación</h2>
             <p>
-              Conservamos los mensajes del formulario de contacto solo por el tiempo
-              necesario para responder tu consulta y, si corresponde, dar seguimiento
-              comercial. Los datos analíticos se conservan según los plazos por
-              defecto de Microsoft Clarity.
+              Conservamos las consultas del formulario de contacto (y los datos
+              técnicos asociados) por un máximo de <strong>24 meses</strong> desde
+              que nos escribes, para responderte y dar seguimiento comercial si
+              corresponde. Pasado ese plazo las eliminamos. Puedes pedirnos que las
+              borremos antes en cualquier momento (ver sección 9).
+            </p>
+            <p>
+              Los registros del límite de envíos por IP se borran solos a los pocos
+              minutos. Los datos analíticos se conservan según los plazos por defecto
+              de Microsoft Clarity.
             </p>
           </section>
 
@@ -182,8 +225,9 @@ export default function PrivacidadPage() {
             <h2 className="text-2xl font-bold text-brand-primary">10. Seguridad de la información</h2>
             <p>
               Aplicamos medidas técnicas razonables para proteger tus datos
-              (por ejemplo, conexión cifrada HTTPS y validación de los datos que
-              recibimos por el formulario de contacto). Sin embargo, ningún sistema
+              (por ejemplo, conexión cifrada HTTPS, validación de los datos que
+              recibimos por el formulario, base de datos sin acceso público y panel
+              interno protegido con contraseña). Sin embargo, ningún sistema
               es 100% infalible, por lo que no podemos garantizar seguridad
               absoluta.
             </p>

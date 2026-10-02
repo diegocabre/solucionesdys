@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import Analytics from "@/components/Analytics";
 import StructuredData from "@/components/StructuredData";
+import AttributionTracker from "@/components/AttributionTracker";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -68,6 +69,7 @@ export default function RootLayout({
         <Footer />
         <CookieConsent />
         <Analytics />
+        <AttributionTracker />
       </body>
     </html>
   );

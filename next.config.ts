@@ -11,6 +11,8 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   // Fuerza HTTPS en visitas futuras (una vez desplegado con certificado válido)
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  // No hay Content-Security-Policy por ahora. Si se agrega, Cloudflare Turnstile (formulario
+  // de contacto) necesita https://challenges.cloudflare.com en script-src y frame-src.
 ];
 
 const nextConfig: NextConfig = {
@@ -19,6 +21,11 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        // Panel interno: que ningún buscador lo indexe.
+        source: "/admin/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
   },
