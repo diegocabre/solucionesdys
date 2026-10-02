@@ -114,7 +114,7 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
           </a>
         </header>
 
-        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-gray-200/60 shadow-xl bg-gray-100">
+        <div className="relative aspect-[24/11] rounded-3xl overflow-hidden border border-gray-200/60 shadow-xl bg-gray-100">
           <Image
             src={caso.imagen}
             alt={`Sitio web de ${caso.cliente} desarrollado por Soluciones DyS`}

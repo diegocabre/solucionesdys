@@ -22,7 +22,7 @@ function BrowserFrame({ project }: { project: PartnerProject }) {
             <span className="truncate">{new URL(project.url).hostname.replace(/^www\./, "")}</span>
           </div>
         </div>
-        <div className="relative aspect-1200/700 bg-gray-50">
+        <div className="relative aspect-[24/11] bg-gray-50">
           <Image
             src={project.image}
             alt={`Captura del sitio web de ${project.name}`}

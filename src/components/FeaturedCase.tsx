@@ -12,7 +12,7 @@ export default function FeaturedCase() {
 
   return (
     <section id="caso-de-exito" className="py-24 bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
         <div className="space-y-6">
           <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
             Caso de éxito
@@ -56,13 +56,13 @@ export default function FeaturedCase() {
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/40 dark:border-slate-800"
+          className="block relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/40 dark:border-slate-800"
         >
           <Image
             src={project.image}
             alt={`Sitio web de ${project.name} desarrollado por Soluciones DyS`}
             fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, 100vw"
             className="object-cover object-top hover:scale-105 transition-transform duration-500"
           />
         </a>

@@ -27,7 +27,7 @@ export default function CasosDeExito() {
         {casos.map((caso) => (
           <li key={caso.slug}>
             <article className="h-full bg-white rounded-3xl border border-gray-100 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col">
-              <div className="relative aspect-[16/10] bg-gray-100">
+              <div className="relative aspect-[24/11] bg-gray-100">
                 <Image
                   src={caso.imagen}
                   alt={`Sitio web de ${caso.cliente}`}
