@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
-import { obtenerFarmaciasTurno, toSlug } from "@/lib/farmacias";
+import { toSlug } from "@/lib/farmacias";
+import { obtenerFarmaciasTurno } from "@/lib/farmacias-server";
 import { getClientIp, limitByIp } from "@/lib/rate-limit";
 
 // Máx. 60 consultas por minuto por IP (solo cuentan las que llegan al servidor, no las del CDN).
@@ -8,6 +9,7 @@ const RATE_LIMIT_WINDOW_SEC = 60;
 
 // GET /api/farmacias-turno            → farmacias de turno de toda la zona de Puerto Varas
 // GET /api/farmacias-turno?comuna=puerto-varas → solo una comuna
+// La respuesta incluye `fuente` ("minsal" | "cache") y `actualizadoEn` (cuándo se obtuvo del MINSAL).
 export async function GET(request: NextRequest) {
   const ip = getClientIp(request.headers);
   const limite = await limitByIp(`farmacias:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_SEC);
@@ -26,7 +28,11 @@ export async function GET(request: NextRequest) {
     return Response.json(data, {
       headers: {
         // El turno cambia una vez al día: 15 min de caché en CDN es más que suficiente.
-        "Cache-Control": "public, s-maxage=900, stale-while-revalidate=3600",
+        // Si son datos de respaldo (MINSAL caído), se cachean poco para recuperarse pronto.
+        "Cache-Control":
+          data.fuente === "cache"
+            ? "public, s-maxage=60, stale-while-revalidate=300"
+            : "public, s-maxage=900, stale-while-revalidate=3600",
       },
     });
   } catch (error) {

@@ -43,6 +43,16 @@ const fechaLarga = (fecha: string) =>
     timeZone: "UTC",
   }).format(new Date(`${fecha}T12:00:00Z`));
 
+// "2 de octubre, 08:15", en hora de Chile.
+const fechaHora = (iso: string) =>
+  new Intl.DateTimeFormat("es-CL", {
+    day: "numeric",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "America/Santiago",
+  }).format(new Date(iso));
+
 const mapaEmbedUrl = (f: FarmaciaTurno) => {
   if (f.lat === null || f.lng === null) return null;
   const d = 0.006;
@@ -308,6 +318,15 @@ export default function FarmaciasTurno() {
           ))}
         </div>
       </div>
+
+      {data.fuente === "cache" && data.actualizadoEn && (
+        <p role="status" className="flex gap-2 text-sm text-gray-600">
+          <Clock className="w-4 h-4 mt-0.5 shrink-0 text-amber-600" aria-hidden="true" />
+          <span>
+            Información actualizada el {fechaHora(data.actualizadoEn)}; confirma por teléfono antes de ir.
+          </span>
+        </p>
+      )}
 
       {turno.hora < 9 && !sinPublicar && (
         <div className="flex gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">

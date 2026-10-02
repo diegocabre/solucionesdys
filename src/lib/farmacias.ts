@@ -1,14 +1,10 @@
-// Farmacias de turno: consulta el servicio abierto del MINSAL, lo normaliza y
-// lo filtra a la zona de Puerto Varas. Lo usa el endpoint /api/farmacias-turno y, como
-// respaldo, el navegador del visitante (el MINSAL bloquea a veces las IP de servidores
-// pero permite CORS, así que la consulta directa desde el navegador sigue funcionando).
+// Farmacias de turno: valida y normaliza la respuesta del servicio abierto del MINSAL
+// y la filtra a la zona de Puerto Varas. Este módulo es compartido: lo usa el servidor
+// (src/lib/farmacias-server.ts, con caché en Redis) y, como respaldo, el navegador del
+// visitante (el MINSAL bloquea a veces las IP de servidores pero permite CORS, así que
+// la consulta directa desde el navegador sigue funcionando).
 
 export const MINSAL_URL = "https://midas.minsal.cl/farmacia_v2/WS/getLocalesTurnos.php";
-
-// Cuánto tiempo (segundos) reutilizamos la respuesta del MINSAL antes de volver a pedirla.
-const REVALIDATE_SECONDS = 900;
-
-export const FUENTE = "MINSAL - Farmacias de turno";
 
 // Comunas de la zona. Puerto Varas va primero: es la principal.
 export const COMUNAS_ZONA = [
@@ -93,12 +89,19 @@ export interface FarmaciaTurno {
   fecha: string;
 }
 
+/**
+ * De dónde salen los datos:
+ * - "minsal": respuesta reciente del MINSAL.
+ * - "cache": el MINSAL no respondió; es la última respuesta válida guardada.
+ */
+export type FuenteFarmacias = "minsal" | "cache";
+
 export interface FarmaciasResponse {
   /** Fecha (YYYY-MM-DD) del turno vigente al generar la respuesta. */
   fecha: string;
-  /** Momento en que se generó esta respuesta (ISO). */
-  actualizado: string;
-  fuente: string;
+  /** Momento (ISO) en que se obtuvieron estos datos del MINSAL. */
+  actualizadoEn: string;
+  fuente: FuenteFarmacias;
   total: number;
   /** Farmacias del turno vigente. Vacío si el MINSAL aún no publica el turno en curso. */
   farmacias: FarmaciaTurno[];
@@ -188,11 +191,58 @@ function normalizar(l: MinsalLocal): FarmaciaTurno {
   };
 }
 
+const CAMPOS_OBLIGATORIOS = [
+  "fecha",
+  "local_id",
+  "local_nombre",
+  "comuna_nombre",
+  "local_direccion",
+  "funcionamiento_hora_apertura",
+  "funcionamiento_hora_cierre",
+] as const;
+
+const FECHA_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+function esLocalValido(item: unknown): item is MinsalLocal {
+  if (typeof item !== "object" || item === null) return false;
+  const r = item as Record<string, unknown>;
+  return (
+    CAMPOS_OBLIGATORIOS.every((k) => typeof r[k] === "string" && (r[k] as string).trim() !== "") &&
+    FECHA_REGEX.test(r.fecha as string)
+  );
+}
+
+/**
+ * Valida la forma de la respuesta cruda del MINSAL y devuelve solo los registros bien
+ * formados. Lanza error si no es una lista, viene vacía o la mayoría está malformada
+ * (señal de que el servicio cambió o respondió basura): eso nunca debe cachearse.
+ */
+export function validarRespuestaMinsal(data: unknown): MinsalLocal[] {
+  if (!Array.isArray(data)) throw new Error("Respuesta inesperada del MINSAL (no es una lista)");
+  if (data.length === 0) throw new Error("El MINSAL respondió una lista vacía");
+  const validos = data.filter(esLocalValido);
+  if (validos.length < data.length * 0.9) {
+    throw new Error(`Respuesta del MINSAL malformada (${validos.length} de ${data.length} registros válidos)`);
+  }
+  return validos;
+}
+
+/** Deja solo una comuna (o todo, si no se indica) y recalcula el total. */
+export function filtrarPorComuna(data: FarmaciasResponse, comunaSlug?: string): FarmaciasResponse {
+  if (!comunaSlug) return data;
+  const farmacias = data.farmacias.filter((f) => f.comunaSlug === comunaSlug);
+  return {
+    ...data,
+    total: farmacias.length,
+    farmacias,
+    otrasFechas: data.otrasFechas.filter((f) => f.comunaSlug === comunaSlug),
+  };
+}
+
 // Convierte la respuesta cruda del MINSAL en la respuesta limpia que usa la página.
 // Es una función pura: corre igual en el servidor y en el navegador.
 export function normalizarRespuesta(data: unknown, comunaSlug?: string): FarmaciasResponse {
-  if (!Array.isArray(data)) throw new Error("Respuesta inesperada del MINSAL");
-  const locales = data as MinsalLocal[];
+  const locales = validarRespuestaMinsal(data);
 
   const { fechaVigente } = turnoVigente();
 
@@ -208,7 +258,6 @@ export function normalizarRespuesta(data: unknown, comunaSlug?: string): Farmaci
   const recientes = locales
     .filter((l) => l.fecha >= limite && zona.has(toSlug(l.comuna_nombre)))
     .map(normalizar)
-    .filter((f) => !comunaSlug || f.comunaSlug === comunaSlug)
     .sort(
       (a, b) =>
         (orden.get(a.comunaSlug) ?? 99) - (orden.get(b.comunaSlug) ?? 99) ||
@@ -217,22 +266,15 @@ export function normalizarRespuesta(data: unknown, comunaSlug?: string): Farmaci
 
   const farmacias = recientes.filter((f) => f.fecha === fechaVigente);
 
-  return {
-    fecha: fechaVigente,
-    actualizado: new Date().toISOString(),
-    fuente: FUENTE,
-    total: farmacias.length,
-    farmacias,
-    otrasFechas: recientes.filter((f) => f.fecha !== fechaVigente),
-  };
-}
-
-export async function obtenerFarmaciasTurno(comunaSlug?: string): Promise<FarmaciasResponse> {
-  const res = await fetch(MINSAL_URL, {
-    headers: { Accept: "application/json", "User-Agent": "SolucionesDyS/1.0 (+https://www.solucionesdys.cl)" },
-    next: { revalidate: REVALIDATE_SECONDS },
-    signal: AbortSignal.timeout(10_000),
-  });
-  if (!res.ok) throw new Error(`MINSAL respondió ${res.status}`);
-  return normalizarRespuesta(await res.json(), comunaSlug);
+  return filtrarPorComuna(
+    {
+      fecha: fechaVigente,
+      actualizadoEn: new Date().toISOString(),
+      fuente: "minsal",
+      total: farmacias.length,
+      farmacias,
+      otrasFechas: recientes.filter((f) => f.fecha !== fechaVigente),
+    },
+    comunaSlug,
+  );
 }
