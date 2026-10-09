@@ -18,16 +18,6 @@ export default function ZonaAtencion() {
           Nos juntamos en persona con negocios de la cuenca del Llanquihue y Puerto Montt, y trabajamos de forma remota con
           pymes de toda la Región de Los Lagos y Chile.
         </p>
-        <ul className="flex flex-wrap gap-2">
-          {AREA_SERVED.map((comuna) => (
-            <li
-              key={comuna}
-              className="rounded-full border border-brand-primary/10 bg-brand-primary/5 px-4 py-1.5 text-sm font-medium text-brand-primary"
-            >
-              {comuna}
-            </li>
-          ))}
-        </ul>
         <p className="text-sm text-gray-500">
           ¿Quieres que tu negocio aparezca cuando te buscan en tu comuna? Lee nuestra guía para{" "}
           <Link
