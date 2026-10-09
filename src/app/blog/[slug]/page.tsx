@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CalendarDays, Clock, MessageCircle } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import { formatPostDate, getPost, getPosts, getRelatedPosts } from "@/lib/blog";
-import { BUSINESS, SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -138,29 +138,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
             <Content />
 
-            <section className="mt-16 bg-brand-primary rounded-3xl p-8 sm:p-10 text-white space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-bold">¿Lo conversamos para tu negocio?</h2>
-              <p className="text-gray-300 font-light">
-                Cuéntanos qué necesitas y te respondemos con una propuesta clara. Atendemos en Puerto
-                Varas, Llanquihue, Frutillar y Puerto Montt.
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link
-                  href="/contacto"
-                  className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-white text-brand-primary font-medium hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
-                >
-                  Cotizar mi sitio
-                </Link>
-                <a
-                  href={BUSINESS.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 h-11 px-6 rounded-md border border-white/30 text-white font-medium hover:bg-white/10 transition-colors"
-                >
-                  <MessageCircle className="w-5 h-5" aria-hidden="true" /> Escribir por WhatsApp
-                </a>
-              </div>
-            </section>
+            {/* Cierre discreto: el blog es informativo, sin bloque de venta */}
+            <p className="mt-16 border-t border-gray-200 pt-6 text-gray-600">
+              ¿Necesitas un sitio para tu negocio? Puedes{" "}
+              <Link
+                href="/contacto"
+                className="text-brand-accent-dark underline underline-offset-2 hover:text-brand-primary"
+              >
+                cotizar tu sitio
+              </Link>{" "}
+              cuando quieras.
+            </p>
           </article>
 
           {toc.length > 0 && (

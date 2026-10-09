@@ -17,6 +17,16 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        // Artículo de precios retirado del blog: quien llegue desde Google va a la guía más cercana.
+        source: "/blog/diseno-web-puerto-varas-cuanto-cuesta",
+        destination: "/blog/landing-page-vs-sitio-corporativo-vs-tienda-online",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

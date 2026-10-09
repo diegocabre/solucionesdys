@@ -54,8 +54,8 @@ Detrás está una sola persona, Diego, que diseña y programa cada sitio. Lo que
 ## Evidence on Hand
 
 - **Proyectos reales:** Rincón del Aromo (cowork y cafetería, Puerto Varas), Estribor Consultores, Dogtoralia Vet (Puente Alto y Santiago Centro) y Caroline Magic. Capturas en `public/assets/img/partners/`.
-- **Blog:** 3 artículos en `content/blog/` sobre precios, Google Maps y tipos de sitio.
-- **Precios:** los rangos del artículo de precios **no están confirmados** (hay un TODO pendiente). No usarlos como precio oficial hasta que Diego los valide.
+- **Blog:** 2 guías en `content/blog/` (Google Maps y tipos de sitio). El blog es informativo: sin artículos de venta ni bloques promocionales; cada artículo cierra con una sola línea discreta hacia /contacto.
+- **Precios:** no hay precios publicados. El artículo de precios se retiró (con redirección 301 a la guía de tipos de sitio); no publicar rangos de precio sin que Diego los confirme.
 - **Testimonios y métricas:** no hay ninguno confirmado. Los casos tienen campos pendientes (resultados "antes/después", PageSpeed y testimonio con autorización escrita). No inventar testimonios, cifras de resultados, reseñas ni calificaciones.
 - **Fotografía:** no hay fotos de Diego ni de la zona; solo capturas de pantalla y una foto de Rincón del Aromo.
 
