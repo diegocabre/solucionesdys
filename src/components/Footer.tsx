@@ -13,18 +13,17 @@ export default function Footer() {
               Soluciones <span className="text-brand-accent-light">DyS</span>
             </h3>
             <p className="text-gray-400 text-sm max-w-sm">
-              Soluciones digitales con las últimas tecnologías: diseño y desarrollo
-              de sitios web a medida con React, Next.js y Tailwind CSS.
+              Sitios web a medida para pymes de Puerto Varas, Los Lagos y todo Chile.
             </p>
           </div>
 
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Servicios</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
+            <ul className="text-gray-400 text-sm">
               <li>
                 <Link
                   href="/webs"
-                  className="hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
                 >
                   Diseño de Sitios Web
                 </Link>
@@ -32,7 +31,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
                 >
                   Blog: guías para pymes
                 </Link>
@@ -40,7 +39,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/partners"
-                  className="hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
                 >
                   Nuestros Partners
                 </Link>
@@ -48,7 +47,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/aprende-ia"
-                  className="hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
                 >
                   Aprende IA
                 </Link>
@@ -56,7 +55,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/comunidad/farmacias-de-turno"
-                  className="hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
                 >
                   Farmacias de turno Puerto Varas
                 </Link>
@@ -66,17 +65,25 @@ export default function Footer() {
 
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Contacto</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>contacto@solucionesdys.cl</li>
-              <li>+56 9 4763 7541</li>
-              <li>Puerto Varas, Chile</li>
+            <ul className="text-gray-400 text-sm">
+              <li>
+                <a href="mailto:contacto@solucionesdys.cl" className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition">
+                  contacto@solucionesdys.cl
+                </a>
+              </li>
+              <li>
+                <a href="tel:+56947637541" className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition">
+                  +56 9 4763 7541
+                </a>
+              </li>
+              <li className="flex min-h-11 items-center">Puerto Varas, Chile</li>
             </ul>
-            <div className="flex gap-4 pt-2">
+            <div className="flex gap-1 -ml-2.5">
               <a
                 href="https://wa.me/56947637541"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-brand-accent-light transition"
+                className="inline-flex size-11 items-center justify-center text-gray-400 hover:text-brand-accent-light transition"
                 aria-label="WhatsApp"
               >
                 <svg
@@ -95,7 +102,7 @@ export default function Footer() {
                 href="https://www.instagram.com/solucionesdys.cl/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-brand-accent-light transition"
+                className="inline-flex size-11 items-center justify-center text-gray-400 hover:text-brand-accent-light transition"
                 aria-label="Instagram"
               >
                 <svg
@@ -123,17 +130,17 @@ export default function Footer() {
             © {new Date().getFullYear()} Soluciones DyS. Todos los derechos
             reservados.
           </p>
-          <div className="mt-4 md:mt-0 space-x-4">
-            <Link href="#" className="hover:text-white transition">
+          <div className="mt-4 md:mt-0 flex flex-wrap justify-center gap-x-4">
+            <Link href="/terminos" className="inline-flex min-h-11 items-center hover:text-white transition">
               Términos de Servicio
             </Link>
-            <Link href="/privacidad" className="hover:text-white transition">
+            <Link href="/privacidad" className="inline-flex min-h-11 items-center hover:text-white transition">
               Privacidad
             </Link>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))}
-              className="hover:text-white transition"
+              className="inline-flex min-h-11 items-center hover:text-white transition"
             >
               Preferencias de Cookies
             </button>

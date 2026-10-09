@@ -36,7 +36,7 @@ function BrowserFrame({ project }: { project: PartnerProject }) {
   );
 }
 
-/** Descripción, tags y CTA del proyecto activo. */
+/** Descripción, lo que hace el sitio (features) y CTA del proyecto activo. */
 function ProjectDetails({ project }: { project: PartnerProject }) {
   return (
     <div className="space-y-5">
@@ -45,22 +45,11 @@ function ProjectDetails({ project }: { project: PartnerProject }) {
       <ul className="grid gap-2 sm:grid-cols-2">
         {project.features.map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-            <ShieldCheck className="h-4 w-4 shrink-0 text-brand-green" />
+            <ShieldCheck className="h-4 w-4 shrink-0 text-brand-accent-dark" />
             <span>{feature}</span>
           </li>
         ))}
       </ul>
-
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-md border border-gray-200/70 bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
 
       <a
         href={project.url}
@@ -106,7 +95,7 @@ export default function PartnersShowcase() {
 
                   <span className="min-w-0 flex-1">
                     <span
-                      className={`block font-serif text-2xl transition-colors sm:text-4xl ${
+                      className={`block font-display font-semibold text-2xl transition-colors sm:text-4xl ${
                         isActive ? 'text-brand-primary' : 'text-gray-500 group-hover:text-gray-700'
                       }`}
                     >
@@ -124,7 +113,7 @@ export default function PartnersShowcase() {
                   <ArrowUpRight
                     className={`h-5 w-5 shrink-0 transition-all ${
                       isActive
-                        ? 'rotate-0 text-brand-accent opacity-100'
+                        ? 'rotate-0 text-brand-accent-dark opacity-100'
                         : '-rotate-45 text-gray-300 opacity-0 group-hover:opacity-100'
                     }`}
                   />

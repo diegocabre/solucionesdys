@@ -154,7 +154,7 @@ export default function RobotGuide() {
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
         <div className="shrink-0">
           <Robot hablando={hablando} />
-          <p className="mt-1 text-center text-sm font-semibold font-serif text-brand-primary">{ROBOT_NOMBRE}</p>
+          <p className="mt-1 text-center text-sm font-semibold font-display text-brand-primary">{ROBOT_NOMBRE}</p>
         </div>
 
         {/* Globo de diálogo */}

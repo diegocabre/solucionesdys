@@ -9,16 +9,16 @@ export default function ZonaAtencion() {
 
   return (
     <section aria-labelledby="zona-atencion" className="py-16 bg-white border-y border-gray-100">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <MapPin className="w-8 h-8 text-brand-accent-dark mx-auto" aria-hidden="true" />
-        <h2 id="zona-atencion" className="text-3xl font-bold text-brand-primary font-serif">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <MapPin className="w-8 h-8 text-brand-accent-dark" aria-hidden="true" />
+        <h2 id="zona-atencion" className="max-w-3xl text-3xl font-bold text-brand-primary">
           Atendemos en {comunas}
         </h2>
-        <p className="text-gray-600 font-light max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-600 font-light max-w-2xl leading-relaxed">
           Nos juntamos en persona con negocios de la cuenca del Llanquihue y Puerto Montt, y trabajamos de forma remota con
           pymes de toda la Región de Los Lagos y Chile.
         </p>
-        <ul className="flex flex-wrap justify-center gap-2">
+        <ul className="flex flex-wrap gap-2">
           {AREA_SERVED.map((comuna) => (
             <li
               key={comuna}

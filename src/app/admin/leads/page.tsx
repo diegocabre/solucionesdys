@@ -21,7 +21,7 @@ const STATUS_LABEL: Record<LeadStatus, string> = {
 };
 
 const STATUS_CLASS: Record<LeadStatus, string> = {
-  nuevo: "bg-brand-green/10 text-brand-green-dark",
+  nuevo: "bg-green-50 text-green-800",
   contactado: "bg-blue-50 text-blue-800",
   cerrado: "bg-brand-accent/15 text-brand-accent-dark",
   descartado: "bg-gray-100 text-gray-600",

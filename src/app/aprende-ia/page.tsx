@@ -25,21 +25,20 @@ export default function AprendeIaPage() {
   return (
     <div className="bg-background relative overflow-hidden">
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute top-[900px] left-0 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Encabezado + robot */}
         <section className="grid gap-12 py-16 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
-              <Bot className="w-4 h-4 text-brand-accent" aria-hidden="true" />
+              <Bot className="w-4 h-4 text-brand-accent-dark" aria-hidden="true" />
               <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
                 Aprende IA
               </span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-bold text-brand-primary leading-tight">
               La inteligencia artificial,{" "}
-              <span className="font-serif italic font-light text-brand-accent-dark">sin complicaciones</span>
+              <span className="text-brand-accent-dark">sin complicaciones</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 font-light leading-relaxed">
               Qué es, cómo evoluciona y cómo usarla en serio. Conversa con DyBot, mira a Claude Code trabajar y
@@ -71,7 +70,7 @@ export default function AprendeIaPage() {
           <div className="space-y-10">
             <div className="max-w-3xl space-y-3">
               <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary">
-                La IA <span className="font-serif italic font-light text-brand-accent-dark">hoy</span>
+                La IA <span className="text-brand-accent-dark">hoy</span>
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 Lo último que publican las fuentes oficiales: Anthropic, OpenAI, Google y MIT Technology Review.
@@ -84,7 +83,7 @@ export default function AprendeIaPage() {
           <div className="space-y-10">
             <div className="max-w-3xl space-y-3">
               <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
-                Conceptos <span className="font-serif italic font-light text-brand-accent-dark">clave</span>
+                Conceptos <span className="text-brand-accent-dark">clave</span>
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 Lo que conviene entender detrás de los titulares. Revisado en {IA_REVISADO}; donde hay fuente
@@ -99,7 +98,7 @@ export default function AprendeIaPage() {
         <section id="claude-code" className="scroll-mt-28 py-16 space-y-12">
           <div className="max-w-3xl space-y-3">
             <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary">
-              Claude <span className="font-serif italic font-light text-brand-accent-dark">Code</span>
+              Claude <span className="text-brand-accent-dark">Code</span>
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Es el asistente de programación de Anthropic y la herramienta que más usamos en Soluciones DyS.
@@ -113,9 +112,8 @@ export default function AprendeIaPage() {
         <section className="py-16">
           <div className="relative overflow-hidden rounded-3xl bg-brand-primary p-8 sm:p-16 text-center text-white shadow-2xl">
             <div className="absolute top-0 right-0 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-green/10 rounded-full blur-3xl" />
             <div className="relative z-10 mx-auto max-w-2xl space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-bold font-serif leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
                 ¿Quieres llevar esto a tu negocio?
               </h2>
               <p className="text-lg text-gray-300 font-light leading-relaxed">
@@ -126,7 +124,7 @@ export default function AprendeIaPage() {
                 href="/contacto"
                 className="inline-flex h-11 items-center justify-center rounded-md bg-brand-accent-dark px-8 text-lg font-medium text-white hover:bg-brand-primary transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
               >
-                Hablemos
+                Cotizar mi sitio
               </Link>
             </div>
           </div>

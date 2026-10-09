@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Bricolage_Grotesque, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,11 +10,14 @@ import AttributionTracker from "@/components/AttributionTracker";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+// Playfair queda solo para el logotipo "Soluciones DyS".
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
+// Fuente de titulares (h1–h3); el eje opsz ajusta el dibujo al tamaño.
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", axes: ["opsz"] });
 
 const title = "Diseño y Desarrollo Web en Puerto Varas | Soluciones DyS";
 const description =
-  "Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de Los Lagos y todo Chile. Rápidos, optimizados para Google y con las últimas tecnologías.";
+  "Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de Los Lagos y todo Chile. Rápidos en el celular, optimizados para Google y con WhatsApp a la vista.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -59,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="es" className={`${inter.variable} ${playfair.variable} ${bricolage.variable} scroll-smooth`}>
       <body className="antialiased min-h-screen flex flex-col">
         <StructuredData />
         <Navbar />

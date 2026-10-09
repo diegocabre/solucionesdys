@@ -11,7 +11,6 @@ export default function PartnersPage() {
     <div className="min-h-screen py-16 bg-background relative overflow-hidden">
       {/* Elementos decorativos de fondo */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -22,7 +21,7 @@ export default function PartnersPage() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20"
           >
-            <Sparkles className="w-4 h-4 text-brand-accent" />
+            <Sparkles className="w-4 h-4 text-brand-accent-dark" />
             <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
               Proyectos en el Mundo Digital
             </span>
@@ -34,7 +33,7 @@ export default function PartnersPage() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-6xl font-bold text-brand-primary"
           >
-            Nuestros <span className="font-serif italic font-light text-brand-accent-dark">Partners</span>
+            Nuestros <span className="text-brand-accent-dark">Partners</span>
           </motion.h1>
           
           <motion.p
@@ -61,23 +60,22 @@ export default function PartnersPage() {
         >
           {/* Background shapes */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-green/10 rounded-full blur-3xl" />
           
           <div className="relative z-10 max-w-3xl mx-auto space-y-8">
             <div className="inline-flex items-center gap-2 p-2 bg-white/10 rounded-xl backdrop-blur-xs">
               <Code className="w-5 h-5 text-brand-accent-light" />
               <Smartphone className="w-5 h-5 text-brand-accent-light" />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold font-serif leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-bold leading-tight">
               ¿Listo para dar el salto digital?
             </h2>
             <p className="text-lg text-gray-300 font-light leading-relaxed">
-              Desarrollamos tu sitio corporativo, catálogo con base de datos, o tienda online a la medida con integraciones estables y diseño de vanguardia.
+              Hacemos tu sitio corporativo, catálogo o tienda online a medida, para que tus clientes te encuentren y te escriban.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contacto">
-                <Button size="lg" className="w-full sm:w-auto bg-brand-accent! hover:bg-brand-accent-dark! text-white! border-brand-accent!">
-                  Cotizar mi Sitio Web
+                <Button size="lg" className="w-full sm:w-auto bg-brand-accent! hover:bg-brand-accent-light! text-brand-primary! border-brand-accent!">
+                  Cotizar mi sitio
                 </Button>
               </Link>
               <Link href="/contacto">

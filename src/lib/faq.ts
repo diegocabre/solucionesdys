@@ -20,9 +20,9 @@ export const FAQS: Faq[] = [
       "Desarrollamos landing pages para campañas y captación de clientes, sitios corporativos multipágina y tiendas online con carrito de compras y pasarela de pagos.",
   },
   {
-    question: "¿Con qué tecnologías trabajan?",
+    question: "¿Por qué no usan plantillas?",
     answer:
-      "Construimos cada sitio a medida con React, Next.js y Tailwind CSS. Esto permite sitios más rápidos, seguros y fáciles de posicionar en Google que las plantillas tradicionales.",
+      "Hacemos cada sitio a medida, sin plantillas. Así carga más rápido, es más seguro y es más fácil de posicionar en Google que un sitio armado sobre una plantilla.",
   },
   {
     question: "¿Mi sitio web va a aparecer en Google?",

@@ -12,11 +12,6 @@
   --brand-accent: #bfa38a;
   --brand-accent-light: #d1baaa;
   --brand-accent-dark: #846852;
-
-  /* Color verde oliva de la marca (Foliado del logo) */
-  --brand-green: #3a5a33;
-  --brand-green-light: #476b3f;
-  --brand-green-dark: #2f4d28;
 }
 
 @theme inline {
@@ -24,23 +19,41 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
+  --font-display: var(--font-bricolage);
+
   /* Añadiendo paleta personalizada a la configuración del tema Tailwind */
   --color-brand-primary: var(--brand-primary);
   --color-brand-accent: var(--brand-accent);
   --color-brand-accent-light: var(--brand-accent-light);
   --color-brand-accent-dark: var(--brand-accent-dark);
-  --color-brand-green: var(--brand-green);
-  --color-brand-green-light: var(--brand-green-light);
-  --color-brand-green-dark: var(--brand-green-dark);
 }
 
 /* Desactivar el modo oscuro automático de prefers-color-scheme en Tailwind v4 redirigiendo la variante dark a una clase inactiva */
 @custom-variant dark (.theme-dark-disabled &);
+
+/* Titulares: Bricolage Grotesque en todos los h1–h3; Inter queda para el texto corrido.
+   Va en la capa base para que las utilidades (tamaño, peso, tracking) sigan mandando. */
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+  /* El tamaño óptico de Bricolage ya cierra el espaciado en grande; basta un ajuste leve. */
+  h1, h2 {
+    letter-spacing: -0.01em;
+  }
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
+}
+
+/* Selección de texto con los colores de la marca (café sobre marino). */
+::selection {
+  background: var(--brand-accent);
+  color: var(--brand-primary);
 }

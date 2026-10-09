@@ -15,7 +15,7 @@ export default function CasosDeExito() {
         <span className="text-xs font-semibold text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
           Resultados reales
         </span>
-        <h2 id="casos-de-exito" className="text-3xl font-bold text-brand-primary font-serif">
+        <h2 id="casos-de-exito" className="text-3xl font-bold text-brand-primary">
           Casos de éxito
         </h2>
         <p className="text-gray-500 font-light max-w-xl mx-auto">
@@ -51,7 +51,7 @@ export default function CasosDeExito() {
                 <ul className="space-y-2 grow">
                   {caso.resultados.slice(0, 3).map((r) => (
                     <li key={r.metrica} className="flex gap-2 text-sm">
-                      <TrendingUp className="w-4 h-4 mt-0.5 text-brand-green shrink-0" aria-hidden="true" />
+                      <TrendingUp className="w-4 h-4 mt-0.5 text-brand-accent-dark shrink-0" aria-hidden="true" />
                       <span>
                         <span className="text-gray-600">{r.metrica}:</span>{" "}
                         <strong className="text-brand-primary">

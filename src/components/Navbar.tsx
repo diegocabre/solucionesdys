@@ -19,11 +19,11 @@ export default function Navbar() {
     { label: "Aprende IA", href: "/aprende-ia", icon: Bot },
     { label: "Comunidad Puerto Varas", href: "/comunidad", icon: MapPin },
     { label: "Partners", href: "/partners" },
-    { label: "Contacto", href: "/contacto" },
+    { label: "Cotizar mi sitio", href: "/contacto" },
   ];
 
   return (
-    <nav className="fixed w-full bg-background border-b z-50 transition-colors">
+    <nav className="fixed w-full bg-background border-b border-gray-200 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo como Emblema con Texto Elegante Al Lado */}
@@ -44,14 +44,14 @@ export default function Navbar() {
               <span className="text-lg sm:text-2xl font-bold font-serif text-brand-primary tracking-wide leading-none transition-colors group-hover:text-brand-accent-dark">
                 Soluciones <span className="text-brand-accent-dark">DyS</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-green-light mt-1.5 leading-none">
+              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-accent-dark mt-1.5 leading-none">
                 Soluciones Digitales
               </span>
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+          <div className="hidden xl:flex items-center space-x-2">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
               const Icon = link.icon;
@@ -60,7 +60,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`relative px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
                     isActive ? "text-brand-accent-dark" : "text-foreground hover:text-brand-accent-dark"
                   }`}
                 >
@@ -81,12 +81,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex lg:hidden items-center gap-4">
+          <div className="flex xl:hidden items-center gap-4">
             <button
               onClick={toggleMenu}
               aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isOpen}
-              className="p-2 text-foreground hover:bg-gray-100 rounded-md focus:outline-none"
+              className="p-2.5 text-foreground hover:bg-gray-100 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -101,7 +101,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t overflow-hidden bg-background"
+            className="xl:hidden border-t border-gray-200 overflow-hidden bg-background"
           >
             <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
               {NAV_LINKS.map((link) => {

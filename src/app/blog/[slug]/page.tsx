@@ -100,7 +100,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   Borrador: no se publica en producción
                 </p>
               )}
-              <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary font-serif leading-tight">{post.title}</h1>
+              <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary leading-tight">{post.title}</h1>
               <p className="text-lg text-gray-600 font-light leading-relaxed">{post.description}</p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500">
                 <span className="inline-flex items-center gap-1.5">
@@ -139,7 +139,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <Content />
 
             <section className="mt-16 bg-brand-primary rounded-3xl p-8 sm:p-10 text-white space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-bold font-serif">¿Lo conversamos para tu negocio?</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold">¿Lo conversamos para tu negocio?</h2>
               <p className="text-gray-300 font-light">
                 Cuéntanos qué necesitas y te respondemos con una propuesta clara. Atendemos en Puerto
                 Varas, Llanquihue, Frutillar y Puerto Montt.
@@ -149,7 +149,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   href="/contacto"
                   className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-white text-brand-primary font-medium hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
                 >
-                  Pedir una cotización
+                  Cotizar mi sitio
                 </Link>
                 <a
                   href={BUSINESS.whatsapp}
@@ -188,7 +188,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {related.length > 0 && (
           <section aria-labelledby="relacionados" className="mt-20 space-y-6">
-            <h2 id="relacionados" className="text-2xl font-bold text-brand-primary font-serif">
+            <h2 id="relacionados" className="text-2xl font-bold text-brand-primary">
               Sigue leyendo
             </h2>
             <ul className="grid gap-6 md:grid-cols-3">

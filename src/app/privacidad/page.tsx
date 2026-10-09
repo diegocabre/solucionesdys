@@ -5,9 +5,6 @@ export default function PrivacidadPage() {
     <div className="bg-background min-h-screen py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-3">
-          <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full inline-block">
-            Legal
-          </span>
           <h1 className="text-4xl font-bold text-brand-primary">
             Política de Privacidad y Cookies
           </h1>

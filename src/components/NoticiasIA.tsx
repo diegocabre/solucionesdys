@@ -14,7 +14,7 @@ type Estado =
 
 const COLOR_FUENTE: Record<string, string> = {
   anthropic: "bg-brand-accent/15 text-brand-accent-dark",
-  "claude-code": "bg-brand-green/10 text-brand-green-dark",
+  "claude-code": "bg-gray-100 text-gray-800",
   openai: "bg-brand-primary/10 text-brand-primary",
   deepmind: "bg-sky-100 text-sky-800",
   google: "bg-sky-100 text-sky-800",
@@ -138,7 +138,7 @@ export default function NoticiasIA() {
                   {hace(n.fecha, ahora)}
                 </time>
               </div>
-              <h3 lang="en" className="mt-4 text-lg font-bold font-serif text-brand-primary leading-snug">
+              <h3 lang="en" className="mt-4 text-lg font-bold text-brand-primary leading-snug">
                 {n.titulo}
               </h3>
               {n.resumen && (

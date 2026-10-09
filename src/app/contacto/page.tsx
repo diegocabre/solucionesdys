@@ -26,10 +26,10 @@ export default function ContactoPage() {
     <div className="bg-background min-h-[calc(100vh-64px)] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <h1 className="text-4xl font-bold text-brand-primary">Contacto</h1>
+          <h1 className="text-4xl font-bold text-brand-primary">Cotiza tu sitio</h1>
           <p className="text-gray-500 dark:text-gray-400 font-light">
-            Estamos listos para ayudarte con tus proyectos. Escríbenos y te
-            responderemos a la brevedad.
+            Cuéntanos qué necesita tu negocio y te respondemos con una propuesta
+            clara, sin compromiso.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export default function ContactoPage() {
             </h2>
             <div className="space-y-6">
               <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
+                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent-dark">
                   <Mail size={24} />
                 </div>
                 <div>
@@ -54,7 +54,7 @@ export default function ContactoPage() {
                 </div>
               </div>
               <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
+                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent-dark">
                   <Phone size={24} />
                 </div>
                 <div>
@@ -62,14 +62,14 @@ export default function ContactoPage() {
                     Teléfono / WhatsApp
                   </p>
                   <p>
-                    <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors">
+                    <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent-dark transition-colors">
                       +56 9 4763 7541
                     </a>
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent">
+                <div className="p-3 bg-brand-accent/10 rounded-full text-brand-accent-dark">
                   <MapPin size={24} />
                 </div>
                 <div>
@@ -79,7 +79,7 @@ export default function ContactoPage() {
               </div>
               
               <div className="pt-6 border-t border-gray-100 dark:border-slate-800 flex justify-start">
-                <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md">
+                <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-gray-900 rounded-lg hover:bg-[#20bd5a] transition-colors font-medium shadow-md">
                   <MessageCircle size={22} />
                   Chatea por WhatsApp
                 </a>
@@ -186,7 +186,7 @@ export default function ContactoPage() {
                 .
               </p>
               <Button type="submit" className="w-full justify-center bg-brand-accent hover:bg-brand-accent-dark border-brand-accent" disabled={pending}>
-                {pending ? "Enviando..." : "Enviar Mensaje"}
+                {pending ? "Enviando..." : "Enviar mensaje"}
               </Button>
             </form>
           </motion.div>

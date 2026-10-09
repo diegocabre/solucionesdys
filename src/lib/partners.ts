@@ -12,8 +12,6 @@ export interface PartnerProject {
   url: string;
   /** Captura de la web (public/assets/img/partners), recortada a la parte superior. */
   image: string;
-  /** Imagen vertical para el carrusel del inicio; si falta se usa `image`. */
-  cover?: string;
   tags: string[];
   gradient: string;
   features: string[];
@@ -28,7 +26,6 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real para un cowork, cafetería y espacio de talleres en Puerto Varas.",
     url: "https://www.rincondelaromo.com/home",
     image: "/assets/img/partners/rincon-del-aromo-web.jpg",
-    cover: "/assets/img/partners/rincon-del-aromo.jpg",
     tags: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
     gradient: "from-[#aa7b49] via-[#bf915f] to-[#5c3e21]",
     features: ["Arriendo de Espacios", "Menú de Cafetería", "Calendario de Actividades"]
@@ -41,7 +38,6 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Plataforma corporativa real para una consultora de estrategia y gestión.",
     url: "https://www.estriborconsultores.cl/",
     image: "/assets/img/partners/estribor-consultores-web.jpg",
-    cover: "/assets/img/partners/estribor-consultores.jpg",
     tags: ["Next.js", "React", "TailwindCSS", "TypeScript"],
     gradient: "from-[#0d2a45] via-[#1a3d60] to-[#081b2e]",
     features: ["Portafolio de Asesorías", "Formulario de Diagnóstico", "Optimización de Velocidad"]
@@ -54,7 +50,6 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real para clínicas veterinarias con tienda online en Puente Alto y Santiago Centro.",
     url: "https://www.dogtoraliavet.cl/home",
     image: "/assets/img/partners/dogtoralia-vet-web.jpg",
-    cover: "/assets/img/partners/dogtoralia-vet.jpg",
     tags: ["React", "Next.js", "TailwindCSS"],
     gradient: "from-[#2793bb] via-[#2e8aa0] to-[#6ea34a]",
     features: ["Tienda Online de Productos", "Servicios Veterinarios", "Contacto por WhatsApp"]
@@ -67,7 +62,6 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real de tarot evolutivo, talleres y arte místico con oráculo interactivo.",
     url: "https://www.carolinemagic.cl/",
     image: "/assets/img/partners/caroline-magic-web.jpg",
-    cover: "/assets/img/partners/caroline-magic.jpg",
     tags: ["Next.js", "React", "TailwindCSS", "Framer Motion"],
     gradient: "from-[#7b3f61] via-[#a4487a] to-[#2e1a3d]",
     features: ["Oráculo Interactivo del Día", "Agenda de Lecturas de Tarot", "Talleres y Rituales Grupales"]

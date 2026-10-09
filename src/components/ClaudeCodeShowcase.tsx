@@ -159,7 +159,7 @@ function FlujoInteractivo() {
                 className={`relative z-10 grid size-12 place-items-center rounded-full border-2 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 ${
                   alcanzado
                     ? "bg-brand-primary border-brand-accent text-white"
-                    : "bg-white border-gray-200 text-gray-400 hover:border-brand-accent"
+                    : "bg-white border-gray-200 text-gray-500 hover:border-brand-accent"
                 } ${i === activo ? "scale-110 shadow-lg" : ""}`}
               >
                 <I className="size-5" aria-hidden="true" />
@@ -188,7 +188,7 @@ function FlujoInteractivo() {
               <Icono className="size-6" aria-hidden="true" />
             </span>
             <div className="space-y-3">
-              <h3 className="text-lg font-bold font-serif text-brand-primary">
+              <h3 className="text-lg font-bold text-brand-primary">
                 {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-gray-600">· {paso.corto}</span>
               </h3>
               <p className="text-gray-700 leading-relaxed">{paso.detalle}</p>
@@ -241,7 +241,7 @@ export default function ClaudeCodeShowcase() {
     <div className="space-y-16">
       <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="space-y-5">
-          <h3 className="text-2xl sm:text-3xl font-bold font-serif text-brand-primary">
+          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
             Míralo trabajar, paso a paso
           </h3>
           <p className="text-gray-600 leading-relaxed">
@@ -267,7 +267,7 @@ export default function ClaudeCodeShowcase() {
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold font-serif text-brand-primary">Cómo trabaja</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">Cómo trabaja</h3>
           <p className="text-gray-600 leading-relaxed">Toca cada paso para ver qué pasa por dentro.</p>
         </div>
         <FlujoInteractivo />
@@ -275,7 +275,7 @@ export default function ClaudeCodeShowcase() {
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold font-serif text-brand-primary">
+          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
             Lo que lo hace potente
           </h3>
           <p className="text-gray-600 leading-relaxed">Voltea las tarjetas para conocer cada pieza.</p>

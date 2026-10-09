@@ -28,19 +28,19 @@ export default function WebsPage() {
       title: "Landing Pages",
       description: "Páginas de un solo scroll diseñadas específicamente para convertir visitas en clientes potenciales. Perfectas para promocionar un servicio o campaña en redes sociales.",
       icon: MousePointerClick,
-      color: "from-blue-500/10 to-blue-600/5 text-blue-600 dark:text-blue-400"
+      color: "from-brand-accent/15 to-brand-accent/5 text-brand-accent-dark"
     },
     {
       title: "Sitios Corporativos",
       description: "Sitios profesionales multipáginas para constructoras, talleres, oficinas y comercios que desean transmitir confianza y establecer una sólida presencia de marca.",
       icon: Layers,
-      color: "from-amber-500/10 to-amber-600/5 text-amber-600 dark:text-amber-400"
+      color: "from-brand-accent/15 to-brand-accent/5 text-brand-accent-dark"
     },
     {
       title: "E-Commerce & Catálogos",
       description: "Tiendas virtuales completas con carrito de compras, catálogos enlazados a bases de datos y pasarela de pagos integrada para vender tus productos online sin esfuerzo.",
       icon: Code,
-      color: "from-green-500/10 to-green-600/5 text-green-600 dark:text-brand-accent-light"
+      color: "from-brand-accent/15 to-brand-accent/5 text-brand-accent-dark"
     }
   ];
 
@@ -58,7 +58,7 @@ export default function WebsPage() {
     {
       step: "03",
       title: "Desarrollo",
-      desc: "Construimos tu sitio para que cargue rápido en cualquier celular y Google lo entienda desde el primer día (con React, Next.js y Tailwind CSS)."
+      desc: "Construimos tu sitio para que cargue rápido en cualquier celular y Google lo entienda desde el primer día."
     },
     {
       step: "04",
@@ -102,26 +102,15 @@ export default function WebsPage() {
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-primary dark:text-white leading-tight">
                 Sitios web que <br />
-                <span className="text-brand-accent-dark italic font-serif font-light">te traen clientes</span>
+                <span className="text-brand-accent-dark">te traen clientes</span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl">
                 Desde Puerto Varas diseñamos sitios que cargan rápido en el celular, aparecen cuando te buscan en Google y hacen fácil que te escriban por WhatsApp. Tu negocio recibiendo consultas las 24 horas, también mientras duermes.
               </p>
-              <p className="text-sm text-gray-500 pt-1">Construidos con tecnología usada por grandes empresas:</p>
-              <div className="flex flex-wrap gap-2">
-                {["React", "Next.js", "Tailwind CSS", "TypeScript"].map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-primary/5 dark:bg-white/5 border border-brand-primary/10 dark:border-white/10 text-brand-primary dark:text-slate-200"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
               <div className="pt-2">
                 <Link href="/contacto?subject=Diseño Web">
                   <Button variant="primary" size="lg" className="shadow-lg hover:shadow-brand-accent/40 transition-all">
-                    Iniciar mi Proyecto
+                    Cotizar mi sitio
                   </Button>
                 </Link>
               </div>
@@ -136,7 +125,7 @@ export default function WebsPage() {
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center gap-3">
                   <Sparkles className="text-brand-accent-light w-6 h-6 animate-pulse" />
-                  <h2 className="text-xl font-bold font-serif text-brand-accent-light">Lo que gana tu negocio</h2>
+                  <h2 className="text-xl font-bold text-brand-accent-light">Lo que gana tu negocio</h2>
                 </div>
                 <div className="space-y-4">
                   <div className="flex gap-4 items-start">
@@ -175,7 +164,7 @@ export default function WebsPage() {
           {/* Grid de Tipos de Sitio */}
           <div className="mb-24 space-y-12">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-brand-primary dark:text-white font-serif">¿Qué tipo de sitio web necesitas?</h2>
+              <h2 className="text-3xl font-bold text-brand-primary dark:text-white">¿Qué tipo de sitio web necesitas?</h2>
               <p className="text-gray-500 font-light max-w-xl mx-auto">Selecciona la estructura ideal para cumplir tus metas de negocio.</p>
             </div>
             
@@ -199,7 +188,7 @@ export default function WebsPage() {
                     <div className="pt-6 border-t border-gray-50 dark:border-slate-800 mt-6">
                       <Link href={`/contacto?subject=Consulta - ${service.title}`}>
                         <span className="text-xs font-semibold text-brand-accent-dark hover:text-brand-primary transition-colors cursor-pointer inline-flex items-center gap-1">
-                          Saber más &rarr;
+                          Cotizar mi sitio &rarr;
                         </span>
                       </Link>
                     </div>
@@ -215,14 +204,14 @@ export default function WebsPage() {
           <div className="bg-gray-50 dark:bg-slate-900/50 border border-gray-100 dark:border-slate-800/80 rounded-3xl p-8 sm:p-16 space-y-16">
             <div className="text-center space-y-2">
               <span className="text-xs font-semibold text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">Metodología</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-serif">Proceso de Desarrollo</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white">Proceso de Desarrollo</h2>
               <p className="text-gray-500 dark:text-slate-300 font-light max-w-xl mx-auto">De la idea a la pantalla de forma ordenada y transparente.</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, idx) => (
                 <div key={idx} className="space-y-4 relative">
-                  <div className="text-4xl font-bold font-serif text-brand-accent/50 dark:text-brand-accent/70">{step.step}</div>
+                  <div className="text-4xl font-bold font-display text-brand-accent-dark">{step.step}</div>
                   <h3 className="text-lg font-bold text-brand-primary dark:text-slate-100">{step.title}</h3>
                   <p className="text-sm text-gray-500 dark:text-slate-300 font-light leading-relaxed">
                     {step.desc}

@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 export default function FarmaciasDeTurnoPage() {
   return (
     <div className="min-h-screen py-16 bg-background relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-green/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,15 +32,15 @@ export default function FarmaciasDeTurnoPage() {
         </nav>
 
         <header className="max-w-3xl mb-12 space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-green/10 border border-brand-green/20">
-            <Pill className="w-4 h-4 text-brand-green" aria-hidden="true" />
-            <span className="text-sm font-semibold tracking-wider text-brand-green uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
+            <Pill className="w-4 h-4 text-brand-accent-dark" aria-hidden="true" />
+            <span className="text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
               Servicio a la comunidad
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-brand-primary">
             Farmacias de turno en{" "}
-            <span className="font-serif italic font-light text-brand-accent-dark">Puerto Varas</span>
+            <span className="text-brand-accent-dark">Puerto Varas</span>
           </h1>
           <p className="text-lg text-gray-600 font-light leading-relaxed">
             Encuentra la farmacia que está de turno hoy en Puerto Varas y las comunas cercanas, con su

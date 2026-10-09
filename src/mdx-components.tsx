@@ -16,7 +16,7 @@ function textOf(node: ReactNode): string {
 
 const components: MDXComponents = {
   h2: ({ children }) => (
-    <h2 id={slugify(textOf(children))} className="scroll-mt-28 text-2xl sm:text-3xl font-bold text-brand-primary font-serif mt-12 mb-4">
+    <h2 id={slugify(textOf(children))} className="scroll-mt-28 text-2xl sm:text-3xl font-bold text-brand-primary mt-12 mb-4">
       {children}
     </h2>
   ),
@@ -31,7 +31,8 @@ const components: MDXComponents = {
   li: ({ children }) => <li className="leading-relaxed">{children}</li>,
   strong: ({ children }) => <strong className="font-semibold text-brand-primary">{children}</strong>,
   blockquote: ({ children }) => (
-    <blockquote className="border-l-4 border-brand-accent bg-brand-accent/5 rounded-r-xl px-5 py-1 my-6 text-gray-700">
+    // Cita destacada: tipografía de titulares y un filete superior, sin barra lateral de color.
+    <blockquote className="my-10 border-t border-brand-accent/40 pt-6 font-display [&_p]:my-0 [&_p]:text-xl sm:[&_p]:text-2xl [&_p]:font-medium [&_p]:leading-snug [&_p]:text-brand-primary">
       {children}
     </blockquote>
   ),

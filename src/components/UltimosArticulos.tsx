@@ -11,14 +11,9 @@ export default function UltimosArticulos({ limit = 3 }: { limit?: number }) {
     <section aria-labelledby="ultimos-articulos" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="space-y-2">
-            <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
-              Blog
-            </span>
-            <h2 id="ultimos-articulos" className="text-3xl font-bold text-brand-primary font-serif">
-              Guías para tu negocio
-            </h2>
-          </div>
+          <h2 id="ultimos-articulos" className="text-3xl font-bold text-brand-primary">
+            Guías para tu negocio
+          </h2>
           <Link
             href="/blog"
             className="inline-flex items-center gap-1 text-sm font-semibold text-brand-accent-dark hover:text-brand-primary"

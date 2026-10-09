@@ -50,7 +50,7 @@ export default function BlogPage() {
           <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
             Blog
           </span>
-          <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary font-serif">
+          <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary">
             Guías para vender más con tu sitio web
           </h1>
           <p className="text-gray-600 font-light">
@@ -71,7 +71,7 @@ export default function BlogPage() {
               <article className="h-full bg-white rounded-3xl border border-gray-100 shadow-xs hover:shadow-xl transition-all p-8 flex flex-col gap-4">
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-brand-green/10 text-brand-green-dark">
+                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent-dark">
                       {tag}
                     </span>
                   ))}
@@ -79,7 +79,7 @@ export default function BlogPage() {
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-900">Borrador</span>
                   )}
                 </div>
-                <h2 className="text-2xl font-bold text-brand-primary font-serif">
+                <h2 className="text-2xl font-bold text-brand-primary">
                   <Link href={`/blog/${post.slug}`} className="hover:text-brand-accent-dark transition-colors">
                     {post.title}
                   </Link>

@@ -123,13 +123,13 @@ function TarjetaFarmacia({
           <div>
             <span
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-                anterior ? "bg-amber-100 text-amber-900" : "bg-brand-green/10 text-brand-green-dark"
+                anterior ? "bg-amber-100 text-amber-900" : "bg-green-50 text-green-800"
               }`}
             >
               <Pill className="w-3.5 h-3.5" aria-hidden="true" />
               {anterior ? "Turno anterior" : "De turno ahora"}
             </span>
-            <h3 className="mt-3 text-xl font-bold font-serif text-brand-primary">{f.nombre}</h3>
+            <h3 className="mt-3 text-xl font-bold text-brand-primary">{f.nombre}</h3>
           </div>
         </div>
 
@@ -311,7 +311,7 @@ export default function FarmaciasTurno() {
               }`}
             >
               {c.nombre}
-              <span className={`ml-2 text-xs ${comuna === slug ? "text-brand-accent-light" : "text-gray-400"}`}>
+              <span className={`ml-2 text-xs ${comuna === slug ? "text-brand-accent-light" : "text-gray-500"}`}>
                 {c.total}
               </span>
             </button>
@@ -454,7 +454,7 @@ export default function FarmaciasTurno() {
             {cercanas.length > 0 && (
               <section aria-labelledby="farmacias-cercanas" className="space-y-4">
                 <div>
-                  <h2 id="farmacias-cercanas" className="text-lg font-bold font-serif text-brand-primary">
+                  <h2 id="farmacias-cercanas" className="text-lg font-bold text-brand-primary">
                     De turno cerca de Puerto Varas
                   </h2>
                   <p className="text-sm text-gray-600">

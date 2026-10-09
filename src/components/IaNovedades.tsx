@@ -6,7 +6,7 @@ import { useState } from "react";
 import { CATEGORIAS_IA, IA_NOVEDADES, type CategoriaIA } from "@/lib/ia-content";
 
 const COLOR_CATEGORIA: Record<CategoriaIA, string> = {
-  Agentes: "bg-brand-green/10 text-brand-green-dark",
+  Agentes: "bg-gray-100 text-gray-800",
   Herramientas: "bg-brand-accent/15 text-brand-accent-dark",
   Modelos: "bg-brand-primary/10 text-brand-primary",
   "Uso responsable": "bg-amber-100 text-amber-800",
@@ -53,7 +53,7 @@ export default function IaNovedades() {
               >
                 {n.categoria}
               </span>
-              <h3 className="mt-4 text-lg font-bold font-serif text-brand-primary leading-snug">{n.titulo}</h3>
+              <h3 className="mt-4 text-lg font-bold text-brand-primary leading-snug">{n.titulo}</h3>
               <p className="mt-3 grow text-sm leading-relaxed text-gray-600">{n.resumen}</p>
               {n.fuente && (
                 <a

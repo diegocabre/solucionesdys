@@ -14,13 +14,10 @@ export default function FeaturedCase() {
     <section id="caso-de-exito" className="py-24 bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
         <div className="space-y-6">
-          <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
-            Caso de éxito
-          </span>
           <h2 className="text-4xl font-bold text-brand-primary dark:text-white">
-            {project.name}
+            Caso de éxito: {project.name}
           </h2>
-          <p className="text-sm font-semibold text-brand-green uppercase tracking-wider">
+          <p className="text-sm font-semibold text-brand-accent-dark uppercase tracking-wider">
             {project.category}
           </p>
           <p className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
@@ -29,7 +26,7 @@ export default function FeaturedCase() {
           <ul className="space-y-2">
             {project.features.map((feature) => (
               <li key={feature} className="flex items-center gap-2 text-gray-700 dark:text-slate-300">
-                <CheckCircle2 className="w-5 h-5 text-brand-green shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-brand-accent-dark shrink-0" />
                 {feature}
               </li>
             ))}

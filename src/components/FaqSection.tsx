@@ -18,15 +18,11 @@ export default function FaqSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-brand-green uppercase bg-brand-green/10 px-3 py-1 rounded-full">
-            Preguntas Frecuentes
-          </span>
-          <h2 className="text-4xl font-bold text-brand-primary dark:text-white">
-            Desarrollo web en Puerto Varas: lo que más nos preguntan
-          </h2>
-        </div>
+      {/* Dos columnas: el título queda fijo a la izquierda mientras se recorren las preguntas */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-start">
+        <h2 className="text-4xl font-bold text-brand-primary dark:text-white lg:sticky lg:top-28">
+          Desarrollo web en Puerto Varas: lo que más nos preguntan
+        </h2>
 
         <div className="space-y-4">
           {FAQS.map((faq) => (

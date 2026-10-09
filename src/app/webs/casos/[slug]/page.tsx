@@ -100,10 +100,10 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
               Borrador: completa los datos en src/lib/casos.ts y cambia published a true
             </p>
           )}
-          <p className="text-sm font-semibold text-brand-green uppercase tracking-wider">
+          <p className="text-sm font-semibold text-brand-accent-dark uppercase tracking-wider">
             {caso.rubro} · {caso.ciudad}
           </p>
-          <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary font-serif">{caso.cliente}</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary">{caso.cliente}</h1>
           <a
             href={caso.url}
             target="_blank"
@@ -133,7 +133,7 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
             {caso.resultados.map((r) => (
               <li key={r.metrica} className="bg-white rounded-2xl border border-gray-100 p-5 space-y-2">
                 <p className="flex items-center gap-2 text-sm text-gray-600">
-                  <TrendingUp className="w-4 h-4 text-brand-green" aria-hidden="true" />
+                  <TrendingUp className="w-4 h-4 text-brand-accent-dark" aria-hidden="true" />
                   {r.metrica}
                 </p>
                 <p className="text-2xl font-bold text-brand-primary">
@@ -172,7 +172,7 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
         )}
 
         <section className="bg-brand-primary rounded-3xl p-8 sm:p-12 text-center text-white space-y-4">
-          <h2 className="text-3xl font-bold font-serif">¿Quieres resultados así para tu negocio?</h2>
+          <h2 className="text-3xl font-bold">¿Quieres resultados así para tu negocio?</h2>
           <p className="text-gray-300 font-light max-w-xl mx-auto">
             Cuéntanos qué necesitas y te respondemos con una propuesta clara, sin compromiso.
           </p>
@@ -180,7 +180,7 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
             href="/contacto"
             className="inline-flex items-center justify-center h-11 px-8 mt-2 rounded-md bg-white text-brand-primary text-lg font-medium hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
           >
-            Cotizar mi sitio web
+            Cotizar mi sitio
           </Link>
         </section>
       </article>
