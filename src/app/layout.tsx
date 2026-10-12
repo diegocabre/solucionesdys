@@ -8,6 +8,7 @@ import Analytics from "@/components/Analytics";
 import StructuredData from "@/components/StructuredData";
 import AttributionTracker from "@/components/AttributionTracker";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 // Playfair queda solo para el logotipo "Soluciones DyS".
@@ -73,6 +74,7 @@ export default function RootLayout({
         <CookieConsent />
         <Analytics />
         <AttributionTracker />
+        <VercelAnalytics />
       </body>
     </html>
   );
