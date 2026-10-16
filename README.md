@@ -87,7 +87,7 @@ Para ganarse esa confianza, además de mostrar proyectos reales, el sitio ofrece
 | Caché y rate limit | [Upstash Redis](https://upstash.com) + `@upstash/ratelimit` |
 | Anti-spam | [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) |
 | Analítica | [Vercel Analytics](https://vercel.com/analytics), [Microsoft Clarity](https://clarity.microsoft.com) |
-| Calidad | ESLint 9 (`eslint-config-next`) |
+| Calidad | ESLint 9 (`eslint-config-next`), [Vitest](https://vitest.dev) y GitHub Actions |
 | Hosting | [Vercel](https://vercel.com) |
 
 ## Requisitos previos
@@ -165,6 +165,7 @@ La tabla `leads` queda con seguridad a nivel de filas (RLS) activa y sin políti
 | `npm run build` | Compila el sitio para producción |
 | `npm run start` | Sirve la versión compilada (ejecuta antes `npm run build`) |
 | `npm run lint` | Revisa el código con ESLint |
+| `npm test` | Corre los tests con Vitest (también los corre GitHub Actions en cada push y pull request) |
 
 ### Ejemplo: publicar un artículo en el blog
 

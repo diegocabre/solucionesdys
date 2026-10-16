@@ -43,3 +43,6 @@ next-env.d.ts
 
 # capturas y logs de Playwright MCP
 /.playwright-mcp/
+
+# material generado con Claude (se conserva en disco, fuera del repo)
+/Claude outputs/

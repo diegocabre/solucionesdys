@@ -112,8 +112,8 @@ function extractHeadings(body: string): Heading[] {
   return headings;
 }
 
-function readPost(file: string): Post {
-  const source = readFileSync(path.join(BLOG_DIR, file), "utf8");
+/** Convierte el contenido de content/blog/<file> en un Post. Se exporta para los tests. */
+export function parsePost(source: string, file: string): Post {
   const { data, body } = splitFrontmatter(source, file);
   const words = plainText(body).split(/\s+/).filter(Boolean).length;
   return {
@@ -129,7 +129,7 @@ const showDrafts = process.env.NODE_ENV !== "production";
 export function getPosts(): Post[] {
   return readdirSync(BLOG_DIR)
     .filter((f) => f.endsWith(".mdx"))
-    .map(readPost)
+    .map((file) => parsePost(readFileSync(path.join(BLOG_DIR, file), "utf8"), file))
     .filter((p) => !p.draft || showDrafts)
     .sort((a, b) => b.date.localeCompare(a.date));
 }
