@@ -1,3 +1,5 @@
+import "server-only";
+
 // Noticias de IA en vivo, leídas de fuentes primarias (blogs y releases oficiales).
 // Cada fuente se consulta por separado: si una falla o cambia de formato, las demás siguen.
 // Lo usa el endpoint /api/ia-noticias.

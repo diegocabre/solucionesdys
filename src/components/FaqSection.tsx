@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react';
+import JsonLd from '@/components/JsonLd';
 import { FAQS } from '@/lib/faq';
 
 export default function FaqSection() {
@@ -14,10 +15,7 @@ export default function FaqSection() {
 
   return (
     <section id="preguntas-frecuentes" className="py-24 bg-background">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLd data={faqSchema} />
       {/* Dos columnas: el título queda fijo a la izquierda mientras se recorren las preguntas */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-start">
         <h2 className="text-4xl font-bold text-brand-primary dark:text-white lg:sticky lg:top-28">

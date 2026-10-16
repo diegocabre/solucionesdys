@@ -36,13 +36,10 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    // El detalle (p. ej. "MINSAL respondió 403") queda solo en el log del servidor.
     console.error("[farmacias-turno]", error);
     return Response.json(
-      {
-        error: "No pudimos consultar las farmacias de turno en este momento.",
-        // Motivo corto (p. ej. "MINSAL respondió 403") para diagnosticar sin abrir los logs.
-        motivo: error instanceof Error ? error.message : "desconocido",
-      },
+      { error: "No pudimos consultar las farmacias de turno en este momento." },
       { status: 502, headers: { "Cache-Control": "no-store" } },
     );
   }

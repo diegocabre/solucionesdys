@@ -1,3 +1,4 @@
+import JsonLd from "@/components/JsonLd";
 import { SITE_URL, SITE_NAME, BUSINESS, AREA_SERVED } from "@/lib/site";
 
 // Único JSON-LD del negocio en todo el sitio (ProfessionalService es un subtipo de
@@ -46,10 +47,5 @@ export default function StructuredData() {
       "Diseño y desarrollo de sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de la Región de Los Lagos y todo Chile.",
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <JsonLd data={data} />;
 }

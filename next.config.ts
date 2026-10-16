@@ -12,9 +12,34 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   // Fuerza HTTPS en visitas futuras (una vez desplegado con certificado válido)
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  // No hay Content-Security-Policy por ahora. Si se agrega, Cloudflare Turnstile (formulario
-  // de contacto) necesita https://challenges.cloudflare.com en script-src y frame-src.
+  // CSP en modo Report-Only: el navegador solo avisa en consola, no bloquea. Cuando no haya
+  // avisos en producción, cambiar la clave a "Content-Security-Policy" para que se aplique.
+  { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy() },
 ];
+
+// 'unsafe-inline' en scripts: Next.js, el JSON-LD y el arranque de Clarity usan scripts
+// en línea y el sitio no usa nonces. 'unsafe-eval' solo en desarrollo (recarga en caliente).
+function contentSecurityPolicy(): string {
+  const dev = process.env.NODE_ENV !== "production";
+  return [
+    "default-src 'self'",
+    // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas).
+    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://*.clarity.ms`,
+    "style-src 'self' 'unsafe-inline'",
+    // Fuentes de next/font/google se sirven desde el propio sitio.
+    "font-src 'self' data:",
+    // Clarity envía su píxel a c.bing.com.
+    "img-src 'self' data: blob: https://*.clarity.ms https://c.bing.com",
+    // Respaldo de farmacias desde el navegador (MINSAL), Clarity y Turnstile.
+    "connect-src 'self' https://midas.minsal.cl https://*.clarity.ms https://challenges.cloudflare.com",
+    // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
+    "frame-src https://challenges.cloudflare.com https://www.openstreetmap.org",
+    "frame-ancestors 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ].join("; ");
+}
 
 const nextConfig: NextConfig = {
   async redirects() {
