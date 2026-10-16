@@ -11,23 +11,12 @@ import {
   Pill,
   RefreshCw,
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import {
-  COMUNAS_ZONA,
-  MINSAL_URL,
-  distanciaAPuertoVarasKm,
-  normalizarRespuesta,
-  toSlug,
-  turnoVigente,
-} from "@/lib/farmacias";
-import type { FarmaciasResponse, FarmaciaTurno, TurnoVigente } from "@/lib/farmacias";
+import { useState } from "react";
+import { useFarmaciasTurno } from "@/hooks/useFarmaciasTurno";
+import { COMUNAS_ZONA, distanciaAPuertoVarasKm, toSlug } from "@/lib/farmacias";
+import type { FarmaciaTurno } from "@/lib/farmacias";
 
 const COMUNA_PRINCIPAL = { slug: "puerto-varas", nombre: "Puerto Varas" };
-
-type Estado =
-  | { tipo: "cargando" }
-  | { tipo: "error" }
-  | { tipo: "listo"; data: FarmaciasResponse; turno: TurnoVigente };
 
 const horarioTexto = (f: FarmaciaTurno) => {
   if (f.apertura === "00:00" && f.cierre === "23:59") return "Atiende las 24 horas";
@@ -64,32 +53,6 @@ const rutaUrl = (f: FarmaciaTurno) =>
   f.lat !== null && f.lng !== null
     ? `https://www.google.com/maps/dir/?api=1&destination=${f.lat},${f.lng}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${f.direccion}, ${f.comuna}, Chile`)}`;
-
-// Primero consulta nuestro API. Si el servidor no logra llegar al MINSAL (su Cloudflare bloquea
-// a veces las IP de servidores), reintenta directo desde el navegador del visitante, que el MINSAL
-// sí acepta (CORS abierto). Devuelve siempre un Estado: los errores no se lanzan.
-async function pedirFarmacias(signal?: AbortSignal): Promise<Estado | null> {
-  // El turno vigente se decide con el reloj del visitante, no con el de la respuesta: el caché
-  // del API puede haberse generado antes del cambio de turno de las 09:00.
-  const listo = (data: FarmaciasResponse): Estado => ({ tipo: "listo", data, turno: turnoVigente() });
-
-  try {
-    const res = await fetch("/api/farmacias-turno", { signal });
-    if (!res.ok) throw new Error(String(res.status));
-    return listo((await res.json()) as FarmaciasResponse);
-  } catch (err) {
-    if (err instanceof DOMException && err.name === "AbortError") return null;
-  }
-
-  try {
-    const res = await fetch(MINSAL_URL, { signal: signal ?? AbortSignal.timeout(15_000) });
-    if (!res.ok) throw new Error(String(res.status));
-    return listo(normalizarRespuesta(await res.json()));
-  } catch (err) {
-    if (err instanceof DOMException && err.name === "AbortError") return null;
-    return { tipo: "error" };
-  }
-}
 
 function TarjetaFarmacia({
   f,
@@ -195,21 +158,10 @@ function TarjetaFarmacia({
 }
 
 export default function FarmaciasTurno() {
-  const [estado, setEstado] = useState<Estado>({ tipo: "cargando" });
+  const { estado, reintentar } = useFarmaciasTurno();
   const [comuna, setComuna] = useState(COMUNA_PRINCIPAL.slug);
   const [seleccion, setSeleccion] = useState<string | null>(null);
   const [verAnterior, setVerAnterior] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    pedirFarmacias(controller.signal).then((e) => e && setEstado(e));
-    return () => controller.abort();
-  }, []);
-
-  const reintentar = () => {
-    setEstado({ tipo: "cargando" });
-    pedirFarmacias().then((e) => e && setEstado(e));
-  };
 
   if (estado.tipo === "cargando") {
     return (
