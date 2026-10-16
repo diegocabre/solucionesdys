@@ -49,8 +49,6 @@ Para ganarse esa confianza, además de mostrar proyectos reales, el sitio ofrece
 - una sección **Aprende IA**, que explica la inteligencia artificial sin tecnicismos;
 - una sección **Comunidad**, con las **farmacias de turno** de la zona en tiempo real.
 
-Por dentro incluye un **panel de administración** para revisar y dar seguimiento a cada consulta recibida.
-
 ## Características principales
 
 **Sitio público**
@@ -68,12 +66,6 @@ Por dentro incluye un **panel de administración** para revisar y dar seguimient
 - **Límite de envíos** por IP: 5 cada 10 minutos (Upstash Redis).
 - Guarda cada consulta en **Supabase** (la IP se guarda como hash, nunca en claro) y avisa por correo con **Resend**, además de enviar una respuesta automática al cliente.
 - Registra de dónde llegó el visitante (página de origen y parámetros `utm_*`).
-
-**Panel de administración** (`/admin/leads`)
-
-- Inicio de sesión con correo y contraseña definidos en variables de entorno (sesión firmada con HMAC, 8 horas).
-- Listado de consultas filtrable por estado: `nuevo`, `contactado`, `cerrado` y `descartado`.
-- Excluido de buscadores (`noindex`).
 
 **SEO, rendimiento y privacidad**
 
@@ -111,7 +103,7 @@ Antes de empezar, necesitas tener instalado:
 2. **npm**, que viene incluido con Node.js.
 3. **[Git](https://git-scm.com)**, para clonar el repositorio.
 
-> 💡 **Para probarlo en tu computador no necesitas ninguna cuenta externa.** Sin variables de entorno, el sitio funciona igual en modo desarrollo: el captcha se omite y el límite de envíos se guarda en memoria. Las cuentas de Supabase, Resend, Upstash y Cloudflare solo hacen falta para que el formulario y el panel funcionen de verdad, o para producción.
+> 💡 **Para probarlo en tu computador no necesitas ninguna cuenta externa.** Sin variables de entorno, el sitio funciona igual en modo desarrollo: el captcha se omite y el límite de envíos se guarda en memoria. Las cuentas de Supabase, Resend, Upstash y Cloudflare solo hacen falta para que el formulario funcione de verdad, o para producción.
 
 ## Instalación paso a paso
 
@@ -155,7 +147,7 @@ Entra a [http://localhost:3000](http://localhost:3000) en tu navegador. Los camb
 
 **6. (Opcional) Prepara la base de datos de consultas**
 
-Si quieres guardar las consultas del formulario y usar el panel `/admin/leads`:
+Si quieres guardar las consultas del formulario (se revisan en el **Table Editor** de Supabase, tabla `leads`):
 
 1. Crea un proyecto en [Supabase](https://supabase.com/dashboard).
 2. Abre **SQL Editor**, pega el contenido de [`supabase/migrations/001_leads.sql`](supabase/migrations/001_leads.sql) y ejecútalo. Si usas la CLI de Supabase, también puedes correr `supabase db push`.
@@ -220,12 +212,6 @@ curl http://localhost:3000/api/ia-noticias
 curl http://localhost:3000/api/farmacias-turno
 ```
 
-### Ejemplo: entrar al panel de administración
-
-1. Define `ADMIN_EMAIL`, `ADMIN_PASSWORD` y `ADMIN_AUTH_SECRET` en `.env.local`.
-2. Reinicia `npm run dev`.
-3. Entra a [http://localhost:3000/admin/login](http://localhost:3000/admin/login).
-
 ## Estructura del proyecto
 
 ```text
@@ -243,7 +229,6 @@ solucionesdys/
 │   │   ├── aprende-ia/        # Sección educativa sobre IA
 │   │   ├── comunidad/         # Farmacias de turno
 │   │   ├── contacto/          # Formulario + Server Action de envío
-│   │   ├── admin/             # Login y panel de consultas (leads)
 │   │   ├── api/               # Endpoints: farmacias-turno, ia-noticias
 │   │   ├── privacidad/, terminos/
 │   │   ├── sitemap.ts, robots.ts
@@ -255,7 +240,6 @@ solucionesdys/
 │   │   ├── blog.ts            # Lectura de artículos y frontmatter
 │   │   ├── farmacias*.ts      # Consulta al MINSAL + caché en Redis
 │   │   ├── ia-noticias.ts     # Lectura de noticias de IA (RSS/Atom)
-│   │   ├── admin-auth.ts      # Sesión del panel
 │   │   ├── rate-limit.ts, redis.ts, turnstile.ts
 │   │   └── supabase/server.ts # Cliente mínimo de Supabase
 │   └── mdx-components.tsx
@@ -282,9 +266,6 @@ Todas las variables van en `.env.local`, que **nunca** se sube al repositorio (y
 | `SUPABASE_URL` | Para guardar consultas | URL del proyecto de Supabase |
 | `SUPABASE_SERVICE_ROLE_KEY` | Para guardar consultas | Llave *service role* (solo servidor; **nunca** con prefijo `NEXT_PUBLIC_`) |
 | `LEAD_IP_HASH_SALT` | Recomendada | Sal para guardar la IP como hash. Genérala con `openssl rand -hex 32` |
-| `ADMIN_EMAIL` | Para el panel | Correo de acceso a `/admin` |
-| `ADMIN_PASSWORD` | Para el panel | Contraseña de acceso a `/admin` |
-| `ADMIN_AUTH_SECRET` | Para el panel | Secreto para firmar la sesión, mínimo 32 caracteres. Genéralo con `openssl rand -base64 48` |
 | `NEXT_PUBLIC_CLARITY_PROJECT_ID` | Opcional | ID de Microsoft Clarity. Si falta, Clarity no se carga |
 
 `.env.example` también trae `KV_REST_API_READ_ONLY_TOKEN`, `KV_URL` y `REDIS_URL`, que agrega la integración de Upstash en Vercel. El código no las usa directamente.

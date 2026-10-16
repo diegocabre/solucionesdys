@@ -242,9 +242,7 @@ export async function sendContactEmail(prevState: FormState, formData: FormData)
       text:
         `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone || '—'}\nMotivo: ${subject}\n\nMensaje:\n${message}` +
         (origin ? `\n\n---\n${origin}` : '') +
-        (leadSaved
-          ? `\n\nVer en el panel: ${SITE_URL}/admin/leads`
-          : '\n\n(Este lead NO quedó guardado en la base de datos.)'),
+        (leadSaved ? '' : '\n\n(Este lead NO quedó guardado en la base de datos.)'),
     })
     if (resendError) {
       console.error('[contacto] Error enviando email:', resendError)

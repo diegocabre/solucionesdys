@@ -33,11 +33,6 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      {
-        // Panel interno: que ningún buscador lo indexe.
-        source: "/admin/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
     ];
   },
 };

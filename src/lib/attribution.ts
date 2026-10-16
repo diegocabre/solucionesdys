@@ -34,7 +34,7 @@ export function registrarVisita(pathname: string, search: string) {
     if (value) utm[key] = value;
   }
   if (Object.keys(utm).length > 0) guardar(STORAGE_UTM, JSON.stringify(utm));
-  if (pathname !== PAGINA_CONTACTO && !pathname.startsWith("/admin")) guardar(STORAGE_ORIGEN, pathname.slice(0, 300));
+  if (pathname !== PAGINA_CONTACTO) guardar(STORAGE_ORIGEN, pathname.slice(0, 300));
 }
 
 /** Agrega al formulario los campos ocultos de atribución antes de enviarlo. */

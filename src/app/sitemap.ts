@@ -3,7 +3,6 @@ import { SITE_URL } from "@/lib/site";
 import { getPosts } from "@/lib/blog";
 import { CASOS } from "@/lib/casos";
 
-// /admin queda fuera a propósito (además tiene noindex).
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: { path: string; priority: number; changeFrequency: "weekly" | "monthly" }[] = [
     { path: "", priority: 1, changeFrequency: "weekly" },

@@ -3,13 +3,7 @@ import "server-only";
 // Cliente mínimo de Supabase para el servidor, sobre su API REST (PostgREST).
 // Usa la service role key, que salta RLS: NUNCA debe llegar al navegador ni
 // llevar el prefijo NEXT_PUBLIC. No usamos @supabase/supabase-js porque solo
-// necesitamos insertar, listar y actualizar la tabla `leads`.
-
-export const LEAD_STATUSES = ["nuevo", "contactado", "cerrado", "descartado"] as const;
-export type LeadStatus = (typeof LEAD_STATUSES)[number];
-
-export const isLeadStatus = (value: string): value is LeadStatus =>
-  (LEAD_STATUSES as readonly string[]).includes(value);
+// necesitamos insertar en la tabla `leads`.
 
 export interface NewLead {
   name: string;
@@ -23,13 +17,6 @@ export interface NewLead {
   utm_campaign: string | null;
   ip_hash: string | null;
   user_agent: string | null;
-}
-
-export interface Lead extends NewLead {
-  id: string;
-  created_at: string;
-  status: LeadStatus;
-  notes: string | null;
 }
 
 interface SupabaseConfig {
@@ -81,20 +68,4 @@ export async function insertLead(lead: NewLead): Promise<string> {
   const id = rows[0]?.id;
   if (!id) throw new Error("Supabase no devolvió el id del lead.");
   return id;
-}
-
-export async function listLeads({ status, limit = 200 }: { status?: LeadStatus; limit?: number } = {}): Promise<Lead[]> {
-  const params = new URLSearchParams({ select: "*", order: "created_at.desc", limit: String(limit) });
-  if (status) params.set("status", `eq.${status}`);
-  const res = await request(`leads?${params}`);
-  return (await res.json()) as Lead[];
-}
-
-export async function updateLead(id: string, changes: { status: LeadStatus; notes: string | null }): Promise<void> {
-  const params = new URLSearchParams({ id: `eq.${id}` });
-  await request(`leads?${params}`, {
-    method: "PATCH",
-    body: JSON.stringify(changes),
-    prefer: "return=minimal",
-  });
 }

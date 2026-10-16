@@ -34,7 +34,7 @@ Detrás está una sola persona, Diego, que diseña y programa cada sitio. Lo que
 
 - Atención presencial en Puerto Varas, Llanquihue, Frutillar y Puerto Montt; el resto de Chile, de forma remota (`AREA_SERVED` en `src/lib/site.ts`).
 - Contacto: formulario en `/contacto` (con Turnstile y límite de envíos), WhatsApp +56 9 4763 7541, contacto@solucionesdys.cl, Instagram @solucionesdys.cl.
-- Panel de administración propio (`/admin/leads`) para revisar los contactos recibidos.
+- Los contactos recibidos se guardan en Supabase (tabla `leads`) y llegan por correo.
 - Idioma: español de Chile (`es_CL`). Los precios se expresan en pesos chilenos.
 
 ## Capabilities and Constraints
