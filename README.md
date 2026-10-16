@@ -150,7 +150,7 @@ Entra a [http://localhost:3000](http://localhost:3000) en tu navegador. Los camb
 Si quieres guardar las consultas del formulario (se revisan en el **Table Editor** de Supabase, tabla `leads`):
 
 1. Crea un proyecto en [Supabase](https://supabase.com/dashboard).
-2. Abre **SQL Editor**, pega el contenido de [`supabase/migrations/001_leads.sql`](supabase/migrations/001_leads.sql) y ejecútalo. Si usas la CLI de Supabase, también puedes correr `supabase db push`.
+2. Abre **SQL Editor**, pega el contenido de [`supabase/migrations/001_leads.sql`](supabase/migrations/001_leads.sql) y ejecútalo. Haz lo mismo con [`002_purga_leads.sql`](supabase/migrations/002_purga_leads.sql), que borra cada semana los leads con más de 24 meses. Si usas la CLI de Supabase, también puedes correr `supabase db push`.
 3. Copia la URL del proyecto y la *service role key* en `.env.local` (`SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY`).
 
 La tabla `leads` queda con seguridad a nivel de filas (RLS) activa y sin políticas públicas: solo el servidor del sitio puede leerla y escribirla.
