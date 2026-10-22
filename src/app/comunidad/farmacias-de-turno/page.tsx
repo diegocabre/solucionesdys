@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Code2, Info, Pill } from "lucide-react";
 import FarmaciasTurno from "@/components/FarmaciasTurno";
+import AvisoFarmaciasForm from "@/components/AvisoFarmaciasForm";
+import { COMUNAS_AVISO } from "@/lib/aviso-farmacias";
 
 export const metadata: Metadata = {
   title: "Farmacias de turno en Puerto Varas hoy",
@@ -49,6 +51,8 @@ export default function FarmaciasDeTurnoPage() {
         </header>
 
         <FarmaciasTurno />
+
+        <AvisoFarmaciasForm comunas={COMUNAS_AVISO} />
 
         <section className="mt-16 grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl bg-white border border-gray-100 p-6 space-y-3">

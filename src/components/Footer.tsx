@@ -60,6 +60,14 @@ export default function Footer() {
                   Farmacias de turno Puerto Varas
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/comunidad/directorio"
+                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                >
+                  Directorio de negocios locales
+                </Link>
+              </li>
             </ul>
           </div>
 

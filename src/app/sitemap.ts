@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/aprende-ia", priority: 0.7, changeFrequency: "monthly" },
     { path: "/comunidad", priority: 0.7, changeFrequency: "monthly" },
     { path: "/comunidad/farmacias-de-turno", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/comunidad/directorio", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/comunidad/directorio/inscribir", priority: 0.5, changeFrequency: "monthly" },
     { path: "/partners", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contacto", priority: 0.8, changeFrequency: "monthly" },
     { path: "/privacidad", priority: 0.3, changeFrequency: "monthly" },
