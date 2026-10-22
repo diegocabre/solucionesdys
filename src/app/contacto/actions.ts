@@ -1,11 +1,11 @@
 'use server'
 
-import { createHash } from 'node:crypto'
 import { Resend } from 'resend'
 import { headers } from 'next/headers'
 import { SITE_URL } from '@/lib/site'
 import { getClientIp, limitByIp } from '@/lib/rate-limit'
 import { verifyTurnstile } from '@/lib/turnstile'
+import { EMAIL_REGEX, PHONE_REGEX, escapeHtml, hashIp, sanitizeForHeader } from '@/lib/form-utils'
 import { insertLead, isSupabaseConfigured, type NewLead } from '@/lib/supabase/server'
 
 export type FormState = {
@@ -22,27 +22,9 @@ const ALLOWED_SUBJECTS = [
   'Otro Motivo',
 ]
 
-const EMAIL_REGEX = /^[^\s@"<>,]+@[^\s@"<>,]+\.[^\s@"<>,]+$/
-// Teléfono opcional: dígitos, espacios, guiones, paréntesis y un + inicial.
-const PHONE_REGEX = /^\+?[\d\s()-]{8,20}$/
-
 // Máx. 5 envíos cada 10 minutos por IP (compartido entre instancias vía Upstash).
 const RATE_LIMIT_MAX = 5
 const RATE_LIMIT_WINDOW_SEC = 10 * 60
-
-// Quita saltos de línea y caracteres de control para evitar inyección de
-// cabeceras SMTP (CRLF injection) cuando el valor se usa en headers de email.
-function sanitizeForHeader(value: string): string {
-  return value.replace(/[\r\n\t\0]/g, ' ').trim()
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
 
 // HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail).
 // El logo ya incluye el texto "Soluciones DyS" dentro de la imagen.
@@ -104,16 +86,6 @@ function buildAutoReplyHtml(name: string, subject: string): string {
 function optionalField(formData: FormData, key: string, max: number): string | null {
   const value = sanitizeForHeader(formData.get(key)?.toString() || '').slice(0, max)
   return value || null
-}
-
-// Hash de la IP con sal: permite detectar abuso repetido sin guardar la IP en claro.
-function hashIp(ip: string): string | null {
-  const salt = process.env.LEAD_IP_HASH_SALT
-  if (!salt) {
-    console.warn('[contacto] Falta LEAD_IP_HASH_SALT: el lead se guarda sin ip_hash.')
-    return null
-  }
-  return createHash('sha256').update(`${salt}:${ip}`).digest('hex')
 }
 
 const SUCCESS: FormState = {

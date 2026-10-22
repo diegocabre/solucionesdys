@@ -1,4 +1,4 @@
-const LAST_UPDATED = "2 de octubre de 2026";
+const LAST_UPDATED = "22 de octubre de 2026";
 
 export default function PrivacidadPage() {
   return (
@@ -38,7 +38,7 @@ export default function PrivacidadPage() {
 
           <section className="space-y-3">
             <h2 className="text-2xl font-bold text-brand-primary">2. Qué datos recopilamos</h2>
-            <p>Recopilamos datos personales en dos situaciones:</p>
+            <p>Recopilamos datos personales en estas situaciones:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li>
                 <strong>Formulario de contacto:</strong> cuando nos escribes desde la
@@ -49,6 +49,19 @@ export default function PrivacidadPage() {
                 enlace etiquetado (parámetros <em>utm</em>), el tipo de navegador
                 (<em>user agent</em>) y un código cifrado de tu dirección IP (un hash
                 irreversible con sal; nunca guardamos la IP en claro).
+              </li>
+              <li>
+                <strong>Aviso diario de farmacia de turno:</strong> si te suscribes,
+                guardamos tu correo electrónico, la comuna elegida, si confirmaste la
+                suscripción y un código cifrado de tu dirección IP.
+              </li>
+              <li>
+                <strong>Directorio de negocios:</strong> si inscribes tu negocio,
+                guardamos los datos del negocio que se publican (nombre, rubro, comuna,
+                descripción y, si los indicas, teléfono, sitio web e Instagram) y tus
+                datos de contacto, que <strong>no se publican</strong> (tu nombre,
+                correo y si te interesa un sitio web), junto con un código cifrado de
+                tu dirección IP.
               </li>
               <li>
                 <strong>Datos de navegación (solo con tu autorización):</strong> si
@@ -74,6 +87,14 @@ export default function PrivacidadPage() {
               </li>
               <li>Saber qué páginas y campañas nos traen consultas, para mejorar el sitio.</li>
               <li>Comunicarnos contigo respecto de un proyecto o servicio solicitado.</li>
+              <li>
+                Enviarte el aviso diario de farmacia de turno, si te suscribiste. Cada
+                correo trae un enlace para darte de baja con un clic.
+              </li>
+              <li>
+                Publicar la ficha de tu negocio en el directorio y, si lo marcaste,
+                contactarte para ofrecerte un sitio web.
+              </li>
               <li>
                 Entender cómo se usa el sitio y mejorarlo (solo si aceptas cookies
                 analíticas).
@@ -184,6 +205,12 @@ export default function PrivacidadPage() {
               que nos escribes, para responderte y dar seguimiento comercial si
               corresponde. Pasado ese plazo las eliminamos. Puedes pedirnos que las
               borremos antes en cualquier momento (ver sección 9).
+            </p>
+            <p>
+              Las suscripciones al aviso de farmacia que no se confirman se borran a
+              los 30 días; las dadas de baja, a los 24 meses. Las fichas del directorio
+              se conservan mientras estén publicadas o hasta que nos pidas
+              eliminarlas.
             </p>
             <p>
               Los registros del límite de envíos por IP se borran solos a los pocos
