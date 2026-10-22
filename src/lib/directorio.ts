@@ -113,3 +113,25 @@ export function validarFicha(formData: FormData): ResultadoFicha {
     },
   };
 }
+
+/**
+ * Enlace mailto: con el correo de bienvenida ya escrito, para el botón del aviso que llega
+ * a contacto@. Al aprobar la ficha, Diego lo abre, lo revisa y lo envía desde su correo.
+ */
+export function mailtoBienvenida(ficha: Pick<FichaNegocio, "nombre" | "contacto_nombre" | "email_contacto">): string {
+  const asunto = `¡${ficha.nombre} ya está en el directorio de Puerto Varas! 🎉`;
+  const cuerpo = [
+    `Hola ${ficha.contacto_nombre}:`,
+    "",
+    `La ficha de ${ficha.nombre} ya está publicada en el Directorio de negocios locales de Puerto Varas y alrededores:`,
+    "https://www.solucionesdys.cl/comunidad/directorio",
+    "",
+    "Si quieres cambiar algo de la ficha, responde este correo y lo actualizamos.",
+    "",
+    "Te pido un favor: comparte el directorio con otros emprendedores que conozcas. Mientras más negocios haya, más gente lo visita y más clientes te llegan a ti también.",
+    "",
+    "¡Gracias por sumarte!",
+    "Diego · Soluciones DyS",
+  ].join("\r\n");
+  return `mailto:${encodeURIComponent(ficha.email_contacto)}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+}

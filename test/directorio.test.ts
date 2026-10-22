@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizarInstagram, normalizarSitio, validarFicha } from "@/lib/directorio";
+import { mailtoBienvenida, normalizarInstagram, normalizarSitio, validarFicha } from "@/lib/directorio";
 
 const ficha = (over: Record<string, string> = {}) => {
   const fd = new FormData();
@@ -67,5 +67,16 @@ describe("validarFicha", () => {
   });
   it("rechaza sitio web inválido", () => {
     expect(validarFicha(ficha({ sitio_web: "javascript:alert(1)" })).ok).toBe(false);
+  });
+});
+
+describe("mailtoBienvenida", () => {
+  it("arma destinatario, asunto y cuerpo codificados", () => {
+    const url = mailtoBienvenida({ nombre: "Café & Té", contacto_nombre: "Ana", email_contacto: "ana@correo.cl" });
+    expect(url.startsWith("mailto:ana%40correo.cl?subject=")).toBe(true);
+    const params = new URLSearchParams(url.split("?")[1]);
+    expect(params.get("subject")).toBe("¡Café & Té ya está en el directorio de Puerto Varas! 🎉");
+    expect(params.get("body")).toContain("Hola Ana:");
+    expect(params.get("body")).toContain("https://www.solucionesdys.cl/comunidad/directorio");
   });
 });
