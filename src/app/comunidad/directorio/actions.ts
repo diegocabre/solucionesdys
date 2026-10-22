@@ -5,6 +5,8 @@ import { Resend } from "resend";
 import { getClientIp, limitByIp } from "@/lib/rate-limit";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { escapeHtml, hashIp } from "@/lib/form-utils";
+import { ADMIN_EMAIL } from "@/lib/admin";
+import { SITE_URL } from "@/lib/site";
 import { mailtoBienvenida, nombreComunaDirectorio, validarFicha } from "@/lib/directorio";
 import { insertNegocio, isSupabaseConfigured } from "@/lib/supabase/server";
 
@@ -64,7 +66,7 @@ export async function inscribirNegocio(_prev: FichaState, formData: FormData): P
     `Instagram: ${ficha.instagram ? `@${ficha.instagram}` : "—"}\n\nContacto: ${ficha.contacto_nombre} <${ficha.email_contacto}>\n` +
     `¿Le interesa un sitio web?: ${ficha.quiere_sitio ? "SÍ" : "no"}\n\n` +
     (guardada
-      ? "Para publicarla: Supabase → Table Editor → negocios → estado = 'aprobado'."
+      ? `Para publicarla: ${SITE_URL}/admin/directorio`
       : "(Esta ficha NO quedó guardada en la base de datos.)");
   // El botón abre el correo de bienvenida ya escrito, para enviarlo tras aprobar la ficha.
   const html =
@@ -77,7 +79,7 @@ export async function inscribirNegocio(_prev: FichaState, formData: FormData): P
     const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({
       from: "Directorio Web <formulario@solucionesdys.cl>",
       replyTo: ficha.email_contacto,
-      to: "contacto@solucionesdys.cl",
+      to: ADMIN_EMAIL,
       subject: `${ficha.quiere_sitio ? "[Quiere sitio web] " : ""}Nueva ficha en el directorio: ${ficha.nombre}`,
       text: texto,
       html,

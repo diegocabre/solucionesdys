@@ -166,3 +166,19 @@ export async function listarNegociosAprobados(): Promise<NegocioPublico[]> {
   );
   return (await res.json()) as NegocioPublico[];
 }
+
+export type EstadoNegocio = "pendiente" | "aprobado" | "rechazado";
+
+/** Ficha completa para el panel /admin (incluye los datos privados del contacto). */
+export type NegocioAdmin = Omit<NuevoNegocio, "ip_hash"> & { id: string; created_at: string; estado: EstadoNegocio };
+
+export async function listarNegociosAdmin(): Promise<NegocioAdmin[]> {
+  const res = await request(
+    "negocios?select=id,created_at,estado,nombre,rubro,comuna_slug,descripcion,telefono,sitio_web,instagram,contacto_nombre,email_contacto,quiere_sitio&order=created_at.desc",
+  );
+  return (await res.json()) as NegocioAdmin[];
+}
+
+export async function actualizarEstadoNegocio(id: string, estado: EstadoNegocio): Promise<void> {
+  await request(`negocios?id=eq.${id}`, { method: "PATCH", body: JSON.stringify({ estado }), prefer: "return=minimal" });
+}
