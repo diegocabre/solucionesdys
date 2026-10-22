@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, HeartHandshake, Lightbulb, Pill } from "lucide-react";
+import { ArrowRight, ArrowUpRight, HeartHandshake, House, Lightbulb, Pill } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Comunidad Puerto Varas: servicios útiles para vecinos",
   description:
-    "Servicios gratuitos para la comunidad de Puerto Varas y alrededores, creados por Soluciones DyS. Empezamos con las farmacias de turno.",
+    "Servicios gratuitos para la comunidad de Puerto Varas y alrededores, creados por Soluciones DyS. Farmacias de turno y reserva directa de cabañas en el sur.",
   alternates: { canonical: "/comunidad" },
   openGraph: {
     title: "Comunidad Puerto Varas | Soluciones DyS",
@@ -57,6 +57,27 @@ export default function ComunidadPage() {
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </span>
           </Link>
+
+          <a
+            href="https://reservas.solucionesdys.cl"
+            target="_blank"
+            rel="noopener"
+            className="group flex flex-col rounded-3xl bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:border-brand-accent transition-all focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+          >
+            <span className="grid size-12 place-items-center rounded-xl bg-brand-accent/10 text-brand-accent-dark">
+              <House className="size-6" aria-hidden="true" />
+            </span>
+            <h2 className="mt-5 text-2xl font-bold text-brand-primary">Cabañas en el sur</h2>
+            <p className="mt-3 grow text-gray-600 leading-relaxed">
+              Cabañas del sur de Chile con reserva directa: eliges la cabaña, pagas el abono y tratas con su
+              dueño, sin intermediarios.
+            </p>
+            <span className="mt-6 inline-flex items-center gap-2 font-semibold text-brand-accent-dark group-hover:text-brand-primary">
+              Ver cabañas
+              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
+              <span className="sr-only">(se abre en una pestaña nueva)</span>
+            </span>
+          </a>
 
           <Link
             href="/contacto"
