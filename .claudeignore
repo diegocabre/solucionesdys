@@ -1,0 +1,24 @@
+# Dependencias y compilados
+node_modules/
+.next/
+dist/
+build/
+out/
+
+# Archivos de bloqueo y logs
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+*.log
+
+# Assets pesados e imágenes
+public/
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.ico
+
+# Configuración local de entorno
+.env*
+.git/

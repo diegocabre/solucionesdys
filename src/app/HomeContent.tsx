@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
@@ -9,7 +9,18 @@ import ServicesCarousel from '@/components/ServicesCarousel';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
 import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
+import { AREA_SERVED } from '@/lib/site';
 import type { ReactNode } from 'react';
+
+// "A, B, C y D"
+const enumerar = (items: readonly string[]) => items.join(', ').replace(/, ([^,]*)$/, ' y $1');
+
+// Respaldo del llamado final: solo hechos confirmados; comunas y clientes salen de sus fuentes únicas.
+const RESPALDO = [
+  'Hablas directo con quien diseña y programa tu sitio.',
+  `Nos juntamos en persona en ${enumerar(AREA_SERVED)}.`,
+  `Sitios reales para ${enumerar(PARTNER_PROJECTS.map((p) => p.name))}.`,
+];
 
 // Ejemplos reales de cada tipo de sitio (según su descripción en partners.ts).
 // Landing Pages no tiene un caso confirmado, así que va sin captura.
@@ -74,7 +85,7 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         {/* Background gradient pattern matching the logo */}
-        <div className="absolute inset-0 -z-10 bg-linear-to-b from-[#182838]/10 via-background to-background">
+        <div className="absolute inset-0 -z-10 bg-linear-to-b from-brand-primary/10 via-background to-background">
           <div className="absolute top-0 -left-1/4 w-[600px] h-[600px] bg-brand-accent/5 blur-3xl rounded-full"></div>
         </div>
 
@@ -208,20 +219,32 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       {serverSections}
 
       {/* CTA Section */}
-      <section className="py-24 bg-[#182838] text-white relative overflow-hidden">
+      <section className="py-24 bg-brand-primary text-white">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-12 lg:gap-16 items-end"
         >
-          <h2 className="max-w-2xl text-4xl lg:text-5xl font-bold">¿Hablamos sobre tu proyecto?</h2>
-          <p className="max-w-2xl text-xl text-gray-300 font-light">
-            Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
-          </p>
-          <Button size="lg" variant="primary" className="mt-8 bg-white! text-[#182838]! hover:bg-gray-100! shadow-lg shadow-white/10" onClick={() => window.location.href='/contacto'}>
-            Cotizar mi sitio
-          </Button>
+          <div className="space-y-8">
+            <h2 className="max-w-2xl text-4xl lg:text-5xl font-bold">¿Hablamos sobre tu proyecto?</h2>
+            <p className="max-w-2xl text-xl text-gray-300 font-light">
+              Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
+            </p>
+            <Button size="lg" variant="primary" className="bg-white! text-brand-primary! hover:bg-gray-100! shadow-lg shadow-white/10" onClick={() => window.location.href='/contacto'}>
+              Cotizar mi sitio
+            </Button>
+          </div>
+
+          {/* Respaldo concreto: hechos confirmados (PRODUCT.md) y casos reales de partners.ts */}
+          <ul className="border-t border-white/15 text-lg text-gray-200 font-light">
+            {RESPALDO.map((hecho) => (
+              <li key={hecho} className="flex gap-3 border-b border-white/15 py-4">
+                <Check className="mt-1 w-5 h-5 shrink-0 text-brand-accent" aria-hidden="true" />
+                <span>{hecho}</span>
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </section>
     </div>
