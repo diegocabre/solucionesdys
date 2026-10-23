@@ -69,7 +69,8 @@ export interface FichaNegocio {
 
 export type ResultadoFicha = { ok: true; ficha: FichaNegocio } | { ok: false; error: string };
 
-export function validarFicha(formData: FormData): ResultadoFicha {
+/** `exigirAutorizacion: false` para las ediciones del panel: la autorización ya la dio el dueño al inscribirse. */
+export function validarFicha(formData: FormData, { exigirAutorizacion = true } = {}): ResultadoFicha {
   const nombre = limpiar(formData.get("nombre"), 80);
   const rubro = limpiar(formData.get("rubro"), 40);
   const comunaSlug = limpiar(formData.get("comuna"), 40);
@@ -93,7 +94,7 @@ export function validarFicha(formData: FormData): ResultadoFicha {
   if (sitio && !sitioWeb) return { ok: false, error: "Revisa el sitio web, por ejemplo www.minegocio.cl." };
   const usuarioIg = instagram ? normalizarInstagram(instagram) : null;
   if (instagram && !usuarioIg) return { ok: false, error: "Revisa el Instagram, por ejemplo @minegocio." };
-  if (formData.get("acepto") !== "on") {
+  if (exigirAutorizacion && formData.get("acepto") !== "on") {
     return { ok: false, error: "Necesitamos tu autorización para publicar la ficha." };
   }
 

@@ -51,6 +51,9 @@ function Ficha({ n }: { n: NegocioAdmin }) {
         {n.instagram && <div><dt className="inline font-semibold">Instagram: </dt><dd className="inline">@{n.instagram}</dd></div>}
       </dl>
       <div className="flex flex-wrap gap-2 pt-1">
+        <Link href={`/admin/directorio/${n.id}`} className={`${boton} border border-gray-300 text-gray-700 hover:bg-gray-100`}>
+          Editar
+        </Link>
         {n.estado === "pendiente" && (
           <>
             <BotonEstado id={n.id} estado="aprobado" texto="Aprobar" estilo="bg-green-700 text-white hover:bg-green-800" />

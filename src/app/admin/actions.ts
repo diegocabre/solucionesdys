@@ -17,7 +17,8 @@ import {
   firmarSesion,
   secretoSesion,
 } from "@/lib/admin";
-import { actualizarEstadoNegocio, type EstadoNegocio } from "@/lib/supabase/server";
+import { validarFicha } from "@/lib/directorio";
+import { actualizarEstadoNegocio, actualizarNegocio, type EstadoNegocio } from "@/lib/supabase/server";
 
 const clave = (token: string) => `dys:admin:enlace:${token}`;
 const TOKEN_REGEX = /^[0-9a-f]{64}$/;
@@ -119,4 +120,24 @@ export async function cambiarEstado(formData: FormData): Promise<void> {
   }
   revalidatePath("/admin/directorio");
   revalidatePath("/comunidad/directorio");
+}
+
+export type EdicionState = { error: string };
+
+/** Guarda los cambios de una ficha que pidió su dueño. */
+export async function editarNegocio(_prev: EdicionState, formData: FormData): Promise<EdicionState> {
+  await exigirAdmin();
+  const id = formData.get("id")?.toString() || "";
+  if (!UUID_REGEX.test(id)) return { error: "Ficha no válida." };
+  const validacion = validarFicha(formData, { exigirAutorizacion: false });
+  if (!validacion.ok) return { error: validacion.error };
+  try {
+    await actualizarNegocio(id, validacion.ficha);
+  } catch (error) {
+    console.error("[admin] Error guardando la edición:", error);
+    return { error: "No pudimos guardar los cambios. Intenta de nuevo." };
+  }
+  revalidatePath("/admin/directorio");
+  revalidatePath("/comunidad/directorio");
+  redirect("/admin/directorio");
 }

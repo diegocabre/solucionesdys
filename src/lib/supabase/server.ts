@@ -182,3 +182,15 @@ export async function listarNegociosAdmin(): Promise<NegocioAdmin[]> {
 export async function actualizarEstadoNegocio(id: string, estado: EstadoNegocio): Promise<void> {
   await request(`negocios?id=eq.${id}`, { method: "PATCH", body: JSON.stringify({ estado }), prefer: "return=minimal" });
 }
+
+export async function obtenerNegocioAdmin(id: string): Promise<NegocioAdmin | null> {
+  const res = await request(
+    `negocios?id=eq.${id}&select=id,created_at,estado,nombre,rubro,comuna_slug,descripcion,telefono,sitio_web,instagram,contacto_nombre,email_contacto,quiere_sitio`,
+  );
+  return ((await res.json()) as NegocioAdmin[])[0] ?? null;
+}
+
+/** Edición desde el panel: reemplaza los datos de la ficha (no toca estado ni ip_hash). */
+export async function actualizarNegocio(id: string, datos: Omit<NuevoNegocio, "ip_hash">): Promise<void> {
+  await request(`negocios?id=eq.${id}`, { method: "PATCH", body: JSON.stringify(datos), prefer: "return=minimal" });
+}

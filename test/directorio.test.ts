@@ -80,3 +80,11 @@ describe("mailtoBienvenida", () => {
     expect(params.get("body")).toContain("https://www.solucionesdys.cl/comunidad/directorio");
   });
 });
+
+describe("validarFicha desde el panel", () => {
+  it("no exige la casilla de autorización al editar", () => {
+    const fd = ficha();
+    fd.delete("acepto");
+    expect(validarFicha(fd, { exigirAutorizacion: false }).ok).toBe(true);
+  });
+});
