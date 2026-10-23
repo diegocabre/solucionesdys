@@ -1,4 +1,4 @@
-const LAST_UPDATED = "22 de octubre de 2026";
+const LAST_UPDATED = "23 de octubre de 2026";
 
 export default function PrivacidadPage() {
   return (
@@ -107,10 +107,24 @@ export default function PrivacidadPage() {
             <h2 className="text-2xl font-bold text-brand-primary">4. Base legal</h2>
             <p>
               Tratamos tus datos con base en tu <strong>consentimiento expreso</strong>,
-              otorgado al completar voluntariamente el formulario de contacto o al
-              aceptar las cookies analíticas mediante el banner que se muestra en tu
-              primera visita. Puedes retirar tu consentimiento en cualquier momento
-              (ver sección 9).
+              que otorgas de estas formas:
+            </p>
+            <ul className="list-disc pl-6 space-y-1">
+              <li>Al completar voluntariamente el formulario de contacto.</li>
+              <li>
+                Al suscribirte al aviso de farmacia de turno y <strong>confirmar</strong> la
+                suscripción desde el enlace que te enviamos por correo. Sin esa
+                confirmación no te enviamos avisos.
+              </li>
+              <li>
+                Al inscribir tu negocio en el directorio marcando la casilla que nos
+                autoriza a <strong>publicar los datos del negocio</strong>. Sin esa
+                autorización la ficha no se puede enviar.
+              </li>
+              <li>Al aceptar las cookies analíticas en el banner de tu primera visita.</li>
+            </ul>
+            <p>
+              Puedes retirar tu consentimiento en cualquier momento (ver sección 9).
             </p>
           </section>
 
@@ -174,7 +188,8 @@ export default function PrivacidadPage() {
               </li>
               <li>
                 <strong>Supabase:</strong> base de datos donde guardamos las consultas
-                del formulario de contacto.
+                del formulario de contacto, las suscripciones al aviso de farmacia y
+                las fichas del directorio.
               </li>
               <li>
                 <strong>Resend:</strong> servicio que envía los correos del formulario
@@ -190,6 +205,13 @@ export default function PrivacidadPage() {
                 límite de envíos por IP.
               </li>
             </ul>
+            <p>
+              Los datos del negocio que inscribes en el directorio (nombre, rubro,
+              comuna, descripción, teléfono, sitio web e Instagram) son{" "}
+              <strong>públicos</strong> una vez aprobada la ficha: cualquier persona
+              puede verlos en el sitio. Tu nombre y tu correo de contacto nunca se
+              publican.
+            </p>
             <p>
               Estos proveedores procesan datos en servidores que pueden estar fuera
               de Chile (por ejemplo, en Estados Unidos), bajo sus propias políticas
@@ -242,6 +264,11 @@ export default function PrivacidadPage() {
                 +56 9 4763 7541
               </a>
               . Responderemos tu solicitud a la brevedad posible.
+            </p>
+            <p>
+              Para dejar de recibir el aviso de farmacia de turno, usa el enlace de
+              baja que viene en cada correo. Para corregir o retirar la ficha de tu
+              negocio del directorio, escríbenos y la actualizamos o la quitamos.
             </p>
           </section>
 
