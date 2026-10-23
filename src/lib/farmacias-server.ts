@@ -149,3 +149,17 @@ export async function obtenerFarmaciasTurno(comunaSlug?: string): Promise<Farmac
     throw error;
   }
 }
+
+/**
+ * Respuesta cruda del MINSAL descargada fuera de Vercel (Cloudflare del MINSAL bloquea a los
+ * servidores en la nube; la descarga el PC de Diego, ver scripts/aviso-farmacias.ps1). Se valida
+ * igual que la propia y queda en caché, así la API del sitio también la sirve ese día.
+ */
+export async function registrarRespuestaExterna(raw: unknown): Promise<FarmaciasResponse> {
+  const data = normalizarRespuesta(raw);
+  if (data.farmacias.length + data.otrasFechas.length === 0) {
+    throw new Error("El MINSAL no informó farmacias de la zona");
+  }
+  await guardarCache(data);
+  return data;
+}
