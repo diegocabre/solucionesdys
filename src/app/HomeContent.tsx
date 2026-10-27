@@ -219,7 +219,7 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       {serverSections}
 
       {/* CTA Section */}
-      <section className="py-24 bg-dys-surface text-dys-text">
+      <section className="dys-light py-24 bg-dys-bg text-dys-text">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +231,7 @@ export default function HomeContent({ serverSections }: { serverSections?: React
             <p className="max-w-2xl text-xl text-dys-muted font-light">
               Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
             </p>
-            <Button size="lg" variant="primary" className="bg-dys-surface! text-dys-text! hover:bg-dys-surface! shadow-lg shadow-dys-text/10" onClick={() => window.location.href='/contacto'}>
+            <Button size="lg" variant="primary" className="shadow-lg shadow-dys-text/10" onClick={() => window.location.href='/contacto'}>
               Cotizar mi sitio
             </Button>
           </div>

@@ -8,7 +8,7 @@ export default function ZonaAtencion() {
   const comunas = AREA_SERVED.join(", ").replace(/, ([^,]*)$/, " y $1");
 
   return (
-    <section aria-labelledby="zona-atencion" className="py-16 bg-dys-surface border-y border-dys-border">
+    <section aria-labelledby="zona-atencion" className="dys-light py-16 bg-dys-bg border-y border-dys-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <MapPin className="w-8 h-8 text-dys-primary" aria-hidden="true" />
         <h2 id="zona-atencion" className="max-w-3xl text-3xl font-bold text-dys-text">
