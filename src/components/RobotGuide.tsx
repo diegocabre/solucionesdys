@@ -21,26 +21,26 @@ function Robot({ hablando }: { hablando: boolean }) {
       transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
     >
       {/* Antena */}
-      <line x1="100" y1="22" x2="100" y2="44" stroke="#9e7f69" strokeWidth="4" strokeLinecap="round" />
+      <line x1="100" y1="22" x2="100" y2="44" stroke="var(--dys-text-muted)" strokeWidth="4" strokeLinecap="round" />
       <motion.circle
         cx="100"
         cy="16"
         r="8"
-        fill="#bfa38a"
+        fill="var(--dys-accent)"
         animate={animar ? { opacity: hablando ? [1, 0.3, 1] : [1, 0.6, 1] } : undefined}
         transition={{ duration: hablando ? 0.5 : 2, repeat: Infinity }}
       />
 
       {/* Orejas */}
-      <rect x="22" y="78" width="16" height="36" rx="8" fill="#9e7f69" />
-      <rect x="162" y="78" width="16" height="36" rx="8" fill="#9e7f69" />
+      <rect x="22" y="78" width="16" height="36" rx="8" fill="var(--dys-text-muted)" />
+      <rect x="162" y="78" width="16" height="36" rx="8" fill="var(--dys-text-muted)" />
 
       {/* Cabeza */}
-      <rect x="34" y="44" width="132" height="96" rx="28" fill="#182838" />
-      <rect x="34" y="44" width="132" height="96" rx="28" fill="none" stroke="#bfa38a" strokeWidth="3" />
+      <rect x="34" y="44" width="132" height="96" rx="28" fill="var(--dys-surface)" />
+      <rect x="34" y="44" width="132" height="96" rx="28" fill="none" stroke="var(--dys-primary)" strokeWidth="3" />
 
       {/* Pantalla de la cara */}
-      <rect x="48" y="58" width="104" height="68" rx="18" fill="#0d1822" />
+      <rect x="48" y="58" width="104" height="68" rx="18" fill="var(--dys-bg)" />
 
       {/* Ojos (parpadean) */}
       <motion.g
@@ -48,10 +48,10 @@ function Robot({ hablando }: { hablando: boolean }) {
         animate={animar ? { scaleY: [1, 1, 0.08, 1, 1] } : undefined}
         transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.94, 0.98, 1] }}
       >
-        <ellipse cx="78" cy="86" rx="9" ry="11" fill="#d1baaa" />
-        <ellipse cx="122" cy="86" rx="9" ry="11" fill="#d1baaa" />
-        <circle cx="80" cy="83" r="3" fill="#fff" opacity="0.8" />
-        <circle cx="124" cy="83" r="3" fill="#fff" opacity="0.8" />
+        <ellipse cx="78" cy="86" rx="9" ry="11" fill="var(--dys-primary)" />
+        <ellipse cx="122" cy="86" rx="9" ry="11" fill="var(--dys-primary)" />
+        <circle cx="80" cy="83" r="3" fill="var(--dys-text)" opacity="0.8" />
+        <circle cx="124" cy="83" r="3" fill="var(--dys-text)" opacity="0.8" />
       </motion.g>
 
       {/* Boca: se abre y cierra mientras habla */}
@@ -61,7 +61,7 @@ function Robot({ hablando }: { hablando: boolean }) {
         width="32"
         height="10"
         rx="5"
-        fill="#5d8254"
+        fill="var(--dys-link)"
         style={{ transformOrigin: "100px 111px", transformBox: "view-box" }}
         animate={
           hablando && animar
@@ -72,17 +72,17 @@ function Robot({ hablando }: { hablando: boolean }) {
       />
 
       {/* Cuello, cuerpo y brazos */}
-      <rect x="88" y="140" width="24" height="10" fill="#9e7f69" />
-      <rect x="56" y="150" width="88" height="58" rx="22" fill="#182838" stroke="#bfa38a" strokeWidth="3" />
-      <circle cx="100" cy="178" r="10" fill="#43663b" />
-      <circle cx="100" cy="178" r="4" fill="#d1baaa" />
-      <rect x="36" y="158" width="16" height="40" rx="8" fill="#182838" stroke="#bfa38a" strokeWidth="2" />
+      <rect x="88" y="140" width="24" height="10" fill="var(--dys-text-muted)" />
+      <rect x="56" y="150" width="88" height="58" rx="22" fill="var(--dys-surface)" stroke="var(--dys-primary)" strokeWidth="3" />
+      <circle cx="100" cy="178" r="10" fill="var(--dys-link)" />
+      <circle cx="100" cy="178" r="4" fill="var(--dys-accent)" />
+      <rect x="36" y="158" width="16" height="40" rx="8" fill="var(--dys-surface)" stroke="var(--dys-primary)" strokeWidth="2" />
       <motion.g
         style={{ transformOrigin: "156px 164px", transformBox: "view-box" }}
         animate={hablando && animar ? { rotate: [0, -14, 0, -10, 0] } : { rotate: 0 }}
         transition={hablando ? { duration: 1.1, repeat: Infinity } : { duration: 0.3 }}
       >
-        <rect x="148" y="158" width="16" height="40" rx="8" fill="#182838" stroke="#bfa38a" strokeWidth="2" />
+        <rect x="148" y="158" width="16" height="40" rx="8" fill="var(--dys-surface)" stroke="var(--dys-primary)" strokeWidth="2" />
       </motion.g>
     </motion.svg>
   );
@@ -150,19 +150,19 @@ export default function RobotGuide() {
   const hablando = !reducir && letras < tema.texto.length;
 
   return (
-    <div className="relative rounded-3xl bg-white border border-gray-100 shadow-xl p-6 sm:p-8">
+    <div className="relative rounded-3xl bg-dys-surface border border-dys-border shadow-xl p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
         <div className="shrink-0">
           <Robot hablando={hablando} />
-          <p className="mt-1 text-center text-sm font-semibold font-display text-brand-primary">{ROBOT_NOMBRE}</p>
+          <p className="mt-1 text-center text-sm font-semibold font-display text-dys-text">{ROBOT_NOMBRE}</p>
         </div>
 
         {/* Globo de diálogo */}
         <div className="relative grow w-full">
-          <div className="relative rounded-2xl bg-brand-primary text-white p-5 sm:p-6 min-h-44 sm:min-h-52">
+          <div className="relative rounded-2xl bg-dys-surface text-dys-text p-5 sm:p-6 min-h-44 sm:min-h-52">
             <span
               aria-hidden="true"
-              className="absolute -top-2 left-1/2 -translate-x-1/2 sm:top-8 sm:-left-2 sm:translate-x-0 size-4 rotate-45 bg-brand-primary"
+              className="absolute -top-2 left-1/2 -translate-x-1/2 sm:top-8 sm:-left-2 sm:translate-x-0 size-4 rotate-45 bg-dys-surface"
             />
             {/* El texto animado no se anuncia letra por letra: el lector de pantalla recibe la frase completa. */}
             <p className="sr-only" aria-live="polite">
@@ -171,7 +171,7 @@ export default function RobotGuide() {
             <p aria-hidden="true" className="relative text-base sm:text-lg leading-relaxed">
               {visible}
               {hablando && (
-                <span className="inline-block w-2 h-5 ml-0.5 align-middle bg-brand-accent-light animate-pulse" />
+                <span className="inline-block w-2 h-5 ml-0.5 align-middle bg-dys-accent animate-pulse" />
               )}
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function RobotGuide() {
               type="button"
               onClick={alternarVoz}
               aria-pressed={voz}
-              className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-brand-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-dys-text hover:bg-dys-surface focus:outline-none focus:ring-2 focus:ring-dys-primary"
             >
               {voz ? <Volume2 className="w-4 h-4" aria-hidden="true" /> : <VolumeX className="w-4 h-4" aria-hidden="true" />}
               {voz ? "Voz activada" : "Activar voz"}
@@ -197,10 +197,10 @@ export default function RobotGuide() {
             type="button"
             onClick={() => elegir(t)}
             aria-pressed={tema.id === t.id}
-            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary ${
               tema.id === t.id
-                ? "bg-brand-accent-dark text-white border-brand-accent-dark"
-                : "bg-white text-foreground border-gray-200 hover:border-brand-accent hover:text-brand-accent-dark"
+                ? "bg-dys-primary text-dys-on-primary border-dys-primary"
+                : "bg-dys-surface text-dys-text border-dys-border hover:border-dys-primary hover:text-dys-primary"
             }`}
           >
             {t.chip}

@@ -79,15 +79,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const toc = post.headings.filter((h) => h.level === 2);
 
   return (
-    <div className="bg-background py-12 pb-24">
+    <div className="bg-dys-bg py-12 pb-24">
       <JsonLd data={jsonLd} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label="Migas de pan" className="text-sm text-gray-500 mb-8">
-          <Link href="/" className="hover:text-brand-primary">
+        <nav aria-label="Migas de pan" className="text-sm text-dys-muted mb-8">
+          <Link href="/" className="hover:text-dys-text">
             Inicio
           </Link>{" "}
           /{" "}
-          <Link href="/blog" className="hover:text-brand-primary">
+          <Link href="/blog" className="hover:text-dys-text">
             Blog
           </Link>
         </nav>
@@ -96,13 +96,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <article className="min-w-0 max-w-3xl">
             <header className="space-y-5 mb-10">
               {post.draft && (
-                <p className="inline-block rounded-full bg-amber-100 text-amber-900 text-xs font-semibold px-3 py-1">
+                <p className="inline-block rounded-full bg-dys-accent/10 text-dys-accent text-xs font-semibold px-3 py-1">
                   Borrador: no se publica en producción
                 </p>
               )}
-              <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary leading-tight">{post.title}</h1>
-              <p className="text-lg text-gray-600 font-light leading-relaxed">{post.description}</p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500">
+              <h1 className="text-4xl lg:text-5xl font-bold text-dys-text leading-tight">{post.title}</h1>
+              <p className="text-lg text-dys-muted font-light leading-relaxed">{post.description}</p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-dys-muted">
                 <span className="inline-flex items-center gap-1.5">
                   <CalendarDays className="w-4 h-4" aria-hidden="true" />
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
@@ -120,14 +120,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </header>
 
             {toc.length > 0 && (
-              <nav aria-labelledby="toc-movil" className="lg:hidden mb-10 rounded-2xl border border-gray-200 bg-white p-5">
-                <p id="toc-movil" className="font-semibold text-brand-primary mb-3">
+              <nav aria-labelledby="toc-movil" className="lg:hidden mb-10 rounded-2xl border border-dys-border bg-dys-surface p-5">
+                <p id="toc-movil" className="font-semibold text-dys-text mb-3">
                   En este artículo
                 </p>
                 <ol className="space-y-2 text-sm">
                   {toc.map((h) => (
                     <li key={h.id}>
-                      <a href={`#${h.id}`} className="text-gray-600 hover:text-brand-accent-dark">
+                      <a href={`#${h.id}`} className="text-dys-muted hover:text-dys-primary">
                         {h.text}
                       </a>
                     </li>
@@ -139,11 +139,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <Content />
 
             {/* Cierre discreto: el blog es informativo, sin bloque de venta */}
-            <p className="mt-16 border-t border-gray-200 pt-6 text-gray-600">
+            <p className="mt-16 border-t border-dys-border pt-6 text-dys-muted">
               ¿Necesitas un sitio para tu negocio? Puedes{" "}
               <Link
                 href="/contacto"
-                className="text-brand-accent-dark underline underline-offset-2 hover:text-brand-primary"
+                className="text-dys-link underline underline-offset-2 hover:text-dys-text"
               >
                 cotizar tu sitio
               </Link>{" "}
@@ -154,15 +154,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           {toc.length > 0 && (
             <aside className="hidden lg:block">
               <nav aria-labelledby="toc-escritorio" className="sticky top-28 space-y-3">
-                <p id="toc-escritorio" className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <p id="toc-escritorio" className="text-xs font-semibold uppercase tracking-wider text-dys-muted">
                   En este artículo
                 </p>
-                <ol className="space-y-2 text-sm border-l border-gray-200">
+                <ol className="space-y-2 text-sm border-l border-dys-border">
                   {toc.map((h) => (
                     <li key={h.id}>
                       <a
                         href={`#${h.id}`}
-                        className="block pl-4 -ml-px border-l-2 border-transparent text-gray-600 hover:text-brand-accent-dark hover:border-brand-accent"
+                        className="block pl-4 -ml-px border-l-2 border-transparent text-dys-muted hover:text-dys-primary hover:border-dys-primary"
                       >
                         {h.text}
                       </a>
@@ -176,7 +176,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {related.length > 0 && (
           <section aria-labelledby="relacionados" className="mt-20 space-y-6">
-            <h2 id="relacionados" className="text-2xl font-bold text-brand-primary">
+            <h2 id="relacionados" className="text-2xl font-bold text-dys-text">
               Sigue leyendo
             </h2>
             <ul className="grid gap-6 md:grid-cols-3">
@@ -184,11 +184,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <li key={p.slug}>
                   <Link
                     href={`/blog/${p.slug}`}
-                    className="group h-full flex flex-col gap-3 bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow"
+                    className="group h-full flex flex-col gap-3 bg-dys-surface rounded-2xl border border-dys-border p-6 hover:shadow-lg transition-shadow"
                   >
-                    <span className="font-semibold text-brand-primary group-hover:text-brand-accent-dark">{p.title}</span>
-                    <span className="text-sm text-gray-500 grow">{p.description}</span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-accent-dark">
+                    <span className="font-semibold text-dys-text group-hover:text-dys-primary">{p.title}</span>
+                    <span className="text-sm text-dys-muted grow">{p.description}</span>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-dys-primary">
                       Leer <ArrowRight className="w-4 h-4" aria-hidden="true" />
                     </span>
                   </Link>

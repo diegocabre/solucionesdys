@@ -10,7 +10,7 @@ import { suscribirAviso, type AvisoState } from "@/app/comunidad/farmacias-de-tu
 const initialState: AvisoState = { ok: false, mensaje: "" };
 
 const campo =
-  "w-full rounded-lg border border-gray-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 text-sm";
+  "w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm";
 
 export default function AvisoFarmaciasForm({ comunas }: { comunas: { slug: string; nombre: string }[] }) {
   const [state, formAction, pending] = useActionState(suscribirAviso, initialState);
@@ -18,20 +18,20 @@ export default function AvisoFarmaciasForm({ comunas }: { comunas: { slug: strin
   return (
     <section
       aria-labelledby="aviso-titulo"
-      className="mt-16 rounded-3xl border border-brand-accent/30 bg-brand-accent/5 p-6 sm:p-8"
+      className="mt-16 rounded-3xl border border-dys-primary/30 bg-dys-primary/5 p-6 sm:p-8"
     >
       <div className="max-w-2xl space-y-2">
-        <h2 id="aviso-titulo" className="flex items-center gap-2 text-2xl font-bold text-brand-primary">
-          <BellRing className="size-6 text-brand-accent-dark" aria-hidden="true" />
+        <h2 id="aviso-titulo" className="flex items-center gap-2 text-2xl font-bold text-dys-text">
+          <BellRing className="size-6 text-dys-primary" aria-hidden="true" />
           Recibe la farmacia de turno cada mañana
         </h2>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-dys-muted leading-relaxed">
           Te llega un correo cada día con la farmacia de turno de tu comuna. Gratis, y te das de baja con un clic.
         </p>
       </div>
 
       {state.ok ? (
-        <p role="status" className="mt-6 p-4 bg-green-50 text-green-800 rounded-md text-sm border border-green-200">
+        <p role="status" className="mt-6 p-4 bg-dys-primary/10 text-dys-primary rounded-md text-sm border border-dys-primary/40">
           {state.mensaje}
         </p>
       ) : (
@@ -43,7 +43,7 @@ export default function AvisoFarmaciasForm({ comunas }: { comunas: { slug: strin
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="aviso-email" className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+              <label htmlFor="aviso-email" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                 Tu correo
               </label>
               <input
@@ -58,7 +58,7 @@ export default function AvisoFarmaciasForm({ comunas }: { comunas: { slug: strin
               />
             </div>
             <div>
-              <label htmlFor="aviso-comuna" className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+              <label htmlFor="aviso-comuna" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                 Comuna
               </label>
               <select id="aviso-comuna" name="comuna" required defaultValue={comunas[0]?.slug} className={campo}>
@@ -73,20 +73,20 @@ export default function AvisoFarmaciasForm({ comunas }: { comunas: { slug: strin
           <Button
             type="submit"
             disabled={pending}
-            className="justify-center bg-brand-accent hover:bg-brand-accent-dark border-brand-accent"
+            className="justify-center bg-dys-primary hover:bg-dys-primary/85 border-dys-primary"
           >
             {pending ? "Enviando..." : "Quiero el aviso"}
           </Button>
           <div className="sm:col-span-2 space-y-3">
             <TurnstileWidget resetKey={state} />
             {state.mensaje && (
-              <p role="alert" className="p-3 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+              <p role="alert" className="p-3 bg-red-500/10 text-red-300 rounded-md text-sm border border-red-500/40">
                 {state.mensaje}
               </p>
             )}
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-dys-muted">
               Solo usamos tu correo para este aviso. Más detalles en nuestra{" "}
-              <Link href="/privacidad" className="underline underline-offset-2 hover:text-brand-primary">
+              <Link href="/privacidad" className="underline underline-offset-2 hover:text-dys-text">
                 política de privacidad
               </Link>
               .

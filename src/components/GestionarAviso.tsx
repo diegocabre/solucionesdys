@@ -19,7 +19,7 @@ export default function GestionarAviso({ accion, token, comuna }: { accion: stri
     return (
       <p
         role={ok ? "status" : "alert"}
-        className={`p-4 rounded-md text-sm border ${ok ? "bg-green-50 text-green-800 border-green-200" : "bg-red-50 text-red-800 border-red-200"}`}
+        className={`p-4 rounded-md text-sm border ${ok ? "bg-dys-primary/10 text-dys-primary border-dys-primary/40" : "bg-red-500/10 text-red-300 border-red-500/40"}`}
       >
         {texto}
       </p>
@@ -35,7 +35,7 @@ export default function GestionarAviso({ accion, token, comuna }: { accion: stri
         type="submit"
         disabled={pending}
         variant={accion === "baja" ? "outline" : "primary"}
-        className={accion === "baja" ? "" : "bg-brand-accent hover:bg-brand-accent-dark border-brand-accent"}
+        className={accion === "baja" ? "" : "bg-dys-primary hover:bg-dys-primary/85 border-dys-primary"}
       >
         {pending ? "Procesando..." : accion === "baja" ? "Darme de baja" : "Confirmar mi aviso"}
       </Button>

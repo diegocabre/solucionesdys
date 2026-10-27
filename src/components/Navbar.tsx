@@ -23,7 +23,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full bg-background border-b border-gray-200 z-50 transition-colors">
+    <nav className="fixed w-full bg-dys-bg border-b border-dys-border z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Wordmark DyS.: nunca bajo 80 px de ancho (regla del kit de marca). */}
@@ -49,7 +49,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
-                    isActive ? "text-brand-accent-dark" : "text-foreground hover:text-brand-accent-dark"
+                    isActive ? "text-dys-primary" : "text-dys-text hover:text-dys-primary"
                   }`}
                 >
                   <span className="relative z-10 inline-flex items-center gap-1.5">
@@ -59,7 +59,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="navbar-active-desktop"
-                      className="absolute inset-0 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-md"
+                      className="absolute inset-0 bg-dys-primary/10 rounded-md"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -74,7 +74,7 @@ export default function Navbar() {
               onClick={toggleMenu}
               aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isOpen}
-              className="p-2.5 text-foreground hover:bg-gray-100 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+              className="p-2.5 text-dys-text hover:bg-dys-surface rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -89,7 +89,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden border-t border-gray-200 overflow-hidden bg-background"
+            className="xl:hidden border-t border-dys-border overflow-hidden bg-dys-bg"
           >
             <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
               {NAV_LINKS.map((link) => {
@@ -103,8 +103,8 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-2 px-3 py-3 text-base font-medium rounded-md transition-colors ${
                       isActive
-                        ? "text-brand-accent-dark bg-brand-accent/10 dark:bg-brand-accent/20"
-                        : "text-foreground hover:text-brand-accent-dark hover:bg-gray-50 dark:hover:bg-slate-800"
+                        ? "text-dys-primary bg-dys-primary/10"
+                        : "text-dys-text hover:text-dys-primary hover:bg-dys-surface"
                     }`}
                   >
                     {Icon && <Icon size={18} aria-hidden="true" />}

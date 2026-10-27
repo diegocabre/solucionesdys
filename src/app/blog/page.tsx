@@ -43,23 +43,23 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="bg-background py-16">
+    <div className="bg-dys-bg py-16">
       <JsonLd data={jsonLd} />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <header className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-brand-accent-dark uppercase bg-brand-accent/10 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold tracking-widest text-dys-primary uppercase bg-dys-primary/10 px-3 py-1 rounded-full">
             Blog
           </span>
-          <h1 className="text-4xl lg:text-5xl font-bold text-brand-primary">
+          <h1 className="text-4xl lg:text-5xl font-bold text-dys-text">
             Guías para vender más con tu sitio web
           </h1>
-          <p className="text-gray-600 font-light">
+          <p className="text-dys-muted font-light">
             Respuestas claras para negocios de Puerto Varas, Llanquihue, Frutillar y Puerto Montt: precios, Google y qué
             sitio te conviene.
           </p>
           <a
             href="/blog/rss.xml"
-            className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-primary"
+            className="inline-flex items-center gap-1 text-sm text-dys-muted hover:text-dys-text"
           >
             <Rss className="w-4 h-4" aria-hidden="true" /> Suscríbete por RSS
           </a>
@@ -68,24 +68,24 @@ export default function BlogPage() {
         <ul className="grid gap-6 md:grid-cols-2">
           {posts.map((post) => (
             <li key={post.slug}>
-              <article className="h-full bg-white rounded-3xl border border-gray-100 shadow-xs hover:shadow-xl transition-all p-8 flex flex-col gap-4">
+              <article className="h-full bg-dys-surface rounded-3xl border border-dys-border shadow-xs hover:shadow-xl transition-all p-8 flex flex-col gap-4">
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent-dark">
+                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-dys-primary/10 text-dys-primary">
                       {tag}
                     </span>
                   ))}
                   {post.draft && (
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-900">Borrador</span>
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-dys-accent/10 text-dys-accent">Borrador</span>
                   )}
                 </div>
-                <h2 className="text-2xl font-bold text-brand-primary">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-brand-accent-dark transition-colors">
+                <h2 className="text-2xl font-bold text-dys-text">
+                  <Link href={`/blog/${post.slug}`} className="hover:text-dys-primary transition-colors">
                     {post.title}
                   </Link>
                 </h2>
-                <p className="text-gray-600 font-light leading-relaxed grow">{post.description}</p>
-                <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-500">
+                <p className="text-dys-muted font-light leading-relaxed grow">{post.description}</p>
+                <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-dys-muted">
                   <span className="inline-flex items-center gap-2">
                     <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                     <span aria-hidden="true">·</span>
@@ -93,7 +93,7 @@ export default function BlogPage() {
                   </span>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 font-semibold text-brand-accent-dark hover:text-brand-primary"
+                    className="inline-flex items-center gap-1 font-semibold text-dys-primary hover:text-dys-text"
                     aria-label={`Leer: ${post.title}`}
                   >
                     Leer <ArrowRight className="w-4 h-4" aria-hidden="true" />

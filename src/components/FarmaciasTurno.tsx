@@ -78,45 +78,45 @@ function TarjetaFarmacia({
       transition={{ duration: 0.3 }}
     >
       <article
-        className={`rounded-3xl bg-white border p-6 space-y-4 transition-shadow ${
-          seleccionada ? "border-brand-accent shadow-lg" : "border-gray-100 shadow-sm hover:shadow-md"
+        className={`rounded-3xl bg-dys-surface border p-6 space-y-4 transition-shadow ${
+          seleccionada ? "border-dys-primary shadow-lg" : "border-dys-border shadow-sm hover:shadow-md"
         }`}
       >
         <div className="flex items-start justify-between gap-3">
           <div>
             <span
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-                anterior ? "bg-amber-100 text-amber-900" : "bg-green-50 text-green-800"
+                anterior ? "bg-dys-accent/10 text-dys-accent" : "bg-dys-primary/10 text-dys-primary"
               }`}
             >
               <Pill className="w-3.5 h-3.5" aria-hidden="true" />
               {anterior ? "Turno anterior" : "De turno ahora"}
             </span>
-            <h3 className="mt-3 text-xl font-bold text-brand-primary">{f.nombre}</h3>
+            <h3 className="mt-3 text-xl font-bold text-dys-text">{f.nombre}</h3>
           </div>
         </div>
 
-        <ul className="space-y-2 text-sm text-gray-700">
+        <ul className="space-y-2 text-sm text-dys-text">
           <li className="flex gap-2">
-            <MapPin className="w-4 h-4 mt-0.5 text-brand-accent-dark shrink-0" aria-hidden="true" />
+            <MapPin className="w-4 h-4 mt-0.5 text-dys-primary shrink-0" aria-hidden="true" />
             <span>
               {f.direccion}
               {f.localidad && f.localidad.toLowerCase() !== f.comuna.toLowerCase() && (
-                <span className="text-gray-500"> · {f.localidad}</span>
+                <span className="text-dys-muted"> · {f.localidad}</span>
               )}
-              <span className="text-gray-500">, {f.comuna}</span>
+              <span className="text-dys-muted">, {f.comuna}</span>
               {typeof distanciaKm === "number" && (
-                <span className="text-gray-500"> · a unos {Math.max(1, Math.round(distanciaKm))} km de Puerto Varas</span>
+                <span className="text-dys-muted"> · a unos {Math.max(1, Math.round(distanciaKm))} km de Puerto Varas</span>
               )}
             </span>
           </li>
           <li className="flex gap-2">
-            <Clock className="w-4 h-4 mt-0.5 text-brand-accent-dark shrink-0" aria-hidden="true" />
+            <Clock className="w-4 h-4 mt-0.5 text-dys-primary shrink-0" aria-hidden="true" />
             <span>{horarioTexto(f)}</span>
           </li>
           {f.telefono && (
             <li className="flex gap-2">
-              <Phone className="w-4 h-4 mt-0.5 text-brand-accent-dark shrink-0" aria-hidden="true" />
+              <Phone className="w-4 h-4 mt-0.5 text-dys-primary shrink-0" aria-hidden="true" />
               <span>{f.telefono}</span>
             </li>
           )}
@@ -127,7 +127,7 @@ function TarjetaFarmacia({
             href={rutaUrl(f)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md bg-brand-primary text-white px-4 py-2 text-sm font-medium hover:bg-brand-primary/90 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-md bg-dys-primary text-dys-on-primary px-4 py-2 text-sm font-medium hover:bg-dys-primary/85 focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
           >
             <Navigation className="w-4 h-4" aria-hidden="true" />
             Cómo llegar
@@ -135,7 +135,7 @@ function TarjetaFarmacia({
           {f.telefonoHref && (
             <a
               href={`tel:${f.telefonoHref}`}
-              className="inline-flex items-center gap-2 rounded-md border-2 border-brand-accent text-brand-accent-dark px-4 py-2 text-sm font-medium hover:bg-brand-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+              className="inline-flex items-center gap-2 rounded-md border-2 border-dys-primary text-dys-primary px-4 py-2 text-sm font-medium hover:bg-dys-primary hover:text-dys-on-primary transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
               Llamar
@@ -145,7 +145,7 @@ function TarjetaFarmacia({
             <button
               type="button"
               onClick={onVerMapa}
-              className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-brand-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-dys-text hover:bg-dys-surface focus:outline-none focus:ring-2 focus:ring-dys-primary"
             >
               <MapPin className="w-4 h-4" aria-hidden="true" />
               Ver en el mapa
@@ -168,7 +168,7 @@ export default function FarmaciasTurno() {
       <div className="space-y-4" aria-busy="true" aria-live="polite">
         <span className="sr-only">Cargando farmacias de turno…</span>
         {[0, 1].map((i) => (
-          <div key={i} className="h-40 rounded-3xl bg-gray-100 animate-pulse" />
+          <div key={i} className="h-40 rounded-3xl bg-dys-surface animate-pulse" />
         ))}
       </div>
     );
@@ -176,18 +176,18 @@ export default function FarmaciasTurno() {
 
   if (estado.tipo === "error") {
     return (
-      <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 text-center space-y-4">
-        <AlertTriangle className="w-8 h-8 text-amber-600 mx-auto" aria-hidden="true" />
-        <p className="text-brand-primary font-medium">
+      <div className="rounded-3xl border border-dys-accent/40 bg-dys-accent/10 p-8 text-center space-y-4">
+        <AlertTriangle className="w-8 h-8 text-dys-accent mx-auto" aria-hidden="true" />
+        <p className="text-dys-text font-medium">
           No pudimos consultar las farmacias de turno en este momento.
         </p>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-dys-muted">
           El servicio del Ministerio de Salud puede estar con problemas. Intenta de nuevo en unos minutos.
         </p>
         <button
           type="button"
           onClick={reintentar}
-          className="inline-flex items-center gap-2 rounded-md bg-brand-primary text-white px-4 py-2 text-sm font-medium hover:bg-brand-primary/90 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+          className="inline-flex items-center gap-2 rounded-md bg-dys-primary text-dys-on-primary px-4 py-2 text-sm font-medium hover:bg-dys-primary/85 focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
         >
           <RefreshCw className="w-4 h-4" aria-hidden="true" />
           Reintentar
@@ -242,8 +242,8 @@ export default function FarmaciasTurno() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-gray-600">
-          Turno del <strong className="text-brand-primary">{fechaLarga(fechaMostrada)}</strong>
+        <p className="text-sm text-dys-muted">
+          Turno del <strong className="text-dys-text">{fechaLarga(fechaMostrada)}</strong>
         </p>
         <div role="tablist" aria-label="Comuna" className="flex flex-wrap gap-2">
           {[...conteo.entries()].map(([slug, c]) => (
@@ -256,14 +256,14 @@ export default function FarmaciasTurno() {
                 setComuna(slug);
                 setSeleccion(null);
               }}
-              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
+              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary ${
                 comuna === slug
-                  ? "bg-brand-primary text-white border-brand-primary"
-                  : "bg-white text-foreground border-gray-200 hover:border-brand-accent hover:text-brand-accent-dark"
+                  ? "bg-dys-primary text-dys-on-primary border-dys-primary"
+                  : "bg-dys-surface text-dys-text border-dys-border hover:border-dys-primary hover:text-dys-primary"
               }`}
             >
               {c.nombre}
-              <span className={`ml-2 text-xs ${comuna === slug ? "text-brand-accent-light" : "text-gray-500"}`}>
+              <span className={`ml-2 text-xs ${comuna === slug ? "text-dys-primary" : "text-dys-muted"}`}>
                 {c.total}
               </span>
             </button>
@@ -272,8 +272,8 @@ export default function FarmaciasTurno() {
       </div>
 
       {data.fuente === "cache" && data.actualizadoEn && (
-        <p role="status" className="flex gap-2 text-sm text-gray-600">
-          <Clock className="w-4 h-4 mt-0.5 shrink-0 text-amber-600" aria-hidden="true" />
+        <p role="status" className="flex gap-2 text-sm text-dys-muted">
+          <Clock className="w-4 h-4 mt-0.5 shrink-0 text-dys-accent" aria-hidden="true" />
           <span>
             Información actualizada el {fechaHora(data.actualizadoEn)}; confirma por teléfono antes de ir.
           </span>
@@ -281,7 +281,7 @@ export default function FarmaciasTurno() {
       )}
 
       {turno.hora < 9 && !sinPublicar && (
-        <div className="flex gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+        <div className="flex gap-3 rounded-2xl border border-dys-accent/40 bg-dys-accent/10 p-4 text-sm text-dys-accent">
           <Clock className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
           <p>
             Los turnos cambian a las 09:00. Antes de esa hora puede seguir de turno la farmacia del día
@@ -291,7 +291,7 @@ export default function FarmaciasTurno() {
       )}
 
       {viendoAnterior && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dys-accent/40 bg-dys-accent/10 p-4 text-sm text-dys-accent">
           <p className="flex gap-3">
             <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
             <span>
@@ -305,7 +305,7 @@ export default function FarmaciasTurno() {
               setVerAnterior(false);
               setSeleccion(null);
             }}
-            className="rounded-md border border-amber-300 bg-white px-3 py-1.5 font-medium hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="rounded-md border border-dys-accent/40 bg-dys-surface px-3 py-1.5 font-medium hover:bg-dys-accent/10 focus:outline-none focus:ring-2 focus:ring-dys-primary"
           >
             Volver al turno vigente
           </button>
@@ -313,18 +313,18 @@ export default function FarmaciasTurno() {
       )}
 
       {sinPublicar && !viendoAnterior ? (
-        <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 text-center space-y-4">
-          <Clock className="w-8 h-8 text-amber-600 mx-auto" aria-hidden="true" />
-          <p className="text-brand-primary font-medium">
+        <div className="rounded-3xl border border-dys-accent/40 bg-dys-accent/10 p-8 text-center space-y-4">
+          <Clock className="w-8 h-8 text-dys-accent mx-auto" aria-hidden="true" />
+          <p className="text-dys-text font-medium">
             El MINSAL aún no publica el turno del {fechaLarga(turno.fechaVigente)}.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-dys-muted">
             Suele actualizarse durante la mañana. Vuelve en un rato o confirma en el{" "}
             <a
               href="https://seremienlinea.minsal.cl/asdigital/mfarmacias/mapa.php"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-accent-dark underline underline-offset-2 hover:text-brand-primary"
+              className="text-dys-link underline underline-offset-2 hover:text-dys-text"
             >
               buscador oficial del MINSAL
             </a>
@@ -337,25 +337,25 @@ export default function FarmaciasTurno() {
                 setVerAnterior(true);
                 setSeleccion(null);
               }}
-              className="inline-flex items-center gap-2 rounded-md border-2 border-brand-accent text-brand-accent-dark px-4 py-2 text-sm font-medium hover:bg-brand-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+              className="inline-flex items-center gap-2 rounded-md border-2 border-dys-primary text-dys-primary px-4 py-2 text-sm font-medium hover:bg-dys-primary hover:text-dys-on-primary transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
             >
               Ver el turno anterior ({fechaLarga(turno.fechaAnterior)}, puede estar desactualizado)
             </button>
           )}
         </div>
       ) : lista.length === 0 && cercanas.length === 0 ? (
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 text-center space-y-3">
-          <Pill className="w-8 h-8 text-brand-accent mx-auto" aria-hidden="true" />
-          <p className="text-brand-primary font-medium">
+        <div className="rounded-3xl border border-dys-border bg-dys-surface p-8 text-center space-y-3">
+          <Pill className="w-8 h-8 text-dys-primary mx-auto" aria-hidden="true" />
+          <p className="text-dys-text font-medium">
             El MINSAL no informa farmacia de turno para {conteo.get(comuna)?.nombre} por ahora.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-dys-muted">
             Prueba con una comuna vecina o confirma en el{" "}
             <a
               href="https://seremienlinea.minsal.cl/asdigital/mfarmacias/mapa.php"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-accent-dark underline underline-offset-2 hover:text-brand-primary"
+              className="text-dys-link underline underline-offset-2 hover:text-dys-text"
             >
               buscador oficial del MINSAL
             </a>
@@ -366,7 +366,7 @@ export default function FarmaciasTurno() {
         <div className="grid gap-6 lg:grid-cols-5">
           <div className="space-y-8 lg:col-span-3">
             {lista.length === 0 ? (
-              <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 flex gap-3 text-sm text-amber-900">
+              <div className="rounded-3xl border border-dys-accent/40 bg-dys-accent/10 p-6 flex gap-3 text-sm text-dys-accent">
                 <Pill className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
                 <p>
                   <strong>El MINSAL no informa farmacia de turno en {conteo.get(comuna)?.nombre} por ahora.</strong>{" "}
@@ -375,7 +375,7 @@ export default function FarmaciasTurno() {
                     href="https://seremienlinea.minsal.cl/asdigital/mfarmacias/mapa.php"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline underline-offset-2 hover:text-brand-primary"
+                    className="underline underline-offset-2 hover:text-dys-text"
                   >
                     buscador oficial del MINSAL
                   </a>
@@ -406,10 +406,10 @@ export default function FarmaciasTurno() {
             {cercanas.length > 0 && (
               <section aria-labelledby="farmacias-cercanas" className="space-y-4">
                 <div>
-                  <h2 id="farmacias-cercanas" className="text-lg font-bold text-brand-primary">
+                  <h2 id="farmacias-cercanas" className="text-lg font-bold text-dys-text">
                     De turno cerca de Puerto Varas
                   </h2>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-dys-muted">
                     Farmacias de turno en las comunas y localidades vecinas, de la más cercana a la más lejana.
                   </p>
                 </div>
@@ -433,7 +433,7 @@ export default function FarmaciasTurno() {
 
           {mapa && activa && (
             <div className="lg:col-span-2">
-              <div className="lg:sticky lg:top-28 rounded-3xl overflow-hidden border border-gray-100 bg-white shadow-sm">
+              <div className="lg:sticky lg:top-28 rounded-3xl overflow-hidden border border-dys-border bg-dys-surface shadow-sm">
                 <iframe
                   key={activa.id}
                   title={`Mapa: ${activa.nombre}, ${activa.direccion}`}
@@ -442,12 +442,12 @@ export default function FarmaciasTurno() {
                   className="w-full h-72 lg:h-96 border-0"
                 />
                 <div className="flex items-center justify-between gap-3 p-4 text-sm">
-                  <span className="font-medium text-brand-primary truncate">{activa.nombre}</span>
+                  <span className="font-medium text-dys-text truncate">{activa.nombre}</span>
                   <a
                     href={`https://www.openstreetmap.org/?mlat=${activa.lat}&mlon=${activa.lng}#map=17/${activa.lat}/${activa.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-brand-accent-dark hover:text-brand-primary shrink-0"
+                    className="inline-flex items-center gap-1 text-dys-primary hover:text-dys-text shrink-0"
                   >
                     Mapa completo
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />

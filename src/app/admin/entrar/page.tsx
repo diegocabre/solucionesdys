@@ -8,8 +8,8 @@ export default async function EntrarPage({ searchParams }: { searchParams: Promi
 
   return (
     <div className="max-w-md mx-auto px-4">
-      <div className="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm space-y-5">
-        <h1 className="text-2xl font-bold text-brand-primary">Entrar al panel</h1>
+      <div className="rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm space-y-5">
+        <h1 className="text-2xl font-bold text-dys-text">Entrar al panel</h1>
         <form action={entrar}>
           <input type="hidden" name="token" value={token} />
           <Button type="submit" className="w-full justify-center">

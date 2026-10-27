@@ -6,7 +6,7 @@ import { COOKIE_CONSENT_EVENT } from "@/components/CookieConsent";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-white pt-12 pb-8">
+    <footer className="bg-dys-surface text-dys-text pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="space-y-4">
@@ -17,18 +17,18 @@ export default function Footer() {
               height={63}
               className="w-28 h-auto"
             />
-            <p className="text-gray-400 text-sm max-w-sm">
+            <p className="text-dys-muted text-sm max-w-sm">
               Sitios web a medida para pymes de Puerto Varas, Los Lagos y todo Chile.
             </p>
           </div>
 
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Servicios</h4>
-            <ul className="text-gray-400 text-sm">
+            <ul className="text-dys-muted text-sm">
               <li>
                 <Link
                   href="/webs"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Diseño de Sitios Web
                 </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Blog: guías para pymes
                 </Link>
@@ -44,7 +44,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/partners"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Nuestros Partners
                 </Link>
@@ -52,7 +52,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/aprende-ia"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Aprende IA
                 </Link>
@@ -60,7 +60,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/comunidad/farmacias-de-turno"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Farmacias de turno Puerto Varas
                 </Link>
@@ -68,7 +68,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/comunidad/directorio"
-                  className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
                   Directorio de negocios locales
                 </Link>
@@ -78,14 +78,14 @@ export default function Footer() {
 
           <div className="space-y-4">
             <h4 className="text-lg font-medium">Contacto</h4>
-            <ul className="text-gray-400 text-sm">
+            <ul className="text-dys-muted text-sm">
               <li>
-                <a href="mailto:contacto@solucionesdys.cl" className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition">
+                <a href="mailto:contacto@solucionesdys.cl" className="inline-flex min-h-11 items-center hover:text-dys-primary transition">
                   contacto@solucionesdys.cl
                 </a>
               </li>
               <li>
-                <a href="tel:+56947637541" className="inline-flex min-h-11 items-center hover:text-brand-accent-light transition">
+                <a href="tel:+56947637541" className="inline-flex min-h-11 items-center hover:text-dys-primary transition">
                   +56 9 4763 7541
                 </a>
               </li>
@@ -96,7 +96,7 @@ export default function Footer() {
                 href="https://wa.me/56947637541"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-11 items-center justify-center text-gray-400 hover:text-brand-accent-light transition"
+                className="inline-flex size-11 items-center justify-center text-dys-muted hover:text-dys-primary transition"
                 aria-label="WhatsApp"
               >
                 <svg
@@ -115,7 +115,7 @@ export default function Footer() {
                 href="https://www.instagram.com/solucionesdys.cl/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-11 items-center justify-center text-gray-400 hover:text-brand-accent-light transition"
+                className="inline-flex size-11 items-center justify-center text-dys-muted hover:text-dys-primary transition"
                 aria-label="Instagram"
               >
                 <svg
@@ -138,22 +138,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+        <div className="border-t border-dys-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-dys-muted">
           <p>
             © {new Date().getFullYear()} Soluciones DyS. Todos los derechos
             reservados.
           </p>
           <div className="mt-4 md:mt-0 flex flex-wrap justify-center gap-x-4">
-            <Link href="/terminos" className="inline-flex min-h-11 items-center hover:text-white transition">
+            <Link href="/terminos" className="inline-flex min-h-11 items-center hover:text-dys-text transition">
               Términos de Servicio
             </Link>
-            <Link href="/privacidad" className="inline-flex min-h-11 items-center hover:text-white transition">
+            <Link href="/privacidad" className="inline-flex min-h-11 items-center hover:text-dys-text transition">
               Privacidad
             </Link>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))}
-              className="inline-flex min-h-11 items-center hover:text-white transition"
+              className="inline-flex min-h-11 items-center hover:text-dys-text transition"
             >
               Preferencias de Cookies
             </button>

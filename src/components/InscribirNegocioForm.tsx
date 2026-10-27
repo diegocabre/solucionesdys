@@ -9,8 +9,8 @@ import { inscribirNegocio, type FichaState } from "@/app/comunidad/directorio/ac
 const initialState: FichaState = { ok: false, mensaje: "" };
 
 const campo =
-  "w-full rounded-lg border border-gray-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all text-slate-900 text-sm";
-const etiqueta = "block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider";
+  "w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm";
+const etiqueta = "block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider";
 const opcional = <span className="normal-case font-normal">(opcional)</span>;
 
 interface Props {
@@ -30,7 +30,7 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
 
   if (state.ok) {
     return (
-      <div role="status" className="space-y-4 p-6 bg-green-50 text-green-800 rounded-2xl border border-green-200">
+      <div role="status" className="space-y-4 p-6 bg-dys-primary/10 text-dys-primary rounded-2xl border border-dys-primary/40">
         <p>{state.mensaje}</p>
         <Link href="/comunidad/directorio" className="inline-block font-semibold underline underline-offset-2">
           Ver el directorio
@@ -48,7 +48,7 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
       </div>
 
       <fieldset className="space-y-5">
-        <legend className="text-lg font-bold text-brand-primary mb-2">Tu negocio (se publica)</legend>
+        <legend className="text-lg font-bold text-dys-text mb-2">Tu negocio (se publica)</legend>
         <div>
           <label htmlFor="neg-nombre" className={etiqueta}>Nombre del negocio</label>
           <input id="neg-nombre" name="nombre" required minLength={2} maxLength={80} className={campo} placeholder="Cabañas Los Alerces" />
@@ -102,7 +102,7 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
       </fieldset>
 
       <fieldset className="space-y-5">
-        <legend className="text-lg font-bold text-brand-primary mb-2">Tus datos (no se publican)</legend>
+        <legend className="text-lg font-bold text-dys-text mb-2">Tus datos (no se publican)</legend>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="neg-contacto" className={etiqueta}>Tu nombre</label>
@@ -113,15 +113,15 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
             <input id="neg-email" name="email" type="email" required maxLength={254} autoComplete="email" className={campo} />
           </div>
         </div>
-        <label className="flex items-start gap-3 text-sm text-gray-700">
-          <input type="checkbox" name="quiere_sitio" className="mt-1 size-4 accent-brand-accent-dark" />
+        <label className="flex items-start gap-3 text-sm text-dys-text">
+          <input type="checkbox" name="quiere_sitio" className="mt-1 size-4 accent-dys-primary" />
           Me interesa que me contacten para tener un sitio web para mi negocio.
         </label>
-        <label className="flex items-start gap-3 text-sm text-gray-700">
-          <input type="checkbox" name="acepto" required className="mt-1 size-4 accent-brand-accent-dark" />
+        <label className="flex items-start gap-3 text-sm text-dys-text">
+          <input type="checkbox" name="acepto" required className="mt-1 size-4 accent-dys-primary" />
           <span>
             Autorizo publicar los datos del negocio en el directorio y acepto la{" "}
-            <Link href="/privacidad" className="underline underline-offset-2 hover:text-brand-primary">
+            <Link href="/privacidad" className="underline underline-offset-2 hover:text-dys-text">
               política de privacidad
             </Link>
             .
@@ -131,14 +131,14 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
 
       <TurnstileWidget resetKey={state} />
       {state.mensaje && (
-        <p role="alert" className="p-3 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+        <p role="alert" className="p-3 bg-red-500/10 text-red-300 rounded-md text-sm border border-red-500/40">
           {state.mensaje}
         </p>
       )}
       <Button
         type="submit"
         disabled={pending}
-        className="w-full justify-center bg-brand-accent hover:bg-brand-accent-dark border-brand-accent"
+        className="w-full justify-center bg-dys-primary hover:bg-dys-primary/85 border-dys-primary"
       >
         {pending ? "Enviando..." : "Inscribir mi negocio gratis"}
       </Button>

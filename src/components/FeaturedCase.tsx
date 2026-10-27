@@ -11,22 +11,22 @@ export default function FeaturedCase() {
   if (!project) return null;
 
   return (
-    <section id="caso-de-exito" className="py-24 bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900">
+    <section id="caso-de-exito" className="py-24 bg-dys-surface border-b border-dys-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
         <div className="space-y-6">
-          <h2 className="text-4xl font-bold text-brand-primary dark:text-white">
+          <h2 className="text-4xl font-bold text-dys-text">
             Caso de éxito: {project.name}
           </h2>
-          <p className="text-sm font-semibold text-brand-accent-dark uppercase tracking-wider">
+          <p className="text-sm font-semibold text-dys-primary uppercase tracking-wider">
             {project.category}
           </p>
-          <p className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+          <p className="text-dys-muted font-light leading-relaxed">
             {project.description}
           </p>
           <ul className="space-y-2">
             {project.features.map((feature) => (
-              <li key={feature} className="flex items-center gap-2 text-gray-700 dark:text-slate-300">
-                <CheckCircle2 className="w-5 h-5 text-brand-accent-dark shrink-0" />
+              <li key={feature} className="flex items-center gap-2 text-dys-text">
+                <CheckCircle2 className="w-5 h-5 text-dys-primary shrink-0" />
                 {feature}
               </li>
             ))}
@@ -36,13 +36,13 @@ export default function FeaturedCase() {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-brand-primary dark:text-white underline decoration-brand-accent underline-offset-4 hover:text-brand-accent-dark transition-colors"
+              className="inline-flex items-center gap-1 font-semibold text-dys-text underline decoration-dys-link underline-offset-4 hover:text-dys-link transition-colors"
             >
               Visitar el sitio <ArrowUpRight className="w-4 h-4" />
             </a>
             <Link
               href="/partners"
-              className="font-semibold text-gray-500 hover:text-brand-primary dark:hover:text-white transition-colors"
+              className="font-semibold text-dys-muted hover:text-dys-text transition-colors"
             >
               Ver todos los proyectos →
             </Link>
@@ -53,7 +53,7 @@ export default function FeaturedCase() {
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/40 dark:border-slate-800"
+          className="block relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-dys-border/40"
         >
           <Image
             src={project.image}

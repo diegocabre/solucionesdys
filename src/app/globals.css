@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
+/* Marca DyS, tema oscuro (único tema del sitio). Fuente: dys-brand-kit/brand/brand.css y tokens.json. */
 :root {
-  /* Fondo crema cálido premium */
-  --background: #fafaf9;
-  /* Texto principal azul slate muy oscuro */
-  --foreground: #1c2733;
-  
-  /* Color principal de la marca (Azul Slate del Logo) */
-  --brand-primary: #182838;
-  /* Color cobre/oro rosa (Acentos, botones, logo) */
-  --brand-accent: #bfa38a;
-  --brand-accent-light: #d1baaa;
-  --brand-accent-dark: #846852;
+  --dys-bg: #000000;
+  --dys-surface: #11161C;
+  --dys-border: #262D36;
+  --dys-text: #F6F1E7;
+  --dys-text-muted: #B5B0A3;
+  --dys-primary: #34D399;      /* botones principales, destacados */
+  --dys-on-primary: #000000;   /* texto sobre el verde */
+  --dys-link: #4C9AFF;         /* enlaces, elementos secundarios */
+  --dys-accent: #FFD60A;       /* acento, usar poco (puntos, etiquetas) */
+  --dys-on-accent: #000000;
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-bricolage);
 
-  /* Añadiendo paleta personalizada a la configuración del tema Tailwind */
-  --color-brand-primary: var(--brand-primary);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-accent-light: var(--brand-accent-light);
-  --color-brand-accent-dark: var(--brand-accent-dark);
+  /* Clases Tailwind de la marca: bg-dys-bg, text-dys-text, bg-dys-primary, etc. */
+  --color-dys-bg: var(--dys-bg);
+  --color-dys-surface: var(--dys-surface);
+  --color-dys-border: var(--dys-border);
+  --color-dys-text: var(--dys-text);
+  --color-dys-muted: var(--dys-text-muted);
+  --color-dys-primary: var(--dys-primary);
+  --color-dys-on-primary: var(--dys-on-primary);
+  --color-dys-link: var(--dys-link);
+  --color-dys-accent: var(--dys-accent);
+  --color-dys-on-accent: var(--dys-on-accent);
 }
-
-/* Desactivar el modo oscuro automático de prefers-color-scheme en Tailwind v4 redirigiendo la variante dark a una clase inactiva */
-@custom-variant dark (.theme-dark-disabled &);
 
 /* Titulares: Bricolage Grotesque en todos los h1–h3; Inter queda para el texto corrido.
    Va en la capa base para que las utilidades (tamaño, peso, tracking) sigan mandando. */
@@ -43,17 +45,21 @@
   h1, h2 {
     letter-spacing: -0.01em;
   }
+  /* El anillo de foco se separa con el fondo de marca, no con el blanco por defecto. */
+  * {
+    --tw-ring-offset-color: var(--dys-bg);
+  }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--dys-bg);
+  color: var(--dys-text);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
 }
 
-/* Selección de texto con los colores de la marca (café sobre marino). */
+/* Selección de texto con el verde de marca. */
 ::selection {
-  background: var(--brand-accent);
-  color: var(--brand-primary);
+  background: var(--dys-primary);
+  color: var(--dys-on-primary);
 }

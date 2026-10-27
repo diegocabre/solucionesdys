@@ -24,10 +24,10 @@ const MS_ENTRE_LINEAS = 900;
 // ── 1. Terminal simulada ─────────────────────────────────────────────────────
 
 const ESTILO_LINEA: Record<LineaTerminal["tipo"], string> = {
-  usuario: "text-white",
-  herramienta: "text-gray-400",
-  claude: "text-brand-accent-light",
-  ok: "text-emerald-400",
+  usuario: "text-dys-text",
+  herramienta: "text-dys-muted",
+  claude: "text-dys-primary",
+  ok: "text-dys-primary",
 };
 
 const PREFIJO_LINEA: Record<LineaTerminal["tipo"], string> = {
@@ -59,14 +59,14 @@ function TerminalDemo() {
   const terminado = mostrar >= total;
 
   return (
-    <div className="rounded-3xl overflow-hidden bg-[#0d1822] shadow-2xl border border-white/10">
-      <div className="flex items-center gap-3 bg-[#182838] px-4 py-3">
+    <div className="rounded-3xl overflow-hidden bg-dys-surface shadow-2xl border border-dys-text/10">
+      <div className="flex items-center gap-3 bg-dys-border px-4 py-3">
         <div className="flex gap-1.5" aria-hidden="true">
           <span className="size-3 rounded-full bg-red-500/80" />
-          <span className="size-3 rounded-full bg-yellow-500/80" />
-          <span className="size-3 rounded-full bg-green-500/80" />
+          <span className="size-3 rounded-full bg-dys-accent/80" />
+          <span className="size-3 rounded-full bg-dys-primary/80" />
         </div>
-        <span className="text-xs text-gray-400 font-mono">claude — mi-proyecto</span>
+        <span className="text-xs text-dys-muted font-mono">claude — mi-proyecto</span>
       </div>
 
       <div role="tablist" aria-label="Ejemplos de uso" className="flex flex-wrap gap-2 px-4 pt-4">
@@ -77,10 +77,10 @@ function TerminalDemo() {
             role="tab"
             aria-selected={e.id === escenario.id}
             onClick={() => elegir(e.id)}
-            className={`rounded-full px-3.5 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
+            className={`rounded-full px-3.5 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary ${
               e.id === escenario.id
-                ? "bg-brand-accent-dark text-white"
-                : "bg-white/10 text-gray-300 hover:bg-white/20"
+                ? "bg-dys-primary text-dys-on-primary"
+                : "bg-dys-text/10 text-dys-muted hover:bg-dys-text/20"
             }`}
           >
             {e.pestana}
@@ -106,16 +106,16 @@ function TerminalDemo() {
           ))}
         </AnimatePresence>
         {!terminado && (
-          <span aria-hidden="true" className="mt-3 inline-block h-4 w-2 bg-gray-300 animate-pulse" />
+          <span aria-hidden="true" className="mt-3 inline-block h-4 w-2 bg-dys-border animate-pulse" />
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-white/10 px-5 py-3 text-xs text-gray-400">
+      <div className="flex items-center justify-between gap-3 border-t border-dys-text/10 px-5 py-3 text-xs text-dys-muted">
         <span>Simulación ilustrativa</span>
         <button
           type="button"
           onClick={() => setVisibles(1)}
-          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-gray-300 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-dys-muted hover:bg-dys-text/10 focus:outline-none focus:ring-2 focus:ring-dys-primary"
         >
           <RotateCcw className="size-3.5" aria-hidden="true" />
           Repetir
@@ -135,13 +135,13 @@ function FlujoInteractivo() {
   const Icono = ICONOS_FLUJO[activo];
 
   return (
-    <div className="rounded-3xl bg-white border border-gray-100 shadow-sm p-6 sm:p-8">
+    <div className="rounded-3xl bg-dys-surface border border-dys-border shadow-sm p-6 sm:p-8">
       <ol className="relative grid grid-cols-5 gap-2">
         {/* Línea que conecta los pasos */}
-        <span aria-hidden="true" className="absolute left-[10%] right-[10%] top-6 h-0.5 bg-gray-200" />
+        <span aria-hidden="true" className="absolute left-[10%] right-[10%] top-6 h-0.5 bg-dys-border" />
         <motion.span
           aria-hidden="true"
-          className="absolute left-[10%] top-6 h-0.5 bg-brand-accent origin-left"
+          className="absolute left-[10%] top-6 h-0.5 bg-dys-primary origin-left"
           style={{ width: "80%" }}
           animate={{ scaleX: activo / (PASOS_FLUJO.length - 1) }}
           transition={{ type: "spring", bounce: 0, duration: 0.5 }}
@@ -156,16 +156,16 @@ function FlujoInteractivo() {
                 onClick={() => setActivo(i)}
                 aria-current={i === activo ? "step" : undefined}
                 aria-label={`Paso ${i + 1}: ${p.titulo}`}
-                className={`relative z-10 grid size-12 place-items-center rounded-full border-2 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 ${
+                className={`relative z-10 grid size-12 place-items-center rounded-full border-2 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2 ${
                   alcanzado
-                    ? "bg-brand-primary border-brand-accent text-white"
-                    : "bg-white border-gray-200 text-gray-500 hover:border-brand-accent"
+                    ? "bg-dys-primary border-dys-primary text-dys-on-primary"
+                    : "bg-dys-surface border-dys-border text-dys-muted hover:border-dys-primary"
                 } ${i === activo ? "scale-110 shadow-lg" : ""}`}
               >
                 <I className="size-5" aria-hidden="true" />
               </button>
               <span
-                className={`mt-2 text-xs sm:text-sm font-semibold ${i === activo ? "text-brand-primary" : "text-gray-500"}`}
+                className={`mt-2 text-xs sm:text-sm font-semibold ${i === activo ? "text-dys-text" : "text-dys-muted"}`}
               >
                 {p.titulo}
               </span>
@@ -182,17 +182,17 @@ function FlujoInteractivo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="flex gap-4 rounded-2xl bg-brand-accent/10 p-5 sm:p-6"
+            className="flex gap-4 rounded-2xl bg-dys-primary/10 p-5 sm:p-6"
           >
-            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl bg-brand-primary text-brand-accent-light">
+            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl bg-dys-surface text-dys-primary">
               <Icono className="size-6" aria-hidden="true" />
             </span>
             <div className="space-y-3">
-              <h3 className="text-lg font-bold text-brand-primary">
-                {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-gray-600">· {paso.corto}</span>
+              <h3 className="text-lg font-bold text-dys-text">
+                {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-dys-muted">· {paso.corto}</span>
               </h3>
-              <p className="text-gray-700 leading-relaxed">{paso.detalle}</p>
-              <p className="text-sm text-brand-accent-dark italic">{paso.ejemplo}</p>
+              <p className="text-dys-text leading-relaxed">{paso.detalle}</p>
+              <p className="text-sm text-dys-primary italic">{paso.ejemplo}</p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -213,23 +213,23 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
       onClick={() => setVolteada((v) => !v)}
       aria-pressed={volteada}
       aria-label={`${titulo}: ${volteada ? "ocultar" : "ver"} detalle`}
-      className="group h-44 w-full text-left [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent rounded-2xl"
+      className="group h-44 w-full text-left [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary rounded-2xl"
     >
       <motion.div
         className="relative size-full [transform-style:preserve-3d]"
         animate={{ rotateY: volteada ? 180 : 0 }}
         transition={{ duration: reducir ? 0 : 0.5 }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-brand-primary p-5 text-white [backface-visibility:hidden]">
-          <span className="font-mono text-lg text-brand-accent-light">{titulo}</span>
+        <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface p-5 text-dys-text [backface-visibility:hidden]">
+          <span className="font-mono text-lg text-dys-primary">{titulo}</span>
           <div>
             <p className="font-semibold">{resumen}</p>
-            <p className="mt-1 text-xs text-gray-400 group-hover:text-brand-accent-light">Toca para ver más</p>
+            <p className="mt-1 text-xs text-dys-muted group-hover:text-dys-primary">Toca para ver más</p>
           </div>
         </div>
-        <div className="absolute inset-0 overflow-auto rounded-2xl border border-brand-accent bg-white p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <p className="font-mono text-xs font-semibold text-brand-accent-dark mb-2">{titulo}</p>
-          <p className="text-sm leading-relaxed text-gray-700">{detalle}</p>
+        <div className="absolute inset-0 overflow-auto rounded-2xl border border-dys-primary bg-dys-surface p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <p className="font-mono text-xs font-semibold text-dys-primary mb-2">{titulo}</p>
+          <p className="text-sm leading-relaxed text-dys-text">{detalle}</p>
         </div>
       </motion.div>
     </button>
@@ -241,20 +241,20 @@ export default function ClaudeCodeShowcase() {
     <div className="space-y-16">
       <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="space-y-5">
-          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
+          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">
             Míralo trabajar, paso a paso
           </h3>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-dys-muted leading-relaxed">
             Describes lo que quieres en lenguaje normal y Claude Code lee tu proyecto, hace los cambios y
             comprueba que funcionen. Elige un ejemplo y observa cómo lo resuelve.
           </p>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Dónde funciona</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-dys-muted mb-2">Dónde funciona</p>
             <ul className="flex flex-wrap gap-2">
               {CLAUDE_CODE_SUPERFICIES.map((s) => (
                 <li
                   key={s}
-                  className="rounded-full border border-brand-accent/40 bg-brand-accent/10 px-3 py-1 text-sm text-brand-accent-dark"
+                  className="rounded-full border border-dys-primary/40 bg-dys-primary/10 px-3 py-1 text-sm text-dys-primary"
                 >
                   {s}
                 </li>
@@ -267,18 +267,18 @@ export default function ClaudeCodeShowcase() {
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">Cómo trabaja</h3>
-          <p className="text-gray-600 leading-relaxed">Toca cada paso para ver qué pasa por dentro.</p>
+          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">Cómo trabaja</h3>
+          <p className="text-dys-muted leading-relaxed">Toca cada paso para ver qué pasa por dentro.</p>
         </div>
         <FlujoInteractivo />
       </div>
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary">
+          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">
             Lo que lo hace potente
           </h3>
-          <p className="text-gray-600 leading-relaxed">Voltea las tarjetas para conocer cada pieza.</p>
+          <p className="text-dys-muted leading-relaxed">Voltea las tarjetas para conocer cada pieza.</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CAPACIDADES_CLAUDE.map((c) => (

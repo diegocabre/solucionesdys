@@ -48,7 +48,7 @@ export default function ServicesCarousel() {
       }}
     >
       {/* Marco: todas las capturas apiladas, se cruzan con opacidad */}
-      <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/40 bg-white">
+      <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-dys-border/40 bg-dys-surface">
         {slides.map((slide, idx) => (
           <Image
             key={slide.id}
@@ -76,16 +76,16 @@ export default function ServicesCarousel() {
               idx === current ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <span className="text-brand-accent-dark text-xs font-semibold uppercase tracking-widest">
+            <span className="text-dys-primary text-xs font-semibold uppercase tracking-widest">
               Proyecto real
             </span>
-            <p className="text-brand-primary text-2xl font-bold mt-1">{slide.title}</p>
+            <p className="text-dys-text text-2xl font-bold mt-1">{slide.title}</p>
             {slide.description && (
-              <p className="text-gray-600 mt-2 text-lg font-light leading-relaxed">{slide.description}</p>
+              <p className="text-dys-muted mt-2 text-lg font-light leading-relaxed">{slide.description}</p>
             )}
             <Link
               href={slide.href}
-              className="inline-block mt-3 py-2 text-sm font-semibold text-brand-primary underline decoration-brand-accent underline-offset-4 hover:text-brand-accent-dark transition-colors"
+              className="inline-block mt-3 py-2 text-sm font-semibold text-dys-text underline decoration-dys-link underline-offset-4 hover:text-dys-link transition-colors"
             >
               Ver proyecto →
             </Link>
@@ -106,7 +106,7 @@ export default function ServicesCarousel() {
           >
             <span
               className={`block h-1.5 rounded-full transition-all duration-300 motion-reduce:transition-none ${
-                idx === current ? 'w-8 bg-brand-accent' : 'w-4 bg-gray-300 group-hover:bg-gray-400'
+                idx === current ? 'w-8 bg-dys-primary' : 'w-4 bg-dys-border group-hover:bg-dys-muted'
               }`}
             />
           </button>

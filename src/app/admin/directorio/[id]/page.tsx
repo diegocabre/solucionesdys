@@ -18,11 +18,11 @@ export default async function EditarNegocioPage({ params }: { params: Promise<{ 
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-      <Link href="/admin/directorio" className="text-sm text-brand-accent-dark underline underline-offset-2">
+      <Link href="/admin/directorio" className="text-sm text-dys-link underline underline-offset-2">
         ← Volver al panel
       </Link>
-      <h1 className="text-3xl font-bold text-brand-primary">Editar {negocio.nombre}</h1>
-      <div className="rounded-3xl bg-white border border-gray-100 p-6 sm:p-8 shadow-sm">
+      <h1 className="text-3xl font-bold text-dys-text">Editar {negocio.nombre}</h1>
+      <div className="rounded-3xl bg-dys-surface border border-dys-border p-6 sm:p-8 shadow-sm">
         <EditarNegocioForm negocio={negocio} rubros={RUBROS} comunas={COMUNAS_DIRECTORIO} />
       </div>
     </div>
