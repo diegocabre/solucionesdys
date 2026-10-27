@@ -74,7 +74,7 @@ export default function Navbar() {
               onClick={toggleMenu}
               aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isOpen}
-              className="p-2.5 text-dys-text hover:bg-dys-surface rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary"
+              className="p-2.5 text-dys-text hover:bg-dys-text/10 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -104,7 +104,7 @@ export default function Navbar() {
                     className={`flex items-center gap-2 px-3 py-3 text-base font-medium rounded-md transition-colors ${
                       isActive
                         ? "text-dys-primary bg-dys-primary/10"
-                        : "text-dys-text hover:text-dys-primary hover:bg-dys-surface"
+                        : "text-dys-text hover:text-dys-primary hover:bg-dys-text/10"
                     }`}
                   >
                     {Icon && <Icon size={18} aria-hidden="true" />}

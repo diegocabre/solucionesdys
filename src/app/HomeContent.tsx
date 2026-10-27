@@ -9,7 +9,7 @@ import ServicesCarousel from '@/components/ServicesCarousel';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
 import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
-import { AREA_SERVED } from '@/lib/site';
+import { AREA_SERVED, PRECIO_DESDE } from '@/lib/site';
 import type { ReactNode } from 'react';
 
 // "A, B, C y D"
@@ -143,6 +143,9 @@ export default function HomeContent({ serverSections }: { serverSections?: React
             </h2>
             <p className="text-lg text-dys-muted font-light leading-relaxed">
               Elige según lo que necesitas: captar clientes con una campaña, mostrar tu empresa o vender en línea.
+            </p>
+            <p className="text-lg font-semibold text-dys-text">
+              Desde <span className="text-dys-primary">{PRECIO_DESDE}</span> por una página estática.
             </p>
           </div>
 

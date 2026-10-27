@@ -184,7 +184,7 @@ function FlujoInteractivo() {
             transition={{ duration: 0.2 }}
             className="flex gap-4 rounded-2xl bg-dys-primary/10 p-5 sm:p-6"
           >
-            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl bg-dys-surface text-dys-primary">
+            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl bg-dys-surface border border-dys-border text-dys-primary">
               <Icono className="size-6" aria-hidden="true" />
             </span>
             <div className="space-y-3">
@@ -220,7 +220,7 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
         animate={{ rotateY: volteada ? 180 : 0 }}
         transition={{ duration: reducir ? 0 : 0.5 }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface p-5 text-dys-text [backface-visibility:hidden]">
+        <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface border border-dys-border p-5 text-dys-text [backface-visibility:hidden]">
           <span className="font-mono text-lg text-dys-primary">{titulo}</span>
           <div>
             <p className="font-semibold">{resumen}</p>

@@ -51,13 +51,13 @@ function Ficha({ n }: { n: NegocioAdmin }) {
         {n.instagram && <div><dt className="inline font-semibold">Instagram: </dt><dd className="inline">@{n.instagram}</dd></div>}
       </dl>
       <div className="flex flex-wrap gap-2 pt-1">
-        <Link href={`/admin/directorio/${n.id}`} className={`${boton} border border-dys-border text-dys-text hover:bg-dys-surface`}>
+        <Link href={`/admin/directorio/${n.id}`} className={`${boton} border border-dys-border text-dys-text hover:bg-dys-text/10`}>
           Editar
         </Link>
         {n.estado === "pendiente" && (
           <>
             <BotonEstado id={n.id} estado="aprobado" texto="Aprobar" estilo="bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85" />
-            <BotonEstado id={n.id} estado="rechazado" texto="Rechazar" estilo="border border-dys-border text-dys-text hover:bg-dys-surface" />
+            <BotonEstado id={n.id} estado="rechazado" texto="Rechazar" estilo="border border-dys-border text-dys-text hover:bg-dys-text/10" />
           </>
         )}
         {n.estado === "aprobado" && (
@@ -69,7 +69,7 @@ function Ficha({ n }: { n: NegocioAdmin }) {
           </>
         )}
         {n.estado === "rechazado" && (
-          <BotonEstado id={n.id} estado="aprobado" texto="Publicar" estilo="border border-dys-border text-dys-text hover:bg-dys-surface" />
+          <BotonEstado id={n.id} estado="aprobado" texto="Publicar" estilo="border border-dys-border text-dys-text hover:bg-dys-text/10" />
         )}
       </div>
     </li>
@@ -104,7 +104,7 @@ export default async function PanelDirectorioPage() {
           </Link>
         </div>
         <form action={salir}>
-          <button type="submit" className={`${boton} border border-dys-border text-dys-text hover:bg-dys-surface`}>
+          <button type="submit" className={`${boton} border border-dys-border text-dys-text hover:bg-dys-text/10`}>
             Salir
           </button>
         </form>

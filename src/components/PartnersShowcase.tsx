@@ -10,7 +10,7 @@ import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
 function BrowserFrame({ project }: { project: PartnerProject }) {
   return (
     <div className={`relative rounded-2xl bg-linear-to-br ${project.gradient} p-1.5 shadow-2xl shadow-dys-bg/10`}>
-      <div className="overflow-hidden rounded-xl bg-dys-surface">
+      <div className="overflow-hidden rounded-xl bg-dys-surface border border-dys-border">
         <div className="flex items-center gap-3 bg-dys-surface px-3 py-2">
           <div className="flex shrink-0 gap-1.5" aria-hidden="true">
             <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />

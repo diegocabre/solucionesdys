@@ -1,7 +1,7 @@
 // Preguntas frecuentes del inicio. Se muestran en la página y se publican como
 // datos estructurados FAQPage, así que las respuestas deben ser cortas y directas.
 
-import { BUSINESS } from "@/lib/site";
+import { BUSINESS, PRECIO_DESDE } from "@/lib/site";
 
 export interface Faq {
   question: string;
@@ -18,6 +18,10 @@ export const FAQS: Faq[] = [
     question: "¿Qué tipo de sitios web desarrollan?",
     answer:
       "Desarrollamos landing pages para campañas y captación de clientes, sitios corporativos multipágina y tiendas online con carrito de compras y pasarela de pagos.",
+  },
+  {
+    question: "¿Cuánto cuesta un sitio web?",
+    answer: `Una página estática parte desde ${PRECIO_DESDE}. El valor final depende de cuántas secciones necesitas y de si incluye tienda online o integraciones; te lo confirmamos en una propuesta clara antes de empezar.`,
   },
   {
     question: "¿Por qué no usan plantillas?",

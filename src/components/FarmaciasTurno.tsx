@@ -145,7 +145,7 @@ function TarjetaFarmacia({
             <button
               type="button"
               onClick={onVerMapa}
-              className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-dys-text hover:bg-dys-surface focus:outline-none focus:ring-2 focus:ring-dys-primary"
+              className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-dys-text hover:bg-dys-text/10 focus:outline-none focus:ring-2 focus:ring-dys-primary"
             >
               <MapPin className="w-4 h-4" aria-hidden="true" />
               Ver en el mapa
@@ -168,7 +168,7 @@ export default function FarmaciasTurno() {
       <div className="space-y-4" aria-busy="true" aria-live="polite">
         <span className="sr-only">Cargando farmacias de turno…</span>
         {[0, 1].map((i) => (
-          <div key={i} className="h-40 rounded-3xl bg-dys-surface animate-pulse" />
+          <div key={i} className="h-40 rounded-3xl bg-dys-border animate-pulse" />
         ))}
       </div>
     );

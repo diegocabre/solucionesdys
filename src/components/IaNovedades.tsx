@@ -6,9 +6,9 @@ import { useState } from "react";
 import { CATEGORIAS_IA, IA_NOVEDADES, type CategoriaIA } from "@/lib/ia-content";
 
 const COLOR_CATEGORIA: Record<CategoriaIA, string> = {
-  Agentes: "bg-dys-surface text-dys-text",
+  Agentes: "bg-dys-text/10 text-dys-text",
   Herramientas: "bg-dys-primary/15 text-dys-primary",
-  Modelos: "bg-dys-surface text-dys-text",
+  Modelos: "bg-dys-text/10 text-dys-text",
   "Uso responsable": "bg-dys-accent/10 text-dys-accent",
 };
 

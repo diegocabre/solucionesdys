@@ -171,14 +171,14 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
           </figure>
         )}
 
-        <section className="bg-dys-surface rounded-3xl p-8 sm:p-12 text-center text-dys-text space-y-4">
+        <section className="dys-light bg-dys-bg rounded-3xl p-8 sm:p-12 text-center text-dys-text space-y-4">
           <h2 className="text-3xl font-bold">¿Quieres resultados así para tu negocio?</h2>
           <p className="text-dys-muted font-light max-w-xl mx-auto">
             Cuéntanos qué necesitas y te respondemos con una propuesta clara, sin compromiso.
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center justify-center h-11 px-8 mt-2 rounded-md bg-dys-surface text-dys-text text-lg font-medium hover:bg-dys-surface transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
+            className="inline-flex items-center justify-center h-11 px-8 mt-2 rounded-md bg-dys-primary text-dys-on-primary text-lg font-medium hover:bg-dys-primary/85 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
           >
             Cotizar mi sitio
           </Link>

@@ -73,7 +73,7 @@ export default function FarmaciasDeTurnoPage() {
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-dys-surface text-dys-text p-6 space-y-3">
+          <div className="dys-light rounded-3xl bg-dys-bg text-dys-text p-6 space-y-3">
             <h2 className="flex items-center gap-2 text-lg font-bold">
               <Code2 className="w-5 h-5 text-dys-primary" aria-hidden="true" />
               API abierta
@@ -81,7 +81,7 @@ export default function FarmaciasDeTurnoPage() {
             <p className="text-sm text-dys-muted leading-relaxed">
               ¿Desarrollas un sitio o app local? Puedes consultar los mismos datos, ya limpios, en JSON:
             </p>
-            <pre className="overflow-x-auto rounded-xl bg-dys-bg/30 p-4 text-xs leading-relaxed text-dys-primary">
+            <pre className="overflow-x-auto rounded-xl bg-dys-surface border border-dys-border p-4 text-xs leading-relaxed text-dys-primary">
               <code>{`GET /api/farmacias-turno
 GET /api/farmacias-turno?comuna=puerto-varas`}</code>
             </pre>

@@ -79,7 +79,7 @@ export default function ContactoPage() {
               </div>
               
               <div className="pt-6 border-t border-dys-border flex justify-start">
-                <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-dys-bg rounded-lg hover:bg-[#20bd5a] transition-colors font-medium shadow-md">
+                <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-dys-primary text-dys-on-primary rounded-lg hover:bg-dys-primary/85 transition-colors font-medium shadow-md">
                   <MessageCircle size={22} />
                   Chatea por WhatsApp
                 </a>

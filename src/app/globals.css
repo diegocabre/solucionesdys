@@ -3,8 +3,10 @@
 /* Marca DyS, tema oscuro (único tema del sitio). Fuente: dys-brand-kit/brand/brand.css y tokens.json. */
 :root {
   --dys-bg: #000000;
-  --dys-surface: #11161C;
-  --dys-border: #262D36;
+  /* Sin el gris azulado del kit (#11161C / #262D36): las tarjetas son negras y el borde
+     es el marfil de marca al 20 % sobre negro. El contraste lo dan las franjas .dys-light. */
+  --dys-surface: #000000;
+  --dys-border: #31302E;
   --dys-text: #F6F1E7;
   --dys-text-muted: #B5B0A3;
   --dys-primary: #34D399;      /* botones principales, destacados */
