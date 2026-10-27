@@ -6,12 +6,12 @@ import { COOKIE_CONSENT_EVENT } from "@/components/CookieConsent";
 
 export default function Footer() {
   return (
-    <footer className="bg-dys-surface text-dys-text pt-12 pb-8">
+    <footer className="dys-light bg-dys-bg text-dys-text border-t border-dys-border pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="space-y-4">
             <Image
-              src="/assets/img/logo/dys-logo-para-fondo-oscuro.svg"
+              src="/assets/img/logo/dys-logo-para-fondo-claro.svg"
               alt="Soluciones DyS"
               width={112}
               height={63}

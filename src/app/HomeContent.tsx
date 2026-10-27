@@ -135,7 +135,7 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 bg-dys-surface border-y border-dys-border">
+      <section id="servicios" className="dys-light py-24 bg-dys-bg border-y border-dys-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14 space-y-4">
             <h2 className="text-4xl font-bold text-dys-text">

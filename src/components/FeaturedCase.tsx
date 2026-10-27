@@ -11,7 +11,7 @@ export default function FeaturedCase() {
   if (!project) return null;
 
   return (
-    <section id="caso-de-exito" className="py-24 bg-dys-surface border-b border-dys-border">
+    <section id="caso-de-exito" className="dys-light py-24 bg-dys-bg border-b border-dys-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
         <div className="space-y-6">
           <h2 className="text-4xl font-bold text-dys-text">
