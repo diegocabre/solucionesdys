@@ -116,11 +116,13 @@ export default function ContactoPage() {
                 </div>
               )}
               <div>
-                <label className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
+                <label htmlFor="contacto-name" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                   Nombre Completo
                 </label>
                 <input
+                  id="contacto-name"
                   name="name"
+                  autoComplete="name"
                   type="text"
                   required
                   className="w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm"
@@ -128,11 +130,13 @@ export default function ContactoPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
+                <label htmlFor="contacto-email" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                   Correo Electrónico
                 </label>
                 <input
+                  id="contacto-email"
                   name="email"
+                  autoComplete="email"
                   type="email"
                   required
                   className="w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm"
@@ -154,10 +158,10 @@ export default function ContactoPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
+                <label htmlFor="contacto-subject" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                   Motivo de Contacto
                 </label>
-                <select name="subject" required className="w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm">
+                <select id="contacto-subject" name="subject" required className="w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm">
                   <option value="Diseño de Sitios Web">Diseño de Sitios Web</option>
                   <option value="Landing Page">Landing Page</option>
                   <option value="Tienda Online / E-commerce">Tienda Online / E-commerce</option>
@@ -166,10 +170,11 @@ export default function ContactoPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
+                <label htmlFor="contacto-message" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
                   Mensaje
                 </label>
                 <textarea
+                  id="contacto-message"
                   name="message"
                   required
                   rows={4}

@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
 
 /** Marco tipo navegador con la captura del sitio, coloreado con la marca del cliente. */
-function BrowserFrame({ project }: { project: PartnerProject }) {
+function BrowserFrame({ project, priority = false }: { project: PartnerProject; priority?: boolean }) {
   return (
     <div className={`relative rounded-2xl bg-linear-to-br ${project.gradient} p-1.5 shadow-2xl shadow-dys-bg/10`}>
       <div className="overflow-hidden rounded-xl bg-dys-surface border border-dys-border">
@@ -28,6 +28,7 @@ function BrowserFrame({ project }: { project: PartnerProject }) {
             alt={`Captura del sitio web de ${project.name}`}
             fill
             sizes="(max-width: 1024px) 92vw, 45vw"
+            priority={priority}
             className="object-cover object-top"
           />
         </div>
@@ -131,7 +132,8 @@ export default function PartnersShowcase() {
                         className="overflow-hidden"
                       >
                         <div className="space-y-6 pb-8">
-                          <BrowserFrame project={project} />
+                          {/* El primer proyecto viene abierto: su captura es el LCP en móvil. */}
+                          <BrowserFrame project={project} priority={project.id === PARTNER_PROJECTS[0].id} />
                           <ProjectDetails project={project} />
                         </div>
                       </motion.div>

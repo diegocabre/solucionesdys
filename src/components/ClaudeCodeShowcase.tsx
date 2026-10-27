@@ -212,7 +212,6 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
       type="button"
       onClick={() => setVolteada((v) => !v)}
       aria-pressed={volteada}
-      aria-label={`${titulo}: ${volteada ? "ocultar" : "ver"} detalle`}
       className="group h-44 w-full text-left [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary rounded-2xl"
     >
       <motion.div
@@ -220,14 +219,15 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
         animate={{ rotateY: volteada ? 180 : 0 }}
         transition={{ duration: reducir ? 0 : 0.5 }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface border border-dys-border p-5 text-dys-text [backface-visibility:hidden]">
+        {/* El nombre del botón es el texto de la cara visible; la otra se oculta al lector de pantalla. */}
+        <div aria-hidden={volteada} className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface border border-dys-border p-5 text-dys-text [backface-visibility:hidden]">
           <span className="font-mono text-lg text-dys-primary">{titulo}</span>
           <div>
             <p className="font-semibold">{resumen}</p>
             <p className="mt-1 text-xs text-dys-muted group-hover:text-dys-primary">Toca para ver más</p>
           </div>
         </div>
-        <div className="absolute inset-0 overflow-auto rounded-2xl border border-dys-primary bg-dys-surface p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div aria-hidden={!volteada} className="absolute inset-0 overflow-auto rounded-2xl border border-dys-primary bg-dys-surface p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <p className="font-mono text-xs font-semibold text-dys-primary mb-2">{titulo}</p>
           <p className="text-sm leading-relaxed text-dys-text">{detalle}</p>
         </div>
