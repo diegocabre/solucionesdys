@@ -18,7 +18,7 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-bricolage);
+  --font-display: var(--font-poppins);
 
   /* Clases Tailwind de la marca: bg-dys-bg, text-dys-text, bg-dys-primary, etc. */
   --color-dys-bg: var(--dys-bg);
@@ -33,15 +33,14 @@
   --color-dys-on-accent: var(--dys-on-accent);
 }
 
-/* Titulares: Bricolage Grotesque en todos los h1–h3; Inter queda para el texto corrido.
+/* Titulares: Poppins (kit de marca) en todos los h1–h3; Inter queda para el texto corrido.
    Va en la capa base para que las utilidades (tamaño, peso, tracking) sigan mandando. */
 @layer base {
   h1, h2, h3 {
     font-family: var(--font-display), var(--font-sans), sans-serif;
-    font-optical-sizing: auto;
     text-wrap: balance;
   }
-  /* El tamaño óptico de Bricolage ya cierra el espaciado en grande; basta un ajuste leve. */
+  /* Poppins es ancha: en grande se cierra un poco el espaciado. */
   h1, h2 {
     letter-spacing: -0.01em;
   }
