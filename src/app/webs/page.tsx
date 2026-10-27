@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Sitios web a medida que cargan rápido, aparecen en Google y generan más consultas para tu negocio.",
     url: "/webs",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   }
 };
 

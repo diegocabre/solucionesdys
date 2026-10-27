@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Guías prácticas sobre sitios web y Google para negocios de Puerto Varas y Los Lagos.",
     url: "/blog",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   },
 };
 

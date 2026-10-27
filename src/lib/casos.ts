@@ -102,7 +102,7 @@ export const CASOS: CasoExito[] = [
       { metrica: "Posición en Google para \"diseño web Puerto Varas\"", antes: PENDIENTE, despues: PENDIENTE, periodo: PENDIENTE },
       { metrica: "PageSpeed móvil", antes: PENDIENTE, despues: PENDIENTE, periodo: PENDIENTE },
     ],
-    imagen: "/assets/img/og-image.jpg",
+    imagen: "/og-image.png",
     url: "https://www.solucionesdys.cl/",
     published: false,
   },

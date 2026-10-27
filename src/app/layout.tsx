@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/img/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: SITE_NAME,
@@ -47,11 +47,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/assets/img/og-image.jpg"],
+    images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // favicon.ico, icon.svg y apple-icon.png de app/ se enlazan solos (convención de archivos).
+  manifest: "/site.webmanifest",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({

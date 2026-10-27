@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: "Negocios de Puerto Varas y alrededores. Inscribe el tuyo gratis.",
     url: "/comunidad/directorio",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   },
 };
 

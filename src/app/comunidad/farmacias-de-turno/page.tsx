@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "Qué farmacia está de turno hoy en Puerto Varas y alrededores, con mapa y teléfono.",
     url: "/comunidad/farmacias-de-turno",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   },
 };
 

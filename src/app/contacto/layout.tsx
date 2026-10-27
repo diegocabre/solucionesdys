@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Cotiza el diseño y desarrollo de tu próximo sitio web, landing page o tienda online para tu negocio. Respuesta con propuesta clara, sin compromiso.",
     url: "/contacto",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   }
 };
 

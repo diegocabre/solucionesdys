@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     description: "Servicios útiles y gratuitos para vecinos de Puerto Varas.",
     url: "/comunidad",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   },
 };
 

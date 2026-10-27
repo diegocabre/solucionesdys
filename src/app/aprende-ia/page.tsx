@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "La IA explicada sin tecnicismos, con ejemplos interactivos y un robot guía.",
     url: "/aprende-ia",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   },
 };
 
