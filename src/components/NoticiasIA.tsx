@@ -14,8 +14,8 @@ type Estado =
 
 const COLOR_FUENTE: Record<string, string> = {
   anthropic: "bg-dys-primary/15 text-dys-primary",
-  "claude-code": "bg-dys-surface text-dys-text",
-  openai: "bg-dys-surface text-dys-text",
+  "claude-code": "bg-dys-text/10 text-dys-text",
+  openai: "bg-dys-text/10 text-dys-text",
   deepmind: "bg-dys-link/15 text-dys-link",
   google: "bg-dys-link/15 text-dys-link",
   mit: "bg-red-500/10 text-red-300",
@@ -67,7 +67,7 @@ export default function NoticiasIA() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
         <span className="sr-only">Cargando noticias…</span>
         {[0, 1, 2].map((i) => (
-          <div key={i} className="h-48 rounded-3xl bg-dys-surface animate-pulse" />
+          <div key={i} className="h-48 rounded-3xl bg-dys-border animate-pulse" />
         ))}
       </div>
     );
@@ -130,7 +130,7 @@ export default function NoticiasIA() {
             >
               <div className="flex items-center justify-between gap-3">
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${COLOR_FUENTE[n.fuenteId] ?? "bg-dys-surface text-dys-text"}`}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold ${COLOR_FUENTE[n.fuenteId] ?? "bg-dys-text/10 text-dys-text"}`}
                 >
                   {n.fuente}
                 </span>

@@ -21,7 +21,7 @@ export default function Button({
   const variants = {
     primary: 'bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85',
     outline: 'border-2 border-dys-primary text-dys-primary hover:bg-dys-primary hover:text-dys-on-primary',
-    ghost: 'hover:bg-dys-surface text-dys-text'
+    ghost: 'hover:bg-dys-text/10 text-dys-text'
   };
 
   const sizes = {

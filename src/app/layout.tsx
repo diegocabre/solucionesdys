@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppFlotante from "@/components/WhatsAppFlotante";
 import Analytics from "@/components/Analytics";
 import StructuredData from "@/components/StructuredData";
 import AttributionTracker from "@/components/AttributionTracker";
@@ -71,6 +72,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <WhatsAppFlotante />
         <CookieConsent />
         <Analytics />
         <AttributionTracker />

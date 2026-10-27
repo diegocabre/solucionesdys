@@ -110,7 +110,7 @@ export default function AprendeIaPage() {
 
         {/* CTA */}
         <section className="py-16">
-          <div className="relative overflow-hidden rounded-3xl bg-dys-surface p-8 sm:p-16 text-center text-dys-text shadow-2xl">
+          <div className="dys-light relative overflow-hidden rounded-3xl bg-dys-bg p-8 sm:p-16 text-center text-dys-text shadow-2xl">
             <div className="absolute top-0 right-0 w-80 h-80 bg-dys-primary/10 rounded-full blur-3xl" />
             <div className="relative z-10 mx-auto max-w-2xl space-y-6">
               <h2 className="text-3xl sm:text-4xl font-bold leading-tight">

@@ -159,7 +159,7 @@ export default async function DirectorioPage() {
           </div>
         )}
 
-        <aside className="mt-16 rounded-3xl bg-dys-surface text-dys-text p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
+        <aside className="dys-light mt-16 rounded-3xl bg-dys-bg text-dys-text p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
           <div className="space-y-2">
             <h2 className="text-xl font-bold">¿Tu negocio aún no tiene sitio web?</h2>
             <p className="text-dys-muted">Te armamos uno a medida, pensado para que te encuentren en Google.</p>

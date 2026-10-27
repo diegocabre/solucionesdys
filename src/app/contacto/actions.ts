@@ -43,7 +43,7 @@ function buildAutoReplyHtml(name: string, subject: string): string {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#000000; padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#11161C; border-radius:16px; overflow:hidden; border:1px solid #262D36;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#000000; border-radius:16px; overflow:hidden; border:1px solid #31302E;">
             <tr>
               <td align="center" style="background-color:#000000; padding:40px 24px;">
                 <img src="${logoUrl}" width="160" alt="Soluciones DyS" style="display:block; max-width:160px; height:auto;" />
@@ -71,7 +71,7 @@ function buildAutoReplyHtml(name: string, subject: string): string {
               </td>
             </tr>
             <tr>
-              <td style="padding:20px 28px; background-color:#000000; border-top:1px solid #262D36; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#B5B0A3; text-align:center;">
+              <td style="padding:20px 28px; background-color:#000000; border-top:1px solid #31302E; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#B5B0A3; text-align:center;">
                 Soluciones DyS · Puerto Varas, Chile
               </td>
             </tr>

@@ -41,7 +41,7 @@ function marco(preheader: string, contenido: string, pie: string): string {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#000000; padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#11161C; border-radius:16px; overflow:hidden; border:1px solid #262D36;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#000000; border-radius:16px; overflow:hidden; border:1px solid #31302E;">
             <tr>
               <td align="center" style="background-color:#000000; padding:28px 24px;">
                 <img src="${SITE_URL}/assets/img/logo/dys-logo-para-fondo-oscuro.png" width="120" alt="Soluciones DyS" style="display:block; max-width:120px; height:auto;" />
@@ -51,7 +51,7 @@ function marco(preheader: string, contenido: string, pie: string): string {
               <td style="padding:28px; font-family:Arial, Helvetica, sans-serif; color:#F6F1E7;">${contenido}</td>
             </tr>
             <tr>
-              <td style="padding:20px 28px; background-color:#000000; border-top:1px solid #262D36; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:1.6; color:#B5B0A3; text-align:center;">${pie}</td>
+              <td style="padding:20px 28px; background-color:#000000; border-top:1px solid #31302E; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:1.6; color:#B5B0A3; text-align:center;">${pie}</td>
             </tr>
           </table>
         </td>
@@ -134,7 +134,7 @@ export function correoDiario(
 
   const filas = lista
     .map(
-      (f) => `<tr><td style="padding:14px 0; border-top:1px solid #262D36;">
+      (f) => `<tr><td style="padding:14px 0; border-top:1px solid #31302E;">
         <p style="margin:0; font-size:15px; font-weight:bold;">${escapeHtml(f.nombre)}</p>
         <p style="margin:4px 0 0; font-size:14px; line-height:1.5; color:#B5B0A3;">
           ${escapeHtml(f.direccion)}, ${escapeHtml(f.comuna)}<br />

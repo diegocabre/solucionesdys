@@ -13,6 +13,9 @@ export const SITE_NAME = "Soluciones DyS";
 // La usan el JSON-LD del negocio (StructuredData) y el bloque visible ZonaAtencion.
 export const AREA_SERVED = ["Puerto Varas", "Llanquihue", "Frutillar", "Puerto Montt"] as const;
 
+// Precio de entrada (CLP): página estática. Se muestra en servicios y en la FAQ.
+export const PRECIO_DESDE = "$350.000";
+
 export const BUSINESS = {
   legalName: "Soluciones DyS SpA",
   displayName: "Soluciones DyS",

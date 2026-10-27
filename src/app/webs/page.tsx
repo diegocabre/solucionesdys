@@ -7,7 +7,7 @@ import UltimosArticulos from '@/components/UltimosArticulos';
 import ZonaAtencion from '@/components/ZonaAtencion';
 import JsonLd from '@/components/JsonLd';
 import { getTestimoniosPublicados } from '@/lib/casos';
-import { SITE_URL } from '@/lib/site';
+import { PRECIO_DESDE, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: "Diseño Web en Puerto Varas: sitios rápidos que traen clientes",
@@ -166,6 +166,9 @@ export default function WebsPage() {
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-dys-text">¿Qué tipo de sitio web necesitas?</h2>
               <p className="text-dys-muted font-light max-w-xl mx-auto">Selecciona la estructura ideal para cumplir tus metas de negocio.</p>
+              <p className="font-semibold text-dys-text">
+                Desde <span className="text-dys-primary">{PRECIO_DESDE}</span> por una página estática.
+              </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

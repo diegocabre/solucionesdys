@@ -159,10 +159,10 @@ export default function RobotGuide() {
 
         {/* Globo de diálogo */}
         <div className="relative grow w-full">
-          <div className="relative rounded-2xl bg-dys-surface text-dys-text p-5 sm:p-6 min-h-44 sm:min-h-52">
+          <div className="dys-light relative rounded-2xl bg-dys-bg text-dys-text p-5 sm:p-6 min-h-44 sm:min-h-52">
             <span
               aria-hidden="true"
-              className="absolute -top-2 left-1/2 -translate-x-1/2 sm:top-8 sm:-left-2 sm:translate-x-0 size-4 rotate-45 bg-dys-surface"
+              className="absolute -top-2 left-1/2 -translate-x-1/2 sm:top-8 sm:-left-2 sm:translate-x-0 size-4 rotate-45 bg-dys-bg"
             />
             {/* El texto animado no se anuncia letra por letra: el lector de pantalla recibe la frase completa. */}
             <p className="sr-only" aria-live="polite">
@@ -181,7 +181,7 @@ export default function RobotGuide() {
               type="button"
               onClick={alternarVoz}
               aria-pressed={voz}
-              className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-dys-text hover:bg-dys-surface focus:outline-none focus:ring-2 focus:ring-dys-primary"
+              className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-dys-text hover:bg-dys-text/10 focus:outline-none focus:ring-2 focus:ring-dys-primary"
             >
               {voz ? <Volume2 className="w-4 h-4" aria-hidden="true" /> : <VolumeX className="w-4 h-4" aria-hidden="true" />}
               {voz ? "Voz activada" : "Activar voz"}
