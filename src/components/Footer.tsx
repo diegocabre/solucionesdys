@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { COOKIE_CONSENT_EVENT } from "@/components/CookieConsent";
 
@@ -9,9 +10,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif tracking-wide">
-              Soluciones <span className="text-brand-accent-light">DyS</span>
-            </h3>
+            <Image
+              src="/assets/img/logo/dys-logo-para-fondo-oscuro.svg"
+              alt="Soluciones DyS"
+              width={112}
+              height={63}
+              className="w-28 h-auto"
+            />
             <p className="text-gray-400 text-sm max-w-sm">
               Sitios web a medida para pymes de Puerto Varas, Los Lagos y todo Chile.
             </p>

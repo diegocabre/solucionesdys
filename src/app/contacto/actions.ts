@@ -27,9 +27,9 @@ const RATE_LIMIT_MAX = 5
 const RATE_LIMIT_WINDOW_SEC = 10 * 60
 
 // HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail).
-// El logo ya incluye el texto "Soluciones DyS" dentro de la imagen.
+// Logo PNG (los clientes de correo no muestran SVG) para el encabezado oscuro.
 function buildAutoReplyHtml(name: string, subject: string): string {
-  const logoUrl = `${SITE_URL}/assets/img/logo.png`
+  const logoUrl = `${SITE_URL}/assets/img/logo/dys-logo-para-fondo-oscuro.png`
   const safeName = escapeHtml(name)
   const safeSubject = escapeHtml(subject)
 

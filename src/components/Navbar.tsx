@@ -26,28 +26,16 @@ export default function Navbar() {
     <nav className="fixed w-full bg-background border-b border-gray-200 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo como Emblema con Texto Elegante Al Lado */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-12 w-12 sm:h-15 sm:w-15 rounded-xl overflow-hidden border border-brand-accent/30 shadow-md shadow-brand-accent/15 transition-transform duration-300 group-hover:scale-105 shrink-0">
-              <Image
-                src="/assets/img/logo.png"
-                alt="Soluciones DyS"
-                fill
-                sizes="(max-width: 640px) 48px, 60px"
-                style={{
-                  objectFit: "cover",
-                }}
-                priority
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-lg sm:text-2xl font-bold font-serif text-brand-primary tracking-wide leading-none transition-colors group-hover:text-brand-accent-dark">
-                Soluciones <span className="text-brand-accent-dark">DyS</span>
-              </span>
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-accent-dark mt-1.5 leading-none">
-                Soluciones Digitales
-              </span>
-            </div>
+          {/* Wordmark DyS.: nunca bajo 80 px de ancho (regla del kit de marca). */}
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/assets/img/logo/dys-logo-para-fondo-oscuro.svg"
+              alt="Soluciones DyS"
+              width={96}
+              height={54}
+              className="w-24 h-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Menu */}

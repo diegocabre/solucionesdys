@@ -43,7 +43,7 @@ function marco(preheader: string, contenido: string, pie: string): string {
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#ffffff; border-radius:16px; overflow:hidden; border:1px solid #e7e2dc;">
             <tr>
               <td align="center" style="background-color:#182838; padding:28px 24px;">
-                <img src="${SITE_URL}/assets/img/logo.png" width="120" alt="Soluciones DyS" style="display:block; max-width:120px; height:auto;" />
+                <img src="${SITE_URL}/assets/img/logo/dys-logo-para-fondo-oscuro.png" width="120" alt="Soluciones DyS" style="display:block; max-width:120px; height:auto;" />
               </td>
             </tr>
             <tr>
