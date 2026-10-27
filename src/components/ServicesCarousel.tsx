@@ -23,6 +23,8 @@ export default function ServicesCarousel() {
   const [current, setCurrent] = useState(0);
   const [hover, setHover] = useState(false);
   const [foco, setFoco] = useState(false);
+  // Las capturas ocultas se montan cuando carga la primera, para no competir con ella (LCP en móvil).
+  const [primeraLista, setPrimeraLista] = useState(false);
   const reducir = useReducedMotion();
   const autoplay = !reducir && !hover && !foco;
 
@@ -49,7 +51,7 @@ export default function ServicesCarousel() {
     >
       {/* Marco: todas las capturas apiladas, se cruzan con opacidad */}
       <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-dys-border/40 bg-dys-surface">
-        {slides.map((slide, idx) => (
+        {slides.map((slide, idx) => (idx === 0 || idx === current || primeraLista) && (
           <Image
             key={slide.id}
             src={slide.image}
@@ -58,6 +60,7 @@ export default function ServicesCarousel() {
             fill
             sizes="(min-width: 1280px) 600px, (min-width: 1024px) 45vw, 100vw"
             priority={idx === 0}
+            onLoad={idx === 0 ? () => setPrimeraLista(true) : undefined}
             className={`object-cover object-top transition-opacity duration-700 ease-out motion-reduce:transition-none ${
               idx === current ? 'opacity-100' : 'opacity-0'
             }`}

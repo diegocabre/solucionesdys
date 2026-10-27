@@ -42,6 +42,8 @@ function contentSecurityPolicy(): string {
 }
 
 const nextConfig: NextConfig = {
+  // AVIF pesa menos que WebP en las capturas del carrusel (LCP en móvil); WebP queda de respaldo.
+  images: { formats: ["image/avif", "image/webp"] },
   async redirects() {
     return [
       {

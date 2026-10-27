@@ -122,15 +122,11 @@ export default function HomeContent({ serverSections }: { serverSections?: React
             </div>
           </div>
 
-          {/* Hero Image / Services Carousel */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
-          >
+          {/* Hero Image / Services Carousel. Sin animación de entrada: es el LCP y con opacidad 0
+              no se pintaba hasta que cargaba el JavaScript (~2 s extra en móvil). */}
+          <div className="relative">
             <ServicesCarousel />
-          </motion.div>
+          </div>
         </div>
       </section>
 
