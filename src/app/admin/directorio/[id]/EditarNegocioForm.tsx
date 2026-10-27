@@ -6,8 +6,8 @@ import type { NegocioAdmin } from "@/lib/supabase/server";
 import { editarNegocio, type EdicionState } from "../../actions";
 
 const campo =
-  "w-full rounded-lg border border-gray-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent text-slate-900 text-sm";
-const etiqueta = "block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider";
+  "w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary text-dys-text text-sm";
+const etiqueta = "block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider";
 const MAX_DESC = 300;
 
 interface Props {
@@ -65,7 +65,7 @@ export default function EditarNegocioForm({ negocio: n, rubros, comunas }: Props
           aria-describedby="ed-desc-largo"
           className={campo}
         />
-        <p id="ed-desc-largo" className={`mt-1 text-xs ${largo >= MAX_DESC ? "text-red-700 font-semibold" : "text-gray-500"}`}>
+        <p id="ed-desc-largo" className={`mt-1 text-xs ${largo >= MAX_DESC ? "text-red-300 font-semibold" : "text-dys-muted"}`}>
           {largo} / {MAX_DESC} caracteres
         </p>
       </div>
@@ -93,12 +93,12 @@ export default function EditarNegocioForm({ negocio: n, rubros, comunas }: Props
           <input id="ed-email" name="email" type="email" required maxLength={254} defaultValue={n.email_contacto} className={campo} />
         </div>
       </div>
-      <label className="flex items-start gap-3 text-sm text-gray-700">
-        <input type="checkbox" name="quiere_sitio" defaultChecked={n.quiere_sitio} className="mt-1 size-4 accent-brand-accent-dark" />
+      <label className="flex items-start gap-3 text-sm text-dys-text">
+        <input type="checkbox" name="quiere_sitio" defaultChecked={n.quiere_sitio} className="mt-1 size-4 accent-dys-primary" />
         Le interesa un sitio web
       </label>
       {state.error && (
-        <p role="alert" className="p-3 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+        <p role="alert" className="p-3 bg-red-500/10 text-red-300 rounded-md text-sm border border-red-500/40">
           {state.error}
         </p>
       )}

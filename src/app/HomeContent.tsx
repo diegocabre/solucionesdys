@@ -58,7 +58,7 @@ function ServicioConEjemplo({
   return (
     <Link href="/webs" className="group block">
       {proyecto && (
-        <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/40">
+        <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-dys-border/40">
           <Image
             src={proyecto.image}
             alt={`${title}: sitio de ${proyecto.name} desarrollado por Soluciones DyS`}
@@ -68,10 +68,10 @@ function ServicioConEjemplo({
           />
         </div>
       )}
-      <h3 className="mt-6 text-2xl font-bold text-brand-primary transition-colors group-hover:text-brand-accent-dark">
+      <h3 className="mt-6 text-2xl font-bold text-dys-text transition-colors group-hover:text-dys-primary">
         {title}
       </h3>
-      <p className="mt-2 max-w-prose text-gray-600 font-light leading-relaxed">{description}</p>
+      <p className="mt-2 max-w-prose text-dys-muted font-light leading-relaxed">{description}</p>
     </Link>
   );
 }
@@ -81,28 +81,28 @@ function ServicioConEjemplo({
 export default function HomeContent({ serverSections }: { serverSections?: ReactNode }) {
 
   return (
-    <div className="flex flex-col bg-background">
+    <div className="flex flex-col bg-dys-bg">
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         {/* Background gradient pattern matching the logo */}
-        <div className="absolute inset-0 -z-10 bg-linear-to-b from-brand-primary/10 via-background to-background">
-          <div className="absolute top-0 -left-1/4 w-[600px] h-[600px] bg-brand-accent/5 blur-3xl rounded-full"></div>
+        <div className="absolute inset-0 -z-10 bg-linear-to-b from-dys-surface via-dys-bg to-dys-bg">
+          <div className="absolute top-0 -left-1/4 w-[600px] h-[600px] bg-dys-primary/5 blur-3xl rounded-full"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 z-10 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
           <div className="space-y-6 sm:space-y-8">
-            <div className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20">
-              <span className="text-xs sm:text-sm font-semibold tracking-wider text-brand-accent-dark uppercase">
+            <div className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
+              <span className="text-xs sm:text-sm font-semibold tracking-wider text-dys-primary uppercase">
                 Soluciones DyS • Puerto Varas, Chile
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold text-brand-primary leading-tight">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold text-dys-text leading-tight">
               Diseño y desarrollo web en{' '}
-              <span className="text-brand-accent-dark whitespace-nowrap">Puerto Varas</span>
+              <span className="text-dys-primary whitespace-nowrap">Puerto Varas</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed font-light">
+            <p className="text-lg sm:text-xl text-dys-muted max-w-lg leading-relaxed font-light">
               {/* En móvil, versión corta: el H1 ya nombra Puerto Varas */}
               <span className="sm:hidden">
                 Sitios web a medida para pymes: rápidos en el celular, visibles en Google y con WhatsApp a un toque.
@@ -135,13 +135,13 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 bg-white border-y border-gray-100">
+      <section id="servicios" className="dys-light py-24 bg-dys-bg border-y border-dys-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14 space-y-4">
-            <h2 className="text-4xl font-bold text-brand-primary">
+            <h2 className="text-4xl font-bold text-dys-text">
               Tres formas de llevar tu negocio a internet
             </h2>
-            <p className="text-lg text-gray-600 font-light leading-relaxed">
+            <p className="text-lg text-dys-muted font-light leading-relaxed">
               Elige según lo que necesitas: captar clientes con una campaña, mostrar tu empresa o vender en línea.
             </p>
           </div>
@@ -157,12 +157,12 @@ export default function HomeContent({ serverSections }: { serverSections?: React
             <div className="lg:col-span-5 grid gap-14">
               <Link
                 href="/webs"
-                className="group block rounded-3xl bg-brand-primary p-8 sm:p-10 text-white shadow-2xl"
+                className="group block rounded-3xl bg-dys-surface p-8 sm:p-10 text-dys-text shadow-2xl"
               >
                 <h3 className="text-2xl font-bold">{SERVICIOS.landing.title}</h3>
-                <p className="mt-3 text-gray-300 font-light leading-relaxed">{SERVICIOS.landing.description}</p>
+                <p className="mt-3 text-dys-muted font-light leading-relaxed">{SERVICIOS.landing.description}</p>
                 <ArrowRight
-                  className="mt-8 w-6 h-6 text-brand-accent transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                  className="mt-8 w-6 h-6 text-dys-primary transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
                   aria-hidden="true"
                 />
               </Link>
@@ -176,20 +176,20 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       <FeaturedCase />
 
       {/* Partners: lista con enlace a cada sitio, misma proporción 5/7 que el caso de éxito */}
-      <section id="partners" aria-labelledby="partners-titulo" className="py-24 bg-background">
+      <section id="partners" aria-labelledby="partners-titulo" className="py-24 bg-dys-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
           <div className="space-y-4">
-            <h2 id="partners-titulo" className="text-4xl font-bold text-brand-primary">
+            <h2 id="partners-titulo" className="text-4xl font-bold text-dys-text">
               Nuestros Partners
             </h2>
-            <p className="max-w-md text-lg text-gray-600 font-light leading-relaxed">
+            <p className="max-w-md text-lg text-dys-muted font-light leading-relaxed">
               Sitios que hicimos para clientes y aliados. Entra y míralos funcionando.
             </p>
           </div>
 
-          <ul className="border-t border-gray-200">
+          <ul className="border-t border-dys-border">
             {PARTNER_PROJECTS.map((project) => (
-              <li key={project.id} className="border-b border-gray-200">
+              <li key={project.id} className="border-b border-dys-border">
                 <a
                   href={project.url}
                   target="_blank"
@@ -197,13 +197,13 @@ export default function HomeContent({ serverSections }: { serverSections?: React
                   className="group flex items-center justify-between gap-6 py-6"
                 >
                   <span className="min-w-0">
-                    <span className="block font-display text-2xl sm:text-3xl font-semibold text-brand-primary transition-colors group-hover:text-brand-accent-dark">
+                    <span className="block font-display text-2xl sm:text-3xl font-semibold text-dys-text transition-colors group-hover:text-dys-primary">
                       {project.name}
                     </span>
-                    <span className="mt-1 block text-sm text-gray-600">{project.category}</span>
+                    <span className="mt-1 block text-sm text-dys-muted">{project.category}</span>
                   </span>
                   <ArrowUpRight
-                    className="w-6 h-6 shrink-0 text-brand-accent-dark transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
+                    className="w-6 h-6 shrink-0 text-dys-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
                     aria-hidden="true"
                   />
                   <span className="sr-only">(abre en una pestaña nueva)</span>
@@ -219,7 +219,7 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       {serverSections}
 
       {/* CTA Section */}
-      <section className="py-24 bg-brand-primary text-white">
+      <section className="dys-light py-24 bg-dys-bg text-dys-text">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -228,19 +228,19 @@ export default function HomeContent({ serverSections }: { serverSections?: React
         >
           <div className="space-y-8">
             <h2 className="max-w-2xl text-4xl lg:text-5xl font-bold">¿Hablamos sobre tu proyecto?</h2>
-            <p className="max-w-2xl text-xl text-gray-300 font-light">
+            <p className="max-w-2xl text-xl text-dys-muted font-light">
               Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
             </p>
-            <Button size="lg" variant="primary" className="bg-white! text-brand-primary! hover:bg-gray-100! shadow-lg shadow-white/10" onClick={() => window.location.href='/contacto'}>
+            <Button size="lg" variant="primary" className="shadow-lg shadow-dys-text/10" onClick={() => window.location.href='/contacto'}>
               Cotizar mi sitio
             </Button>
           </div>
 
           {/* Respaldo concreto: hechos confirmados (PRODUCT.md) y casos reales de partners.ts */}
-          <ul className="border-t border-white/15 text-lg text-gray-200 font-light">
+          <ul className="border-t border-dys-text/15 text-lg text-dys-text font-light">
             {RESPALDO.map((hecho) => (
-              <li key={hecho} className="flex gap-3 border-b border-white/15 py-4">
-                <Check className="mt-1 w-5 h-5 shrink-0 text-brand-accent" aria-hidden="true" />
+              <li key={hecho} className="flex gap-3 border-b border-dys-text/15 py-4">
+                <Check className="mt-1 w-5 h-5 shrink-0 text-dys-primary" aria-hidden="true" />
                 <span>{hecho}</span>
               </li>
             ))}

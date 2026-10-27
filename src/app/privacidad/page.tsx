@@ -2,16 +2,16 @@ const LAST_UPDATED = "23 de octubre de 2026";
 
 export default function PrivacidadPage() {
   return (
-    <div className="bg-background min-h-screen py-16">
+    <div className="bg-dys-bg min-h-screen py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-3">
-          <h1 className="text-4xl font-bold text-brand-primary">
+          <h1 className="text-4xl font-bold text-dys-text">
             Política de Privacidad y Cookies
           </h1>
-          <p className="text-sm text-gray-500">Última actualización: {LAST_UPDATED}</p>
+          <p className="text-sm text-dys-muted">Última actualización: {LAST_UPDATED}</p>
         </div>
 
-        <div className="space-y-10 text-gray-700 leading-relaxed">
+        <div className="space-y-10 text-dys-text leading-relaxed">
           <p>
             En Soluciones DyS SpA respetamos tu privacidad y nos comprometemos a
             proteger los datos personales que nos entregas al usar este sitio web.
@@ -22,7 +22,7 @@ export default function PrivacidadPage() {
           </p>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">1. Responsable del tratamiento</h2>
+            <h2 className="text-2xl font-bold text-dys-text">1. Responsable del tratamiento</h2>
             <p>
               El responsable de los datos personales recopilados a través de este
               sitio es:
@@ -37,7 +37,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">2. Qué datos recopilamos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">2. Qué datos recopilamos</h2>
             <p>Recopilamos datos personales en estas situaciones:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li>
@@ -74,7 +74,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">3. Para qué usamos tus datos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">3. Para qué usamos tus datos</h2>
             <ul className="list-disc pl-6 space-y-1">
               <li>Responder tus consultas y cotizaciones a través del formulario de contacto o WhatsApp.</li>
               <li>
@@ -104,7 +104,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">4. Base legal</h2>
+            <h2 className="text-2xl font-bold text-dys-text">4. Base legal</h2>
             <p>
               Tratamos tus datos con base en tu <strong>consentimiento expreso</strong>,
               que otorgas de estas formas:
@@ -129,19 +129,19 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">5. Cookies que utilizamos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">5. Cookies que utilizamos</h2>
             <p>Clasificamos las cookies de este sitio en dos categorías:</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm border-collapse mt-2">
                 <thead>
-                  <tr className="border-b border-gray-200 text-left">
-                    <th className="py-2 pr-4 font-semibold text-brand-primary">Categoría</th>
-                    <th className="py-2 pr-4 font-semibold text-brand-primary">Finalidad</th>
-                    <th className="py-2 font-semibold text-brand-primary">¿Requiere tu autorización?</th>
+                  <tr className="border-b border-dys-border text-left">
+                    <th className="py-2 pr-4 font-semibold text-dys-text">Categoría</th>
+                    <th className="py-2 pr-4 font-semibold text-dys-text">Finalidad</th>
+                    <th className="py-2 font-semibold text-dys-text">¿Requiere tu autorización?</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-gray-100">
+                  <tr className="border-b border-dys-border">
                     <td className="py-2 pr-4 align-top">Esenciales</td>
                     <td className="py-2 pr-4 align-top">
                       Necesarias para el funcionamiento básico del sitio (por ejemplo,
@@ -175,7 +175,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">6. Con quién compartimos tus datos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">6. Con quién compartimos tus datos</h2>
             <p>Para operar el sitio, algunos datos pasan por proveedores externos:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li>
@@ -220,7 +220,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">7. Plazo de conservación</h2>
+            <h2 className="text-2xl font-bold text-dys-text">7. Plazo de conservación</h2>
             <p>
               Conservamos las consultas del formulario de contacto (y los datos
               técnicos asociados) por un máximo de <strong>24 meses</strong> desde
@@ -242,7 +242,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">8. Tus derechos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">8. Tus derechos</h2>
             <p>
               Tienes derecho a acceder, rectificar, cancelar o eliminar tus datos
               personales, a oponerte a su tratamiento y a solicitar su portabilidad,
@@ -252,15 +252,15 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">9. Cómo ejercer tus derechos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">9. Cómo ejercer tus derechos</h2>
             <p>
               Para ejercer cualquiera de estos derechos, o si tienes preguntas sobre
               esta política, escríbenos a{" "}
-              <a href="mailto:contacto@solucionesdys.cl" className="text-brand-accent-dark underline hover:text-brand-primary">
+              <a href="mailto:contacto@solucionesdys.cl" className="text-dys-link underline hover:text-dys-text">
                 contacto@solucionesdys.cl
               </a>{" "}
               o contáctanos por WhatsApp al{" "}
-              <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="text-brand-accent-dark underline hover:text-brand-primary">
+              <a href="https://wa.me/56947637541" target="_blank" rel="noopener noreferrer" className="text-dys-link underline hover:text-dys-text">
                 +56 9 4763 7541
               </a>
               . Responderemos tu solicitud a la brevedad posible.
@@ -273,7 +273,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">10. Seguridad de la información</h2>
+            <h2 className="text-2xl font-bold text-dys-text">10. Seguridad de la información</h2>
             <p>
               Aplicamos medidas técnicas razonables para proteger tus datos
               (por ejemplo, conexión cifrada HTTPS, validación de los datos que
@@ -285,7 +285,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">11. Cambios a esta política</h2>
+            <h2 className="text-2xl font-bold text-dys-text">11. Cambios a esta política</h2>
             <p>
               Podemos actualizar esta política para reflejar cambios en nuestras
               prácticas o en la legislación vigente. Publicaremos cualquier cambio

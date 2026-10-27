@@ -9,20 +9,20 @@ import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
 /** Marco tipo navegador con la captura del sitio, coloreado con la marca del cliente. */
 function BrowserFrame({ project }: { project: PartnerProject }) {
   return (
-    <div className={`relative rounded-2xl bg-linear-to-br ${project.gradient} p-1.5 shadow-2xl shadow-black/10`}>
-      <div className="overflow-hidden rounded-xl bg-white">
-        <div className="flex items-center gap-3 bg-gray-100 px-3 py-2">
+    <div className={`relative rounded-2xl bg-linear-to-br ${project.gradient} p-1.5 shadow-2xl shadow-dys-bg/10`}>
+      <div className="overflow-hidden rounded-xl bg-dys-surface">
+        <div className="flex items-center gap-3 bg-dys-surface px-3 py-2">
           <div className="flex shrink-0 gap-1.5" aria-hidden="true">
             <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-            <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
-            <div className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+            <div className="h-2.5 w-2.5 rounded-full bg-dys-accent/80" />
+            <div className="h-2.5 w-2.5 rounded-full bg-dys-primary/80" />
           </div>
-          <div className="flex min-w-0 grow items-center gap-1.5 rounded-md bg-white px-2 py-0.5 text-[11px] text-gray-500 ring-1 ring-gray-200">
+          <div className="flex min-w-0 grow items-center gap-1.5 rounded-md bg-dys-surface px-2 py-0.5 text-[11px] text-dys-muted ring-1 ring-dys-border">
             <Globe className="h-3 w-3 shrink-0" aria-hidden="true" />
             <span className="truncate">{new URL(project.url).hostname.replace(/^www\./, "")}</span>
           </div>
         </div>
-        <div className="relative aspect-[24/11] bg-gray-50">
+        <div className="relative aspect-[24/11] bg-dys-surface">
           <Image
             src={project.image}
             alt={`Captura del sitio web de ${project.name}`}
@@ -40,12 +40,12 @@ function BrowserFrame({ project }: { project: PartnerProject }) {
 function ProjectDetails({ project }: { project: PartnerProject }) {
   return (
     <div className="space-y-5">
-      <p className="text-base leading-relaxed text-gray-600">{project.description}</p>
+      <p className="text-base leading-relaxed text-dys-muted">{project.description}</p>
 
       <ul className="grid gap-2 sm:grid-cols-2">
         {project.features.map((feature) => (
-          <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-            <ShieldCheck className="h-4 w-4 shrink-0 text-brand-accent-dark" />
+          <li key={feature} className="flex items-center gap-2 text-sm text-dys-muted">
+            <ShieldCheck className="h-4 w-4 shrink-0 text-dys-primary" />
             <span>{feature}</span>
           </li>
         ))}
@@ -55,7 +55,7 @@ function ProjectDetails({ project }: { project: PartnerProject }) {
         href={project.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-primary transition-colors hover:text-brand-accent-dark"
+        className="group inline-flex items-center gap-2 text-sm font-semibold text-dys-text transition-colors hover:text-dys-primary"
       >
         <span>Visitar sitio web en vivo</span>
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -76,7 +76,7 @@ export default function PartnersShowcase() {
           {PARTNER_PROJECTS.map((project, idx) => {
             const isActive = project.id === activeId;
             return (
-              <li key={project.id} className="border-b border-gray-200 first:border-t">
+              <li key={project.id} className="border-b border-dys-border first:border-t">
                 <button
                   type="button"
                   onMouseEnter={() => setActiveId(project.id)}
@@ -87,7 +87,7 @@ export default function PartnersShowcase() {
                 >
                   <span
                     className={`font-mono text-sm transition-colors ${
-                      isActive ? 'text-brand-accent-dark' : 'text-gray-500'
+                      isActive ? 'text-dys-primary' : 'text-dys-muted'
                     }`}
                   >
                     {String(idx + 1).padStart(2, '0')}
@@ -96,14 +96,14 @@ export default function PartnersShowcase() {
                   <span className="min-w-0 flex-1">
                     <span
                       className={`block font-display font-semibold text-2xl transition-colors sm:text-4xl ${
-                        isActive ? 'text-brand-primary' : 'text-gray-500 group-hover:text-gray-700'
+                        isActive ? 'text-dys-text' : 'text-dys-muted group-hover:text-dys-text'
                       }`}
                     >
                       {project.name}
                     </span>
                     <span
                       className={`mt-1 block text-xs uppercase tracking-widest transition-colors ${
-                        isActive ? 'text-brand-accent-dark' : 'text-gray-500'
+                        isActive ? 'text-dys-primary' : 'text-dys-muted'
                       }`}
                     >
                       {project.category}
@@ -113,8 +113,8 @@ export default function PartnersShowcase() {
                   <ArrowUpRight
                     className={`h-5 w-5 shrink-0 transition-all ${
                       isActive
-                        ? 'rotate-0 text-brand-accent-dark opacity-100'
-                        : '-rotate-45 text-gray-300 opacity-0 group-hover:opacity-100'
+                        ? 'rotate-0 text-dys-primary opacity-100'
+                        : '-rotate-45 text-dys-muted opacity-0 group-hover:opacity-100'
                     }`}
                   />
                 </button>

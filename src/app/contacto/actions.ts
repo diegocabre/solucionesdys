@@ -26,42 +26,43 @@ const ALLOWED_SUBJECTS = [
 const RATE_LIMIT_MAX = 5
 const RATE_LIMIT_WINDOW_SEC = 10 * 60
 
-// HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail).
-// El logo ya incluye el texto "Soluciones DyS" dentro de la imagen.
+// HTML basado en tablas (compatibilidad con Gmail/Outlook/Apple Mail). Colores de marca en hex:
+// los clientes de correo no soportan variables CSS.
+// Logo PNG (los clientes de correo no muestran SVG) para el encabezado oscuro.
 function buildAutoReplyHtml(name: string, subject: string): string {
-  const logoUrl = `${SITE_URL}/assets/img/logo.png`
+  const logoUrl = `${SITE_URL}/assets/img/logo/dys-logo-para-fondo-oscuro.png`
   const safeName = escapeHtml(name)
   const safeSubject = escapeHtml(subject)
 
   return `<!DOCTYPE html>
 <html lang="es">
-  <body style="margin:0; padding:0; background-color:#fafaf9;">
+  <body style="margin:0; padding:0; background-color:#000000;">
     <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
       Recibimos tu mensaje, ${safeName}. Pronto nos comunicaremos contigo.
     </div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafaf9; padding:32px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#000000; padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#ffffff; border-radius:16px; overflow:hidden; border:1px solid #e7e2dc;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background-color:#11161C; border-radius:16px; overflow:hidden; border:1px solid #262D36;">
             <tr>
-              <td align="center" style="background-color:#182838; padding:40px 24px;">
+              <td align="center" style="background-color:#000000; padding:40px 24px;">
                 <img src="${logoUrl}" width="160" alt="Soluciones DyS" style="display:block; max-width:160px; height:auto;" />
               </td>
             </tr>
             <tr>
-              <td style="padding:32px 28px; font-family:Arial, Helvetica, sans-serif; color:#1c2733;">
+              <td style="padding:32px 28px; font-family:Arial, Helvetica, sans-serif; color:#F6F1E7;">
                 <p style="font-size:16px; margin:0 0 16px;">Hola ${safeName},</p>
                 <p style="font-size:15px; line-height:1.6; margin:0 0 16px;">
                   Gracias por contactarnos. Recibimos tu mensaje sobre
-                  <strong style="color:#9e7f69;">"${safeSubject}"</strong> y muy pronto nos comunicaremos contigo.
+                  <strong style="color:#34D399;">"${safeSubject}"</strong> y muy pronto nos comunicaremos contigo.
                 </p>
                 <p style="font-size:15px; line-height:1.6; margin:0 0 24px;">
                   Mientras tanto, si tu consulta es urgente, puedes escribirnos directo por WhatsApp.
                 </p>
                 <table role="presentation" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td align="center" style="background-color:#43663b; border-radius:8px;">
-                      <a href="https://wa.me/56947637541" style="display:inline-block; padding:12px 24px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#ffffff; text-decoration:none; font-weight:bold;">
+                    <td align="center" style="background-color:#34D399; border-radius:8px;">
+                      <a href="https://wa.me/56947637541" style="display:inline-block; padding:12px 24px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-decoration:none; font-weight:bold;">
                         Escribir por WhatsApp
                       </a>
                     </td>
@@ -70,7 +71,7 @@ function buildAutoReplyHtml(name: string, subject: string): string {
               </td>
             </tr>
             <tr>
-              <td style="padding:20px 28px; background-color:#fafaf9; border-top:1px solid #e7e2dc; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#6b7280; text-align:center;">
+              <td style="padding:20px 28px; background-color:#000000; border-top:1px solid #262D36; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#B5B0A3; text-align:center;">
                 Soluciones DyS · Puerto Varas, Chile
               </td>
             </tr>

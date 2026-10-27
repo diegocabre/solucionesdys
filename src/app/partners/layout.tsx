@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Conoce los proyectos web creados por Soluciones DyS: Rincón del Aromo, Estribor Consultores y Dogtoralia Vet.",
     url: "/partners",
     type: "website",
-    images: [{ url: "/assets/img/og-image.jpg", width: 1200, height: 630, alt: "Soluciones DyS" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Soluciones DyS" }],
   }
 };
 

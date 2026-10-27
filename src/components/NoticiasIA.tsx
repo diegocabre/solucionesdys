@@ -13,12 +13,12 @@ type Estado =
   | { tipo: "listo"; data: NoticiasResponse; ahora: number };
 
 const COLOR_FUENTE: Record<string, string> = {
-  anthropic: "bg-brand-accent/15 text-brand-accent-dark",
-  "claude-code": "bg-gray-100 text-gray-800",
-  openai: "bg-brand-primary/10 text-brand-primary",
-  deepmind: "bg-sky-100 text-sky-800",
-  google: "bg-sky-100 text-sky-800",
-  mit: "bg-rose-100 text-rose-800",
+  anthropic: "bg-dys-primary/15 text-dys-primary",
+  "claude-code": "bg-dys-surface text-dys-text",
+  openai: "bg-dys-surface text-dys-text",
+  deepmind: "bg-dys-link/15 text-dys-link",
+  google: "bg-dys-link/15 text-dys-link",
+  mit: "bg-red-500/10 text-red-300",
 };
 
 const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
@@ -67,7 +67,7 @@ export default function NoticiasIA() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
         <span className="sr-only">Cargando noticias…</span>
         {[0, 1, 2].map((i) => (
-          <div key={i} className="h-48 rounded-3xl bg-gray-100 animate-pulse" />
+          <div key={i} className="h-48 rounded-3xl bg-dys-surface animate-pulse" />
         ))}
       </div>
     );
@@ -75,13 +75,13 @@ export default function NoticiasIA() {
 
   if (estado.tipo === "error") {
     return (
-      <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 text-center space-y-4">
-        <AlertTriangle className="w-8 h-8 text-amber-600 mx-auto" aria-hidden="true" />
-        <p className="text-brand-primary font-medium">No pudimos cargar las noticias en este momento.</p>
+      <div className="rounded-3xl border border-dys-accent/40 bg-dys-accent/10 p-8 text-center space-y-4">
+        <AlertTriangle className="w-8 h-8 text-dys-accent mx-auto" aria-hidden="true" />
+        <p className="text-dys-text font-medium">No pudimos cargar las noticias en este momento.</p>
         <button
           type="button"
           onClick={reintentar}
-          className="inline-flex items-center gap-2 rounded-md bg-brand-primary text-white px-4 py-2 text-sm font-medium hover:bg-brand-primary/90 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+          className="inline-flex items-center gap-2 rounded-md bg-dys-primary text-dys-on-primary px-4 py-2 text-sm font-medium hover:bg-dys-primary/85 focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
         >
           <RefreshCw className="w-4 h-4" aria-hidden="true" />
           Reintentar
@@ -105,10 +105,10 @@ export default function NoticiasIA() {
             type="button"
             aria-pressed={filtro === f.id}
             onClick={() => setFiltro(f.id)}
-            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent ${
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary ${
               filtro === f.id
-                ? "bg-brand-primary text-white border-brand-primary"
-                : "bg-white text-foreground border-gray-200 hover:border-brand-accent hover:text-brand-accent-dark"
+                ? "bg-dys-primary text-dys-on-primary border-dys-primary"
+                : "bg-dys-surface text-dys-text border-dys-border hover:border-dys-primary hover:text-dys-primary"
             }`}
           >
             {f.nombre}
@@ -126,23 +126,23 @@ export default function NoticiasIA() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.25 }}
-              className="flex flex-col rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-shadow p-6"
+              className="flex flex-col rounded-3xl bg-dys-surface border border-dys-border shadow-sm hover:shadow-lg transition-shadow p-6"
             >
               <div className="flex items-center justify-between gap-3">
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${COLOR_FUENTE[n.fuenteId] ?? "bg-gray-100 text-gray-700"}`}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold ${COLOR_FUENTE[n.fuenteId] ?? "bg-dys-surface text-dys-text"}`}
                 >
                   {n.fuente}
                 </span>
-                <time dateTime={n.fecha} className="text-xs text-gray-500">
+                <time dateTime={n.fecha} className="text-xs text-dys-muted">
                   {hace(n.fecha, ahora)}
                 </time>
               </div>
-              <h3 lang="en" className="mt-4 text-lg font-bold text-brand-primary leading-snug">
+              <h3 lang="en" className="mt-4 text-lg font-bold text-dys-text leading-snug">
                 {n.titulo}
               </h3>
               {n.resumen && (
-                <p lang="en" className="mt-3 grow text-sm leading-relaxed text-gray-600 line-clamp-4">
+                <p lang="en" className="mt-3 grow text-sm leading-relaxed text-dys-muted line-clamp-4">
                   {n.resumen}
                 </p>
               )}
@@ -150,7 +150,7 @@ export default function NoticiasIA() {
                 href={n.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-brand-accent-dark hover:text-brand-primary transition-colors"
+                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-dys-primary hover:text-dys-text transition-colors"
               >
                 Leer en {n.fuente}
                 <ArrowUpRight className="size-4" aria-hidden="true" />
@@ -165,14 +165,14 @@ export default function NoticiasIA() {
           <button
             type="button"
             onClick={() => setExpandido(true)}
-            className="rounded-md border-2 border-brand-accent px-5 py-2 text-sm font-medium text-brand-accent-dark hover:bg-brand-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+            className="rounded-md border-2 border-dys-primary px-5 py-2 text-sm font-medium text-dys-primary hover:bg-dys-primary hover:text-dys-on-primary transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
           >
             Ver {lista.length - VISIBLES_AL_INICIO} noticias más
           </button>
         </div>
       )}
 
-      <p className="text-xs text-gray-500 leading-relaxed">
+      <p className="text-xs text-dys-muted leading-relaxed">
         Titulares en inglés, tal como los publica cada fuente oficial. Se actualiza cada hora. Fuentes:{" "}
         {data.fuentes.map((f) => f.nombre).join(", ")}.
         {fuentesCaidas.length > 0 && (

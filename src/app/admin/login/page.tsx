@@ -8,13 +8,13 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="max-w-md mx-auto px-4">
-      <div className="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm space-y-5">
-        <h1 className="text-2xl font-bold text-brand-primary">Entrar al panel</h1>
-        <p className="text-gray-600 text-sm leading-relaxed">
+      <div className="rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm space-y-5">
+        <h1 className="text-2xl font-bold text-dys-text">Entrar al panel</h1>
+        <p className="text-dys-muted text-sm leading-relaxed">
           Escribe el correo de administrador y te enviamos un enlace para entrar. Vale 15 minutos y sirve una sola vez.
         </p>
         {error === "enlace" && (
-          <p role="alert" className="p-3 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+          <p role="alert" className="p-3 bg-red-500/10 text-red-300 rounded-md text-sm border border-red-500/40">
             El enlace no es válido, ya se usó o expiró. Pide uno nuevo.
           </p>
         )}

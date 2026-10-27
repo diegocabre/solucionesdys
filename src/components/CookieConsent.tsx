@@ -65,13 +65,13 @@ export default function CookieConsent() {
           aria-label="Preferencias de cookies"
           className="fixed bottom-0 inset-x-0 z-100 p-4 sm:p-6"
         >
-          <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl shadow-2xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
+          <div className="max-w-3xl mx-auto bg-dys-surface border border-dys-border rounded-2xl shadow-2xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center">
+            <p className="text-sm text-dys-muted flex-1">
               Usamos cookies esenciales para el funcionamiento del sitio. Con tu
               autorización, también usamos Microsoft Clarity para entender cómo
               se usa el sitio y mejorarlo. Puedes revisar los detalles en
               nuestra{' '}
-              <Link href="/privacidad" className="underline text-brand-accent-dark hover:text-brand-primary">
+              <Link href="/privacidad" className="underline text-dys-link hover:text-dys-text">
                 Política de Privacidad y Cookies
               </Link>
               .
@@ -79,13 +79,13 @@ export default function CookieConsent() {
             <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => setConsent('essential-only')}
-                className="px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+                className="px-4 py-2 text-sm font-medium rounded-lg border border-dys-border text-dys-text hover:bg-dys-surface transition-colors"
               >
                 Solo esenciales
               </button>
               <button
                 onClick={() => setConsent('accepted')}
-                className="px-4 py-2 text-sm font-medium rounded-lg bg-brand-primary text-white hover:bg-brand-primary/90 transition-colors"
+                className="px-4 py-2 text-sm font-medium rounded-lg bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85 transition-colors"
               >
                 Aceptar todas
               </button>

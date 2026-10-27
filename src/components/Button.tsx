@@ -16,12 +16,12 @@ export default function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
   
   const variants = {
-    primary: 'bg-brand-accent-dark text-white hover:bg-brand-primary',
-    outline: 'border-2 border-brand-accent text-brand-accent-dark hover:bg-brand-accent-dark hover:text-white',
-    ghost: 'hover:bg-gray-100 text-brand-primary dark:hover:bg-gray-800'
+    primary: 'bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85',
+    outline: 'border-2 border-dys-primary text-dys-primary hover:bg-dys-primary hover:text-dys-on-primary',
+    ghost: 'hover:bg-dys-surface text-dys-text'
   };
 
   const sizes = {

@@ -13,28 +13,28 @@ export const metadata: Metadata = {
 
 export default function InscribirNegocioPage() {
   return (
-    <div className="min-h-screen py-16 bg-background">
+    <div className="min-h-screen py-16 bg-dys-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label="Migas de pan" className="text-sm text-gray-500 mb-8">
-          <Link href="/comunidad" className="hover:text-brand-accent-dark">Comunidad Puerto Varas</Link>
+        <nav aria-label="Migas de pan" className="text-sm text-dys-muted mb-8">
+          <Link href="/comunidad" className="hover:text-dys-primary">Comunidad Puerto Varas</Link>
           <span className="mx-2">/</span>
-          <Link href="/comunidad/directorio" className="hover:text-brand-accent-dark">Directorio</Link>
+          <Link href="/comunidad/directorio" className="hover:text-dys-primary">Directorio</Link>
           <span className="mx-2">/</span>
-          <span className="text-brand-primary">Inscribir</span>
+          <span className="text-dys-text">Inscribir</span>
         </nav>
 
         <header className="mb-10 space-y-4">
-          <span className="grid size-12 place-items-center rounded-xl bg-brand-accent/10 text-brand-accent-dark">
+          <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/10 text-dys-primary">
             <Store className="size-6" aria-hidden="true" />
           </span>
-          <h1 className="text-3xl sm:text-5xl font-bold text-brand-primary">Inscribe tu negocio gratis</h1>
-          <p className="text-lg text-gray-600 font-light leading-relaxed">
+          <h1 className="text-3xl sm:text-5xl font-bold text-dys-text">Inscribe tu negocio gratis</h1>
+          <p className="text-lg text-dys-muted font-light leading-relaxed">
             Completa la ficha y, después de revisarla, la publicamos en el directorio para que los vecinos y
             turistas te encuentren.
           </p>
         </header>
 
-        <div className="rounded-3xl bg-white border border-gray-100 p-6 sm:p-10 shadow-sm">
+        <div className="rounded-3xl bg-dys-surface border border-dys-border p-6 sm:p-10 shadow-sm">
           <InscribirNegocioForm rubros={RUBROS} comunas={COMUNAS_DIRECTORIO} />
         </div>
       </div>

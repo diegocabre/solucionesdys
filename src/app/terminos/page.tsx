@@ -5,16 +5,16 @@ const LAST_UPDATED = "9 de octubre de 2026";
 
 export default function TerminosPage() {
   return (
-    <div className="bg-background min-h-screen py-16">
+    <div className="bg-dys-bg min-h-screen py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-3">
-          <h1 className="text-4xl font-bold text-brand-primary">
+          <h1 className="text-4xl font-bold text-dys-text">
             Términos y Condiciones de Servicio
           </h1>
-          <p className="text-sm text-gray-500">Última actualización: {LAST_UPDATED}</p>
+          <p className="text-sm text-dys-muted">Última actualización: {LAST_UPDATED}</p>
         </div>
 
-        <div className="space-y-10 text-gray-700 leading-relaxed">
+        <div className="space-y-10 text-dys-text leading-relaxed">
           <p>
             Estos términos regulan el uso del sitio web solucionesdys.cl y la
             contratación de los servicios de diseño y desarrollo web que ofrece
@@ -26,7 +26,7 @@ export default function TerminosPage() {
           </p>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">1. Quiénes somos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">1. Quiénes somos</h2>
             <ul className="list-disc pl-6 space-y-1">
               <li><strong>Razón social:</strong> Soluciones DyS SpA</li>
               <li><strong>RUT:</strong> 78.152.735-1</li>
@@ -37,7 +37,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">2. Aceptación de estos términos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">2. Aceptación de estos términos</h2>
             <p>
               Al navegar por este sitio aceptas estos términos en lo que se refiere
               al uso del sitio. Al aceptar una cotización nuestra, aceptas además las
@@ -48,7 +48,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">3. Uso del sitio web</h2>
+            <h2 className="text-2xl font-bold text-dys-text">3. Uso del sitio web</h2>
             <p>
               El contenido de este sitio (textos, guías del blog, secciones de
               Aprende IA y Comunidad) es informativo. Puedes usarlo para fines
@@ -68,7 +68,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">4. Servicios y cotizaciones</h2>
+            <h2 className="text-2xl font-bold text-dys-text">4. Servicios y cotizaciones</h2>
             <p>
               Cada proyecto se define en una cotización escrita que indica el alcance
               del trabajo, los entregables, el precio, la forma y los plazos de pago,
@@ -84,7 +84,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">5. Precios y pagos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">5. Precios y pagos</h2>
             <p>
               Los precios se expresan en pesos chilenos. La forma de pago, los
               montos de cada cuota y sus fechas se establecen en cada cotización,
@@ -98,7 +98,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">6. Plazos y colaboración del cliente</h2>
+            <h2 className="text-2xl font-bold text-dys-text">6. Plazos y colaboración del cliente</h2>
             <p>
               Los plazos de entrega son estimados y dependen de que nos entregues a
               tiempo lo necesario para avanzar: textos, imágenes, logotipos, accesos
@@ -108,7 +108,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">7. Cambios y trabajos adicionales</h2>
+            <h2 className="text-2xl font-bold text-dys-text">7. Cambios y trabajos adicionales</h2>
             <p>
               Los ajustes que estén dentro del alcance descrito en la cotización
               están incluidos. Las funciones, páginas o cambios que queden fuera de
@@ -117,7 +117,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">8. Propiedad intelectual</h2>
+            <h2 className="text-2xl font-bold text-dys-text">8. Propiedad intelectual</h2>
             <p>
               <strong>Contenido de este sitio.</strong> Los textos, diseños, marcas y
               demás elementos de solucionesdys.cl pertenecen a Soluciones DyS SpA o a
@@ -149,7 +149,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">9. Dominio, hosting y mantenimiento</h2>
+            <h2 className="text-2xl font-bold text-dys-text">9. Dominio, hosting y mantenimiento</h2>
             <p>
               El dominio de tu sitio se registra a tu nombre. El hosting, el
               mantenimiento y los cambios posteriores a la publicación se contratan
@@ -160,7 +160,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">10. Alcance de nuestra responsabilidad</h2>
+            <h2 className="text-2xl font-bold text-dys-text">10. Alcance de nuestra responsabilidad</h2>
             <p>
               Construimos cada sitio con buenas prácticas de velocidad y
               posicionamiento, pero no podemos garantizar una posición específica en
@@ -180,7 +180,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">11. Tus derechos como consumidor</h2>
+            <h2 className="text-2xl font-bold text-dys-text">11. Tus derechos como consumidor</h2>
             <p>
               Si contratas como persona natural para un fin no profesional, o como
               micro o pequeña empresa en los casos que contempla el Estatuto Pyme
@@ -192,12 +192,12 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">12. Datos personales</h2>
+            <h2 className="text-2xl font-bold text-dys-text">12. Datos personales</h2>
             <p>
               El tratamiento de los datos que nos entregas se explica en nuestra{" "}
               <Link
                 href="/privacidad"
-                className="text-brand-accent-dark underline underline-offset-2 hover:text-brand-primary"
+                className="text-dys-link underline underline-offset-2 hover:text-dys-text"
               >
                 Política de Privacidad y Cookies
               </Link>
@@ -206,7 +206,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">13. Enlaces a otros sitios</h2>
+            <h2 className="text-2xl font-bold text-dys-text">13. Enlaces a otros sitios</h2>
             <p>
               Este sitio incluye enlaces a sitios de terceros, como los de nuestros
               clientes o fuentes de noticias. No somos responsables de su contenido
@@ -215,7 +215,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">14. Cambios a estos términos</h2>
+            <h2 className="text-2xl font-bold text-dys-text">14. Cambios a estos términos</h2>
             <p>
               Podemos actualizar estos términos para reflejar cambios en nuestros
               servicios o en la ley. La versión vigente es la publicada en esta
@@ -225,7 +225,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">15. Ley aplicable y tribunales</h2>
+            <h2 className="text-2xl font-bold text-dys-text">15. Ley aplicable y tribunales</h2>
             <p>
               Estos términos se rigen por las leyes de la República de Chile.
               Cualquier conflicto se someterá a los tribunales ordinarios de justicia
@@ -236,7 +236,7 @@ export default function TerminosPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-primary">16. Contacto</h2>
+            <h2 className="text-2xl font-bold text-dys-text">16. Contacto</h2>
             <p>
               Si tienes dudas sobre estos términos, escríbenos a
               contacto@solucionesdys.cl o por WhatsApp al +56 9 4763 7541.

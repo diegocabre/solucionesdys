@@ -11,7 +11,7 @@ export default function LoginForm() {
 
   if (state.enviado) {
     return (
-      <p role="status" className="p-4 bg-green-50 text-green-800 rounded-md text-sm border border-green-200">
+      <p role="status" className="p-4 bg-dys-primary/10 text-dys-primary rounded-md text-sm border border-dys-primary/40">
         Si el correo está autorizado, te llegó un enlace para entrar. Revisa tu bandeja.
       </p>
     );
@@ -20,7 +20,7 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-4">
       <div>
-        <label htmlFor="admin-email" className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+        <label htmlFor="admin-email" className="block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider">
           Correo
         </label>
         <input
@@ -29,11 +29,11 @@ export default function LoginForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded-lg border border-gray-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent text-slate-900 text-sm"
+          className="w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary text-dys-text text-sm"
         />
       </div>
       {state.error && (
-        <p role="alert" className="p-3 bg-red-50 text-red-800 rounded-md text-sm border border-red-200">
+        <p role="alert" className="p-3 bg-red-500/10 text-red-300 rounded-md text-sm border border-red-500/40">
           {state.error}
         </p>
       )}

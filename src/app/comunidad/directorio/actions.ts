@@ -69,10 +69,11 @@ export async function inscribirNegocio(_prev: FichaState, formData: FormData): P
       ? `Para publicarla: ${SITE_URL}/admin/directorio`
       : "(Esta ficha NO quedó guardada en la base de datos.)");
   // El botón abre el correo de bienvenida ya escrito, para enviarlo tras aprobar la ficha.
+  // Hex de la paleta clara del kit: sin marco propio, el correo se ve sobre el blanco del cliente.
   const html =
     `<pre style="font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:1.5; white-space:pre-wrap;">${escapeHtml(texto)}</pre>` +
-    `<p style="margin:24px 0 8px;"><a href="${escapeHtml(mailtoBienvenida(ficha))}" style="display:inline-block; padding:12px 22px; background:#846852; color:#ffffff; border-radius:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; text-decoration:none;">Preparar correo de bienvenida</a></p>` +
-    `<p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; color:#6b7280;">Úsalo después de aprobar la ficha: abre el correo ya escrito para que lo revises y lo envíes.</p>`;
+    `<p style="margin:24px 0 8px;"><a href="${escapeHtml(mailtoBienvenida(ficha))}" style="display:inline-block; padding:12px 22px; background:#05694A; color:#FFFFFF; border-radius:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; text-decoration:none;">Preparar correo de bienvenida</a></p>` +
+    `<p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; color:#4B5560;">Úsalo después de aprobar la ficha: abre el correo ya escrito para que lo revises y lo envíes.</p>`;
 
   let notificada = false;
   try {

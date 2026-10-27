@@ -12,8 +12,9 @@ export default function StructuredData() {
     name: BUSINESS.legalName,
     alternateName: SITE_NAME,
     url: SITE_URL,
-    image: `${SITE_URL}/assets/img/og-image.jpg`,
-    logo: `${SITE_URL}/assets/img/logo.png`,
+    image: `${SITE_URL}/og-image.png`,
+    // PNG para fondo claro: Google muestra el logo sobre blanco.
+    logo: `${SITE_URL}/assets/img/logo/dys-logo-para-fondo-claro.png`,
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
     priceRange: "$$",

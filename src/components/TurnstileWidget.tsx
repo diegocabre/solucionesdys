@@ -35,7 +35,7 @@ const SCRIPT_URL = "https://challenges.cloudflare.com/turnstile/v0/api.js?render
 
 function AvisoSinVerificacion() {
   return (
-    <p role="alert" className="p-3 rounded-md text-sm border border-amber-200 bg-amber-50 text-amber-900">
+    <p role="alert" className="p-3 rounded-md text-sm border border-dys-accent/40 bg-dys-accent/10 text-dys-accent">
       No pudimos cargar la verificación anti-robots. Recarga la página o escríbenos directo por{" "}
       <a href={BUSINESS.whatsapp} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
         WhatsApp
@@ -57,7 +57,7 @@ export default function TurnstileWidget({ resetKey }: { resetKey?: unknown }) {
     widgetId.current = window.turnstile.render(container.current, {
       sitekey: siteKey,
       // El sitio usa siempre tema claro.
-      theme: "light",
+      theme: "dark",
       language: "es",
       size: "flexible",
       callback: () => setFallo(false),
