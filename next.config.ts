@@ -23,22 +23,32 @@ const securityHeaders = [
 // en línea y el sitio no usa nonces. 'unsafe-eval' solo en desarrollo (recarga en caliente).
 function contentSecurityPolicy(): string {
   const dev = process.env.NODE_ENV !== "production";
+  // La Vercel Toolbar (comentarios) solo se inyecta en los deploys de preview; producción no la permite.
+  const preview = process.env.VERCEL_ENV === "preview";
+  const toolbar = {
+    script: preview ? " https://vercel.live" : "",
+    style: preview ? " https://vercel.live https://fonts.googleapis.com" : "",
+    font: preview ? " https://vercel.live https://assets.vercel.com https://fonts.gstatic.com" : "",
+    img: preview ? " https://vercel.live https://vercel.com" : "",
+    connect: preview ? " https://vercel.live wss://ws-us3.pusher.com" : "",
+    frame: preview ? " https://vercel.live" : "",
+  };
   return [
     "default-src 'self'",
     // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas):
     // www.clarity.ms/tag/<id> carga el script real desde scripts.clarity.ms.
-    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.clarity.ms https://scripts.clarity.ms`,
-    "style-src 'self' 'unsafe-inline'",
+    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.clarity.ms https://scripts.clarity.ms${toolbar.script}`,
+    `style-src 'self' 'unsafe-inline'${toolbar.style}`,
     // Fuentes de next/font/google se sirven desde el propio sitio.
-    "font-src 'self' data:",
+    `font-src 'self' data:${toolbar.font}`,
     // next/image se sirve desde /_next/image (self). Clarity envía su píxel a c.clarity.ms y c.bing.com.
-    "img-src 'self' data: blob: https://c.clarity.ms https://c.bing.com",
+    `img-src 'self' data: blob: https://c.clarity.ms https://c.bing.com${toolbar.img}`,
     // Respaldo de farmacias desde el navegador (MINSAL), Turnstile y Clarity. Clarity reparte
     // la recolección entre subdominios de una letra (a.clarity.ms, k.clarity.ms…), por eso
     // *.clarity.ms es el valor que documenta Microsoft; se limita a connect-src.
-    "connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms",
+    `connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms${toolbar.connect}`,
     // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
-    "frame-src https://challenges.cloudflare.com https://www.openstreetmap.org",
+    `frame-src https://challenges.cloudflare.com https://www.openstreetmap.org${toolbar.frame}`,
     "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'self'",
