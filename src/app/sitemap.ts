@@ -19,26 +19,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/terminos", priority: 0.3, changeFrequency: "monthly" },
   ];
 
+  // Solo artículos publicados (sin draft) y casos con published: true.
+  const publicados = getPosts().filter((p) => !p.draft);
+  // El índice del blog cambia cuando cambia su artículo más reciente.
+  const ultimoArticulo = publicados.map((p) => p.updated).sort().at(-1);
+
+  // Sin lastmod en páginas sin fecha real: new Date() marcaba todo como cambiado en cada deploy.
   const pages: MetadataRoute.Sitemap = routes.map(({ path, priority, changeFrequency }) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: new Date(),
+    lastModified: path === "/blog" && ultimoArticulo ? new Date(`${ultimoArticulo}T12:00:00Z`) : undefined,
     changeFrequency,
     priority,
   }));
 
-  // Solo artículos publicados (sin draft) y casos con published: true.
-  const posts: MetadataRoute.Sitemap = getPosts()
-    .filter((p) => !p.draft)
-    .map((p) => ({
-      url: `${SITE_URL}/blog/${p.slug}`,
-      lastModified: new Date(`${p.updated}T12:00:00Z`),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    }));
+  const posts: MetadataRoute.Sitemap = publicados.map((p) => ({
+    url: `${SITE_URL}/blog/${p.slug}`,
+    lastModified: new Date(`${p.updated}T12:00:00Z`),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   const casos: MetadataRoute.Sitemap = CASOS.filter((c) => c.published).map((c) => ({
     url: `${SITE_URL}/webs/casos/${c.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
