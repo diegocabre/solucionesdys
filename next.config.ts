@@ -15,6 +15,8 @@ const securityHeaders = [
   // CSP en modo Report-Only: el navegador solo avisa en consola, no bloquea. Cuando no haya
   // avisos en producción, cambiar la clave a "Content-Security-Policy" para que se aplique.
   { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy() },
+  // Destino de report-to (Reporting API); report-uri queda para Firefox y Safari.
+  { key: "Reporting-Endpoints", value: 'csp-endpoint="/api/csp-report"' },
 ];
 
 // 'unsafe-inline' en scripts: Next.js, el JSON-LD y el arranque de Clarity usan scripts
@@ -23,21 +25,26 @@ function contentSecurityPolicy(): string {
   const dev = process.env.NODE_ENV !== "production";
   return [
     "default-src 'self'",
-    // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas).
-    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://*.clarity.ms`,
+    // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas):
+    // www.clarity.ms/tag/<id> carga el script real desde scripts.clarity.ms.
+    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.clarity.ms https://scripts.clarity.ms`,
     "style-src 'self' 'unsafe-inline'",
     // Fuentes de next/font/google se sirven desde el propio sitio.
     "font-src 'self' data:",
-    // Clarity envía su píxel a c.bing.com.
-    "img-src 'self' data: blob: https://*.clarity.ms https://c.bing.com",
-    // Respaldo de farmacias desde el navegador (MINSAL), Clarity y Turnstile.
-    "connect-src 'self' https://midas.minsal.cl https://*.clarity.ms https://challenges.cloudflare.com",
+    // next/image se sirve desde /_next/image (self). Clarity envía su píxel a c.clarity.ms y c.bing.com.
+    "img-src 'self' data: blob: https://c.clarity.ms https://c.bing.com",
+    // Respaldo de farmacias desde el navegador (MINSAL), Turnstile y Clarity. Clarity reparte
+    // la recolección entre subdominios de una letra (a.clarity.ms, k.clarity.ms…), por eso
+    // *.clarity.ms es el valor que documenta Microsoft; se limita a connect-src.
+    "connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms",
     // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
     "frame-src https://challenges.cloudflare.com https://www.openstreetmap.org",
     "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
+    "report-uri /api/csp-report",
+    "report-to csp-endpoint",
   ].join("; ");
 }
 
