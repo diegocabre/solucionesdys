@@ -1,0 +1,168 @@
+diff --git a/next.config.ts b/next.config.ts
+index a17c381..bbdfc8d 100644
+--- a/next.config.ts
++++ b/next.config.ts
+@@ -14,39 +14,10 @@ const securityHeaders = [
+   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+   // CSP en modo Report-Only: el navegador solo avisa en consola, no bloquea. Cuando no haya
+   // avisos en producción, cambiar la clave a "Content-Security-Policy" para que se aplique.
+-  { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy() },
+   // Destino de report-to (Reporting API); report-uri queda para Firefox y Safari.
+   { key: "Reporting-Endpoints", value: 'csp-endpoint="/api/csp-report"' },
+ ];
+ 
+-// 'unsafe-inline' en scripts: Next.js, el JSON-LD y el arranque de Clarity usan scripts
+-// en línea y el sitio no usa nonces. 'unsafe-eval' solo en desarrollo (recarga en caliente).
+-function contentSecurityPolicy(): string {
+-  const dev = process.env.NODE_ENV !== "production";
+-  return [
+-    "default-src 'self'",
+-    // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas):
+-    // www.clarity.ms/tag/<id> carga el script real desde scripts.clarity.ms.
+-    `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.clarity.ms https://scripts.clarity.ms`,
+-    "style-src 'self' 'unsafe-inline'",
+-    // Fuentes de next/font/google se sirven desde el propio sitio.
+-    "font-src 'self' data:",
+-    // next/image se sirve desde /_next/image (self). Clarity envía su píxel a c.clarity.ms y c.bing.com.
+-    "img-src 'self' data: blob: https://c.clarity.ms https://c.bing.com",
+-    // Respaldo de farmacias desde el navegador (MINSAL), Turnstile y Clarity. Clarity reparte
+-    // la recolección entre subdominios de una letra (a.clarity.ms, k.clarity.ms…), por eso
+-    // *.clarity.ms es el valor que documenta Microsoft; se limita a connect-src.
+-    "connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms",
+-    // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
+-    "frame-src https://challenges.cloudflare.com https://www.openstreetmap.org",
+-    "frame-ancestors 'self'",
+-    "object-src 'none'",
+-    "base-uri 'self'",
+-    "form-action 'self'",
+-    "report-uri /api/csp-report",
+-    "report-to csp-endpoint",
+-  ].join("; ");
+-}
+ 
+ const nextConfig: NextConfig = {
+   // AVIF pesa menos que WebP en las capturas del carrusel (LCP en móvil); WebP queda de respaldo.
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+index e0e44b8..496992f 100644
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -1,4 +1,5 @@
+ import type { Metadata, Viewport } from "next";
++import { headers } from "next/headers";
+ import { Inter, Poppins } from "next/font/google";
+ import "./globals.css";
+ import Navbar from "@/components/Navbar";
+@@ -68,11 +69,12 @@ export const viewport: Viewport = {
+   themeColor: "#000000",
+ };
+ 
+-export default function RootLayout({
++export default async function RootLayout({
+   children,
+ }: Readonly<{
+   children: React.ReactNode;
+ }>) {
++  const nonce = (await headers()).get("x-nonce") ?? undefined;
+   return (
+     <html lang="es" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
+       <body className="antialiased min-h-screen flex flex-col">
+@@ -84,7 +86,7 @@ export default function RootLayout({
+         <Footer />
+         <WhatsAppFlotante />
+         <CookieConsent />
+-        <Analytics />
++        <Analytics nonce={nonce} />
+         <AttributionTracker />
+       </body>
+     </html>
+diff --git a/src/components/Analytics.tsx b/src/components/Analytics.tsx
+index 3143376..4ffc768 100644
+--- a/src/components/Analytics.tsx
++++ b/src/components/Analytics.tsx
+@@ -9,7 +9,7 @@ import { getCookieConsent, COOKIE_CONSENT_CHANGE_EVENT } from '@/components/Cook
+ // Mientras no esté definido, el script simplemente no se carga.
+ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
+ 
+-export default function Analytics() {
++export default function Analytics({ nonce }: { nonce?: string }) {
+   const [enabled, setEnabled] = useState(false);
+ 
+   useEffect(() => {
+@@ -29,7 +29,7 @@ export default function Analytics() {
+   if (!enabled || !CLARITY_ID) return null;
+ 
+   return (
+-    <Script id="clarity-init" strategy="afterInteractive">
++    <Script id="clarity-init" strategy="afterInteractive" nonce={nonce}>
+       {`
+         (function(c,l,a,r,i,t,y){
+           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+diff --git a/src/lib/csp.ts b/src/lib/csp.ts
+new file mode 100644
+index 0000000..269ecec
+--- /dev/null
++++ b/src/lib/csp.ts
+@@ -0,0 +1,28 @@
++// 'unsafe-inline' en scripts: Next.js, el JSON-LD y el arranque de Clarity usan scripts
++// en línea y el sitio no usa nonces. 'unsafe-eval' solo en desarrollo (recarga en caliente).
++export function contentSecurityPolicy(nonce: string): string {
++  const dev = process.env.NODE_ENV !== "production";
++  return [
++    "default-src 'self'",
++    // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas):
++    // www.clarity.ms/tag/<id> carga el script real desde scripts.clarity.ms.
++    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.clarity.ms https://scripts.clarity.ms`,
++    "style-src 'self' 'unsafe-inline'",
++    // Fuentes de next/font/google se sirven desde el propio sitio.
++    "font-src 'self' data:",
++    // next/image se sirve desde /_next/image (self). Clarity envía su píxel a c.clarity.ms y c.bing.com.
++    "img-src 'self' data: blob: https://c.clarity.ms https://c.bing.com",
++    // Respaldo de farmacias desde el navegador (MINSAL), Turnstile y Clarity. Clarity reparte
++    // la recolección entre subdominios de una letra (a.clarity.ms, k.clarity.ms…), por eso
++    // *.clarity.ms es el valor que documenta Microsoft; se limita a connect-src.
++    "connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms",
++    // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
++    "frame-src https://challenges.cloudflare.com https://www.openstreetmap.org",
++    "frame-ancestors 'self'",
++    "object-src 'none'",
++    "base-uri 'self'",
++    "form-action 'self'",
++    "report-uri /api/csp-report",
++    "report-to csp-endpoint",
++  ].join("; ");
++}
+diff --git a/src/proxy.ts b/src/proxy.ts
+new file mode 100644
+index 0000000..d78db60
+--- /dev/null
++++ b/src/proxy.ts
+@@ -0,0 +1,29 @@
++import { NextRequest, NextResponse } from "next/server";
++import { contentSecurityPolicy } from "@/lib/csp";
++
++// Nonce por petición: obliga a renderizar en el servidor cada página que lo use.
++export function proxy(request: NextRequest) {
++  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
++  const csp = contentSecurityPolicy(nonce);
++
++  const requestHeaders = new Headers(request.headers);
++  requestHeaders.set("x-nonce", nonce);
++  // Next lee la CSP de la petición para poner el nonce en sus propios <script>.
++  requestHeaders.set("Content-Security-Policy", csp);
++
++  const response = NextResponse.next({ request: { headers: requestHeaders } });
++  response.headers.set("Content-Security-Policy-Report-Only", csp);
++  return response;
++}
++
++export const config = {
++  matcher: [
++    {
++      source: "/((?!api|_next/static|_next/image|favicon|icon-|apple-touch-icon|site.webmanifest|robots.txt|sitemap.xml|og-image.png|assets).*)",
++      missing: [
++        { type: "header", key: "next-router-prefetch" },
++        { type: "header", key: "purpose", value: "prefetch" },
++      ],
++    },
++  ],
++};
