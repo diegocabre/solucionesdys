@@ -19,7 +19,7 @@ export default function GestionarAviso({ accion, token, comuna }: { accion: stri
     return (
       <p
         role={ok ? "status" : "alert"}
-        className={`p-4 rounded-md text-sm border ${ok ? "bg-dys-primary/10 text-dys-primary border-dys-primary/40" : "bg-red-500/10 text-red-300 border-red-500/40"}`}
+        className={`p-4 rounded-md text-sm border ${ok ? "border-l-4 border-dys-primary text-dys-text" : "border-l-4 border-red-500 text-red-300"}`}
       >
         {texto}
       </p>

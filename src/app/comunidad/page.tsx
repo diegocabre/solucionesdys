@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, HeartHandshake, House, Lightbulb, Pill, Store } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Comunidad Puerto Varas: servicios útiles para vecinos",
@@ -16,104 +15,89 @@ export const metadata: Metadata = {
   },
 };
 
+// Servicios a la comunidad; externo = abre otro sitio en una pestaña nueva.
+const SERVICIOS = [
+  {
+    titulo: "Farmacias de turno",
+    descripcion:
+      "Mira qué farmacia está de turno hoy en Puerto Varas, Llanquihue, Frutillar y Puerto Montt, con dirección, horario, teléfono y mapa. Y recíbela cada mañana en tu correo.",
+    href: "/comunidad/farmacias-de-turno",
+    accion: "Ver farmacias de turno",
+    externo: false,
+  },
+  {
+    titulo: "Directorio de negocios",
+    descripcion: "Negocios locales de Puerto Varas y alrededores, inscritos por sus dueños. ¿Tienes uno? Aparece gratis.",
+    href: "/comunidad/directorio",
+    accion: "Ver el directorio",
+    externo: false,
+  },
+  {
+    titulo: "Cabañas en el sur",
+    descripcion:
+      "Cabañas del sur de Chile con reserva directa: eliges la cabaña, pagas el abono y tratas con su dueño, sin intermediarios.",
+    href: "https://reservas.solucionesdys.cl",
+    accion: "Ver cabañas",
+    externo: true,
+  },
+];
+
 export default function ComunidadPage() {
   return (
-    <div className="min-h-screen py-16 bg-dys-bg relative overflow-hidden">
-      <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-dys-primary/5 rounded-full blur-3xl -z-10" />
-
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="max-w-3xl mb-14 space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
-            <HeartHandshake className="w-4 h-4 text-dys-primary" aria-hidden="true" />
-            <span className="text-sm font-semibold tracking-wider text-dys-primary uppercase">
-              Servicio a la comunidad
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-bold text-dys-text">
-            Comunidad{" "}
-            <span className="text-dys-primary">Puerto Varas</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-dys-muted font-light leading-relaxed">
-            Herramientas útiles y gratuitas para los vecinos de Puerto Varas y alrededores. Somos de acá y
-            usamos la tecnología para hacerle la vida más fácil a la comunidad.
+    <div className="bg-dys-bg">
+      <section className="pt-16 pb-12 sm:pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <h1 className="firma-punto max-w-[14ch] text-titular-1 font-bold text-dys-text">Comunidad Puerto Varas</h1>
+          <p className="max-w-[56ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
+            Herramientas útiles y gratuitas para los vecinos de Puerto Varas y alrededores. Somos de acá y usamos la
+            tecnología para hacerle la vida más fácil a la comunidad.
           </p>
-        </header>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <Link
-            href="/comunidad/farmacias-de-turno"
-            className="group flex flex-col rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm hover:shadow-xl hover:border-dys-primary transition-all focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
-            <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/10 text-dys-primary">
-              <Pill className="size-6" aria-hidden="true" />
-            </span>
-            <h2 className="mt-5 text-2xl font-bold text-dys-text">Farmacias de turno</h2>
-            <p className="mt-3 grow text-dys-muted leading-relaxed">
-              Mira qué farmacia está de turno hoy en Puerto Varas, Llanquihue, Frutillar y Puerto Montt, con
-              dirección, horario, teléfono y mapa. Y recíbela cada mañana en tu correo.
-            </p>
-            <span className="mt-6 inline-flex items-center gap-2 font-semibold text-dys-primary group-hover:text-dys-text">
-              Ver farmacias
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-          </Link>
-
-          <Link
-            href="/comunidad/directorio"
-            className="group flex flex-col rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm hover:shadow-xl hover:border-dys-primary transition-all focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
-            <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/10 text-dys-primary">
-              <Store className="size-6" aria-hidden="true" />
-            </span>
-            <h2 className="mt-5 text-2xl font-bold text-dys-text">Directorio de negocios</h2>
-            <p className="mt-3 grow text-dys-muted leading-relaxed">
-              Negocios locales de Puerto Varas y alrededores, inscritos por sus dueños. ¿Tienes uno? Aparece gratis.
-            </p>
-            <span className="mt-6 inline-flex items-center gap-2 font-semibold text-dys-primary group-hover:text-dys-text">
-              Ver directorio
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-          </Link>
-
-          <a
-            href="https://reservas.solucionesdys.cl"
-            target="_blank"
-            rel="noopener"
-            className="group flex flex-col rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm hover:shadow-xl hover:border-dys-primary transition-all focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
-            <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/10 text-dys-primary">
-              <House className="size-6" aria-hidden="true" />
-            </span>
-            <h2 className="mt-5 text-2xl font-bold text-dys-text">Cabañas en el sur</h2>
-            <p className="mt-3 grow text-dys-muted leading-relaxed">
-              Cabañas del sur de Chile con reserva directa: eliges la cabaña, pagas el abono y tratas con su
-              dueño, sin intermediarios.
-            </p>
-            <span className="mt-6 inline-flex items-center gap-2 font-semibold text-dys-primary group-hover:text-dys-text">
-              Ver cabañas
-              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
-              <span className="sr-only">(se abre en una pestaña nueva)</span>
-            </span>
-          </a>
-
-          <Link
-            href="/contacto"
-            className="group flex flex-col rounded-3xl border-2 border-dashed border-dys-primary/50 bg-dys-primary/5 p-8 hover:bg-dys-primary/10 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
-            <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/20 text-dys-primary">
-              <Lightbulb className="size-6" aria-hidden="true" />
-            </span>
-            <h2 className="mt-5 text-2xl font-bold text-dys-text">Próximamente más servicios</h2>
-            <p className="mt-3 grow text-dys-muted leading-relaxed">
-              Estamos empezando. ¿Qué información local te gustaría tener a mano? Cuéntanos tu idea.
-            </p>
-            <span className="mt-6 inline-flex items-center gap-2 font-semibold text-dys-primary group-hover:text-dys-text">
-              Proponer un servicio
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-          </Link>
         </div>
-      </div>
+      </section>
+
+      {/* Servicios como lista tipográfica, igual que los sitios reales de la home */}
+      <section aria-label="Servicios a la comunidad" className="pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ul className="border-t border-dys-border">
+            {SERVICIOS.map((s) => (
+              <li key={s.titulo} className="border-b border-dys-border py-8 sm:py-10">
+                <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-4 lg:gap-12">
+                  <h2 className="text-titular-2 font-bold text-dys-text">{s.titulo}</h2>
+                  <div className="space-y-4">
+                    <p className="max-w-[60ch] text-lg text-dys-muted leading-relaxed">{s.descripcion}</p>
+                    {s.externo ? (
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener"
+                        className="inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
+                      >
+                        {s.accion}
+                        <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={s.href}
+                        className="inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
+                      >
+                        {s.accion}
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-10 max-w-[60ch] text-lg text-dys-muted leading-relaxed">
+            Estamos empezando. ¿Qué información local te gustaría tener a mano?{" "}
+            <Link href="/contacto" className="font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text">
+              Propón un servicio
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

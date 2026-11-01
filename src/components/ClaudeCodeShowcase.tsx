@@ -59,14 +59,9 @@ function TerminalDemo() {
   const terminado = mostrar >= total;
 
   return (
-    <div className="rounded-3xl overflow-hidden bg-dys-surface shadow-2xl border border-dys-text/10">
-      <div className="flex items-center gap-3 bg-dys-border px-4 py-3">
-        <div className="flex gap-1.5" aria-hidden="true">
-          <span className="size-3 rounded-full bg-red-500/80" />
-          <span className="size-3 rounded-full bg-dys-accent/80" />
-          <span className="size-3 rounded-full bg-dys-primary/80" />
-        </div>
-        <span className="text-xs text-dys-muted font-mono">claude — mi-proyecto</span>
+    <div className="rounded-xl overflow-hidden bg-dys-surface border border-dys-border">
+      <div className="border-b border-dys-border px-4 py-3">
+        <span className="text-sm text-dys-muted font-mono">claude, en mi-proyecto</span>
       </div>
 
       <div role="tablist" aria-label="Ejemplos de uso" className="flex flex-wrap gap-2 px-4 pt-4">
@@ -135,7 +130,7 @@ function FlujoInteractivo() {
   const Icono = ICONOS_FLUJO[activo];
 
   return (
-    <div className="rounded-3xl bg-dys-surface border border-dys-border shadow-sm p-6 sm:p-8">
+    <div className="rounded-xl bg-dys-surface border border-dys-border p-6 sm:p-8">
       <ol className="relative grid grid-cols-5 gap-2">
         {/* Línea que conecta los pasos */}
         <span aria-hidden="true" className="absolute left-[10%] right-[10%] top-6 h-0.5 bg-dys-border" />
@@ -182,17 +177,17 @@ function FlujoInteractivo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="flex gap-4 rounded-2xl bg-dys-primary/10 p-5 sm:p-6"
+            className="flex gap-4 border-l-4 border-dys-primary pl-5 sm:pl-6 py-1"
           >
-            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl bg-dys-surface border border-dys-border text-dys-primary">
+            <span className="hidden sm:grid size-12 shrink-0 place-items-center rounded-xl border border-dys-border text-dys-text">
               <Icono className="size-6" aria-hidden="true" />
             </span>
             <div className="space-y-3">
               <h3 className="text-lg font-bold text-dys-text">
-                {activo + 1}. {paso.titulo} <span className="font-sans text-sm font-medium text-dys-muted">· {paso.corto}</span>
+                {activo + 1}. {paso.titulo}: <span className="font-sans text-base font-medium text-dys-muted">{paso.corto}</span>
               </h3>
               <p className="text-dys-text leading-relaxed">{paso.detalle}</p>
-              <p className="text-sm text-dys-primary italic">{paso.ejemplo}</p>
+              <p className="text-dys-muted italic">{paso.ejemplo}</p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -212,7 +207,7 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
       type="button"
       onClick={() => setVolteada((v) => !v)}
       aria-pressed={volteada}
-      className="group h-44 w-full text-left [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary rounded-2xl"
+      className="group h-44 w-full text-left [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary rounded-xl"
     >
       <motion.div
         className="relative size-full [transform-style:preserve-3d]"
@@ -220,15 +215,15 @@ function TarjetaGiratoria({ titulo, resumen, detalle }: { titulo: string; resume
         transition={{ duration: reducir ? 0 : 0.5 }}
       >
         {/* El nombre del botón es el texto de la cara visible; la otra se oculta al lector de pantalla. */}
-        <div aria-hidden={volteada} className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-dys-surface border border-dys-border p-5 text-dys-text [backface-visibility:hidden]">
-          <span className="font-mono text-lg text-dys-primary">{titulo}</span>
+        <div aria-hidden={volteada} className="absolute inset-0 flex flex-col justify-between rounded-xl bg-dys-surface border border-dys-border p-5 text-dys-text [backface-visibility:hidden]">
+          <span className="font-mono text-lg text-dys-text">{titulo}</span>
           <div>
             <p className="font-semibold">{resumen}</p>
-            <p className="mt-1 text-xs text-dys-muted group-hover:text-dys-primary">Toca para ver más</p>
+            <p className="mt-1 text-sm text-dys-muted underline underline-offset-4">Toca para ver más</p>
           </div>
         </div>
-        <div aria-hidden={!volteada} className="absolute inset-0 overflow-auto rounded-2xl border border-dys-primary bg-dys-surface p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <p className="font-mono text-xs font-semibold text-dys-primary mb-2">{titulo}</p>
+        <div aria-hidden={!volteada} className="absolute inset-0 overflow-auto rounded-xl border border-dys-text/40 bg-dys-surface p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <p className="font-mono text-sm font-semibold text-dys-text mb-2">{titulo}</p>
           <p className="text-sm leading-relaxed text-dys-text">{detalle}</p>
         </div>
       </motion.div>
@@ -241,7 +236,7 @@ export default function ClaudeCodeShowcase() {
     <div className="space-y-16">
       <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="space-y-5">
-          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">
+          <h3 className="text-titular-3 font-semibold text-dys-text">
             Míralo trabajar, paso a paso
           </h3>
           <p className="text-dys-muted leading-relaxed">
@@ -249,12 +244,12 @@ export default function ClaudeCodeShowcase() {
             comprueba que funcionen. Elige un ejemplo y observa cómo lo resuelve.
           </p>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-dys-muted mb-2">Dónde funciona</p>
+            <p className="text-sm font-semibold text-dys-text mb-2">Dónde funciona</p>
             <ul className="flex flex-wrap gap-2">
               {CLAUDE_CODE_SUPERFICIES.map((s) => (
                 <li
                   key={s}
-                  className="rounded-full border border-dys-primary/40 bg-dys-primary/10 px-3 py-1 text-sm text-dys-primary"
+                  className="rounded-full border border-dys-border px-3 py-1 text-sm text-dys-text"
                 >
                   {s}
                 </li>
@@ -267,7 +262,7 @@ export default function ClaudeCodeShowcase() {
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">Cómo trabaja</h3>
+          <h3 className="text-titular-3 font-semibold text-dys-text">Cómo trabaja</h3>
           <p className="text-dys-muted leading-relaxed">Toca cada paso para ver qué pasa por dentro.</p>
         </div>
         <FlujoInteractivo />
@@ -275,7 +270,7 @@ export default function ClaudeCodeShowcase() {
 
       <div className="space-y-6">
         <div className="max-w-2xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-bold text-dys-text">
+          <h3 className="text-titular-3 font-semibold text-dys-text">
             Lo que lo hace potente
           </h3>
           <p className="text-dys-muted leading-relaxed">Voltea las tarjetas para conocer cada pieza.</p>

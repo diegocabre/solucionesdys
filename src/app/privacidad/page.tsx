@@ -5,10 +5,8 @@ export default function PrivacidadPage() {
     <div className="bg-dys-bg min-h-screen py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-3">
-          <h1 className="text-4xl font-bold text-dys-text">
-            Política de Privacidad y Cookies
-          </h1>
-          <p className="text-sm text-dys-muted">Última actualización: {LAST_UPDATED}</p>
+          <h1 className="firma-punto text-titular-2 font-bold text-dys-text">Política de privacidad y cookies</h1>
+          <p className="text-dys-muted">Última actualización: {LAST_UPDATED}</p>
         </div>
 
         <div className="space-y-10 text-dys-text leading-relaxed">

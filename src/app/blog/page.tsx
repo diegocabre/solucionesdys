@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Clock, Rss } from "lucide-react";
+import { Rss } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import { formatPostDate, getPosts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site";
@@ -45,59 +45,40 @@ export default function BlogPage() {
   return (
     <div className="bg-dys-bg py-16">
       <JsonLd data={jsonLd} />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <header className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-dys-primary uppercase bg-dys-primary/10 px-3 py-1 rounded-full">
-            Blog
-          </span>
-          <h1 className="text-4xl lg:text-5xl font-bold text-dys-text">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <header className="space-y-6 pt-8">
+          <h1 className="firma-punto max-w-[18ch] text-titular-1 font-bold text-dys-text">
             Guías para vender más con tu sitio web
           </h1>
-          <p className="text-dys-muted font-light">
+          <p className="max-w-[56ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
             Respuestas claras para negocios de Puerto Varas, Llanquihue, Frutillar y Puerto Montt: precios, Google y qué
             sitio te conviene.
           </p>
-          <a
-            href="/blog/rss.xml"
-            className="inline-flex items-center gap-1 text-sm text-dys-muted hover:text-dys-text"
-          >
+          <a href="/blog/rss.xml" className="inline-flex items-center gap-1.5 text-dys-muted underline underline-offset-4 hover:text-dys-text">
             <Rss className="w-4 h-4" aria-hidden="true" /> Suscríbete por RSS
           </a>
         </header>
 
-        <ul className="grid gap-6 md:grid-cols-2">
+        {/* Lista de artículos con divisores, como las guías de la home */}
+        <ul className="border-t border-dys-border">
           {posts.map((post) => (
-            <li key={post.slug}>
-              <article className="h-full bg-dys-surface rounded-3xl border border-dys-border shadow-xs hover:shadow-xl transition-all p-8 flex flex-col gap-4">
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-dys-primary/10 text-dys-primary">
-                      {tag}
-                    </span>
-                  ))}
-                  {post.draft && (
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-dys-accent/10 text-dys-accent">Borrador</span>
-                  )}
-                </div>
-                <h2 className="text-2xl font-bold text-dys-text">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-dys-primary transition-colors">
-                    {post.title}
-                  </Link>
-                </h2>
-                <p className="text-dys-muted font-light leading-relaxed grow">{post.description}</p>
-                <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-dys-muted">
-                  <span className="inline-flex items-center gap-2">
-                    <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-                    <span aria-hidden="true">·</span>
-                    <Clock className="w-4 h-4" aria-hidden="true" /> {post.readingMinutes} min de lectura
-                  </span>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 font-semibold text-dys-primary hover:text-dys-text"
-                    aria-label={`Leer: ${post.title}`}
-                  >
-                    Leer <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                  </Link>
+            <li key={post.slug} className="border-b border-dys-border">
+              <article className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-3 lg:gap-12 py-8 sm:py-10">
+                <p className="text-dys-muted">
+                  <time dateTime={post.date}>{formatPostDate(post.date)}</time>, {post.readingMinutes} min de lectura
+                  {post.draft && <span className="ml-2 font-semibold text-dys-text">(borrador)</span>}
+                  <span className="mt-1 block text-sm">{post.tags.slice(0, 3).join(", ")}</span>
+                </p>
+                <div className="space-y-3">
+                  <h2 className="text-titular-3 font-semibold text-dys-text">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="underline-offset-4 decoration-2 hover:underline hover:decoration-dys-primary"
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <p className="max-w-[65ch] text-lg text-dys-muted leading-relaxed">{post.description}</p>
                 </div>
               </article>
             </li>

@@ -1,7 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { AlertTriangle, ArrowUpRight, RefreshCw } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { NoticiasResponse } from "@/lib/ia-noticias";
 
@@ -11,15 +10,6 @@ type Estado =
   | { tipo: "cargando" }
   | { tipo: "error" }
   | { tipo: "listo"; data: NoticiasResponse; ahora: number };
-
-const COLOR_FUENTE: Record<string, string> = {
-  anthropic: "bg-dys-primary/15 text-dys-primary",
-  "claude-code": "bg-dys-text/10 text-dys-text",
-  openai: "bg-dys-text/10 text-dys-text",
-  deepmind: "bg-dys-link/15 text-dys-link",
-  google: "bg-dys-link/15 text-dys-link",
-  mit: "bg-red-500/10 text-red-300",
-};
 
 const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
 
@@ -64,10 +54,12 @@ export default function NoticiasIA() {
 
   if (estado.tipo === "cargando") {
     return (
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
+      <div className="grid gap-x-10 md:grid-cols-2" aria-busy="true">
         <span className="sr-only">Cargando noticias…</span>
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="h-48 rounded-3xl bg-dys-border animate-pulse" />
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="border-t border-dys-border py-6">
+            <div className="h-28 rounded-md bg-dys-border/60 animate-pulse motion-reduce:animate-none" />
+          </div>
         ))}
       </div>
     );
@@ -75,9 +67,8 @@ export default function NoticiasIA() {
 
   if (estado.tipo === "error") {
     return (
-      <div className="rounded-3xl border border-dys-accent/40 bg-dys-accent/10 p-8 text-center space-y-4">
-        <AlertTriangle className="w-8 h-8 text-dys-accent mx-auto" aria-hidden="true" />
-        <p className="text-dys-text font-medium">No pudimos cargar las noticias en este momento.</p>
+      <div role="alert" className="border-l-4 border-dys-accent py-2 pl-6 space-y-4">
+        <p className="text-dys-text font-medium">No pudimos cargar las noticias. Revisa tu conexión y vuelve a intentarlo.</p>
         <button
           type="button"
           onClick={reintentar}
@@ -116,63 +107,47 @@ export default function NoticiasIA() {
         ))}
       </div>
 
-      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {visibles.map((n) => (
-            <motion.li
-              key={n.id}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-              className="flex flex-col rounded-3xl bg-dys-surface border border-dys-border shadow-sm hover:shadow-lg transition-shadow p-6"
+      {/* Lista en dos columnas con divisores: sin tarjetas ni animación al filtrar */}
+      <ul className="grid gap-x-10 md:grid-cols-2">
+        {visibles.map((n) => (
+          <li key={n.id} className="flex min-w-0 flex-col border-t border-dys-border pt-6 pb-8 [overflow-wrap:anywhere]">
+            <p className="text-sm text-dys-muted">
+              {n.fuente}, <time dateTime={n.fecha}>{hace(n.fecha, ahora)}</time>
+            </p>
+            <h3 lang="en" className="mt-2 font-display text-xl font-semibold text-dys-text leading-snug">
+              {n.titulo}
+            </h3>
+            {n.resumen && (
+              <p lang="en" className="mt-3 grow leading-relaxed text-dys-muted line-clamp-4">
+                {n.resumen}
+              </p>
+            )}
+            <a
+              href={n.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 self-start font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
             >
-              <div className="flex items-center justify-between gap-3">
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${COLOR_FUENTE[n.fuenteId] ?? "bg-dys-text/10 text-dys-text"}`}
-                >
-                  {n.fuente}
-                </span>
-                <time dateTime={n.fecha} className="text-xs text-dys-muted">
-                  {hace(n.fecha, ahora)}
-                </time>
-              </div>
-              <h3 lang="en" className="mt-4 text-lg font-bold text-dys-text leading-snug">
-                {n.titulo}
-              </h3>
-              {n.resumen && (
-                <p lang="en" className="mt-3 grow text-sm leading-relaxed text-dys-muted line-clamp-4">
-                  {n.resumen}
-                </p>
-              )}
-              <a
-                href={n.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-dys-primary hover:text-dys-text transition-colors"
-              >
-                Leer en {n.fuente}
-                <ArrowUpRight className="size-4" aria-hidden="true" />
-              </a>
-            </motion.li>
-          ))}
-        </AnimatePresence>
+              Leer en {n.fuente}
+              <span className="sr-only"> (abre en una pestaña nueva)</span>
+            </a>
+          </li>
+        ))}
       </ul>
 
       {!expandido && filtro === "todas" && lista.length > VISIBLES_AL_INICIO && (
-        <div className="text-center">
+        <div>
           <button
             type="button"
             onClick={() => setExpandido(true)}
-            className="rounded-md border-2 border-dys-primary px-5 py-2 text-sm font-medium text-dys-primary hover:bg-dys-primary hover:text-dys-on-primary transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
+            className="rounded-lg border-2 border-dys-primary px-5 py-2.5 font-semibold text-dys-text hover:bg-dys-primary hover:text-dys-on-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary focus-visible:ring-offset-2"
           >
             Ver {lista.length - VISIBLES_AL_INICIO} noticias más
           </button>
         </div>
       )}
 
-      <p className="text-xs text-dys-muted leading-relaxed">
+      <p className="text-sm text-dys-muted leading-relaxed">
         Titulares en inglés, tal como los publica cada fuente oficial. Se actualiza cada hora. Fuentes:{" "}
         {data.fuentes.map((f) => f.nombre).join(", ")}.
         {fuentesCaidas.length > 0 && (

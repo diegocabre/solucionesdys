@@ -9,8 +9,8 @@ import { inscribirNegocio, type FichaState } from "@/app/comunidad/directorio/ac
 const initialState: FichaState = { ok: false, mensaje: "" };
 
 const campo =
-  "w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-sm";
-const etiqueta = "block text-xs font-semibold text-dys-muted mb-1 uppercase tracking-wider";
+  "w-full rounded-lg border border-dys-border bg-dys-surface p-3 outline-none focus:ring-2 focus:ring-dys-primary/50 focus:border-dys-primary transition-all text-dys-text text-base";
+const etiqueta = "block mb-1.5 font-semibold text-dys-text";
 const opcional = <span className="normal-case font-normal">(opcional)</span>;
 
 interface Props {
@@ -30,7 +30,7 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
 
   if (state.ok) {
     return (
-      <div role="status" className="space-y-4 p-6 bg-dys-primary/10 text-dys-primary rounded-2xl border border-dys-primary/40">
+      <div role="status" className="space-y-4 p-6 rounded-xl border-l-4 border-dys-primary bg-dys-surface text-dys-text">
         <p>{state.mensaje}</p>
         <Link href="/comunidad/directorio" className="inline-block font-semibold underline underline-offset-2">
           Ver el directorio
@@ -138,7 +138,7 @@ export default function InscribirNegocioForm({ rubros, comunas }: Props) {
       <Button
         type="submit"
         disabled={pending}
-        className="w-full justify-center bg-dys-primary hover:bg-dys-primary/85 border-dys-primary"
+        size="lg" className="w-full"
       >
         {pending ? "Enviando..." : "Inscribir mi negocio gratis"}
       </Button>

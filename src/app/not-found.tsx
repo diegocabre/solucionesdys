@@ -1,18 +1,16 @@
-import Link from "next/link";
+import Button from "@/components/Button";
 
 // Reemplaza la 404 por defecto de Next, que trae fondo blanco en línea.
 export default function NotFound() {
   return (
-    <section className="max-w-xl mx-auto px-4 py-32 text-center space-y-6">
-      <p className="text-sm font-semibold uppercase tracking-widest text-dys-primary">Error 404</p>
-      <h1 className="text-4xl font-bold text-dys-text">No encontramos esta página</h1>
-      <p className="text-dys-muted">Puede que el enlace esté mal escrito o que la página ya no exista.</p>
-      <Link
-        href="/"
-        className="inline-flex items-center rounded-md bg-dys-primary px-5 py-3 font-semibold text-dys-on-primary hover:bg-dys-primary/85 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-      >
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32 space-y-8">
+      <h1 className="firma-punto max-w-[16ch] text-titular-1 font-bold text-dys-text">No encontramos esta página</h1>
+      <p className="max-w-[52ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
+        Puede que el enlace esté mal escrito o que la página ya no exista. Error 404.
+      </p>
+      <Button size="lg" href="/">
         Volver al inicio
-      </Link>
+      </Button>
     </section>
   );
 }

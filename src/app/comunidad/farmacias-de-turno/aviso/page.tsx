@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BellRing } from "lucide-react";
 import GestionarAviso from "@/components/GestionarAviso";
 import { nombreComuna } from "@/lib/aviso-farmacias";
 
@@ -19,13 +18,10 @@ export default async function AvisoPage({ searchParams }: { searchParams: Promis
   return (
     <div className="min-h-[70vh] py-16 bg-dys-bg">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
-        <div className="rounded-3xl bg-dys-surface border border-dys-border p-8 shadow-sm space-y-5">
-          <span className="grid size-12 place-items-center rounded-xl bg-dys-primary/10 text-dys-primary">
-            <BellRing className="size-6" aria-hidden="true" />
-          </span>
+        <div className="rounded-xl bg-dys-surface border border-dys-border p-8 space-y-5">
           {valida ? (
             <>
-              <h1 className="text-2xl sm:text-3xl font-bold text-dys-text">
+              <h1 className="text-titular-2 font-bold text-dys-text">
                 {accion === "confirmar" ? `Aviso de farmacia de turno en ${nombre}` : "Dejar de recibir el aviso"}
               </h1>
               <p className="text-dys-muted leading-relaxed">
@@ -37,12 +33,12 @@ export default async function AvisoPage({ searchParams }: { searchParams: Promis
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-bold text-dys-text">Enlace no válido</h1>
+              <h1 className="text-titular-2 font-bold text-dys-text">Enlace no válido</h1>
               <p className="text-dys-muted">Revisa que hayas abierto el enlace completo del correo.</p>
             </>
           )}
-          <Link href="/comunidad/farmacias-de-turno" className="inline-block text-sm font-semibold text-dys-primary hover:text-dys-text">
-            ← Ver farmacias de turno
+          <Link href="/comunidad/farmacias-de-turno" className="inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text">
+            Volver a farmacias de turno
           </Link>
         </div>
       </div>

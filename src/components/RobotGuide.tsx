@@ -150,7 +150,7 @@ export default function RobotGuide() {
   const hablando = !reducir && letras < tema.texto.length;
 
   return (
-    <div className="relative rounded-3xl bg-dys-surface border border-dys-border shadow-xl p-6 sm:p-8">
+    <div className="relative rounded-xl bg-dys-surface border border-dys-border p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
         <div className="shrink-0">
           <Robot hablando={hablando} />
@@ -159,7 +159,7 @@ export default function RobotGuide() {
 
         {/* Globo de diálogo */}
         <div className="relative grow w-full">
-          <div className="dys-light relative rounded-2xl bg-dys-bg text-dys-text p-5 sm:p-6 min-h-44 sm:min-h-52">
+          <div className="dys-light relative rounded-xl bg-dys-bg text-dys-text p-5 sm:p-6 min-h-44 sm:min-h-52">
             <span
               aria-hidden="true"
               className="absolute -top-2 left-1/2 -translate-x-1/2 sm:top-8 sm:-left-2 sm:translate-x-0 size-4 rotate-45 bg-dys-bg"

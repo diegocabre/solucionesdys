@@ -1,16 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { CATEGORIAS_IA, IA_NOVEDADES, type CategoriaIA } from "@/lib/ia-content";
-
-const COLOR_CATEGORIA: Record<CategoriaIA, string> = {
-  Agentes: "bg-dys-text/10 text-dys-text",
-  Herramientas: "bg-dys-primary/15 text-dys-primary",
-  Modelos: "bg-dys-text/10 text-dys-text",
-  "Uso responsable": "bg-dys-accent/10 text-dys-accent",
-};
 
 export default function IaNovedades() {
   const [filtro, setFiltro] = useState<CategoriaIA | "Todas">("Todas");
@@ -36,39 +27,25 @@ export default function IaNovedades() {
         ))}
       </div>
 
-      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {lista.map((n) => (
-            <motion.li
-              key={n.titulo}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-              className="flex flex-col rounded-3xl bg-dys-surface border border-dys-border shadow-sm hover:shadow-lg transition-shadow p-6"
-            >
-              <span
-                className={`self-start rounded-full px-3 py-1 text-xs font-semibold ${COLOR_CATEGORIA[n.categoria]}`}
+      <ul className="grid gap-x-10 md:grid-cols-2">
+        {lista.map((n) => (
+          <li key={n.titulo} className="flex min-w-0 flex-col border-t border-dys-border pt-6 pb-8">
+            <p className="text-sm text-dys-muted">{n.categoria}</p>
+            <h3 className="mt-2 font-display text-xl font-semibold text-dys-text leading-snug">{n.titulo}</h3>
+            <p className="mt-3 grow leading-relaxed text-dys-muted">{n.resumen}</p>
+            {n.fuente && (
+              <a
+                href={n.fuente.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 self-start font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
               >
-                {n.categoria}
-              </span>
-              <h3 className="mt-4 text-lg font-bold text-dys-text leading-snug">{n.titulo}</h3>
-              <p className="mt-3 grow text-sm leading-relaxed text-dys-muted">{n.resumen}</p>
-              {n.fuente && (
-                <a
-                  href={n.fuente.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-dys-primary hover:text-dys-text transition-colors"
-                >
-                  {n.fuente.etiqueta}
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              )}
-            </motion.li>
-          ))}
-        </AnimatePresence>
+                {n.fuente.etiqueta}
+                <span className="sr-only"> (abre en una pestaña nueva)</span>
+              </a>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
