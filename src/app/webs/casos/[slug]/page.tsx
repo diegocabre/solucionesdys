@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, Quote, TrendingUp } from "lucide-react";
+import Button from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import { getCasoVisible, getCasosVisibles } from "@/lib/casos";
 import { SITE_URL } from "@/lib/site";
@@ -84,76 +84,74 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <div className="bg-dys-bg py-12 pb-24">
+    <div className="bg-dys-bg pt-12 pb-24">
       <JsonLd data={jsonLd} />
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
         <nav aria-label="Migas de pan" className="text-sm text-dys-muted">
-          <Link href="/webs" className="hover:text-dys-text">
+          <Link href="/webs" className="underline underline-offset-4 hover:text-dys-text">
             Sitios web
           </Link>{" "}
           / <span className="text-dys-text">{caso.cliente}</span>
         </nav>
 
-        <header className="space-y-4">
+        <header className="space-y-5">
           {!caso.published && (
-            <p className="inline-block rounded-full bg-dys-accent/10 text-dys-accent text-xs font-semibold px-3 py-1">
+            <p className="text-sm font-semibold text-dys-muted">
               Borrador: completa los datos en src/lib/casos.ts y cambia published a true
             </p>
           )}
-          <p className="text-sm font-semibold text-dys-primary uppercase tracking-wider">
-            {caso.rubro} · {caso.ciudad}
+          <h1 className="firma-punto text-titular-1 font-bold text-dys-text">{caso.cliente}</h1>
+          <p className="text-lg sm:text-xl text-dys-muted">
+            {caso.rubro}, en {caso.ciudad}
           </p>
-          <h1 className="text-4xl lg:text-5xl font-bold text-dys-text">{caso.cliente}</h1>
           <a
             href={caso.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-semibold text-dys-text underline decoration-dys-link underline-offset-4 hover:text-dys-link"
+            className="inline-block font-semibold text-dys-text underline decoration-dys-link decoration-2 underline-offset-4 hover:text-dys-link"
           >
-            Visitar el sitio <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+            Visitar el sitio de {caso.cliente}
+            <span className="sr-only"> (abre en una pestaña nueva)</span>
           </a>
         </header>
 
-        <div className="relative aspect-[24/11] rounded-3xl overflow-hidden border border-dys-border/60 shadow-xl bg-dys-surface">
+        <div className="relative aspect-[24/11] rounded-xl overflow-hidden border border-dys-border">
           <Image
             src={caso.imagen}
             alt={`Sitio web de ${caso.cliente} desarrollado por Soluciones DyS`}
             fill
             priority
-            sizes="(min-width: 896px) 896px, 100vw"
+            sizes="(min-width: 1024px) 976px, 100vw"
             className="object-cover object-top"
           />
         </div>
 
         <section aria-labelledby="resultados" className="space-y-6">
-          <h2 id="resultados" className="text-2xl font-bold text-dys-text">
+          <h2 id="resultados" className="text-titular-2 font-bold text-dys-text">
             Resultados
           </h2>
-          <ul className="grid gap-4 sm:grid-cols-2">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 border-t border-dys-border">
             {caso.resultados.map((r) => (
-              <li key={r.metrica} className="bg-dys-surface rounded-2xl border border-dys-border p-5 space-y-2">
-                <p className="flex items-center gap-2 text-sm text-dys-muted">
-                  <TrendingUp className="w-4 h-4 text-dys-primary" aria-hidden="true" />
-                  {r.metrica}
-                </p>
-                <p className="text-2xl font-bold text-dys-text">
-                  {r.antes} <span className="text-dys-primary">→</span> {r.despues}
-                </p>
-                <p className="text-xs text-dys-muted">{r.periodo}</p>
-              </li>
+              <div key={r.metrica} className="border-b border-dys-border py-6">
+                <dt className="text-dys-muted">{r.metrica}</dt>
+                <dd className="mt-2 font-display text-titular-3 font-semibold text-dys-text">
+                  {r.antes} → {r.despues}
+                </dd>
+                <dd className="mt-1 text-sm text-dys-muted">{r.periodo}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </section>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2">
           <section aria-labelledby="problema" className="space-y-3">
-            <h2 id="problema" className="text-2xl font-bold text-dys-text">
+            <h2 id="problema" className="text-titular-3 font-semibold text-dys-text">
               El desafío
             </h2>
             <p className="text-dys-text leading-relaxed">{caso.problema}</p>
           </section>
           <section aria-labelledby="solucion" className="space-y-3">
-            <h2 id="solucion" className="text-2xl font-bold text-dys-text">
+            <h2 id="solucion" className="text-titular-3 font-semibold text-dys-text">
               Lo que hicimos
             </h2>
             <p className="text-dys-text leading-relaxed">{caso.solucion}</p>
@@ -162,26 +160,26 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
         </div>
 
         {caso.testimonio && (
-          <figure className="bg-dys-surface rounded-3xl border border-dys-border p-8 space-y-4">
-            <Quote className="w-8 h-8 text-dys-primary" aria-hidden="true" />
-            <blockquote className="text-lg text-dys-text leading-relaxed">{caso.testimonio.texto}</blockquote>
-            <figcaption className="text-sm text-dys-muted">
+          <figure className="border-l-4 border-dys-text/30 pl-6 sm:pl-8 space-y-4">
+            <blockquote className="font-display text-titular-3 font-medium text-dys-text">
+              {caso.testimonio.texto}
+            </blockquote>
+            <figcaption className="text-dys-muted">
               <strong className="text-dys-text">{caso.testimonio.autor}</strong>, {caso.testimonio.cargo}
             </figcaption>
           </figure>
         )}
 
-        <section className="dys-light bg-dys-bg rounded-3xl p-8 sm:p-12 text-center text-dys-text space-y-4">
-          <h2 className="text-3xl font-bold">¿Quieres resultados así para tu negocio?</h2>
-          <p className="text-dys-muted font-light max-w-xl mx-auto">
+        <section aria-labelledby="cierre-caso" className="dys-light bg-dys-bg rounded-xl p-8 sm:p-12 text-dys-text space-y-5">
+          <h2 id="cierre-caso" className="text-titular-2 font-bold">
+            ¿Quieres resultados así para tu negocio?
+          </h2>
+          <p className="max-w-xl text-lg text-dys-muted">
             Cuéntanos qué necesitas y te respondemos con una propuesta clara, sin compromiso.
           </p>
-          <Link
-            href="/contacto"
-            className="inline-flex items-center justify-center h-11 px-8 mt-2 rounded-md bg-dys-primary text-dys-on-primary text-lg font-medium hover:bg-dys-primary/85 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
+          <Button size="lg" href="/contacto">
             Cotizar mi sitio
-          </Link>
+          </Button>
         </section>
       </article>
     </div>
