@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="dys-light bg-dys-bg text-dys-text border-t border-dys-border pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-[4fr_3fr_5fr] gap-10 mb-10">
           <div className="space-y-4">
             <Image
               src="/assets/img/logo/dys-logo-para-fondo-claro.svg"
@@ -24,14 +24,14 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-lg font-medium">Servicios</h2>
+            <h2 className="text-base font-semibold">Servicios</h2>
             <ul className="text-dys-muted text-sm">
               <li>
                 <Link
                   href="/webs"
                   className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
-                  Diseño de Sitios Web
+                  Diseño de sitios web
                 </Link>
               </li>
               <li>
@@ -47,7 +47,7 @@ export default function Footer() {
                   href="/partners"
                   className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >
-                  Nuestros Partners
+                  Nuestros partners
                 </Link>
               </li>
               <li>
@@ -78,18 +78,21 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-lg font-medium">Contacto</h2>
-            <ul className="text-dys-muted text-sm">
+            <h2 className="text-base font-semibold">Contacto</h2>
+            {/* Correo y teléfono en grande: son lo que se busca al llegar al pie de página. */}
+            <ul className="font-display text-xl sm:text-2xl font-semibold text-dys-text">
               <li>
-                <a href="mailto:contacto@solucionesdys.cl" className="inline-flex min-h-11 items-center hover:text-dys-primary transition">
+                <a href="mailto:contacto@solucionesdys.cl" className="inline-flex min-h-11 items-center break-all underline-offset-4 decoration-2 hover:underline hover:decoration-dys-primary">
                   contacto@solucionesdys.cl
                 </a>
               </li>
               <li>
-                <a href="tel:+56947637541" className="inline-flex min-h-11 items-center hover:text-dys-primary transition">
+                <a href="tel:+56947637541" className="inline-flex min-h-11 items-center underline-offset-4 decoration-2 hover:underline hover:decoration-dys-primary">
                   +56 9 4763 7541
                 </a>
               </li>
+            </ul>
+            <ul className="text-dys-muted text-sm">
               <li className="flex min-h-11 items-center">Puerto Varas, Chile</li>
             </ul>
             <div className="flex gap-1 -ml-2.5">
@@ -136,7 +139,7 @@ export default function Footer() {
           </p>
           <div className="mt-4 md:mt-0 flex flex-wrap justify-center gap-x-4">
             <Link href="/terminos" className="inline-flex min-h-11 items-center hover:text-dys-text transition">
-              Términos de Servicio
+              Términos de servicio
             </Link>
             <Link href="/privacidad" className="inline-flex min-h-11 items-center hover:text-dys-text transition">
               Privacidad
@@ -146,7 +149,7 @@ export default function Footer() {
               onClick={() => window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))}
               className="inline-flex min-h-11 items-center hover:text-dys-text transition"
             >
-              Preferencias de Cookies
+              Preferencias de cookies
             </button>
           </div>
         </div>

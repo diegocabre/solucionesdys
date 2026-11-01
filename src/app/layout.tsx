@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Familjen_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,9 +10,9 @@ import StructuredData from "@/components/StructuredData";
 import AttributionTracker from "@/components/AttributionTracker";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-// Fuente de titulares (h1–h3) del kit de marca; Poppins no es variable, se cargan los pesos usados.
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+// Fuente de titulares (h1–h3), elegida en la fase 0 del rediseño (docs/rediseno-plan.md). Es variable.
+const titulares = Familjen_Grotesk({ subsets: ["latin"], variable: "--font-titulares" });
 
 const title = "Diseño y Desarrollo Web en Puerto Varas | Soluciones DyS";
 const description =
@@ -74,11 +74,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
+    <html lang="es" className={`${inter.variable} ${titulares.variable} scroll-smooth`}>
       <body className="antialiased min-h-screen flex flex-col">
         <StructuredData />
         <Navbar />
-        <main className="grow pt-16">
+        {/* Compensa la barra fija (h-20 + borde) para que no tape el inicio de cada página. */}
+        <main className="grow pt-20">
           {children}
         </main>
         <Footer />

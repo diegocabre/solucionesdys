@@ -9,10 +9,12 @@
   --dys-border: #31302E;
   --dys-text: #F6F1E7;
   --dys-text-muted: #B5B0A3;
-  --dys-primary: #34D399;      /* botones principales, destacados */
+  /* Roles (docs/rediseno-plan.md): el verde es solo para acciones (botones, estado activo);
+     el amarillo es la firma, el punto del logo "DyS.", y se usa solo en .firma-punto. */
+  --dys-primary: #34D399;      /* acciones: botones y estado activo */
   --dys-on-primary: #000000;   /* texto sobre el verde */
   --dys-link: #4C9AFF;         /* enlaces, elementos secundarios */
-  --dys-accent: #FFD60A;       /* acento, usar poco (puntos, etiquetas) */
+  --dys-accent: #FFD60A;       /* firma: el punto del logo; nunca para texto */
   --dys-on-accent: #000000;
   color-scheme: dark;
 }
@@ -33,9 +35,19 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-poppins);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: var(--font-titulares);
+
+  /* Escala de titulares (Elements of Typographic Style): se encoge en móvil sin saltos. */
+  --text-titular-1: clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem);
+  --text-titular-1--line-height: 0.98;
+  --text-titular-1--letter-spacing: -0.025em;
+  --text-titular-2: clamp(2.25rem, 1.6rem + 2.2vw, 3.5rem);
+  --text-titular-2--line-height: 1.05;
+  --text-titular-2--letter-spacing: -0.02em;
+  --text-titular-3: clamp(1.5rem, 1.3rem + 0.8vw, 1.75rem);
+  --text-titular-3--line-height: 1.2;
 
   /* Clases Tailwind de la marca: bg-dys-bg, text-dys-text, bg-dys-primary, etc. */
   --color-dys-bg: var(--dys-bg);
@@ -50,16 +62,16 @@
   --color-dys-on-accent: var(--dys-on-accent);
 }
 
-/* Titulares: Poppins (kit de marca) en todos los h1–h3; Inter queda para el texto corrido.
+/* Titulares: Familjen Grotesk en todos los h1–h3; Inter queda para el texto corrido.
    Va en la capa base para que las utilidades (tamaño, peso, tracking) sigan mandando. */
 @layer base {
   h1, h2, h3 {
     font-family: var(--font-display), var(--font-sans), sans-serif;
     text-wrap: balance;
   }
-  /* Poppins es ancha: en grande se cierra un poco el espaciado. */
+  /* En grande se cierra un poco el espaciado. */
   h1, h2 {
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
   /* El anillo de foco se separa con el fondo de marca, no con el blanco por defecto. */
   * {
@@ -78,4 +90,11 @@ body {
 ::selection {
   background: var(--dys-primary);
   color: var(--dys-on-primary);
+}
+
+/* Firma de marca: el punto amarillo del logo "DyS." como cierre del titular principal
+   de cada página. Es el único gesto llamativo del sitio; no usarlo en otros textos. */
+.firma-punto::after {
+  content: ".";
+  color: var(--dys-accent);
 }

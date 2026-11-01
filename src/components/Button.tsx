@@ -1,43 +1,55 @@
-'use client';
+import Link from 'next/link';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+type Variant = 'primary' | 'outline' | 'ghost';
+type Size = 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends HTMLMotionProps<"button"> {
-  variant?: 'primary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
+  // Con href se dibuja un enlace con aspecto de botón: navegar es un enlace, no un botón.
+  href?: string;
+  children: ReactNode;
 }
+
+// El verde es el color de las acciones (docs/rediseno-plan.md): el botón principal lo rellena,
+// el secundario lo usa solo en el borde. Sin animación de escala: el cambio de color basta.
+const baseStyles =
+  'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none motion-reduce:transition-none';
+
+const variants: Record<Variant, string> = {
+  primary: 'bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85',
+  outline: 'border-2 border-dys-primary text-dys-text hover:bg-dys-primary hover:text-dys-on-primary',
+  ghost: 'text-dys-text hover:bg-dys-text/10',
+};
+
+const sizes: Record<Size, string> = {
+  sm: 'h-9 px-3 text-sm',
+  md: 'h-11 px-5 text-base',
+  lg: 'h-12 px-7 text-base sm:text-lg',
+};
 
 export default function Button({
   variant = 'primary',
   size = 'md',
+  href,
   children,
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
-  
-  const variants = {
-    primary: 'bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85',
-    outline: 'border-2 border-dys-primary text-dys-primary hover:bg-dys-primary hover:text-dys-on-primary',
-    ghost: 'hover:bg-dys-text/10 text-dys-text'
-  };
+  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  const sizes = {
-    sm: 'h-9 px-3 text-sm',
-    md: 'h-10 px-4 py-2',
-    lg: 'h-11 px-8 text-lg'
-  };
+  if (href) {
+    return (
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {children}
-    </motion.button>
+    </button>
   );
 }
