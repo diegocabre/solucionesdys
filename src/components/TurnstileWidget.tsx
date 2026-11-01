@@ -35,7 +35,7 @@ const SCRIPT_URL = "https://challenges.cloudflare.com/turnstile/v0/api.js?render
 
 function AvisoSinVerificacion() {
   return (
-    <p role="alert" className="p-3 rounded-md text-sm border border-dys-accent/40 bg-dys-accent/10 text-dys-accent">
+    <p role="alert" className="p-3 rounded-md text-sm border border-dys-accent bg-dys-accent/10 text-dys-text">
       No pudimos cargar la verificación anti-robots. Recarga la página o escríbenos directo por{" "}
       <a href={BUSINESS.whatsapp} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
         WhatsApp
@@ -45,7 +45,8 @@ function AvisoSinVerificacion() {
   );
 }
 
-export default function TurnstileWidget({ resetKey }: { resetKey?: unknown }) {
+// theme: "dark" sobre las zonas negras del sitio, "light" sobre las franjas marfil (.dys-light).
+export default function TurnstileWidget({ resetKey, theme = "dark" }: { resetKey?: unknown; theme?: "light" | "dark" }) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
   const container = useRef<HTMLDivElement>(null);
   const widgetId = useRef<string | null>(null);
@@ -56,8 +57,7 @@ export default function TurnstileWidget({ resetKey }: { resetKey?: unknown }) {
     if (!siteKey || !container.current || !window.turnstile || widgetId.current) return;
     widgetId.current = window.turnstile.render(container.current, {
       sitekey: siteKey,
-      // El sitio usa siempre tema claro.
-      theme: "dark",
+      theme,
       language: "es",
       size: "flexible",
       callback: () => setFallo(false),
@@ -67,7 +67,7 @@ export default function TurnstileWidget({ resetKey }: { resetKey?: unknown }) {
         setFallo(true);
       },
     });
-  }, [siteKey]);
+  }, [siteKey, theme]);
 
   // Si el script ya estaba cargado (p. ej. al volver a /contacto), se dibuja de inmediato.
   useEffect(() => {
