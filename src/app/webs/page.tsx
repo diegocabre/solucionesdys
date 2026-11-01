@@ -1,4 +1,3 @@
-import { Globe, Code, Layers, MousePointerClick, Zap, Search, Sparkles, Smartphone } from 'lucide-react';
 import Button from '@/components/Button';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -23,48 +22,59 @@ export const metadata: Metadata = {
 };
 
 export default function WebsPage() {
-  const webServices = [
+  // Lo que gana el negocio: beneficios concretos, sin íconos de relleno.
+  const beneficios = [
     {
-      title: "Landing Pages",
-      description: "Páginas de un solo scroll diseñadas específicamente para convertir visitas en clientes potenciales. Perfectas para promocionar un servicio o campaña en redes sociales.",
-      icon: MousePointerClick,
-      color: "from-dys-primary/15 to-dys-primary/5 text-dys-primary"
+      title: "Carga rápida en el celular",
+      description: "Si tu sitio demora, la visita se va a la competencia. Optimizamos cada imagen y cada línea de código.",
     },
     {
-      title: "Sitios Corporativos",
-      description: "Sitios profesionales multipáginas para constructoras, talleres, oficinas y comercios que desean transmitir confianza y establecer una sólida presencia de marca.",
-      icon: Layers,
-      color: "from-dys-primary/15 to-dys-primary/5 text-dys-primary"
+      title: "Se ve bien en cualquier pantalla",
+      description: "La mayoría de tus clientes te encontrará desde el celular.",
     },
     {
-      title: "E-Commerce & Catálogos",
-      description: "Tiendas virtuales completas con carrito de compras, catálogos enlazados a bases de datos y pasarela de pagos integrada para vender tus productos online sin esfuerzo.",
-      icon: Code,
-      color: "from-dys-primary/15 to-dys-primary/5 text-dys-primary"
-    }
+      title: "Aparecer en Google",
+      description: "Preparado para que te encuentren quienes buscan lo que ofreces en tu zona.",
+    },
+    {
+      title: "Más consultas",
+      description: "Botones de WhatsApp y formularios a la vista para que contactarte sea fácil.",
+    },
   ];
 
+  const webServices = [
+    {
+      title: "Landing pages",
+      description: "Páginas de un solo scroll diseñadas específicamente para convertir visitas en clientes potenciales. Perfectas para promocionar un servicio o campaña en redes sociales.",
+    },
+    {
+      title: "Sitios corporativos",
+      description: "Sitios profesionales multipáginas para constructoras, talleres, oficinas y comercios que desean transmitir confianza y establecer una sólida presencia de marca.",
+    },
+    {
+      title: "Tiendas online y catálogos",
+      description: "Tiendas virtuales completas con carrito de compras, catálogos enlazados a bases de datos y pasarela de pagos integrada para vender tus productos online sin esfuerzo.",
+    },
+  ];
+
+  // El proceso sí es una secuencia: aquí los números tienen sentido.
   const processSteps = [
     {
-      step: "01",
       title: "Planificación",
-      desc: "Analizamos tu negocio y definimos el mapa del sitio junto con los objetivos clave de conversión."
+      desc: "Analizamos tu negocio y definimos el mapa del sitio junto con los objetivos clave de conversión.",
     },
     {
-      step: "02",
-      title: "Diseño UX/UI",
-      desc: "Creamos la maqueta visual alineada a los colores e identidad corporativa de tu marca."
+      title: "Diseño",
+      desc: "Creamos la maqueta visual alineada a los colores e identidad corporativa de tu marca.",
     },
     {
-      step: "03",
       title: "Desarrollo",
-      desc: "Construimos tu sitio para que cargue rápido en cualquier celular y Google lo entienda desde el primer día."
+      desc: "Construimos tu sitio para que cargue rápido en cualquier celular y Google lo entienda desde el primer día.",
     },
     {
-      step: "04",
       title: "Lanzamiento",
-      desc: "Realizamos pruebas de usabilidad, conectamos tu dominio y publicamos tu sitio al mundo digital."
-    }
+      desc: "Realizamos pruebas de usabilidad, conectamos tu dominio y publicamos tu sitio.",
+    },
   ];
 
   // AggregateRating solo con reseñas reales publicadas que tengan calificación.
@@ -87,145 +97,107 @@ export default function WebsPage() {
       : null;
 
   return (
-    <div className="flex flex-col min-h-screen bg-dys-bg">
+    <div className="flex flex-col bg-dys-bg">
       {ratingJsonLd && <JsonLd data={ratingJsonLd} />}
-      <div className="flex-1 pt-12 pb-8">
+
+      {/* Hero: el titular solo, cerrado con el punto del logo, como en la home. */}
+      <section className="pt-16 pb-20 sm:pt-24 sm:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Hero Section / Cabecera */}
-          <div className="mb-20 flex flex-col lg:flex-row gap-12 items-center">
-            <div className="flex-1 space-y-6">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
-                <span className="text-sm font-semibold tracking-wider text-dys-primary uppercase">
-                  Diseño & Desarrollo Profesional
-                </span>
-              </div>
-              <h1 className="text-5xl lg:text-7xl font-bold text-dys-text leading-tight">
-                Sitios web que <br />
-                <span className="text-dys-primary">te traen clientes</span>
-              </h1>
-              <p className="text-lg text-dys-muted font-light leading-relaxed max-w-xl">
-                Desde Puerto Varas diseñamos sitios que cargan rápido en el celular, aparecen cuando te buscan en Google y hacen fácil que te escriban por WhatsApp. Tu negocio recibiendo consultas las 24 horas, también mientras duermes.
-              </p>
-              <div className="pt-2">
-                <Link href="/contacto?subject=Diseño Web">
-                  <Button variant="primary" size="lg" className="shadow-lg hover:shadow-dys-primary/40 transition-all">
-                    Cotizar mi sitio
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            
-            {/* Visual card */}
-            <div className="flex-1 w-full bg-linear-to-br from-dys-surface to-dys-bg rounded-3xl p-8 sm:p-12 text-dys-text border border-dys-border relative overflow-hidden shadow-2xl">
-              <div className="absolute -bottom-10 -right-10 p-4 opacity-5 rotate-12">
-                <Globe className="w-96 h-96" />
-              </div>
-              
-              <div className="relative z-10 space-y-6">
-                <div className="flex items-center gap-3">
-                  <Sparkles className="text-dys-primary w-6 h-6 animate-pulse" />
-                  <h2 className="text-xl font-bold text-dys-primary">Lo que gana tu negocio</h2>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex gap-4 items-start">
-                    <div className="p-2 bg-dys-text/10 rounded-lg"><Zap className="w-5 h-5 text-dys-primary" /></div>
-                    <div>
-                      <h3 className="font-semibold text-sm">Carga rápida en el celular</h3>
-                      <p className="text-xs text-dys-muted">Si tu sitio demora, la visita se va a la competencia. Optimizamos cada imagen y cada línea de código.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <div className="p-2 bg-dys-text/10 rounded-lg"><Smartphone className="w-5 h-5 text-dys-primary" /></div>
-                    <div>
-                      <h3 className="font-semibold text-sm">Se ve bien en cualquier pantalla</h3>
-                      <p className="text-xs text-dys-muted">La mayoría de tus clientes te encontrará desde el celular.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <div className="p-2 bg-dys-text/10 rounded-lg"><Search className="w-5 h-5 text-dys-primary" /></div>
-                    <div>
-                      <h3 className="font-semibold text-sm">Aparecer en Google</h3>
-                      <p className="text-xs text-dys-muted">Preparado para que te encuentren quienes buscan lo que ofreces en tu zona.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <div className="p-2 bg-dys-text/10 rounded-lg"><Code className="w-5 h-5 text-dys-primary" /></div>
-                    <div>
-                      <h3 className="font-semibold text-sm">Más consultas</h3>
-                      <p className="text-xs text-dys-muted">Botones de WhatsApp y formularios a la vista para que contactarte sea fácil.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <h1 className="firma-punto max-w-[14ch] text-titular-1 font-bold text-dys-text">
+            Sitios web que te traen clientes
+          </h1>
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-8 lg:gap-12 items-end">
+            <p className="max-w-[56ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
+              Desde Puerto Varas diseñamos sitios que cargan rápido en el celular, aparecen cuando te buscan en Google y
+              hacen fácil que te escriban por WhatsApp. Tu negocio recibiendo consultas las 24 horas, también mientras
+              duermes.
+            </p>
+            <div className="lg:flex lg:justify-end">
+              <Button size="lg" href="/contacto">
+                Cotizar mi sitio
+              </Button>
             </div>
           </div>
-
-          {/* Grid de Tipos de Sitio */}
-          <div className="mb-24 space-y-12">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-dys-text">¿Qué tipo de sitio web necesitas?</h2>
-              <p className="text-dys-muted font-light max-w-xl mx-auto">Selecciona la estructura ideal para cumplir tus metas de negocio.</p>
-              <p className="font-semibold text-dys-text">
-                Desde <span className="text-dys-primary">{PRECIO_DESDE}</span> por una página estática.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {webServices.map((service, idx) => {
-                const Icon = service.icon;
-                return (
-                  <div 
-                    key={idx}
-                    className="bg-dys-surface rounded-3xl p-8 border border-dys-border shadow-xs hover:shadow-xl transition-all flex flex-col justify-between"
-                  >
-                    <div className="space-y-6">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center`}>
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <h3 className="text-xl font-bold text-dys-text">{service.title}</h3>
-                      <p className="text-sm text-dys-muted font-light leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-                    <div className="pt-6 border-t border-dys-border mt-6">
-                      <Link href={`/contacto?subject=Consulta - ${service.title}`}>
-                        <span className="text-xs font-semibold text-dys-primary hover:text-dys-text transition-colors cursor-pointer inline-flex items-center gap-1">
-                          Cotizar mi sitio &rarr;
-                        </span>
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <CasosDeExito />
-
-          {/* Proceso de Trabajo */}
-          <div className="bg-dys-surface border border-dys-border rounded-3xl p-8 sm:p-16 space-y-16">
-            <div className="text-center space-y-2">
-              <span className="text-xs font-semibold text-dys-primary uppercase bg-dys-primary/10 px-3 py-1 rounded-full">Metodología</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-dys-text">Proceso de Desarrollo</h2>
-              <p className="text-dys-muted font-light max-w-xl mx-auto">De la idea a la pantalla de forma ordenada y transparente.</p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {processSteps.map((step, idx) => (
-                <div key={idx} className="space-y-4 relative">
-                  <div className="text-4xl font-bold font-display text-dys-primary">{step.step}</div>
-                  <h3 className="text-lg font-bold text-dys-text">{step.title}</h3>
-                  <p className="text-sm text-dys-muted font-light leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
-      </div>
+      </section>
+
+      {/* Beneficios en lista de dos columnas con divisores */}
+      <section aria-labelledby="beneficios" className="dys-light bg-dys-bg py-20 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
+          <h2 id="beneficios" className="text-titular-2 font-bold text-dys-text">
+            Lo que gana tu negocio
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 border-t border-dys-border">
+            {beneficios.map((b) => (
+              <li key={b.title} className="border-b border-dys-border py-6">
+                <h3 className="text-xl font-semibold text-dys-text">{b.title}</h3>
+                <p className="mt-2 text-dys-muted leading-relaxed">{b.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Tipos de sitio: misma lista tipográfica que en la home */}
+      <section aria-labelledby="tipos-de-sitio" className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
+          <div className="space-y-5">
+            <h2 id="tipos-de-sitio" className="text-titular-2 font-bold text-dys-text">
+              ¿Qué tipo de sitio web necesitas?
+            </h2>
+            <p className="max-w-md text-lg text-dys-muted leading-relaxed">
+              Elige la estructura que mejor calza con lo que quieres lograr.
+            </p>
+            <p className="text-lg text-dys-text">
+              Desde <strong className="font-semibold">{PRECIO_DESDE}</strong> por una página estática.
+            </p>
+          </div>
+
+          <ul className="border-t border-dys-border">
+            {webServices.map((service) => (
+              <li key={service.title} className="border-b border-dys-border py-8">
+                <h3 className="text-titular-3 font-semibold text-dys-text">{service.title}</h3>
+                <p className="mt-3 max-w-[60ch] text-dys-muted leading-relaxed">{service.description}</p>
+                <Link
+                  href="/contacto"
+                  className="mt-4 inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
+                >
+                  Cotizar {service.title.toLowerCase()}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <CasosDeExito />
+
+      {/* Proceso: una secuencia real, por eso va numerada */}
+      <section aria-labelledby="proceso" className="dys-light bg-dys-bg py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="max-w-2xl space-y-4">
+            <h2 id="proceso" className="text-titular-2 font-bold text-dys-text">
+              Cómo trabajamos
+            </h2>
+            <p className="text-lg text-dys-muted leading-relaxed">
+              De la idea a la pantalla, en cuatro pasos y hablando siempre con quien construye tu sitio.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 border-t border-dys-border">
+            {processSteps.map((step, idx) => (
+              <li key={step.title} className="border-b border-dys-border lg:border-b-0 py-8">
+                <span className="block font-display text-titular-2 font-bold text-dys-muted" aria-hidden="true">
+                  {idx + 1}
+                </span>
+                <h3 className="mt-4 text-xl font-semibold text-dys-text">{step.title}</h3>
+                <p className="mt-2 text-dys-muted leading-relaxed">{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <UltimosArticulos />
       <ZonaAtencion />
     </div>
