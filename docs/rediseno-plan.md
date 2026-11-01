@@ -105,6 +105,8 @@ Cada fase va en su propio PR, con capturas de escritorio (1440 px) y móvil (390
 
 El panel `/admin` queda fuera del rediseño.
 
+**Estado (noviembre de 2026):** las cinco fases están hechas (PR #12 a #16). Para páginas nuevas, seguir el mismo sistema: titular con `firma-punto`, escala `text-titular-*`, listas con divisores en vez de tarjetas, verde solo para acciones y franjas `.dys-light` para alternar.
+
 ### Cómo pedir cada fase
 
 > "Haz la fase 1 del plan de rediseño (`docs/rediseno-plan.md`)."

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import { formatPostDate, getPost, getPosts, getRelatedPosts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site";
@@ -87,7 +86,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             Inicio
           </Link>{" "}
           /{" "}
-          <Link href="/blog" className="hover:text-dys-text">
+          <Link href="/blog" className="underline underline-offset-4 hover:text-dys-text">
             Blog
           </Link>
         </nav>
@@ -96,15 +95,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <article className="min-w-0 max-w-3xl">
             <header className="space-y-5 mb-10">
               {post.draft && (
-                <p className="inline-block rounded-full bg-dys-accent/10 text-dys-accent text-xs font-semibold px-3 py-1">
+                <p className="text-sm font-semibold text-dys-muted">
                   Borrador: no se publica en producción
                 </p>
               )}
-              <h1 className="text-4xl lg:text-5xl font-bold text-dys-text leading-tight">{post.title}</h1>
-              <p className="text-lg text-dys-muted font-light leading-relaxed">{post.description}</p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-dys-muted">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="w-4 h-4" aria-hidden="true" />
+              <h1 className="firma-punto text-titular-2 font-bold text-dys-text">{post.title}</h1>
+              <p className="text-lg sm:text-xl text-dys-muted leading-relaxed">{post.description}</p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-dys-muted">
+                <span>
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </span>
                 {post.updated !== post.date && (
@@ -112,22 +110,19 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     Actualizado el <time dateTime={post.updated}>{formatPostDate(post.updated)}</time>
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="w-4 h-4" aria-hidden="true" />
-                  {post.readingMinutes} min de lectura
-                </span>
+                <span>{post.readingMinutes} min de lectura</span>
               </div>
             </header>
 
             {toc.length > 0 && (
-              <nav aria-labelledby="toc-movil" className="lg:hidden mb-10 rounded-2xl border border-dys-border bg-dys-surface p-5">
+              <nav aria-labelledby="toc-movil" className="lg:hidden mb-10 border-y border-dys-border py-5">
                 <p id="toc-movil" className="font-semibold text-dys-text mb-3">
                   En este artículo
                 </p>
                 <ol className="space-y-2 text-sm">
                   {toc.map((h) => (
                     <li key={h.id}>
-                      <a href={`#${h.id}`} className="text-dys-muted hover:text-dys-primary">
+                      <a href={`#${h.id}`} className="text-dys-muted underline-offset-4 hover:text-dys-text hover:underline">
                         {h.text}
                       </a>
                     </li>
@@ -154,7 +149,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           {toc.length > 0 && (
             <aside className="hidden lg:block">
               <nav aria-labelledby="toc-escritorio" className="sticky top-28 space-y-3">
-                <p id="toc-escritorio" className="text-xs font-semibold uppercase tracking-wider text-dys-muted">
+                <p id="toc-escritorio" className="font-semibold text-dys-text">
                   En este artículo
                 </p>
                 <ol className="space-y-2 text-sm border-l border-dys-border">
@@ -162,7 +157,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <li key={h.id}>
                       <a
                         href={`#${h.id}`}
-                        className="block pl-4 -ml-px border-l-2 border-transparent text-dys-muted hover:text-dys-primary hover:border-dys-primary"
+                        className="block pl-4 -ml-px border-l-2 border-transparent text-dys-muted hover:text-dys-text hover:border-dys-text"
                       >
                         {h.text}
                       </a>
@@ -176,21 +171,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {related.length > 0 && (
           <section aria-labelledby="relacionados" className="mt-20 space-y-6">
-            <h2 id="relacionados" className="text-2xl font-bold text-dys-text">
+            <h2 id="relacionados" className="text-titular-2 font-bold text-dys-text">
               Sigue leyendo
             </h2>
-            <ul className="grid gap-6 md:grid-cols-3">
+            <ul className="border-t border-dys-border">
               {related.map((p) => (
-                <li key={p.slug}>
-                  <Link
-                    href={`/blog/${p.slug}`}
-                    className="group h-full flex flex-col gap-3 bg-dys-surface rounded-2xl border border-dys-border p-6 hover:shadow-lg transition-shadow"
-                  >
-                    <span className="font-semibold text-dys-text group-hover:text-dys-primary">{p.title}</span>
-                    <span className="text-sm text-dys-muted grow">{p.description}</span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-dys-primary">
-                      Leer <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                <li key={p.slug} className="border-b border-dys-border">
+                  <Link href={`/blog/${p.slug}`} className="group block py-6">
+                    <span className="block font-display text-xl sm:text-2xl font-semibold text-dys-text underline-offset-4 decoration-2 group-hover:underline group-hover:decoration-dys-primary">
+                      {p.title}
                     </span>
+                    <span className="mt-2 block max-w-[65ch] text-dys-muted leading-relaxed">{p.description}</span>
                   </Link>
                 </li>
               ))}

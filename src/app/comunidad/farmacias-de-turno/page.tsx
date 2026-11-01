@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Code2, Info, Pill } from "lucide-react";
 import FarmaciasTurno from "@/components/FarmaciasTurno";
 import AvisoFarmaciasForm from "@/components/AvisoFarmaciasForm";
 import { COMUNAS_AVISO } from "@/lib/aviso-farmacias";
@@ -21,12 +20,10 @@ export const metadata: Metadata = {
 
 export default function FarmaciasDeTurnoPage() {
   return (
-    <div className="min-h-screen py-16 bg-dys-bg relative overflow-hidden">
-      <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-dys-primary/5 rounded-full blur-3xl -z-10" />
-
+    <div className="min-h-screen pt-12 pb-24 bg-dys-bg">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Migas de pan" className="text-sm text-dys-muted mb-8">
-          <Link href="/comunidad" className="hover:text-dys-primary">
+          <Link href="/comunidad" className="underline underline-offset-4 hover:text-dys-text">
             Comunidad Puerto Varas
           </Link>
           <span className="mx-2">/</span>
@@ -34,17 +31,8 @@ export default function FarmaciasDeTurnoPage() {
         </nav>
 
         <header className="max-w-3xl mb-12 space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
-            <Pill className="w-4 h-4 text-dys-primary" aria-hidden="true" />
-            <span className="text-sm font-semibold tracking-wider text-dys-primary uppercase">
-              Servicio a la comunidad
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-dys-text">
-            Farmacias de turno en{" "}
-            <span className="text-dys-primary">Puerto Varas</span>
-          </h1>
-          <p className="text-lg text-dys-muted font-light leading-relaxed">
+          <h1 className="firma-punto text-titular-1 font-bold text-dys-text">Farmacias de turno en Puerto Varas</h1>
+          <p className="max-w-[56ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
             Encuentra la farmacia que está de turno hoy en Puerto Varas y las comunas cercanas, con su
             dirección, horario y teléfono.
           </p>
@@ -54,13 +42,12 @@ export default function FarmaciasDeTurnoPage() {
 
         <AvisoFarmaciasForm comunas={COMUNAS_AVISO} />
 
-        <section className="mt-16 grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl bg-dys-surface border border-dys-border p-6 space-y-3">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-dys-text">
-              <Info className="w-5 h-5 text-dys-primary" aria-hidden="true" />
+        <section className="mt-16 grid gap-10 md:grid-cols-2">
+          <div className="border-t border-dys-border pt-6 space-y-3">
+            <h2 className="text-titular-3 font-semibold text-dys-text">
               Cómo funciona
             </h2>
-            <ul className="list-disc pl-5 space-y-2 text-sm text-dys-muted leading-relaxed">
+            <ul className="list-disc pl-5 space-y-2 text-dys-muted leading-relaxed">
               <li>
                 Los datos vienen del servicio oficial de farmacias de turno del Ministerio de Salud (MINSAL) y se
                 actualizan cada 15 minutos.
@@ -73,15 +60,14 @@ export default function FarmaciasDeTurnoPage() {
             </ul>
           </div>
 
-          <div className="dys-light rounded-3xl bg-dys-bg text-dys-text p-6 space-y-3">
-            <h2 className="flex items-center gap-2 text-lg font-bold">
-              <Code2 className="w-5 h-5 text-dys-primary" aria-hidden="true" />
+          <div className="border-t border-dys-border pt-6 space-y-3">
+            <h2 className="text-titular-3 font-semibold text-dys-text">
               API abierta
             </h2>
-            <p className="text-sm text-dys-muted leading-relaxed">
+            <p className="text-dys-muted leading-relaxed">
               ¿Desarrollas un sitio o app local? Puedes consultar los mismos datos, ya limpios, en JSON:
             </p>
-            <pre className="overflow-x-auto rounded-xl bg-dys-surface border border-dys-border p-4 text-xs leading-relaxed text-dys-primary">
+            <pre className="overflow-x-auto rounded-xl bg-dys-surface border border-dys-border p-4 text-xs leading-relaxed text-dys-text">
               <code>{`GET /api/farmacias-turno
 GET /api/farmacias-turno?comuna=puerto-varas`}</code>
             </pre>

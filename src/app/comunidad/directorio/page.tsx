@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, AtSign, Globe, MapPin, Phone, Plus, Store } from "lucide-react";
+import { AtSign, Globe, MapPin, Phone } from "lucide-react";
+import Button from "@/components/Button";
 import { RUBROS, nombreComunaDirectorio } from "@/lib/directorio";
 import { isSupabaseConfigured, listarNegociosAprobados, type NegocioPublico } from "@/lib/supabase/server";
 
@@ -36,15 +37,15 @@ const slugRubro = (rubro: string) =>
 
 function TarjetaNegocio({ n }: { n: NegocioPublico }) {
   return (
-    <li className="flex flex-col rounded-3xl bg-dys-surface border border-dys-border p-6 shadow-sm">
-      <h3 className="text-xl font-bold text-dys-text">{n.nombre}</h3>
+    <li className="flex flex-col border-t border-dys-border pt-6 pb-8">
+      <h3 className="font-display text-xl font-semibold text-dys-text">{n.nombre}</h3>
       <p className="mt-1 flex items-center gap-1.5 text-sm text-dys-muted">
         <MapPin className="size-4" aria-hidden="true" />
         {nombreComunaDirectorio(n.comuna_slug)}
       </p>
       <p className="mt-3 grow text-dys-muted leading-relaxed">{n.descripcion}</p>
       {(n.telefono || n.sitio_web || n.instagram) && (
-        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-dys-primary">
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-semibold text-dys-link">
           {n.telefono && (
             <a href={`tel:${n.telefono.replace(/[^\d+]/g, "")}`} className="inline-flex items-center gap-1.5 hover:text-dys-text">
               <Phone className="size-4" aria-hidden="true" />
@@ -83,35 +84,24 @@ export default async function DirectorioPage() {
   );
 
   return (
-    <div className="min-h-screen py-16 bg-dys-bg relative overflow-hidden">
-      <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-dys-primary/5 rounded-full blur-3xl -z-10" />
+    <div className="min-h-screen pt-12 pb-24 bg-dys-bg">
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Migas de pan" className="text-sm text-dys-muted mb-8">
-          <Link href="/comunidad" className="hover:text-dys-primary">Comunidad Puerto Varas</Link>
+          <Link href="/comunidad" className="underline underline-offset-4 hover:text-dys-text">Comunidad Puerto Varas</Link>
           <span className="mx-2">/</span>
           <span className="text-dys-text">Directorio</span>
         </nav>
 
         <header className="max-w-3xl mb-10 space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
-            <Store className="w-4 h-4 text-dys-primary" aria-hidden="true" />
-            <span className="text-sm font-semibold tracking-wider text-dys-primary uppercase">Hecho en el sur</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-dys-text">
-            Directorio de negocios <span className="text-dys-primary">locales</span>
-          </h1>
-          <p className="text-lg text-dys-muted font-light leading-relaxed">
+          <h1 className="firma-punto text-titular-1 font-bold text-dys-text">Directorio de negocios locales</h1>
+          <p className="max-w-[56ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
             Negocios de Puerto Varas y alrededores, inscritos por sus propios dueños. Compra local y apoya a los
             vecinos.
           </p>
-          <Link
-            href="/comunidad/directorio/inscribir"
-            className="inline-flex items-center gap-2 rounded-md bg-dys-primary px-5 py-3 font-semibold text-dys-on-primary hover:bg-dys-primary/85 transition-colors focus:outline-none focus:ring-2 focus:ring-dys-primary focus:ring-offset-2"
-          >
-            <Plus className="size-4" aria-hidden="true" />
+          <Button size="lg" href="/comunidad/directorio/inscribir">
             Inscribe tu negocio gratis
-          </Link>
+          </Button>
         </header>
 
         {grupos.length > 1 && (
@@ -129,27 +119,26 @@ export default async function DirectorioPage() {
         )}
 
         {grupos.length === 0 ? (
-          <div className="rounded-3xl border-2 border-dashed border-dys-primary/50 bg-dys-primary/5 p-8 sm:p-12 text-center space-y-4">
-            <h2 className="text-2xl font-bold text-dys-text">Estamos armando el directorio</h2>
-            <p className="text-dys-muted max-w-xl mx-auto">
+          <div className="border-t border-dys-border pt-8 space-y-4">
+            <h2 className="text-titular-3 font-semibold text-dys-text">Estamos armando el directorio</h2>
+            <p className="text-lg text-dys-muted max-w-xl">
               Sé de los primeros negocios en aparecer. Inscribirse es gratis y toma un par de minutos.
             </p>
             <Link
               href="/comunidad/directorio/inscribir"
-              className="inline-flex items-center gap-2 font-semibold text-dys-primary hover:text-dys-text"
+              className="inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
             >
               Inscribir mi negocio
-              <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
         ) : (
           <div className="space-y-12">
             {grupos.map((g) => (
               <section key={g.rubro} id={slugRubro(g.rubro)} aria-labelledby={`${slugRubro(g.rubro)}-titulo`} className="scroll-mt-24">
-                <h2 id={`${slugRubro(g.rubro)}-titulo`} className="mb-5 text-2xl font-bold text-dys-text">
+                <h2 id={`${slugRubro(g.rubro)}-titulo`} className="mb-2 text-titular-3 font-semibold text-dys-text">
                   {g.rubro}
                 </h2>
-                <ul className="grid gap-6 md:grid-cols-2">
+                <ul className="grid gap-x-10 md:grid-cols-2">
                   {g.items.map((n) => (
                     <TarjetaNegocio key={n.id} n={n} />
                   ))}
@@ -159,18 +148,14 @@ export default async function DirectorioPage() {
           </div>
         )}
 
-        <aside className="dys-light mt-16 rounded-3xl bg-dys-bg text-dys-text p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
+        <aside className="dys-light mt-16 rounded-xl bg-dys-bg text-dys-text p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
           <div className="space-y-2">
-            <h2 className="text-xl font-bold">¿Tu negocio aún no tiene sitio web?</h2>
+            <h2 className="text-titular-3 font-semibold">¿Tu negocio aún no tiene sitio web?</h2>
             <p className="text-dys-muted">Te armamos uno a medida, pensado para que te encuentren en Google.</p>
           </div>
-          <Link
-            href="/contacto"
-            className="mt-5 sm:mt-0 inline-flex shrink-0 items-center gap-2 rounded-md bg-dys-primary px-5 py-3 font-semibold text-dys-on-primary hover:bg-dys-primary/85 transition-colors"
-          >
+          <Button size="lg" href="/contacto" className="mt-5 sm:mt-0 shrink-0">
             Cotizar mi sitio
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
+          </Button>
         </aside>
       </div>
     </div>
