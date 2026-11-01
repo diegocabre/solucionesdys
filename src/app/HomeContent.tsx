@@ -1,14 +1,9 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
-import ServicesCarousel from '@/components/ServicesCarousel';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
-import { PARTNER_PROJECTS, type PartnerProject } from '@/lib/partners';
+import { PARTNER_PROJECTS } from '@/lib/partners';
 import { AREA_SERVED, PRECIO_DESDE } from '@/lib/site';
 import type { ReactNode } from 'react';
 
@@ -23,188 +18,79 @@ const RESPALDO = [
 ];
 
 // Ejemplos reales de cada tipo de sitio (según su descripción en partners.ts).
-// Landing Pages no tiene un caso confirmado, así que va sin captura.
-const ejemplo = (name: string) => PARTNER_PROJECTS.find((p) => p.name === name);
-
-const SERVICIOS = {
-  corporativo: {
-    title: "Sitios Corporativos",
-    description: "Varias páginas para contar quién eres, qué ofreces y cómo contactarte, para que un cliente nuevo confíe antes de escribirte.",
-    proyecto: ejemplo("Rincón del Aromo"),
+// Landing Pages no tiene un caso confirmado, así que va sin ejemplo.
+const SERVICIOS = [
+  {
+    title: 'Sitios corporativos',
+    description: 'Varias páginas para contar quién eres, qué ofreces y cómo contactarte, para que un cliente nuevo confíe antes de escribirte.',
+    ejemplo: PARTNER_PROJECTS.find((p) => p.name === 'Rincón del Aromo'),
   },
-  tienda: {
-    title: "E-commerce & Tiendas Online",
-    description: "Tu catálogo con carrito y pago en línea, para vender también cuando el local está cerrado.",
-    proyecto: ejemplo("Dogtoralia Vet"),
+  {
+    title: 'Tiendas online',
+    description: 'Tu catálogo con carrito y pago en línea, para vender también cuando el local está cerrado.',
+    ejemplo: PARTNER_PROJECTS.find((p) => p.name === 'Dogtoralia Vet'),
   },
-  landing: {
-    title: "Landing Pages",
-    description: "Una sola página enfocada en una oferta o campaña, pensada para que quien llega te escriba.",
+  {
+    title: 'Landing pages',
+    description: 'Una sola página enfocada en una oferta o campaña, pensada para que quien llega te escriba.',
+    ejemplo: undefined,
   },
-};
+];
 
-// Servicio con la captura de un proyecto real, enmarcada igual que en FeaturedCase.
-function ServicioConEjemplo({
-  title,
-  description,
-  proyecto,
-  sizes,
-}: {
-  title: string;
-  description: string;
-  proyecto?: PartnerProject;
-  sizes: string;
-}) {
-  return (
-    <Link href="/webs" className="group block">
-      {proyecto && (
-        <div className="relative aspect-[24/11] rounded-3xl overflow-hidden shadow-2xl border border-dys-border/40">
-          <Image
-            src={proyecto.image}
-            alt={`${title}: sitio de ${proyecto.name} desarrollado por Soluciones DyS`}
-            fill
-            sizes={sizes}
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-          />
-        </div>
-      )}
-      <h3 className="mt-6 text-2xl font-bold text-dys-text transition-colors group-hover:text-dys-primary">
-        {title}
-      </h3>
-      <p className="mt-2 max-w-prose text-dys-muted font-light leading-relaxed">{description}</p>
-    </Link>
-  );
-}
-
-// Contenido interactivo de la home. Recibe desde page.tsx (servidor) las secciones
-// que leen datos en el servidor, como los últimos artículos del blog.
+// Home. Recibe desde page.tsx las secciones que leen datos en el servidor, como los últimos artículos del blog.
 export default function HomeContent({ serverSections }: { serverSections?: ReactNode }) {
-
   return (
     <div className="flex flex-col bg-dys-bg">
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        {/* Background gradient pattern matching the logo */}
-        <div className="absolute inset-0 -z-10 bg-linear-to-b from-dys-surface via-dys-bg to-dys-bg">
-          <div className="absolute top-0 -left-1/4 w-[600px] h-[600px] bg-dys-primary/5 blur-3xl rounded-full"></div>
-        </div>
+      {/* Hero: el titular solo, en grande; el punto amarillo del logo lo cierra (único gesto animado del sitio). */}
+      <section className="pt-16 pb-20 sm:pt-24 sm:pb-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="firma-punto firma-punto-entrada max-w-[15ch] text-titular-1 font-bold text-dys-text">
+            Diseño y desarrollo web en Puerto Varas
+          </h1>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 z-10 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
-          <div className="space-y-6 sm:space-y-8">
-            <div className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-dys-primary/10 border border-dys-primary/20">
-              <span className="text-xs sm:text-sm font-semibold tracking-wider text-dys-primary uppercase">
-                Soluciones DyS • Puerto Varas, Chile
-              </span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold text-dys-text leading-tight">
-              Diseño y desarrollo web en{' '}
-              <span className="text-dys-primary whitespace-nowrap">Puerto Varas</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-dys-muted max-w-lg leading-relaxed font-light">
-              {/* En móvil, versión corta: el H1 ya nombra Puerto Varas */}
-              <span className="sm:hidden">
-                Sitios web a medida para pymes: rápidos en el celular, visibles en Google y con WhatsApp a un toque.
-              </span>
-              <span className="hidden sm:inline">
-                Sitios web a medida para pymes de Puerto Varas, Los Lagos y todo Chile: rápidos en el celular, visibles en Google y con WhatsApp a un toque.
-              </span>
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-8 lg:gap-12 items-end">
+            <p className="max-w-[52ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
+              Sitios web a medida para pymes de Puerto Varas, Los Lagos y todo Chile: rápidos en el celular, visibles en
+              Google y con WhatsApp a un toque.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Button size="lg" onClick={() => window.location.href='/webs'}>
-                Ver servicios
-              </Button>
-              <Button size="lg" variant="outline" onClick={() => window.location.href='/contacto'}>
+            <div className="flex flex-col sm:flex-row lg:justify-end gap-4">
+              <Button size="lg" href="/contacto">
                 Cotizar mi sitio
               </Button>
+              <Button size="lg" variant="outline" href="#servicios">
+                Ver servicios
+              </Button>
             </div>
-          </div>
-
-          {/* Hero Image / Services Carousel. Sin animación de entrada: es el LCP y con opacidad 0
-              no se pintaba hasta que cargaba el JavaScript (~2 s extra en móvil). */}
-          <div className="relative">
-            <ServicesCarousel />
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="servicios" className="dys-light py-24 bg-dys-bg border-y border-dys-border">
+      {/* Trabajo real en vez de un carrusel: los cuatro sitios, cada uno enlazado a su web.
+          En móvil es una fila que se desliza; desde lg, una grilla de 2 × 2. */}
+      <section aria-labelledby="sitios-reales" className="dys-light bg-dys-bg py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-14 space-y-4">
-            <h2 className="text-4xl font-bold text-dys-text">
-              Tres formas de llevar tu negocio a internet
-            </h2>
-            <p className="text-lg text-dys-muted font-light leading-relaxed">
-              Elige según lo que necesitas: captar clientes con una campaña, mostrar tu empresa o vender en línea.
-            </p>
-            <p className="text-lg font-semibold text-dys-text">
-              Desde <span className="text-dys-primary">{PRECIO_DESDE}</span> por una página estática.
-            </p>
-          </div>
+          <h2 id="sitios-reales" className="max-w-2xl text-titular-3 font-semibold text-dys-text">
+            Sitios reales hechos por nosotros. Entra y míralos funcionando.
+          </h2>
 
-          {/* Composición 7/5: el servicio principal con su captura a la izquierda; a la derecha,
-              Landing Pages en bloque marino y la tienda online con su captura. */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-14 items-start">
-            {/* Fija al hacer scroll: la columna derecha es más alta y así no queda un hueco bajo esta */}
-            <div className="lg:col-span-7 lg:sticky lg:top-28">
-              <ServicioConEjemplo {...SERVICIOS.corporativo} sizes="(min-width: 1280px) 700px, (min-width: 1024px) 56vw, 100vw" />
-            </div>
-
-            <div className="lg:col-span-5 grid gap-14">
-              <Link
-                href="/webs"
-                className="group block rounded-3xl bg-dys-surface p-8 sm:p-10 text-dys-text shadow-2xl"
-              >
-                <h3 className="text-2xl font-bold">{SERVICIOS.landing.title}</h3>
-                <p className="mt-3 text-dys-muted font-light leading-relaxed">{SERVICIOS.landing.description}</p>
-                <ArrowRight
-                  className="mt-8 w-6 h-6 text-dys-primary transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-                  aria-hidden="true"
-                />
-              </Link>
-
-              <ServicioConEjemplo {...SERVICIOS.tienda} sizes="(min-width: 1280px) 500px, (min-width: 1024px) 40vw, 100vw" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <FeaturedCase />
-
-      {/* Partners: lista con enlace a cada sitio, misma proporción 5/7 que el caso de éxito */}
-      <section id="partners" aria-labelledby="partners-titulo" className="py-24 bg-dys-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
-          <div className="space-y-4">
-            <h2 id="partners-titulo" className="text-4xl font-bold text-dys-text">
-              Nuestros Partners
-            </h2>
-            <p className="max-w-md text-lg text-dys-muted font-light leading-relaxed">
-              Sitios que hicimos para clientes y aliados. Entra y míralos funcionando.
-            </p>
-          </div>
-
-          <ul className="border-t border-dys-border">
-            {PARTNER_PROJECTS.map((project) => (
-              <li key={project.id} className="border-b border-dys-border">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-6 py-6"
-                >
-                  <span className="min-w-0">
-                    <span className="block font-display text-2xl sm:text-3xl font-semibold text-dys-text transition-colors group-hover:text-dys-primary">
-                      {project.name}
-                    </span>
-                    <span className="mt-1 block text-sm text-dys-muted">{project.category}</span>
+          <ul className="mt-10 -mx-4 px-4 sm:mx-0 sm:px-0 flex lg:grid lg:grid-cols-2 gap-6 lg:gap-x-10 lg:gap-y-12 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-px-4 sm:scroll-px-0 pb-2">
+            {PARTNER_PROJECTS.map((project, i) => (
+              <li key={project.id} className="snap-start shrink-0 w-[82%] sm:w-[60%] lg:w-auto">
+                <a href={project.url} target="_blank" rel="noopener noreferrer" className="group relative block">
+                  <div className="relative aspect-[24/11] overflow-hidden rounded-xl border border-dys-border">
+                    <Image
+                      src={project.image}
+                      alt={`Sitio web de ${project.name}, desarrollado por Soluciones DyS`}
+                      fill
+                      priority={i === 0}
+                      sizes="(min-width: 1280px) 590px, (min-width: 1024px) 46vw, 82vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <span className="mt-4 block font-display text-xl sm:text-2xl font-semibold text-dys-text underline-offset-4 decoration-2 group-hover:underline group-hover:decoration-dys-primary">
+                    {project.name}
                   </span>
-                  <ArrowUpRight
-                    className="w-6 h-6 shrink-0 text-dys-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
-                    aria-hidden="true"
-                  />
+                  <span className="mt-1 block text-sm text-dys-muted">{project.summary}</span>
                   <span className="sr-only">(abre en una pestaña nueva)</span>
                 </a>
               </li>
@@ -213,38 +99,80 @@ export default function HomeContent({ serverSections }: { serverSections?: React
         </div>
       </section>
 
+      {/* Servicios como lista tipográfica: las capturas ya están arriba, aquí basta nombrar el ejemplo. */}
+      <section id="servicios" aria-labelledby="servicios-titulo" className="scroll-mt-20 py-24 bg-dys-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
+          <div className="space-y-5">
+            <h2 id="servicios-titulo" className="text-titular-2 font-bold text-dys-text">
+              Tres formas de llevar tu negocio a internet
+            </h2>
+            <p className="max-w-md text-lg text-dys-muted leading-relaxed">
+              Elige según lo que necesitas: captar clientes con una campaña, mostrar tu empresa o vender en línea.
+            </p>
+            <p className="text-lg text-dys-text">
+              Desde <strong className="font-semibold">{PRECIO_DESDE}</strong> por una página estática.
+            </p>
+          </div>
+
+          <ul className="border-t border-dys-border">
+            {SERVICIOS.map((servicio) => (
+              <li key={servicio.title} className="border-b border-dys-border py-8">
+                <h3 className="text-titular-3 font-semibold text-dys-text">{servicio.title}</h3>
+                <p className="mt-3 max-w-[60ch] text-dys-muted leading-relaxed">{servicio.description}</p>
+                {servicio.ejemplo && (
+                  <p className="mt-3 text-sm text-dys-muted">
+                    Ejemplo real:{' '}
+                    <a
+                      href={servicio.ejemplo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-dys-link underline underline-offset-4 hover:text-dys-text"
+                    >
+                      {servicio.ejemplo.name}
+                    </a>
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+          <Link href="/webs" className="font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text">
+            Ver en detalle cómo trabajamos cada tipo de sitio
+          </Link>
+        </div>
+      </section>
+
+      <FeaturedCase />
+
       <FaqSection />
 
       {serverSections}
 
-      {/* CTA Section */}
-      <section className="dys-light py-24 bg-dys-bg text-dys-text">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-12 lg:gap-16 items-end"
-        >
+      {/* Cierre: sin animación de entrada, para que se vea aunque no cargue el JavaScript. */}
+      <section aria-labelledby="cierre-titulo" className="py-24 bg-dys-bg text-dys-text">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-12 lg:gap-16 items-end">
           <div className="space-y-8">
-            <h2 className="max-w-2xl text-4xl lg:text-5xl font-bold">¿Hablamos sobre tu proyecto?</h2>
-            <p className="max-w-2xl text-xl text-dys-muted font-light">
+            <h2 id="cierre-titulo" className="max-w-2xl text-titular-2 font-bold">
+              ¿Hablamos sobre tu proyecto?
+            </h2>
+            <p className="max-w-2xl text-xl text-dys-muted">
               Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
             </p>
-            <Button size="lg" variant="primary" className="shadow-lg shadow-dys-text/10" onClick={() => window.location.href='/contacto'}>
+            <Button size="lg" href="/contacto">
               Cotizar mi sitio
             </Button>
           </div>
 
           {/* Respaldo concreto: hechos confirmados (PRODUCT.md) y casos reales de partners.ts */}
-          <ul className="border-t border-dys-text/15 text-lg text-dys-text font-light">
+          <ul className="border-t border-dys-border text-lg text-dys-text">
             {RESPALDO.map((hecho) => (
-              <li key={hecho} className="flex gap-3 border-b border-dys-text/15 py-4">
-                <Check className="mt-1 w-5 h-5 shrink-0 text-dys-primary" aria-hidden="true" />
-                <span>{hecho}</span>
+              <li key={hecho} className="border-b border-dys-border py-4">
+                {hecho}
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

@@ -98,3 +98,26 @@ body {
   content: ".";
   color: var(--dys-accent);
 }
+
+/* Único momento animado del sitio: el punto del titular de la home cae en su lugar al cargar.
+   Solo se anima el punto (no el texto), así no retrasa el pintado del titular. */
+.firma-punto-entrada::after {
+  display: inline-block;
+  transform-origin: 50% 85%;
+  animation: firma-punto-entrada 520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) 300ms both;
+}
+
+@keyframes firma-punto-entrada {
+  from {
+    transform: translateY(-0.6em) scale(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .firma-punto-entrada::after {
+    animation: none;
+  }
+}
