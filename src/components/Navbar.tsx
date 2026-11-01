@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, MapPin, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,15 +15,18 @@ export default function Navbar() {
 
   const NAV_LINKS = [
     { label: "Inicio", href: "/" },
-    { label: "Diseño Web", href: "/webs" },
-    { label: "Aprende IA", href: "/aprende-ia", icon: Bot },
-    { label: "Comunidad Puerto Varas", href: "/comunidad", icon: MapPin },
+    { label: "Diseño web", href: "/webs" },
+    { label: "Aprende IA", href: "/aprende-ia" },
+    { label: "Comunidad Puerto Varas", href: "/comunidad" },
     { label: "Partners", href: "/partners" },
-    { label: "Cotizar mi sitio", href: "/contacto" },
   ];
+  // Cotizar es la acción principal del sitio: va aparte, como botón verde.
+  const CTA = { label: "Cotizar mi sitio", href: "/contacto" };
+
+  const isActive = (href: string) => pathname === href || (href !== "/" && pathname?.startsWith(href));
 
   return (
-    <nav className="fixed w-full bg-dys-bg border-b border-dys-border z-50 transition-colors">
+    <nav className="fixed w-full bg-dys-bg border-b border-dys-border z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Wordmark DyS.: nunca bajo 80 px de ancho (regla del kit de marca). */}
@@ -38,34 +41,27 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden xl:flex items-center space-x-2">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
-              const Icon = link.icon;
-
-              return (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={`relative px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
-                    isActive ? "text-dys-primary" : "text-dys-text hover:text-dys-primary"
-                  }`}
-                >
-                  <span className="relative z-10 inline-flex items-center gap-1.5">
-                    {Icon && <Icon size={15} aria-hidden="true" />}
-                    {link.label}
-                  </span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="navbar-active-desktop"
-                      className="absolute inset-0 bg-dys-primary/10 rounded-md"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
+          {/* Desktop Menu: la página actual se marca con texto verde y subrayado, sin cápsula animada */}
+          <div className="hidden xl:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`px-3 py-2 text-[15px] font-medium whitespace-nowrap underline-offset-8 decoration-2 transition-colors ${
+                  isActive(link.href) ? "text-dys-primary underline" : "text-dys-text hover:text-dys-primary"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href={CTA.href}
+              aria-current={isActive(CTA.href) ? "page" : undefined}
+              className="ml-4 inline-flex h-10 items-center rounded-lg bg-dys-primary px-4 text-[15px] font-semibold text-dys-on-primary transition-colors hover:bg-dys-primary/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dys-primary focus-visible:ring-offset-2"
+            >
+              {CTA.label}
+            </Link>
           </div>
 
           {/* Mobile Actions */}
@@ -91,27 +87,29 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="xl:hidden border-t border-dys-border overflow-hidden bg-dys-bg"
           >
-            <div className="flex flex-col px-4 pt-2 pb-6 space-y-1 shadow-inner">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
-                const Icon = link.icon;
-
-                return (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2 px-3 py-3 text-base font-medium rounded-md transition-colors ${
-                      isActive
-                        ? "text-dys-primary bg-dys-primary/10"
-                        : "text-dys-text hover:text-dys-primary hover:bg-dys-text/10"
-                    }`}
-                  >
-                    {Icon && <Icon size={18} aria-hidden="true" />}
-                    {link.label}
-                  </Link>
-                );
-              })}
+            <div className="flex flex-col px-4 pt-2 pb-6 space-y-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`px-3 py-3 text-lg font-medium rounded-md transition-colors ${
+                    isActive(link.href)
+                      ? "text-dys-primary"
+                      : "text-dys-text hover:text-dys-primary hover:bg-dys-text/10"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href={CTA.href}
+                onClick={() => setIsOpen(false)}
+                className="mt-3 inline-flex h-12 items-center justify-center rounded-lg bg-dys-primary px-5 text-base font-semibold text-dys-on-primary transition-colors hover:bg-dys-primary/85"
+              >
+                {CTA.label}
+              </Link>
             </div>
           </motion.div>
         )}
