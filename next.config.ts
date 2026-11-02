@@ -12,9 +12,9 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   // Fuerza HTTPS en visitas futuras (una vez desplegado con certificado válido)
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  // CSP en modo Report-Only: el navegador solo avisa en consola, no bloquea. Cuando no haya
-  // avisos en producción, cambiar la clave a "Content-Security-Policy" para que se aplique.
-  { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy() },
+  // CSP en modo bloqueo: el navegador bloquea lo que no esté permitido y reporta cada
+  // violación a /api/csp-report.
+  { key: "Content-Security-Policy", value: contentSecurityPolicy() },
   // Destino de report-to (Reporting API); report-uri queda para Firefox y Safari.
   { key: "Reporting-Endpoints", value: 'csp-endpoint="/api/csp-report"' },
 ];
