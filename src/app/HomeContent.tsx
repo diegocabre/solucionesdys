@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Button from '@/components/Button';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
+import RutaDys from '@/components/RutaDys';
 import { PARTNER_PROJECTS } from '@/lib/partners';
 import { AREA_SERVED, PRECIO_DESDE } from '@/lib/site';
 import type { ReactNode } from 'react';
@@ -144,6 +145,8 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       </section>
 
       <FeaturedCase />
+
+      <RutaDys />
 
       <FaqSection />
 

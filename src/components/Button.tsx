@@ -9,6 +9,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: Size;
   // Con href se dibuja un enlace con aspecto de botón: navegar es un enlace, no un botón.
   href?: string;
+  // Con external el enlace sale del sitio y abre en una pestaña nueva.
+  external?: boolean;
   children: ReactNode;
 }
 
@@ -33,11 +35,21 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   href,
+  external = false,
   children,
   className = '',
   ...props
 }: ButtonProps) {
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+
+  if (href && external) {
+    return (
+      <a href={href} target="_blank" rel="noopener" className={classes}>
+        {children}
+        <span className="sr-only"> (abre en una pestaña nueva)</span>
+      </a>
+    );
+  }
 
   if (href) {
     return (
