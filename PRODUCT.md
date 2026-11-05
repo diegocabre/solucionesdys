@@ -15,9 +15,13 @@ Dos públicos con el mismo peso:
 
 En ambos casos la tarea es la misma: decidir si confían en Soluciones DyS para tener un sitio que les traiga clientes, entender qué tipo de sitio necesitan (landing, corporativo o tienda) y cuánto cuesta, y escribir para cotizar.
 
+Ruta DyS suma un tercer público: **empresas con vendedores en terreno** que visitan clientes y quieren asignar cartera, ordenar la ruta del día y ver visitas y kilómetros. Su tarea es entender qué hace el producto y registrarse en el plan demo.
+
 ## Product Purpose
 
 Soluciones DyS (Soluciones DyS SpA) diseña y desarrolla sitios web, landing pages y tiendas online a medida para pymes. El sitio existe para generar cotizaciones: el éxito es que un dueño de pyme escriba por el formulario de contacto, WhatsApp o correo.
+
+**Segunda línea de negocio: Ruta DyS**, producto propio que se vende. Es un panel web y una app Android para empresas con vendedores en terreno: se asigna la cartera (importada por CSV), cada vendedor vincula la app con un código QR, la app arma la ruta del día y funciona sin señal, y el panel muestra en un mapa el recorrido, las visitas y los kilómetros, con reportes descargables. Se presenta en la portada (`src/components/RutaDys.tsx`) y vive en `https://rutario.solucionesdys.cl`. En el sitio, el éxito es que la empresa pruebe el plan demo o descargue la app.
 
 Las secciones **Aprende IA**, **Comunidad Puerto Varas** (farmacias de turno) y el **blog** no se venden: atraen visitas, sobre todo locales y de búsqueda, y muestran conocimiento para ganar confianza.
 
@@ -43,11 +47,13 @@ Detrás está una sola persona, Diego, que diseña y programa cada sitio. Lo que
 - Datos centralizados en `src/lib/site.ts`; casos en `src/lib/casos.ts`; partners en `src/lib/partners.ts`; preguntas frecuentes en `src/lib/faq.ts`.
 - El SEO local es estratégico: hay datos estructurados (JSON-LD), sitemap y páginas pensadas para búsquedas por comuna. No cambiar rutas ni títulos sin revisar el impacto en el posicionamiento.
 - Analítica: Vercel Analytics y Microsoft Clarity, este último solo con consentimiento de cookies.
+- **Ruta DyS:** plan demo sin costo (2 clientes y 1 vendedor) y planes pagados. No hay precios publicados de los planes; no inventarlos. Declara cumplir las leyes 19.628 y 21.719 y usar solo cookies de sesión. Aún no hay capturas del panel ni de la app (solo el logo en `public/assets/img/ruta-dys/icon.webp`); las capturas futuras no deben mostrar datos de clientes reales.
 - **Voz confirmada:** el sitio habla como marca, en "nosotros" ("Soluciones DyS"). Por ahora no se muestra la foto de Diego.
 
 ## Brand Commitments
 
-- Nombre: Soluciones DyS (razón social Soluciones DyS SpA). Logo existente en `public/`.
+- Nombre: Soluciones DyS (razón social Soluciones DyS SpA).
+- **Logo oficial:** wordmark "DyS." con D verde, "y" marfil (grafito en fondo claro), S azul y punto amarillo. Archivos en `dys-brand-kit/dys-brand-kit/` (logos, favicon, imágenes sociales y paleta en `brand/brand.css` y `brand/tokens.json`). Reglas de uso: margen libre de al menos media altura de la "D"; ancho mínimo 80 px en pantalla (por debajo de 40 px, el favicon); no cambiar colores, estirar ni agregar sombras; sobre fotos, la versión blanca; el punto amarillo nunca se quita.
 - Voz: "nosotros", como marca. Sin foto de Diego por ahora; no agregar retratos ni fotos de equipo.
 - Los textos deben hablarle a un dueño de pyme sin tecnicismos: beneficios concretos (clientes, Google, WhatsApp) antes que nombres de tecnologías.
 

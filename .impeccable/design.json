@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T00:00:00Z",
+  "title": "Design System: Soluciones DyS",
+  "extensions": {
+    "colorMeta": {
+      "negro": { "role": "neutral", "displayName": "Negro" },
+      "marfil": { "role": "neutral", "displayName": "Marfil" },
+      "marfil-apagado": { "role": "neutral", "displayName": "Marfil apagado" },
+      "borde-oscuro": { "role": "neutral", "displayName": "Borde oscuro" },
+      "verde-dys": { "role": "primary", "displayName": "Verde DyS" },
+      "azul-enlace": { "role": "secondary", "displayName": "Azul enlace" },
+      "amarillo-punto": { "role": "tertiary", "displayName": "Amarillo punto" },
+      "papel-blanco": { "role": "neutral", "displayName": "Papel blanco" },
+      "grafito": { "role": "neutral", "displayName": "Grafito" },
+      "grafito-apagado": { "role": "neutral", "displayName": "Grafito apagado" },
+      "borde-claro": { "role": "neutral", "displayName": "Borde claro" },
+      "verde-profundo": { "role": "primary", "displayName": "Verde profundo (sobre marfil)" },
+      "azul-profundo": { "role": "secondary", "displayName": "Azul profundo (sobre marfil)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Titular 1", "purpose": "H1 de cada página, cerrado con el punto amarillo." },
+      "headline": { "displayName": "Titular 2", "purpose": "H2 de sección." },
+      "title": { "displayName": "Titular 3", "purpose": "Subtítulos dentro de una sección." },
+      "body": { "displayName": "Texto", "purpose": "Texto corrido, menos de 75 caracteres por línea." },
+      "label": { "displayName": "Etiqueta", "purpose": "Sobretítulos breves en minúscula de oración." }
+    },
+    "shadows": [
+      { "name": "flotante", "value": "0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4)", "purpose": "Botón de WhatsApp fijo en móvil." },
+      { "name": "aviso", "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)", "purpose": "Aviso de cookies." }
+    ],
+    "motion": [
+      { "name": "firma-punto-entrada", "value": "520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) 300ms", "purpose": "El punto del titular de la portada cae en su lugar al cargar." },
+      { "name": "color-transition", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Cambio de color en botones y enlaces." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "La acción principal de un bloque, como Cotizar mi sitio.",
+      "html": "<button class=\"ds-btn-primary\">Cotizar mi sitio</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: #34D399; color: #000; font: 600 16px Inter, sans-serif; cursor: pointer; transition: background-color 150ms; } .ds-btn-primary:hover { background: rgb(52 211 153 / 0.85); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #000, 0 0 0 4px #34D399; }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Acción secundaria junto a la principal.",
+      "html": "<button class=\"ds-btn-outline\">Ver servicios</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border: 2px solid #34D399; border-radius: 8px; background: transparent; color: #F6F1E7; font: 600 16px Inter, sans-serif; cursor: pointer; transition: background-color 150ms, color 150ms; } .ds-btn-outline:hover { background: #34D399; color: #000; } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px #000, 0 0 0 4px #34D399; }"
+    },
+    {
+      "name": "Campo de formulario",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo con etiqueta visible, dentro del panel marfil del formulario.",
+      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-label\" for=\"ds-n\">Nombre completo</label><input id=\"ds-n\" class=\"ds-input\" placeholder=\"Juan Pérez\"></div>",
+      "css": ".ds-field-wrap { background: #F6F1E7; padding: 24px; border-radius: 12px; } .ds-label { display: block; margin-bottom: 6px; font: 600 16px Inter, sans-serif; color: #121820; } .ds-input { width: 100%; padding: 12px; border: 1px solid #DDD6C8; border-radius: 8px; background: #fff; color: #121820; font: 400 16px Inter, sans-serif; outline: none; transition: border-color 150ms; } .ds-input:focus { border-color: #05694A; box-shadow: 0 0 0 2px rgb(5 105 74 / 0.4); }"
+    },
+    {
+      "name": "Enlace de navegación",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Enlaces de la barra superior; el activo va en verde subrayado.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Inicio</a><a class=\"ds-nav-link ds-active\" href=\"#\" aria-current=\"page\">Diseño web</a><a class=\"ds-nav-link\" href=\"#\">Aprende IA</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 4px; background: #000; padding: 16px; border-bottom: 1px solid #31302E; } .ds-nav-link { padding: 8px 12px; font: 500 15px Inter, sans-serif; color: #F6F1E7; text-decoration: none; text-underline-offset: 8px; text-decoration-thickness: 2px; transition: color 150ms; } .ds-nav-link:hover { color: #34D399; } .ds-active { color: #34D399; text-decoration-line: underline; }"
+    },
+    {
+      "name": "Titular con firma",
+      "kind": "custom",
+      "description": "H1 grotesco cerrado con el punto amarillo del logo.",
+      "html": "<div class=\"ds-hero\"><h1 class=\"ds-h1\">Diseño web en Puerto Varas</h1></div>",
+      "css": ".ds-hero { background: #000; padding: 32px; } .ds-h1 { margin: 0; font: 700 clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem)/0.98 'Familjen Grotesk', Inter, sans-serif; letter-spacing: -0.025em; color: #F6F1E7; text-wrap: balance; } .ds-h1::after { content: '.'; color: #FFD60A; }"
+    },
+    {
+      "name": "Marco de captura",
+      "kind": "card",
+      "refersTo": "screenshot-frame",
+      "description": "Captura real de un sitio de cliente, proporción 24:11.",
+      "html": "<div class=\"ds-frame\"></div>",
+      "css": ".ds-frame { aspect-ratio: 24 / 11; width: 100%; max-width: 480px; border: 1px solid #31302E; border-radius: 12px; overflow: hidden; background: linear-gradient(180deg, #11161C, #000); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El punto final",
+    "overview": "Todo el sistema está construido para que un solo gesto se note: el punto amarillo del logo \"DyS.\", que cierra el titular principal de cada página. Lo demás calla. El fondo es negro, el texto es marfil, los titulares son grandes y en una sola tinta, y las secciones se separan con divisores finos en lugar de cajas. La calma del conjunto es lo que hace que el punto se lea como firma.",
+    "keyCharacteristics": [
+      "Tema oscuro único, con franjas marfil para alternar.",
+      "Titulares grotescos grandes que encogen sin saltos en móvil.",
+      "El verde significa \"haz clic\"; el amarillo es solo el punto de la firma.",
+      "Listas con divisores en vez de tarjetas idénticas en fila.",
+      "Un único momento animado: el punto del titular de la portada cae en su lugar."
+    ],
+    "rules": [
+      { "name": "The Green Means Click Rule", "body": "Si algo es verde, es una acción. Nunca se pinta de verde una palabra del titular ni un elemento decorativo.", "section": "colors" },
+      { "name": "The One Dot Rule", "body": "El amarillo aparece una sola vez por página, como punto final del titular principal. Si hay un segundo amarillo, sobra uno.", "section": "colors" },
+      { "name": "The Token Swap Rule", "body": "Las franjas claras no definen colores propios: .dys-light reasigna las mismas variables, así que todo componente funciona en ambos fondos sin cambios.", "section": "colors" },
+      { "name": "The Sentence Case Rule", "body": "Sin mayúsculas sostenidas ni etiquetas en versalitas sobre los títulos. Si un dato sirve, va en minúscula de oración.", "section": "typography" },
+      { "name": "The Single Ink Rule", "body": "El titular va en un solo color. El énfasis lo dan el tamaño y la composición, no una palabra resaltada.", "section": "typography" },
+      { "name": "The Flat Page Rule", "body": "Nada que viva dentro del flujo de la página lleva sombra. Si un elemento necesita destacar, cambia de fondo (franja marfil) o gana espacio.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do cerrar el H1 de cada página nueva con .firma-punto y usar la escala titular-1/2/3.",
+      "Do usar las variables dys-* y las franjas .dys-light para alternar fondos; nunca colores sueltos.",
+      "Do mostrar capturas reales de sitios en el marco 24:11 cuando se necesite una imagen.",
+      "Do presentar listas con divisores de 1 px en vez de tarjetas en fila.",
+      "Do respetar las reglas del logo: ancho mínimo de 80 px, sin cambiar colores ni quitar el punto amarillo."
+    ],
+    "donts": [
+      "Don't usar etiquetas en mayúsculas sobre los títulos ni resaltar una palabra del titular en verde.",
+      "Don't usar el amarillo fuera del punto de la firma, ni como color de texto.",
+      "Don't agregar animaciones de entrada al hacer scroll; el único momento animado es el punto de la portada.",
+      "Don't terminar enlaces con \"→\"; el texto del enlace dice qué hace.",
+      "Don't poner sombras en elementos dentro del flujo de la página ni íconos en cuadritos como relleno."
+    ]
+  }
+}
