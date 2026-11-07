@@ -114,12 +114,12 @@ export default function ContactoPage() {
                     />
                   </div>
                   {state.message && (
-                    <p role="status" className="p-4 rounded-lg border-l-4 border-dys-primary bg-dys-surface text-dys-text">
+                    <p role="status" className="p-4 rounded-lg border border-dys-primary/40 bg-dys-surface text-dys-text">
                       {state.message}
                     </p>
                   )}
                   {state.error && (
-                    <p role="alert" className="p-4 rounded-lg border-l-4 border-red-700 bg-dys-surface text-red-800">
+                    <p role="alert" className="p-4 rounded-lg border border-red-700/40 bg-dys-surface text-red-800">
                       {state.error}
                     </p>
                   )}
