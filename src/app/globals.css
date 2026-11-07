@@ -184,6 +184,37 @@ body {
   display: none;
 }
 
+/* En el celular, con el chat abierto, la ventana ocupa la pantalla y el botón verde pasa a ser
+   un "cerrar" arriba a la derecha: abajo quedaba pegado al botón de enviar y se tocaba por error. */
+@media (max-width: 640px) {
+  .dys-chat .chat-window-wrapper:has(> .chat-window:not([style*="display: none"])) {
+    inset: 0;
+    max-width: none;
+    max-height: none;
+  }
+  .dys-chat .chat-window-wrapper:has(> .chat-window:not([style*="display: none"])) .chat-window {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .dys-chat .chat-window-wrapper:has(> .chat-window:not([style*="display: none"])) .chat-window-toggle {
+    position: absolute;
+    top: max(0.75rem, env(safe-area-inset-top));
+    right: 0.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: transparent;
+    color: var(--dys-text);
+  }
+  .dys-chat .chat-window .chat-header {
+    padding-right: 4rem;
+    padding-top: max(var(--chat--header--padding, 1rem), env(safe-area-inset-top));
+  }
+}
+
 .dys-chat .chat-window-toggle:focus-visible,
 .dys-chat button:focus-visible,
 .dys-chat textarea:focus-visible {
