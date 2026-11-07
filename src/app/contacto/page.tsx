@@ -7,6 +7,10 @@ import { sendContactEmail, FormState } from "./actions";
 import TurnstileWidget from "@/components/TurnstileWidget";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { agregarAtribucion } from "@/lib/attribution";
+import dynamic from "next/dynamic";
+
+// Carga diferida: el chat (Vue + estilos de n8n) no entra en el bundle inicial de la página.
+const ChatN8n = dynamic(() => import("@/components/ChatN8n"), { ssr: false });
 
 // Campos de 16 px (text-base): con menos, iOS hace zoom al tocarlos.
 const CAMPO =
@@ -34,6 +38,16 @@ export default function ContactoPage() {
           <p className="max-w-[52ch] text-lg sm:text-xl text-dys-muted leading-relaxed">
             Cuéntanos qué necesita tu negocio y te respondemos con una propuesta clara, sin compromiso.
           </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="agenda-titulo" className="pb-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="space-y-2">
+            <h2 id="agenda-titulo" className="text-titular-3 font-semibold text-dys-text">Agenda una reunión</h2>
+            <p className="text-dys-muted">Nuestro asistente te ayuda a elegir día y hora, sin esperar respuesta por correo.</p>
+          </div>
+          <ChatN8n modo="incrustado" />
         </div>
       </section>
 

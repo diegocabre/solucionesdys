@@ -116,6 +116,81 @@ body {
   }
 }
 
+/* Chat de agendamiento (@n8n/chat): sus variables por defecto viven en :root; aquí se pisan
+   con la marca en el contenedor del chat, que las hereda. */
+.dys-chat {
+  --chat--color--primary: var(--dys-primary);
+  --chat--color--primary-shade-50: #2bbf87;
+  --chat--color--primary--shade-100: #24a676;
+  --chat--color--secondary: var(--dys-primary);
+  --chat--color-secondary-shade-50: #2bbf87;
+  --chat--color-white: var(--dys-text);
+  --chat--color-light: var(--dys-bg);
+  --chat--color-light-shade-50: #1a1a19;
+  --chat--color-light-shade-100: var(--dys-border);
+  --chat--color-medium: var(--dys-border);
+  --chat--color-dark: var(--dys-text);
+  --chat--color-disabled: var(--dys-text-muted);
+  --chat--color-typing: var(--dys-text-muted);
+  --chat--font-family: var(--font-inter), Arial, sans-serif;
+  --chat--border-radius: 0.75rem;
+
+  --chat--header--background: var(--dys-bg);
+  --chat--header--color: var(--dys-text);
+  --chat--header--border-bottom: 1px solid var(--dys-border);
+  --chat--body--background: var(--dys-bg);
+  --chat--footer--background: var(--dys-bg);
+  --chat--footer--color: var(--dys-text-muted);
+
+  --chat--message--bot--background: #1a1a19;
+  --chat--message--bot--color: var(--dys-text);
+  --chat--message--bot--border: 1px solid var(--dys-border);
+  --chat--message--user--background: var(--dys-primary);
+  --chat--message--user--color: var(--dys-on-primary);
+  --chat--message--pre--background: #1a1a19;
+
+  /* 16 px en el campo: con menos, iOS hace zoom al tocarlo. */
+  --chat--input--font-size: 1rem;
+  --chat--input--background: var(--dys-bg);
+  --chat--input--container--background: var(--dys-bg);
+  --chat--input--container--border: 0;
+  --chat--input--text-color: var(--dys-text);
+  --chat--input--border: 1px solid var(--dys-border);
+  --chat--input--border-active: 1px solid var(--dys-primary);
+  --chat--input--send--button--background: transparent;
+  --chat--input--send--button--color: var(--dys-primary);
+  --chat--input--send--button--background-hover: transparent;
+  --chat--input--send--button--color-hover: var(--dys-text);
+
+  --chat--button--background--primary: var(--dys-primary);
+  --chat--button--color--primary: var(--dys-on-primary);
+
+  --chat--toggle--background: var(--dys-primary);
+  --chat--toggle--hover--background: #2bbf87;
+  --chat--toggle--active--background: #24a676;
+  --chat--toggle--color: var(--dys-on-primary);
+  --chat--toggle--size: 3.5rem;
+  --chat--window--border: 1px solid var(--dys-border);
+  --chat--window--right: 1.25rem;
+  --chat--window--bottom: max(1.25rem, env(safe-area-inset-bottom));
+  --chat--window--width: 400px;
+  --chat--window--height: min(600px, calc(100svh - 7rem));
+  /* Sobre la barra de navegación, bajo el aviso de cookies (z-100). */
+  --chat--window--z-index: 60;
+}
+
+/* Incrustado en /contacto la sección ya tiene título: la cabecera del chat sobra. */
+.dys-chat-incrustado .chat-layout .chat-header {
+  display: none;
+}
+
+.dys-chat .chat-window-toggle:focus-visible,
+.dys-chat button:focus-visible,
+.dys-chat textarea:focus-visible {
+  outline: 2px solid var(--dys-primary);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .firma-punto-entrada::after {
     animation: none;

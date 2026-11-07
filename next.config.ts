@@ -33,6 +33,11 @@ function contentSecurityPolicy(): string {
     connect: preview ? " https://vercel.live wss://ws-us3.pusher.com" : "",
     frame: preview ? " https://vercel.live" : "",
   };
+  // Chat de agendamiento: el navegador llama directo al webhook de n8n.
+  let chat = "";
+  try {
+    chat = ` ${new URL(process.env.NEXT_PUBLIC_CHAT_WEBHOOK_URL ?? "").origin}`;
+  } catch {}
   return [
     "default-src 'self'",
     // Turnstile (formulario de contacto) y Microsoft Clarity (solo con cookies aceptadas):
@@ -46,7 +51,7 @@ function contentSecurityPolicy(): string {
     // Respaldo de farmacias desde el navegador (MINSAL), Turnstile y Clarity. Clarity reparte
     // la recolección entre subdominios de una letra (a.clarity.ms, k.clarity.ms…), por eso
     // *.clarity.ms es el valor que documenta Microsoft; se limita a connect-src.
-    `connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms${toolbar.connect}`,
+    `connect-src 'self' https://midas.minsal.cl https://challenges.cloudflare.com https://*.clarity.ms${chat}${toolbar.connect}`,
     // Mapa de farmacias (OpenStreetMap) y el widget de Turnstile.
     `frame-src https://challenges.cloudflare.com https://www.openstreetmap.org${toolbar.frame}`,
     "frame-ancestors 'self'",
