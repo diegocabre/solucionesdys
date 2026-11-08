@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env.local)",
+      "Read(./.env*.local)",
+      "Edit(./.env.local)",
+      "Edit(./.env*.local)",
+      "Bash(cat .env.local*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/proteger-archivos.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/verificar-tipos.js\"",
+            "timeout": 180,
+            "statusMessage": "Revisando tipos y lint como el CI"
+          }
+        ]
+      }
+    ]
+  }
+}
