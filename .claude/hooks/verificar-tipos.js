@@ -9,7 +9,7 @@ const opts = { cwd: process.env.CLAUDE_PROJECT_DIR || input.cwd, stdio: "pipe", 
 const cambios = execSync("git status --porcelain -- src test", opts).trim();
 if (!cambios) process.exit(0);
 
-for (const cmd of ["npx tsc --noEmit", "npx eslint src test --quiet"]) {
+for (const cmd of ["npx tsc --noEmit", "npx eslint --quiet"]) {
   try {
     execSync(cmd, opts);
   } catch (e) {

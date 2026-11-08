@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Scripts de Claude Code: CommonJS que corre Node, no es código de la app.
+    ".claude/**",
   ]),
 ]);
 
