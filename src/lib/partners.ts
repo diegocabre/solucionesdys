@@ -33,14 +33,14 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
   {
     id: 2,
     name: "Estribor Consultores",
-    category: "Consultoría estratégica y asesorías",
-    description: "Consultores de negocios de primer nivel. Plataforma corporativa diseñada con una estética limpia e institucional para la difusión de servicios de análisis financiero, gestión de riesgos y desarrollo de estrategias de crecimiento comercial.",
-    summary: "Plataforma corporativa real para una consultora de estrategia y gestión.",
+    category: "Consultoría en seguridad, personas y sostenibilidad",
+    description: "Consultora boutique de Puerto Varas que asesora a empresas de acuicultura, construcción, energía e industria en gestión de personas, seguridad laboral, sostenibilidad y comunicaciones. Sitio corporativo con sus servicios por sector, recursos, portal de empleo y agenda de reuniones.",
+    summary: "Sitio corporativo real para una consultora de seguridad laboral, personas y sostenibilidad.",
     url: "https://www.estriborconsultores.cl/",
     image: "/assets/img/partners/estribor-consultores-web.jpg",
     tags: ["Next.js", "React", "TailwindCSS", "TypeScript"],
     gradient: "from-[#0d2a45] via-[#1a3d60] to-[#081b2e]",
-    features: ["Portafolio de asesorías", "Formulario de diagnóstico", "Optimización de velocidad"]
+    features: ["Servicios por sector", "Portal de empleo", "Agenda de reuniones"]
   },
   {
     id: 3,
