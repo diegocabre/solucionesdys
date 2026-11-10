@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Blog: sitios web y Google para negocios de Puerto Varas",
   description:
-    "Guías prácticas para pymes de Puerto Varas y Los Lagos: cuánto cuesta un sitio web, cómo aparecer en Google Maps y qué tipo de sitio necesita tu negocio.",
+    "Guías prácticas para pymes de Puerto Varas y Los Lagos: cómo aparecer en Google Maps y qué tipo de sitio necesita tu negocio.",
   alternates: {
     canonical: "/blog",
     types: { "application/rss+xml": [{ url: "/blog/rss.xml", title: "Blog de Soluciones DyS" }] },

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export const COOKIE_CONSENT_KEY = 'sdys_cookie_consent';
 export const COOKIE_CONSENT_EVENT = 'sdys:open-cookie-preferences';
@@ -53,46 +52,38 @@ export default function CookieConsent() {
     setVisible(false);
   };
 
+  if (!visible) return null;
+
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          role="dialog"
-          aria-label="Preferencias de cookies"
-          className="fixed bottom-0 inset-x-0 z-100 p-4 sm:p-6"
-        >
-          <div className="max-w-3xl mx-auto bg-dys-surface border border-dys-border rounded-2xl shadow-2xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center">
-            <p className="text-sm text-dys-muted flex-1">
-              Usamos cookies esenciales para el funcionamiento del sitio. Con tu
-              autorización, también usamos Microsoft Clarity para entender cómo
-              se usa el sitio y mejorarlo. Puedes revisar los detalles en
-              nuestra{' '}
-              <Link href="/privacidad" className="underline text-dys-link hover:text-dys-text">
-                Política de Privacidad y Cookies
-              </Link>
-              .
-            </p>
-            <div className="flex gap-3 shrink-0">
-              <button
-                onClick={() => setConsent('essential-only')}
-                className="px-4 py-2 text-sm font-medium rounded-lg border border-dys-border text-dys-text hover:bg-dys-text/10 transition-colors"
-              >
-                Solo esenciales
-              </button>
-              <button
-                onClick={() => setConsent('accepted')}
-                className="px-4 py-2 text-sm font-medium rounded-lg bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85 transition-colors"
-              >
-                Aceptar todas
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      role="dialog"
+      aria-label="Preferencias de cookies"
+      className="entrada-banner fixed bottom-0 inset-x-0 z-100 p-4 sm:p-6 pointer-events-none"
+    >
+      <div className="pointer-events-auto max-w-3xl mx-auto bg-dys-surface border border-dys-border rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:items-center">
+        <p className="text-sm text-dys-muted flex-1">
+          Usamos cookies esenciales y, si aceptas, Microsoft Clarity para
+          mejorar el sitio. Más detalles en nuestra{' '}
+          <Link href="/privacidad" className="underline text-dys-link hover:text-dys-text">
+            Política de Privacidad y Cookies
+          </Link>
+          .
+        </p>
+        <div className="flex gap-3 shrink-0">
+          <button
+            onClick={() => setConsent('essential-only')}
+            className="px-4 py-2 text-sm font-medium rounded-lg border border-dys-border text-dys-text hover:bg-dys-text/10 transition-colors"
+          >
+            Solo esenciales
+          </button>
+          <button
+            onClick={() => setConsent('accepted')}
+            className="px-4 py-2 text-sm font-medium rounded-lg bg-dys-primary text-dys-on-primary hover:bg-dys-primary/85 transition-colors"
+          >
+            Aceptar todas
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

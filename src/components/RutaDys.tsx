@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import Button from '@/components/Button';
 import { BUSINESS } from '@/lib/site';
 
@@ -22,7 +23,7 @@ export default function RutaDys() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
         <div className="space-y-6">
-          <p className="text-sm font-semibold text-dys-muted">Nuestro producto</p>
+          <p className="text-sm font-semibold text-dys-muted">Ejemplo de app a medida</p>
           <h2 id="ruta-dys-titulo" className="text-titular-2 font-bold text-dys-text">
             Ruta DyS: la ruta del día para tus vendedores en terreno
           </h2>
@@ -56,20 +57,34 @@ export default function RutaDys() {
             </a>
             . Cumple con las leyes 19.628 y 21.719 y solo usa cookies de sesión.
           </p>
+          <p className="text-dys-text">
+            ¿Necesitas una app para tu negocio? La adaptamos a tu equipo o la hacemos desde cero.{' '}
+            <Link
+              href={`/contacto?motivo=${encodeURIComponent('App a medida')}#formulario`}
+              className="font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
+            >
+              Cotizar una app
+            </Link>
+          </p>
         </div>
 
         <div className="space-y-10">
           {/* Espacio para capturas del panel y la app (sin datos de clientes reales); por ahora, el logo. */}
-          <div className="relative aspect-[24/11] rounded-xl overflow-hidden border border-dys-border bg-black flex items-center justify-center">
+          <a
+            href={RUTA_DYS_URL}
+            target="_blank"
+            rel="noopener"
+            className="relative aspect-[24/11] rounded-xl overflow-hidden border border-dys-border bg-black flex items-center justify-center"
+          >
             <Image
               src="/assets/img/ruta-dys/icon.webp"
-              alt="Logo de Ruta DyS"
+              alt="Probar Ruta DyS (abre en una pestaña nueva)"
               width={200}
               height={200}
               sizes="(min-width: 640px) 200px, 128px"
               className="w-32 h-32 sm:w-[200px] sm:h-[200px]"
             />
-          </div>
+          </a>
 
           <div>
             <h3 className="text-titular-3 font-semibold text-dys-text">Cómo funciona</h3>

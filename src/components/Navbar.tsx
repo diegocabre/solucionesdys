@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +20,7 @@ export default function Navbar() {
     { label: "Partners", href: "/partners" },
   ];
   // Cotizar es la acción principal del sitio: va aparte, como botón verde.
-  const CTA = { label: "Cotizar mi sitio", href: "/contacto" };
+  const CTA = { label: "Cotizar mi proyecto", href: "/contacto" };
 
   const isActive = (href: string) => pathname === href || (href !== "/" && pathname?.startsWith(href));
 
@@ -79,41 +78,34 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden border-t border-dys-border overflow-hidden bg-dys-bg"
-          >
-            <div className="flex flex-col px-4 pt-2 pb-6 space-y-1">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  aria-current={isActive(link.href) ? "page" : undefined}
-                  className={`px-3 py-3 text-lg font-medium rounded-md transition-colors ${
-                    isActive(link.href)
-                      ? "text-dys-primary"
-                      : "text-dys-text hover:text-dys-primary hover:bg-dys-text/10"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+      {isOpen && (
+        <div className="entrada-menu xl:hidden border-t border-dys-border overflow-hidden bg-dys-bg">
+          <div className="flex flex-col px-4 pt-2 pb-6 space-y-1">
+            {NAV_LINKS.map((link) => (
               <Link
-                href={CTA.href}
+                key={link.label}
+                href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="mt-3 inline-flex h-12 items-center justify-center rounded-lg bg-dys-primary px-5 text-base font-semibold text-dys-on-primary transition-colors hover:bg-dys-primary/85"
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`px-3 py-3 text-lg font-medium rounded-md transition-colors ${
+                  isActive(link.href)
+                    ? "text-dys-primary"
+                    : "text-dys-text hover:text-dys-primary hover:bg-dys-text/10"
+                }`}
               >
-                {CTA.label}
+                {link.label}
               </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <Link
+              href={CTA.href}
+              onClick={() => setIsOpen(false)}
+              className="mt-3 inline-flex h-12 items-center justify-center rounded-lg bg-dys-primary px-5 text-base font-semibold text-dys-on-primary transition-colors hover:bg-dys-primary/85"
+            >
+              {CTA.label}
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

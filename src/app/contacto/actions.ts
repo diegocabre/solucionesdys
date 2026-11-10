@@ -18,6 +18,7 @@ const ALLOWED_SUBJECTS = [
   'Diseño de Sitios Web',
   'Landing Page',
   'Tienda Online / E-commerce',
+  'App a medida',
   'Alianzas / Partners',
   'Otro Motivo',
 ]

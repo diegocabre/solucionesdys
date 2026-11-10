@@ -39,13 +39,15 @@ export default function StructuredData() {
       "Desarrollo web",
       "Landing pages",
       "Tiendas online",
+      "Desarrollo de aplicaciones a medida",
+      "Soporte y mantención de sitios web",
       "SEO",
       "React",
       "Next.js",
     ],
     sameAs: [BUSINESS.instagram],
     description:
-      "Diseño y desarrollo de sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de la Región de Los Lagos y todo Chile.",
+      "Diseño y desarrollo de sitios web, landing pages, tiendas online y apps a medida en Puerto Varas, para pymes de la Región de Los Lagos y todo Chile, con soporte después de la entrega.",
   };
 
   return <JsonLd data={data} />;

@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "createdAt": "2026-11-10T03:46:06.661Z",
+        "reason": "Claude: Arial es la pila segura para HTML de correo (auto-respuesta en contacto/actions.ts); los clientes de correo no cargan fuentes web"
+      }
+    ]
+  }
+}

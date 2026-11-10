@@ -16,7 +16,7 @@ const titulares = Familjen_Grotesk({ subsets: ["latin"], variable: "--font-titul
 
 const title = "Diseño y Desarrollo Web en Puerto Varas | Soluciones DyS";
 const description =
-  "Diseñamos y desarrollamos sitios web, landing pages y tiendas online a medida en Puerto Varas, para pymes de Los Lagos y todo Chile. Rápidos en el celular, optimizados para Google y con WhatsApp a la vista.";
+  "Sitios web y apps a medida para pymes de Puerto Varas, Los Lagos y todo Chile, con actualizaciones, respaldos y soporte después de la entrega.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

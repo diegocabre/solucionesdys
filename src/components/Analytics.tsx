@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { getCookieConsent, COOKIE_CONSENT_CHANGE_EVENT } from '@/components/CookieConsent';
+import { eventoDeEnlace } from '@/lib/clarity';
 
 // Configura este ID en `.env.local` (no se commitea) y en Vercel:
 //   NEXT_PUBLIC_CLARITY_PROJECT_ID=xxxxxxxxxx
@@ -23,6 +24,17 @@ export default function Analytics() {
     window.addEventListener(COOKIE_CONSENT_CHANGE_EVENT, onChange);
     return () => window.removeEventListener(COOKIE_CONSENT_CHANGE_EVENT, onChange);
   }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const onClick = (e: MouseEvent) => {
+      const href = (e.target as Element).closest('a')?.getAttribute('href');
+      const evento = href && eventoDeEnlace(href);
+      if (evento) window.clarity?.('event', evento);
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, [enabled]);
 
   // Nunca se carga sin consentimiento explícito, y solo si además
   // configuraste el Project ID.

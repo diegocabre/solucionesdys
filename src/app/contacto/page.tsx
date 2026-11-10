@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { sendContactEmail, FormState } from "./actions";
 import TurnstileWidget from "@/components/TurnstileWidget";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
@@ -25,6 +25,17 @@ const initialState: FormState = {
 
 export default function ContactoPage() {
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
+  useEffect(() => {
+    if (state.success) window.clarity?.("event", "formulario_enviado");
+  }, [state]);
+  // Preselecciona el motivo que viene desde la lista de servicios; si no existe, deja el primero.
+  const motivo = useRef<HTMLSelectElement>(null);
+  useEffect(() => {
+    const valor = new URLSearchParams(window.location.search).get("motivo");
+    if (!valor || !motivo.current) return;
+    motivo.current.value = valor;
+    if (motivo.current.selectedIndex < 0) motivo.current.selectedIndex = 0;
+  }, []);
   // Adjunta la página de origen y los utm_* (si los hay) antes de enviar.
   const enviar = (formData: FormData) => {
     agregarAtribucion(formData);
@@ -98,7 +109,7 @@ export default function ContactoPage() {
           </div>
 
           {/* Formulario sobre papel marfil: destaca como la acción principal de la página */}
-          <div className="dys-light bg-dys-bg text-dys-text rounded-xl p-6 sm:p-10">
+          <div id="formulario" className="scroll-mt-28 dys-light bg-dys-bg text-dys-text rounded-xl p-6 sm:p-10">
             <h2 className="text-titular-3 font-semibold">Envíanos tu consulta</h2>
             <div className="mt-6">
                 <form action={enviar} className="relative space-y-5">
@@ -169,10 +180,11 @@ export default function ContactoPage() {
                     <label htmlFor="contacto-subject" className={ETIQUETA}>
                       Motivo de contacto
                     </label>
-                    <select id="contacto-subject" name="subject" required className={CAMPO}>
+                    <select ref={motivo} id="contacto-subject" name="subject" required className={CAMPO}>
                       <option value="Diseño de Sitios Web">Diseño de sitio web</option>
                       <option value="Landing Page">Landing page</option>
                       <option value="Tienda Online / E-commerce">Tienda online</option>
+                      <option value="App a medida">App a medida</option>
                       <option value="Alianzas / Partners">Alianzas y partners</option>
                       <option value="Otro Motivo">Otro motivo</option>
                     </select>

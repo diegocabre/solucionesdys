@@ -88,6 +88,8 @@ export default function ChatN8n({ modo }: { modo: Modo }) {
         };
         target.addEventListener("click", alAbrir, true);
         quitarEscucha = () => target.removeEventListener("click", alAbrir, true);
+        // La ventana solo se monta después de que tocaron el botón: se abre de inmediato.
+        target.querySelector<HTMLElement>(".chat-window-toggle")?.click();
       }
     })();
 

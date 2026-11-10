@@ -19,7 +19,7 @@ Ruta DyS suma un tercer público: **empresas con vendedores en terreno** que vis
 
 ## Product Purpose
 
-Soluciones DyS (Soluciones DyS SpA) diseña y desarrolla sitios web, landing pages y tiendas online a medida para pymes. El sitio existe para generar cotizaciones: el éxito es que un dueño de pyme escriba por el formulario de contacto, WhatsApp o correo.
+Soluciones DyS (Soluciones DyS SpA) diseña y desarrolla sitios web, landing pages, tiendas online y apps a medida para pymes, con postventa: actualizaciones, meses de soporte y respaldo de la base de datos. El sitio existe para generar cotizaciones: el éxito es que un dueño de pyme escriba por el formulario de contacto, WhatsApp o correo.
 
 **Segunda línea de negocio: Ruta DyS**, producto propio que se vende. Es un panel web y una app Android para empresas con vendedores en terreno: se asigna la cartera (importada por CSV), cada vendedor vincula la app con un código QR, la app arma la ruta del día y funciona sin señal, y el panel muestra en un mapa el recorrido, las visitas y los kilómetros, con reportes descargables. Se presenta en la portada (`src/components/RutaDys.tsx`) y vive en `https://rutario.solucionesdys.cl`. En el sitio, el éxito es que la empresa pruebe el plan demo o descargue la app.
 
@@ -61,8 +61,8 @@ Detrás está una sola persona, Diego, que diseña y programa cada sitio. Lo que
 
 - **Proyectos reales:** Rincón del Aromo (cowork y cafetería, Puerto Varas), Estribor Consultores, Dogtoralia Vet (Puente Alto y Santiago Centro) y Caroline Magic. Capturas en `public/assets/img/partners/`.
 - **Blog:** 2 guías en `content/blog/` (Google Maps y tipos de sitio). El blog es informativo: sin artículos de venta ni bloques promocionales; cada artículo cierra con una sola línea discreta hacia /contacto.
-- **Precios:** no hay precios publicados. El artículo de precios se retiró (con redirección 301 a la guía de tipos de sitio); no publicar rangos de precio sin que Diego los confirme.
-- **Testimonios y métricas:** no hay ninguno confirmado. Los casos tienen campos pendientes (resultados "antes/después", PageSpeed y testimonio con autorización escrita). No inventar testimonios, cifras de resultados, reseñas ni calificaciones.
+- **Precios:** precio de entrada confirmado: desde $350.000 por una página estática (`PRECIO_DESDE`). El artículo de precios se retiró (301 a la guía de tipos de sitio); no publicar otros rangos sin que Diego los confirme.
+- **Testimonios:** dos opiniones reales de Google (Carolina Cosentino de Caroline Magic, y Dogtoralia), en `HomeContent.tsx`. Métricas de resultados: ninguna confirmada; los casos siguen con campos pendientes. No inventar testimonios, cifras, reseñas ni calificaciones.
 - **Fotografía:** no hay fotos de Diego ni de la zona; solo capturas de pantalla y una foto de Rincón del Aromo.
 
 ## Product Principles

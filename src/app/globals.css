@@ -222,8 +222,31 @@ body {
   outline-offset: 2px;
 }
 
+.entrada-banner {
+  animation: entrada-banner 400ms ease-out both;
+}
+
+.entrada-menu {
+  animation: entrada-menu 200ms ease-out both;
+}
+
+@keyframes entrada-banner {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes entrada-menu {
+  from {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .firma-punto-entrada::after {
+  .firma-punto-entrada::after,
+  .entrada-banner,
+  .entrada-menu {
     animation: none;
   }
 }

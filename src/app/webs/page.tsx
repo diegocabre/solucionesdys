@@ -10,7 +10,7 @@ import { PRECIO_DESDE, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: "Diseño Web en Puerto Varas: sitios rápidos que traen clientes",
-  description: "Sitios web, landing pages y tiendas online a medida para pymes de Puerto Varas y Los Lagos: cargan rápido en el celular, aparecen en Google y convierten visitas en consultas por WhatsApp.",
+  description: "Sitios web, landing pages y tiendas online a medida para pymes de Puerto Varas: rápidos en el celular, visibles en Google y con WhatsApp a un toque.",
   alternates: { canonical: "/webs" },
   openGraph: {
     title: "Diseño Web en Puerto Varas: sitios rápidos que traen clientes | Soluciones DyS",
