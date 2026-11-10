@@ -137,6 +137,14 @@ export default function HomeContent({ serverSections }: { serverSections?: React
                 </li>
               ))}
             </ul>
+            <a
+              href={BUSINESS.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block font-semibold text-dys-link underline underline-offset-4 hover:text-dys-text"
+            >
+              Ver todas las opiniones en Google<span className="sr-only"> (abre en una pestaña nueva)</span>
+            </a>
             <p className="mt-8 text-sm text-dys-muted">Hechos a medida con Next.js y React, sin plantillas ni WordPress.</p>
           </div>
         </div>

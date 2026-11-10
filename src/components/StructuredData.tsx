@@ -45,7 +45,7 @@ export default function StructuredData() {
       "React",
       "Next.js",
     ],
-    sameAs: [BUSINESS.instagram],
+    sameAs: [BUSINESS.instagram, BUSINESS.googleMaps],
     description:
       "Diseño y desarrollo de sitios web, landing pages, tiendas online y apps a medida en Puerto Varas, para pymes de la Región de Los Lagos y todo Chile, con soporte después de la entrega.",
   };

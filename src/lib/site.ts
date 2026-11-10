@@ -28,5 +28,7 @@ export const BUSINESS = {
   // Centro de Puerto Varas (no publicamos dirección exacta).
   geo: { latitude: -41.3195, longitude: -72.9854 },
   instagram: "https://www.instagram.com/solucionesdys.cl/",
+  // Ficha de Google Business (enlace estable por CID, no depende de la sesión).
+  googleMaps: "https://maps.google.com/?cid=4928313683893335653",
   whatsapp: "https://wa.me/56947637541",
 };
