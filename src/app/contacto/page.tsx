@@ -52,7 +52,7 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      <section aria-labelledby="agenda-titulo" className="pb-16">
+      <section id="agenda" aria-labelledby="agenda-titulo" className="scroll-mt-24 pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="space-y-2">
             <h2 id="agenda-titulo" className="text-titular-3 font-semibold text-dys-text">Agenda una reunión</h2>

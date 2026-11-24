@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AgentesIA from '@/components/AgentesIA';
 import Button from '@/components/Button';
 import FeaturedCase from '@/components/FeaturedCase';
 import Cotizador from '@/components/Cotizador';
@@ -193,6 +194,8 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       <FeaturedCase />
 
       <RutaDys />
+
+      <AgentesIA />
 
       <Cotizador />
 
