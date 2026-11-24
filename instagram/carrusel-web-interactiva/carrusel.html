@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carrusel: 4 cosas para probar en solucionesdys.cl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#000; --tx:#F6F1E7; --mut:#A9A79F; --verde:#34D399; --azul:#4C9AFF; --amar:#FFD60A; --borde:#2A323C; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#222; font-family:'Inter',sans-serif; color:var(--tx); }
+  ::-webkit-scrollbar { display:none; }
+  .slide { width:1080px; height:1350px; background:var(--bg); position:relative; overflow:hidden;
+           padding:100px 96px 0; display:flex; flex-direction:column; margin-bottom:40px; }
+  h1,h2 { font-family:'Familjen Grotesk',sans-serif; letter-spacing:-0.03em; font-weight:700; }
+  .top { display:flex; justify-content:space-between; align-items:center; font-size:30px; color:var(--mut); font-weight:500; }
+  .pill { border:2px solid var(--borde); border-radius:999px; padding:10px 26px; }
+  .foot { position:absolute; left:96px; right:96px; bottom:72px; display:flex; justify-content:space-between; align-items:center; font-size:30px; color:var(--mut); }
+  .foot svg { height:56px; width:auto; }
+  /* portada */
+  .cover h1 { font-size:142px; line-height:.95; margin-top:150px; }
+  .cover h1 .punto { color:var(--amar); }
+  .cover p { font-size:46px; line-height:1.25; margin-top:60px; max-width:840px; }
+  .cover .swipe { margin-top:70px; font-size:34px; color:var(--mut); font-weight:600; }
+  /* láminas con captura */
+  .demo h2 { font-size:84px; line-height:1; margin-top:56px; }
+  .demo p { font-size:38px; line-height:1.3; color:var(--mut); margin-top:28px; max-width:880px; }
+  .demo .cap { margin-top:52px; flex:1; display:flex; justify-content:center; align-items:flex-start; padding-bottom:170px; min-height:0; }
+  .demo .cap img { max-width:100%; max-height:100%; border-radius:24px; border:2px solid var(--borde); object-fit:contain; }
+  /* cierre */
+  .close h1 { font-size:120px; line-height:1; margin-top:170px; }
+  .close h1 .punto { color:var(--amar); }
+  .close p { font-size:46px; line-height:1.3; margin-top:60px; max-width:860px; }
+  .close .url { margin-top:70px; font-family:'Familjen Grotesk',sans-serif; font-size:64px; font-weight:700; color:var(--verde); }
+  .close .cta { margin-top:40px; display:inline-flex; align-self:flex-start; background:var(--verde); color:#000;
+                font-weight:600; font-size:40px; padding:28px 48px; border-radius:999px; }
+</style>
+</head>
+<body>
+<template id="logo"><svg xmlns='http://www.w3.org/2000/svg' viewBox='216 334 770 434' role='img' aria-label='Soluciones DyS'><g fill='none' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'><path d='M262 380 V650 H335 A135 135 0 0 0 335 380 Z' stroke='#34D399'/><path d='M545 500 L603 640 M661 500 L573 722' stroke='#F6F1E7'/><path d='M860 430 C830 380 740 385 735 440 C730 500 860 510 865 585 C870 650 770 665 735 610' stroke='#4C9AFF'/><circle cx='930' cy='639' r='34' fill='#FFD60A' stroke='none'/></g></svg></template>
+
+<section class="slide cover">
+  <div class="top"><span class="pill">Nuevo en la web</span><span>1/6</span></div>
+  <h1>4 cosas que puedes probar en nuestra web<span class="punto">.</span></h1>
+  <p>Sin llamar ni escribir a nadie. Las tocas y ves cómo funcionan.</p>
+  <p class="swipe">Desliza</p>
+  <div class="foot"><span class="logo"></span><span>solucionesdys.cl</span></div>
+</section>
+
+<section class="slide demo">
+  <div class="top"><span class="pill">1. Cotizador</span><span>2/6</span></div>
+  <h2>¿Cuánto cuesta tu sitio?</h2>
+  <p>Eliges qué necesitas y ves el rango al tiro. Si te calza, lo mandas por WhatsApp.</p>
+  <div class="cap"><img src="capturas/cotizador.png" alt=""></div>
+  <div class="foot"><span class="logo"></span><span>solucionesdys.cl/#cotizador</span></div>
+</section>
+
+<section class="slide demo">
+  <div class="top"><span class="pill">2. Restaurantes</span><span>3/6</span></div>
+  <h2>La mesa le avisa al mesonero</h2>
+  <p>Tu cliente toca "Pedir la cuenta" y al mesonero le llega al celular. Sin instalar nada.</p>
+  <div class="cap"><img src="capturas/mesonero.png" alt=""></div>
+  <div class="foot"><span class="logo"></span><span>solucionesdys.cl/restaurantes</span></div>
+</section>
+
+<section class="slide demo">
+  <div class="top"><span class="pill">3. Cabañas</span><span>4/6</span></div>
+  <h2>Reservas directas, sin comisión</h2>
+  <p>Tu huésped elige fechas y personas, ve el total y paga el abono con Mercado Pago.</p>
+  <div class="cap"><img src="capturas/cabanas.png" alt=""></div>
+  <div class="foot"><span class="logo"></span><span>solucionesdys.cl/cabanas</span></div>
+</section>
+
+<section class="slide demo">
+  <div class="top"><span class="pill">4. Agentes con IA</span><span>5/6</span></div>
+  <h2>Un agente que agenda por ti</h2>
+  <p>Revisa tu calendario, ofrece horas libres, agenda y te avisa.</p>
+  <div class="cap"><img src="capturas/agente.png" alt=""></div>
+  <div class="foot"><span class="logo"></span><span>solucionesdys.cl/agentes</span></div>
+</section>
+
+<section class="slide close">
+  <div class="top"><span class="pill">Pruébalo tú</span><span>6/6</span></div>
+  <h1>Todo esto lo hacemos en Puerto Varas<span class="punto">.</span></h1>
+  <p>Y hablas directo con quien lo programa.</p>
+  <p class="url">solucionesdys.cl</p>
+  <span class="cta">Link en la bio</span>
+  <div class="foot"><span class="logo"></span><span>@solucionesdys.cl</span></div>
+</section>
+
+<script>
+  const logo = document.getElementById('logo').innerHTML;
+  document.querySelectorAll('.logo').forEach((el) => (el.innerHTML = logo));
+</script>
+</body>
+</html>
