@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import RutaDemo from '@/components/RutaDemo';
 import { BUSINESS } from '@/lib/site';
 
 // Producto propio de Soluciones DyS. Sin precios publicados: solo plan demo sin costo y planes pagados.
@@ -69,22 +69,7 @@ export default function RutaDys() {
         </div>
 
         <div className="space-y-10">
-          {/* Espacio para capturas del panel y la app (sin datos de clientes reales); por ahora, el logo. */}
-          <a
-            href={RUTA_DYS_URL}
-            target="_blank"
-            rel="noopener"
-            className="relative aspect-[24/11] rounded-xl overflow-hidden border border-dys-border bg-black flex items-center justify-center"
-          >
-            <Image
-              src="/assets/img/ruta-dys/icon.webp"
-              alt="Probar Ruta DyS (abre en una pestaña nueva)"
-              width={200}
-              height={200}
-              sizes="(min-width: 640px) 200px, 128px"
-              className="w-32 h-32 sm:w-[200px] sm:h-[200px]"
-            />
-          </a>
+          <RutaDemo />
 
           <div>
             <h3 className="text-titular-3 font-semibold text-dys-text">Cómo funciona</h3>

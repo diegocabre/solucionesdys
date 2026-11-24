@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Button from '@/components/Button';
-import MesaDemo from './MesaDemo';
+import MesaDemo from '@/components/MesaDemo';
 import { OFERTAS, SITES, whatsappLink, withUtm } from '@/lib/dys-links';
 
 export const metadata: Metadata = {

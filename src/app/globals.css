@@ -144,6 +144,20 @@ body {
   }
 }
 
+/* Demo de Ruta DyS: el tramo nuevo se dibuja desde el cliente anterior. */
+@media (prefers-reduced-motion: no-preference) {
+  .tramo-entra {
+    stroke-dasharray: 1;
+    animation: tramo-entra 450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+}
+
+@keyframes tramo-entra {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
 @keyframes llamada-entra {
   from {
     opacity: 0;

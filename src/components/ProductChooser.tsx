@@ -1,4 +1,7 @@
+import type { ReactNode } from 'react';
 import Button from '@/components/Button';
+import CabanaDemo from '@/components/CabanaDemo';
+import MesaDemo from '@/components/MesaDemo';
 import { OFERTAS, SITES, whatsappLink, withUtm } from '@/lib/dys-links';
 
 // "¿Restaurante o cabañas?": lleva a los dos productos propios (Mesonero y reservas directas).
@@ -10,6 +13,7 @@ type ProductCard = {
   title: string;
   text: string;
   oferta: string;
+  demo: ReactNode;
   primary: Cta;
   secondary: Cta;
 };
@@ -27,6 +31,7 @@ const cards: ProductCard[] = [
     title: 'Mesonero: la mesa te avisa',
     text: 'Tus clientes tocan la mesa con su celular, sin descargar nada, y el mesonero recibe el aviso al instante. Si pasan 3 minutos sin atender, te avisa a ti.',
     oferta: OFERTAS.restaurantes,
+    demo: <MesaDemo />,
     primary: {
       label: 'Ver cómo funciona',
       href: '/restaurantes',
@@ -42,6 +47,7 @@ const cards: ProductCard[] = [
     title: 'Reservas directas, sin comisión de plataforma',
     text: 'Tus huéspedes ven fechas y precio al tiro, piden la reserva y tú la apruebas desde el celular. El abono llega directo a tu cuenta de Mercado Pago.',
     oferta: OFERTAS.cabanas,
+    demo: <CabanaDemo />,
     primary: {
       label: 'Ver cómo funciona',
       href: withUtm(SITES.reservas, { ...utmBase, content: 'cabanas_ver' }),
@@ -78,7 +84,8 @@ export default function ProductChooser() {
             >
               <p className="text-sm font-semibold text-dys-muted">{card.eyebrow}</p>
               <h3 className="mt-2 text-titular-3 font-semibold text-dys-text">{card.title}</h3>
-              <p className="mt-4 flex-1 text-dys-muted leading-relaxed">{card.text}</p>
+              <p className="mt-4 text-dys-muted leading-relaxed">{card.text}</p>
+              <div className="mt-8 flex-1">{card.demo}</div>
               <p className="mt-6 border-l-2 border-dys-primary pl-4 text-dys-text">{card.oferta}</p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
