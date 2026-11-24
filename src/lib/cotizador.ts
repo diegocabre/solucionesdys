@@ -1,7 +1,7 @@
 // Rangos del cotizador de la home. Propuesta a partir de un estudio de mercado (nov 2026) de guías
 // de precios publicadas por agencias chilenas: rocketmedia.cl, kotizame.cl, forrate.cl y estudiobrief.cl.
 // DyS se ubica entre el sitio de plantilla y la agencia premium: código a medida, estudio chico.
-// Si cambian los precios, se cambian solo aquí.
+// Montos sin IVA (así los publica DyS). Si cambian los precios, se cambian solo aquí.
 
 export type TipoSitio = 'landing' | 'corporativo' | 'tienda';
 export type Extra = 'blog' | 'reservas' | 'idioma' | 'textos';

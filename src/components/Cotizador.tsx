@@ -19,7 +19,7 @@ export default function Cotizador() {
 
   const { min, max } = cotizar(tipo, extras, urgente);
   const tipoSel = TIPOS.find((t) => t.id === tipo)!;
-  const rango = `${clp.format(min)} a ${clp.format(max)}`;
+  const rango = `${clp.format(min)} a ${clp.format(max)} + IVA`;
 
   const mensaje = [
     'Hola, usé el cotizador de la web:',
@@ -43,8 +43,8 @@ export default function Cotizador() {
             ¿Cuánto cuesta tu sitio?
           </h2>
           <p className="mt-5 max-w-md text-lg text-dys-muted leading-relaxed">
-            Elige lo que necesitas y ve el rango al tiro. El valor final te lo confirmamos en una propuesta antes de
-            empezar.
+            Elige lo que necesitas y ve el rango al tiro. Los valores son sin IVA; el final te lo confirmamos en una
+            propuesta antes de empezar.
           </p>
         </div>
 

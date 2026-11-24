@@ -14,7 +14,8 @@ export const SITE_NAME = "Soluciones DyS";
 export const AREA_SERVED = ["Puerto Varas", "Llanquihue", "Frutillar", "Puerto Montt"] as const;
 
 // Precio de entrada (CLP): página estática. Se muestra en servicios y en la FAQ.
-export const PRECIO_DESDE = "$350.000";
+// Precios publicados sin IVA.
+export const PRECIO_DESDE = "$350.000 + IVA";
 
 export const BUSINESS = {
   legalName: "Soluciones DyS SpA",
