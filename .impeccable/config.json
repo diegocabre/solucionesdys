@@ -14,6 +14,24 @@
         "value": "inter",
         "createdAt": "2026-11-12T02:17:32.073Z",
         "reason": "DESIGN.md del proyecto define Inter como fuente de cuerpo de la marca; el carrusel la usa para coincidir con el sitio"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          "instagram/carrusel-web-interactiva/carrusel.html"
+        ],
+        "createdAt": "2026-11-24T13:31:09.071Z",
+        "reason": "Claude: lámina de Instagram 1080x1350, el titular grande es la portada del carrusel, no un hero web; mismo tamaño que el carrusel anterior (150px)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "instagram/carrusel-web-interactiva/carrusel.html"
+        ],
+        "createdAt": "2026-11-24T13:31:09.307Z",
+        "reason": "Claude: el borde enmarca capturas de pantalla de las demos (marco de captura de DESIGN.md); el contenido de la captura ya trae su propio margen"
       }
     ]
   }
