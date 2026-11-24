@@ -46,6 +46,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/cabanas"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
+                >
+                  Reservas directas para cabañas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/agentes"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
+                >
+                  Agentes con IA para empresas
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >

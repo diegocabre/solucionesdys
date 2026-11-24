@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import Button from '@/components/Button';
 import CabanaDemo from '@/components/CabanaDemo';
 import MesaDemo from '@/components/MesaDemo';
-import { OFERTAS, SITES, whatsappLink, withUtm } from '@/lib/dys-links';
+import { OFERTAS, whatsappLink } from '@/lib/dys-links';
 
 // "¿Restaurante o cabañas?": lleva a los dos productos propios (Mesonero y reservas directas).
 type Cta = { label: string; href: string };
@@ -17,12 +17,6 @@ type ProductCard = {
   primary: Cta;
   secondary: Cta;
 };
-
-const utmBase = {
-  source: 'solucionesdys.cl',
-  medium: 'web',
-  campaign: 'inicio_productos',
-} as const;
 
 const cards: ProductCard[] = [
   {
@@ -50,7 +44,7 @@ const cards: ProductCard[] = [
     demo: <CabanaDemo />,
     primary: {
       label: 'Ver cómo funciona',
-      href: withUtm(SITES.reservas, { ...utmBase, content: 'cabanas_ver' }),
+      href: '/cabanas',
     },
     secondary: {
       label: 'Quiero reservas directas',

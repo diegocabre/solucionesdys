@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/webs", priority: 0.9, changeFrequency: "monthly" },
     { path: "/restaurantes", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/cabanas", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/agentes", priority: 0.8, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
     { path: "/aprende-ia", priority: 0.7, changeFrequency: "monthly" },
     { path: "/comunidad", priority: 0.7, changeFrequency: "monthly" },

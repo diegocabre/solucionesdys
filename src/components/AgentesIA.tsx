@@ -24,7 +24,8 @@ const PUEDE = [
 
 const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export default function AgentesIA() {
+// titulo: en /agentes la página ya tiene su H1, así que la sección usa otro.
+export default function AgentesIA({ titulo = 'Agentes con IA que atienden y agendan por ti' }: { titulo?: string }) {
   const [mensajes, setMensajes] = useState<Mensaje[]>(INICIO);
   const [paso, setPaso] = useState(0);
   const [pensando, setPensando] = useState<string | null>(null);
@@ -96,7 +97,7 @@ export default function AgentesIA() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12">
         <div className="space-y-6">
           <h2 id="agentes-titulo" className="text-titular-2 font-bold text-dys-text">
-            Agentes con IA que atienden y agendan por ti
+            {titulo}
           </h2>
           <p className="text-lg text-dys-muted leading-relaxed">
             Un asistente entrenado con la información de tu negocio, conectado a tus herramientas. El mismo que atiende
