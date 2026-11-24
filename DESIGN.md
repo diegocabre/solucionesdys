@@ -211,6 +211,8 @@ Cercanos y amables: se ven claramente tocables, con texto que dice qué hacen y 
 ### Screenshot Frame
 La pieza más característica: capturas reales de sitios de clientes en un marco 24:11, 12 px de radio y borde de 1 px. Reemplaza a íconos e ilustraciones como prueba del trabajo.
 
+En el inicio el marco guarda la captura de la página completa y la recorre de arriba abajo (9 s al bajar, 0,7 s al volver) cuando la persona pasa el cursor, le da foco con el teclado o, en pantallas táctiles, desliza la fila y la tarjeta queda a la vista. Con movimiento reducido se queda quieta en la parte de arriba.
+
 ### Firma (punto del titular)
 El punto final del H1 se dibuja con `::after` en amarillo punto. En la portada cae en su lugar al cargar (520 ms, con un leve rebote, 300 ms de retraso); con movimiento reducido, aparece fijo.
 
@@ -226,6 +228,7 @@ El punto final del H1 se dibuja con `::after` en amarillo punto. En la portada c
 ### Don't:
 - **Don't** usar etiquetas en mayúsculas sobre los títulos ni resaltar una palabra del titular en verde.
 - **Don't** usar el amarillo fuera del punto de la firma, ni como color de texto.
-- **Don't** agregar animaciones de entrada al hacer scroll; el único momento animado es el punto de la portada.
+- **Don't** agregar animaciones de entrada al hacer scroll ni movimiento que parta solo; lo único animado al cargar es el punto de la portada.
+- **Do** usar movimiento solo como respuesta a algo que hace la persona y que muestre qué cambió: el recorrido de los sitios reales, la llamada que entra en la demo de /restaurantes. Siempre con `prefers-reduced-motion` respetado.
 - **Don't** terminar enlaces con "→"; el texto del enlace dice qué hace.
 - **Don't** poner sombras en elementos dentro del flujo de la página ni íconos en cuadritos como relleno.

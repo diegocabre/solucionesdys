@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
 import ProductChooser from '@/components/ProductChooser';
 import RutaDys from '@/components/RutaDys';
+import SitiosReales from '@/components/SitiosReales';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 import { PARTNER_PROJECTS } from '@/lib/partners';
 import { AREA_SERVED, BUSINESS, PRECIO_DESDE } from '@/lib/site';
@@ -103,30 +103,12 @@ export default function HomeContent({ serverSections }: { serverSections?: React
           <h2 id="sitios-reales" className="max-w-2xl text-titular-3 font-semibold text-dys-text">
             Sitios reales hechos por nosotros. Entra y míralos funcionando.
           </h2>
+          <p className="mt-3 text-dys-muted">
+            <span className="hidden [@media(hover:hover)]:inline">Pasa el cursor sobre un sitio para recorrerlo entero.</span>
+            <span className="[@media(hover:hover)]:hidden">Desliza la fila y cada sitio se recorre entero.</span>
+          </p>
 
-          <ul className="mt-10 -mx-4 px-4 sm:mx-0 sm:px-0 flex lg:grid lg:grid-cols-2 gap-6 lg:gap-x-10 lg:gap-y-12 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-px-4 sm:scroll-px-0 pb-2">
-            {PARTNER_PROJECTS.map((project, i) => (
-              <li key={project.id} className="snap-start shrink-0 w-[82%] sm:w-[60%] lg:w-auto">
-                <a href={project.url} target="_blank" rel="noopener noreferrer" className="group relative block">
-                  <div className="relative aspect-[24/11] overflow-hidden rounded-xl border border-dys-border">
-                    <Image
-                      src={project.image}
-                      alt={`Sitio web de ${project.name}, desarrollado por Soluciones DyS`}
-                      fill
-                      priority={i === 0}
-                      sizes="(min-width: 1280px) 590px, (min-width: 1024px) 46vw, 82vw"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <span className="mt-4 block font-display text-xl sm:text-2xl font-semibold text-dys-text underline-offset-4 decoration-2 group-hover:underline group-hover:decoration-dys-primary">
-                    {project.name}
-                  </span>
-                  <span className="mt-1 block text-sm text-dys-muted">{project.summary}</span>
-                  <span className="sr-only">(abre en una pestaña nueva)</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <SitiosReales />
 
           <div id="opiniones" className="scroll-mt-24 mt-16">
             <h3 className="text-titular-3 font-semibold text-dys-text">Lo que dicen en Google</h3>

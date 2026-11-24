@@ -12,6 +12,8 @@ export interface PartnerProject {
   url: string;
   /** Captura de la web (public/assets/img/partners), recortada a la parte superior. */
   image: string;
+  /** Captura de la página completa (1200 px de ancho) para recorrerla en el inicio. */
+  pagina: { src: string; alto: number };
   tags: string[];
   gradient: string;
   features: string[];
@@ -26,6 +28,7 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real para un cowork, cafetería y espacio de talleres en Puerto Varas.",
     url: "https://www.rincondelaromo.com/home",
     image: "/assets/img/partners/rincon-del-aromo-web.jpg",
+    pagina: { src: "/assets/img/partners/rincon-del-aromo-completa.webp", alto: 4263 },
     tags: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
     gradient: "from-[#aa7b49] via-[#bf915f] to-[#5c3e21]",
     features: ["Arriendo de espacios", "Menú de cafetería", "Calendario de actividades"]
@@ -38,6 +41,7 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio corporativo real para una consultora de seguridad laboral, personas y sostenibilidad.",
     url: "https://www.estriborconsultores.cl/",
     image: "/assets/img/partners/estribor-consultores-web.jpg",
+    pagina: { src: "/assets/img/partners/estribor-consultores-completa.webp", alto: 4437 },
     tags: ["Next.js", "React", "TailwindCSS", "TypeScript"],
     gradient: "from-[#0d2a45] via-[#1a3d60] to-[#081b2e]",
     features: ["Servicios por sector", "Portal de empleo", "Agenda de reuniones"]
@@ -50,6 +54,7 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real para clínicas veterinarias con tienda online en Puente Alto y Santiago Centro.",
     url: "https://www.dogtoraliavet.cl/home",
     image: "/assets/img/partners/dogtoralia-vet-web.jpg",
+    pagina: { src: "/assets/img/partners/dogtoralia-vet-completa.webp", alto: 4639 },
     tags: ["React", "Next.js", "TailwindCSS"],
     gradient: "from-[#2793bb] via-[#2e8aa0] to-[#6ea34a]",
     features: ["Tienda online de productos", "Servicios veterinarios", "Contacto por WhatsApp"]
@@ -62,6 +67,7 @@ export const PARTNER_PROJECTS: PartnerProject[] = [
     summary: "Sitio web real de tarot evolutivo, talleres y arte místico con oráculo interactivo.",
     url: "https://www.carolinemagic.cl/",
     image: "/assets/img/partners/caroline-magic-web.jpg",
+    pagina: { src: "/assets/img/partners/caroline-magic-completa.webp", alto: 3496 },
     tags: ["Next.js", "React", "TailwindCSS", "Framer Motion"],
     gradient: "from-[#7b3f61] via-[#a4487a] to-[#2e1a3d]",
     features: ["Oráculo interactivo del día", "Agenda de lecturas de tarot", "Talleres y rituales grupales"]
