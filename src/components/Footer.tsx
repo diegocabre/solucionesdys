@@ -38,6 +38,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/restaurantes"
+                  className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
+                >
+                  Mesonero para restaurantes
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="inline-flex min-h-11 items-center hover:text-dys-primary transition"
                 >

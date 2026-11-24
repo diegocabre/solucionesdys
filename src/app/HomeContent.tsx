@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Button from '@/components/Button';
 import FeaturedCase from '@/components/FeaturedCase';
 import FaqSection from '@/components/FaqSection';
+import ProductChooser from '@/components/ProductChooser';
 import RutaDys from '@/components/RutaDys';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 import { PARTNER_PROJECTS } from '@/lib/partners';
@@ -92,6 +93,8 @@ export default function HomeContent({ serverSections }: { serverSections?: React
           </p>
         </div>
       </section>
+
+      <ProductChooser />
 
       {/* Trabajo real en vez de un carrusel: los cuatro sitios, cada uno enlazado a su web.
           En móvil es una fila que se desliza; desde lg, una grilla de 2 × 2. */}

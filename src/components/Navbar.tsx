@@ -15,6 +15,7 @@ export default function Navbar() {
   const NAV_LINKS = [
     { label: "Inicio", href: "/" },
     { label: "Diseño web", href: "/webs" },
+    { label: "Restaurantes", href: "/restaurantes" },
     { label: "Aprende IA", href: "/aprende-ia" },
     { label: "Comunidad Puerto Varas", href: "/comunidad" },
     { label: "Partners", href: "/partners" },

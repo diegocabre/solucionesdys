@@ -11,6 +11,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   // Con external el enlace sale del sitio y abre en una pestaña nueva.
   external?: boolean;
+  // Solo para enlaces externos; por defecto "noopener".
+  rel?: string;
   children: ReactNode;
 }
 
@@ -36,6 +38,7 @@ export default function Button({
   size = 'md',
   href,
   external = false,
+  rel = 'noopener',
   children,
   className = '',
   ...props
@@ -44,7 +47,7 @@ export default function Button({
 
   if (href && external) {
     return (
-      <a href={href} target="_blank" rel="noopener" className={classes}>
+      <a href={href} target="_blank" rel={rel} className={classes}>
         {children}
         <span className="sr-only"> (abre en una pestaña nueva)</span>
       </a>
