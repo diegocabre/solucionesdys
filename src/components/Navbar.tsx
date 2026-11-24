@@ -12,13 +12,14 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Servicios y productos primero; el logo ya lleva al inicio y Partners vive en el footer y la home.
   const NAV_LINKS = [
-    { label: "Inicio", href: "/" },
     { label: "Diseño web", href: "/webs" },
     { label: "Restaurantes", href: "/restaurantes" },
+    { label: "Cabañas", href: "/cabanas" },
+    { label: "Agentes IA", href: "/agentes" },
     { label: "Aprende IA", href: "/aprende-ia" },
-    { label: "Comunidad Puerto Varas", href: "/comunidad" },
-    { label: "Partners", href: "/partners" },
+    { label: "Comunidad", href: "/comunidad" },
   ];
   // Cotizar es la acción principal del sitio: va aparte, como botón verde.
   const CTA = { label: "Cotizar mi proyecto", href: "/contacto" };
