@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Button from '@/components/Button';
 import FeaturedCase from '@/components/FeaturedCase';
+import Cotizador from '@/components/Cotizador';
 import FaqSection from '@/components/FaqSection';
 import ProductChooser from '@/components/ProductChooser';
 import RutaDys from '@/components/RutaDys';
@@ -192,6 +193,8 @@ export default function HomeContent({ serverSections }: { serverSections?: React
       <FeaturedCase />
 
       <RutaDys />
+
+      <Cotizador />
 
       <FaqSection />
 
