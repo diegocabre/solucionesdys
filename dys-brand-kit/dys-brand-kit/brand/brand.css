@@ -1,0 +1,28 @@
+:root {
+  /* Marca DyS, tema oscuro (por defecto) */
+  --dys-bg: #000000;
+  --dys-surface: #11161C;
+  --dys-border: #262D36;
+  --dys-text: #F6F1E7;
+  --dys-text-muted: #B5B0A3;
+  --dys-primary: #34D399;      /* botones principales, destacados */
+  --dys-on-primary: #000000;   /* texto sobre el verde */
+  --dys-link: #4C9AFF;         /* enlaces, elementos secundarios */
+  --dys-accent: #FFD60A;       /* acento, usar poco (puntos, etiquetas) */
+  --dys-on-accent: #000000;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --dys-bg: #F6F1E7;
+    --dys-surface: #FFFFFF;
+    --dys-border: #DDD6C8;
+    --dys-text: #121820;
+    --dys-text-muted: #4B5560;
+    --dys-primary: #05694A;    /* verde oscurecido para contraste con texto blanco */
+    --dys-on-primary: #FFFFFF;
+    --dys-link: #1F5FD6;
+    --dys-accent: #B58900;     /* solo gráficos; para texto usar #7A5C00 */
+    --dys-on-accent: #121820;
+  }
+}
+/* Si el sitio no cambia según el sistema, usar solo el bloque oscuro. */
