@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { getCookieConsent, COOKIE_CONSENT_CHANGE_EVENT } from '@/components/CookieConsent';
-import { eventoDeEnlace } from '@/lib/clarity';
+import { eventosDeClic } from '@/lib/clarity';
 
 // Configura este ID en `.env.local` (no se commitea) y en Vercel:
 //   NEXT_PUBLIC_CLARITY_PROJECT_ID=xxxxxxxxxx
@@ -27,10 +27,22 @@ export default function Analytics() {
 
   useEffect(() => {
     if (!enabled) return;
+    // Cada demo cuenta una vez por página: interesa cuántos la usan, no cuántos clics hacen.
+    const demosVistas = new Set<string>();
     const onClick = (e: MouseEvent) => {
-      const href = (e.target as Element).closest('a')?.getAttribute('href');
-      const evento = href && eventoDeEnlace(href);
-      if (evento) window.clarity?.('event', evento);
+      const el = e.target as Element;
+      const enlace = el.closest('a');
+      const demo = el.closest<HTMLElement>('[data-evento]')?.dataset.evento ?? null;
+      const eventos = eventosDeClic({
+        href: enlace?.getAttribute('href'),
+        seccion: el.closest('section[id]')?.id,
+        demo: demo && !demosVistas.has(demo) ? demo : null,
+      });
+      if (demo) demosVistas.add(demo);
+      for (const ev of eventos) window.clarity?.('event', ev);
+      // Al tocar un enlace dentro de [data-clarity-tag="clave=valor"], etiqueta la sesión.
+      const tag = enlace ? el.closest<HTMLElement>('[data-clarity-tag]')?.dataset.clarityTag?.split('=') : undefined;
+      if (tag?.length === 2) window.clarity?.('set', tag[0], tag[1]);
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);

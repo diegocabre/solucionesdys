@@ -54,7 +54,7 @@ export default function Cotizador() {
             <p className="text-dys-muted">Tu sitio, a medida</p>
             <p className="mt-1 font-display text-titular-3 font-bold text-dys-text tabular-nums">{rango}</p>
           </div>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap" data-clarity-tag={`cotizador_tipo=${tipo}`}>
             <Button size="lg" href={whatsappLink(mensaje)} external rel="noopener noreferrer">
               Enviar por WhatsApp
             </Button>
@@ -64,7 +64,7 @@ export default function Cotizador() {
           </div>
         </div>
 
-        <div className="space-y-10 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+        <div data-evento="cotizador_uso" className="space-y-10 lg:col-start-2 lg:row-start-1 lg:row-span-2">
           <fieldset>
             <legend className="text-xl font-semibold text-dys-text">Qué necesitas</legend>
             <div className="mt-3 border-t border-dys-border text-dys-muted">

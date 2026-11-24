@@ -39,7 +39,7 @@ export default function RutaDemo() {
   const urgentes = CLIENTES.filter((c) => !ruta.includes(c.id) && c.dias > 30).length;
 
   return (
-    <div>
+    <div data-evento="demo_ruta">
       <div className="relative aspect-[24/11] overflow-hidden rounded-xl border border-dys-border bg-[#0E1411]">
         <svg viewBox="0 0 600 275" className="absolute inset-0 size-full" aria-hidden="true">
           {/* Calles y la orilla del lago, solo de referencia. */}

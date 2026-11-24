@@ -61,7 +61,7 @@ export default function CabanaDemo() {
   const total = noches * noche;
 
   return (
-    <div className="rounded-xl border border-dys-border p-4 sm:p-5">
+    <div className="rounded-xl border border-dys-border p-4 sm:p-5" data-evento="demo_cabanas">
       <div className="flex items-baseline justify-between gap-3">
         <p className="font-display text-lg font-semibold text-dys-text first-letter:uppercase">{nombreMes}</p>
         <p className="text-sm text-dys-muted">

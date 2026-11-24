@@ -55,7 +55,7 @@ export default function MesaDemo() {
   const pendientes = llamadas.filter((l) => !l.atendida).length;
 
   return (
-    <figure className="m-0">
+    <figure className="m-0" data-evento="demo_mesonero">
       <div className="grid grid-cols-2 gap-3 sm:gap-6">
         {/* Celular de la mesa: vestido con la marca del restaurante, no con la de DyS. */}
         <div className="flex min-h-[22rem] flex-col rounded-[1.75rem] border border-dys-border p-1.5 sm:min-h-[27rem]">

@@ -125,7 +125,7 @@ export default function AgentesIA() {
           </div>
         </div>
 
-        <div>
+        <div data-evento="demo_agentes">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[7fr_5fr]">
             {/* Chat */}
             <div className="flex min-h-[26rem] flex-col rounded-xl border border-dys-border">
